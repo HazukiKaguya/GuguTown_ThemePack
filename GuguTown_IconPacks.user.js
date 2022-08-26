@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Gugu Town IconPack
-// @namespace   https://github.com/HazukiKaguya/GuguTown_IconPackage
+// @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack/
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.1.2
+// @version     0.2
 // @description Gugu Town IconPack.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -13,6 +13,7 @@
 // @require     https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPackage.user.js
 // ==/UserScript==
+
 /**
  * default settings
  */
@@ -26,6 +27,7 @@ if (custom.useOldNames == true) { useOldNamesCheck = 'checked' }
 const classicIcons={
     "url":"https://sticker.inari.site/guguicons/old/",
     "ext":".gif",
+    "dessert":["apple","grape","cherry"],
     "i0":["反叛者的刺杀弓 z2105_.gif","bow_"],
     "i1":["狂信者的荣誉之刃 z2104_.gif","knife_"],
     "i2":["陨铁重剑 z2109_.gif","sword_"],
@@ -58,6 +60,7 @@ const classicIcons={
 ,pcrIcons={
     "url":"https://sticker.inari.site/guguicons/pcr/",
     "ext":".gif",
+    "dessert":["pie","donuts","cake"],
     "i0":["反叛者的刺杀弓","%E5%8F%8D%E5%8F%9B%E8%80%85%E7%9A%84%E5%88%BA%E6%9D%80%E5%BC%93"],
     "i1":["狂信者的荣誉之刃","%E7%8B%82%E4%BF%A1%E8%80%85%E7%9A%84%E8%8D%A3%E8%AA%89%E4%B9%8B%E5%88%83"],
     "i2":["陨铁重剑","%E9%99%A8%E9%93%81%E9%87%8D%E5%89%91"],
@@ -107,7 +110,7 @@ $(".iconpack-icons").click(function(){
     }else{ if(confirm("按【确定】恢复默认主题包，按【取消】则不操作。")){ console.log('classic');custom.iconPack="classic"; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}}
 });
 $(".iconpack-size").click(function(){
-    let IconSize = prompt('请输入图标大小,格式应为30-60间的数字+px\n示例：42px', "42px");
+    let IconSize = prompt('请输入图标大小,格式应为32-128间的数字+px\n示例：50px', "50px");
     if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
     else{ custom.iconSize = '50px'; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
 });
@@ -117,7 +120,7 @@ $(".iconpack-usr").click(function(){
 });
 $(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
 function listener(){console.log("listener fired.");repfunc();}
-document.addEventListener("DOMSubtreeModified", function() { if(timeout) {clearTimeout(timeout);} timeout = setTimeout(listener, 200);}, false);
+document.addEventListener("DOMSubtreeModified", function() { if(timeout) {clearTimeout(timeout);} timeout = setTimeout(listener, 100);}, false);
 function repfunc(){
     if(custom.iconPack=="classic"){ nowIcons=classicIcons;}
     else if(custom.iconPack=="pcr"){ nowIcons=pcrIcons;}
@@ -126,7 +129,7 @@ function repfunc(){
         if(userIcons.i19){nowIcons=userIcons;}
         else{ console.log("自定义主题包数据异常，没有主题包启用!"); return;}
     }
-    let ext=nowIcons.ext,url=nowIcons.url,i0=nowIcons.i0,i1=nowIcons.i1,i2=nowIcons.i2,i3=nowIcons.i3,i4=nowIcons.i4,i5=nowIcons.i5,i6=nowIcons.i6,i7=nowIcons.i7,i8=nowIcons.i8,i9=nowIcons.i9,i10=nowIcons.i10,
+    let ext=nowIcons.ext,url=nowIcons.url,dessert=nowIcons.dessert,i0=nowIcons.i0,i1=nowIcons.i1,i2=nowIcons.i2,i3=nowIcons.i3,i4=nowIcons.i4,i5=nowIcons.i5,i6=nowIcons.i6,i7=nowIcons.i7,i8=nowIcons.i8,i9=nowIcons.i9,i10=nowIcons.i10,
         i11=nowIcons.i11,i12=nowIcons.i12,i13=nowIcons.i13,i14=nowIcons.i14,i15=nowIcons.i15,i16=nowIcons.i16,i17=nowIcons.i17,i18=nowIcons.i18,i19=nowIcons.i19,i20=nowIcons.i20,i21=nowIcons.i21,i22=nowIcons.i22;
     if(custom.useOldNames==true){
         i5=nowIcons.o5;i11=nowIcons.o11;i12=nowIcons.o12;i20=nowIcons.o20;i21=nowIcons.o21;i22=nowIcons.o22;
@@ -140,6 +143,17 @@ function repfunc(){
         $("button[data-original-title*='萌爪耳钉']").attr("data-original-title",function(n,v){ n= v.replace(/萌爪耳钉/g, "天使缎带");return n;});
     }
     if(ext!=".gif"){ $("button[style*='ys/icon/z/z2']").attr("style",function(n,v){ n= v.replace(/.gif/g, ext);return n;});}
+    if(custom.iconPack=="pcr"){
+        $("button[data-original-title*='稀有苹果护身符']").attr("data-original-title",function(n,v){ n= v.replace(/稀有苹果护身符/g, "家常的苹果派");return n;});
+        $("button[data-original-title*='史诗苹果护身符']").attr("data-original-title",function(n,v){ n= v.replace(/史诗苹果护身符/g, "美味的苹果派");return n;});
+        $("button[data-original-title*='传奇苹果护身符']").attr("data-original-title",function(n,v){ n= v.replace(/传奇苹果护身符/g, "诱人的苹果派");return n;});
+        $("button[data-original-title*='稀有葡萄护身符']").attr("data-original-title",function(n,v){ n= v.replace(/稀有葡萄护身符/g, "家常的甜甜圈");return n;});
+        $("button[data-original-title*='史诗葡萄护身符']").attr("data-original-title",function(n,v){ n= v.replace(/史诗葡萄护身符/g, "美味的甜甜圈");return n;});
+        $("button[data-original-title*='传奇葡萄护身符']").attr("data-original-title",function(n,v){ n= v.replace(/传奇葡萄护身符/g, "诱人的甜甜圈");return n;});
+        $("button[data-original-title*='稀有樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/稀有樱桃护身符/g, "家常的樱桃蛋糕");return n;});
+        $("button[data-original-title*='史诗樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/史诗樱桃护身符/g, "美味的樱桃蛋糕");return n;});
+        $("button[data-original-title*='传奇樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/传奇樱桃护身符/g, "诱人的樱桃蛋糕");return n;});
+    }
     $("button[style*='z2105_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2105_/g, url+i0[1]);return n;});
     $("button[style*='z2104_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2104_/g, url+i1[1]);return n;});
     $("button[style*='z2109_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2109_/g, url+i2[1]);return n;});
@@ -163,6 +177,9 @@ function repfunc(){
     $("button[style*='z2403_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2403_/g, url+i20[1]);return n;});
     $("button[style*='z2402_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2402_/g, url+i21[1]);return n;});
     $("button[style*='z2401_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2401_/g, url+i22[1]);return n;});
+    $("button[style*='z903.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z903/g, url+dessert[0]);return n;});
+    $("button[style*='z902.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z902/g, url+dessert[1]);return n;});
+    $("button[style*='z901.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z901/g, url+dessert[2]);return n;});
 
     $(".fyg_tc>img[src*='z2105_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2105_/g, url+i0[1]);return n;});
     $(".fyg_tc>img[src*='z2104_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2104_/g, url+i1[1]);return n;});
@@ -194,7 +211,12 @@ function repfunc(){
  * add CSS
  */
 $('head').append(`<style>
-    .btn.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;}
+    .btn.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;line-height: ${Math.floor(parseInt(iconsize)*3/5)}px; }
+    .btn.fyg_colpzbg.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;}
     .img-rounded { width: 50px; height:50px;}
-    .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;}
+    .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
 </style>`);
+if(custom.iconPack=="pcr"){
+    $('head').append(`<style>
+.fyg_colpz01bg,.fyg_colpz02bg,.fyg_colpz03bg,.fyg_colpz04bg,.fyg_colpz05bg,.fyg_colpz06bg {background-blend-mode: normal !important; }
+</style>`);}
