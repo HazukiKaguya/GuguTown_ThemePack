@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPackage
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.1
+// @version     0.1.1
 // @description Gugu Town IconPack.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -115,7 +115,7 @@ $(".iconpack-usr").click(function(){
     let userIcon = prompt('请输入自定义主题包的json数据,\n请访问默认显示的url，以查看完整的json格式。', "https://kf.miaola.work/read.php?tid=809121&sf=141&page=21");
     if (userIcon) { console.log(userIcon); userIcons=JSON.parse(userIcon); localStorage.setItem('userIcons', userIcon);}
 });
-$(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));});
+$(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
 function listener(){console.log("listener fired.");repfunc();}
 document.addEventListener("DOMSubtreeModified", function() { if(timeout) {clearTimeout(timeout);} timeout = setTimeout(listener, 200);}, false);
 function repfunc(){
