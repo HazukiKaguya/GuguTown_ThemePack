@@ -3,7 +3,7 @@
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPackage
 // @homepage    https://github.com/HazukiKaguya
 // @version     0.1
-// @description Gugu Town IconPack
+// @description Gugu Town IconPack.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
