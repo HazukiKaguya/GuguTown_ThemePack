@@ -3,7 +3,7 @@ Gugu Town IconPack
 
 ## 安装脚本  
 [Github](https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPack.user.js)  
-[GreasyFork](https://greasyfork.org/zh-CN/scripts/)  
+[GreasyFork](https://greasyfork.org/scripts/450204)  
 
 ## 赞助  
 如果你喜欢这个插件，可以用以下链接试用Vultr来赞助我的云同步账号服务器/图床服务器的费用。  
