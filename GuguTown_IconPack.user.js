@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.2.2
+// @version     0.2.3
 // @description Gugu Town IconPack
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -140,16 +140,6 @@ function repfunc(){
         $("button[data-original-title*='探险者耳环']").attr("data-original-title",function(n,v){ n= v.replace(/探险者耳环/g, "探险者头巾");return n;});
         $("button[data-original-title*='占星师的耳饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的耳饰/g, "占星师的发饰");return n;});
         $("button[data-original-title*='萌爪耳钉']").attr("data-original-title",function(n,v){ n= v.replace(/萌爪耳钉/g, "天使缎带");return n;});
-        $(".with-padding").text(function(n,v){
-            n= v.replace(/荆棘盾剑/g, "荆棘剑盾");
-            n= n.replace(/饮血魔剑/g, "饮血长枪");
-            n= n.replace(/探险者手环/g, "探险者手套");
-            n= n.replace(/秃鹫手环/g, "秃鹫手套");
-            n= n.replace(/复苏战衣/g, "复苏木甲");
-            n= n.replace(/探险者耳环/g, "探险者头巾");
-            n= n.replace(/占星师的耳饰/g, "占星师的发饰");
-            n= n.replace(/萌爪耳钉/g, "天使缎带");
-            return n;});
     }
     if(ext!=".gif"){ $("button[style*='ys/icon/z/z2']").attr("style",function(n,v){ n= v.replace(/.gif/g, ext);return n;});}
     if(custom.iconPack=="pcr"){
@@ -162,7 +152,6 @@ function repfunc(){
         $("button[data-original-title*='稀有樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/稀有樱桃护身符/g, "家常的樱桃蛋糕");return n;});
         $("button[data-original-title*='史诗樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/史诗樱桃护身符/g, "美味的樱桃蛋糕");return n;});
         $("button[data-original-title*='传奇樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/传奇樱桃护身符/g, "诱人的樱桃蛋糕");return n;});
-        $(".with-padding").text(function(n,v){n= v.replace(/苹果护身符/g, "苹果派"); n= n.replace(/葡萄护身符/g, "甜甜圈"); n= n.replace(/樱桃护身符/g, "樱桃蛋糕"); return n;});
     }
     $("button[style*='z2105_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2105_/g, url+i0[1]);return n;});
     $("button[style*='z2104_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2104_/g, url+i1[1]);return n;});
