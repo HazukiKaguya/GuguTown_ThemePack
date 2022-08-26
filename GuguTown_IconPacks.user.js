@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack/
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.2
+// @version     0.2.1
 // @description Gugu Town IconPack.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -120,7 +120,7 @@ $(".iconpack-usr").click(function(){
 });
 $(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
 function listener(){console.log("listener fired.");repfunc();}
-document.addEventListener("DOMSubtreeModified", function() { if(timeout) {clearTimeout(timeout);} timeout = setTimeout(listener, 100);}, false);
+document.addEventListener("DOMSubtreeModified", function() { if(timeout) {clearTimeout(timeout);} timeout = setTimeout(listener, 50);}, false);
 function repfunc(){
     if(custom.iconPack=="classic"){ nowIcons=classicIcons;}
     else if(custom.iconPack=="pcr"){ nowIcons=pcrIcons;}
@@ -218,5 +218,5 @@ $('head').append(`<style>
 </style>`);
 if(custom.iconPack=="pcr"){
     $('head').append(`<style>
-.fyg_colpz01bg,.fyg_colpz02bg,.fyg_colpz03bg,.fyg_colpz04bg,.fyg_colpz05bg,.fyg_colpz06bg {background-blend-mode: normal !important; }
+[data-trigger=hover] {background-blend-mode: normal !important; }
 </style>`);}
