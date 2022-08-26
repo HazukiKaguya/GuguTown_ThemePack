@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPackage
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.1.1
+// @version     0.1.2
 // @description Gugu Town IconPack.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -195,6 +195,6 @@ function repfunc(){
  */
 $('head').append(`<style>
     .btn.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;}
-    .img-rounded { width: ${iconsize}; height:${iconsize};}
+    .img-rounded { width: 50px; height:50px;}
     .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;}
 </style>`);
