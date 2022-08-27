@@ -2,22 +2,20 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.2.3
+// @version     0.2.4
 // @description Gugu Town IconPack
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
-// @include     https://www.guguzhen.com/*
+// @match       https://www.guguzhen.com/*
 // @run-at      document-end
 // @license     MIT License
-// @require     https://sticker.inari.site/js/jquery.min.user.js
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPack.user.js
 // ==/UserScript==
+'use strict';
 /**
  * default settings
  */
-'use strict';
-this.$ = this.jQuery = jQuery.noConflict(true);
 const defaultConf={"useOldNames":false,"iconPack":"classic","iconSize":"50px"};
 let useOldNamesCheck ='',custom = defaultConf,userIcons={},timeout = null,nowIcons;
 if (localStorage.IconPackConf) { custom = JSON.parse(localStorage.IconPackConf) }
@@ -118,16 +116,9 @@ $(".iconpack-usr").click(function(){
     if (userIcon) { console.log(userIcon); userIcons=JSON.parse(userIcon); localStorage.setItem('userIcons', userIcon);}
 });
 $(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
-function listener(){console.log("listener fired.");repfunc();}
-document.addEventListener("DOMSubtreeModified", function() { if(timeout) {clearTimeout(timeout);} timeout = setTimeout(listener, 50);}, false);
 function repfunc(){
-    if(custom.iconPack=="classic"){ nowIcons=classicIcons;}
-    else if(custom.iconPack=="pcr"){ nowIcons=pcrIcons;}
-    else if(custom.iconPack=="off"){ return;}
-    else if(custom.iconPack=="user"){
-        if(userIcons.i19){nowIcons=userIcons;}
-        else{ console.log("自定义主题包数据异常，没有主题包启用!"); return;}
-    }
+    if(custom.iconPack=="classic"){ nowIcons=classicIcons;} else if(custom.iconPack=="pcr"){ nowIcons=pcrIcons;} else if(custom.iconPack=="off"){ return;}
+    else if(custom.iconPack=="user"){ if(userIcons.i19){nowIcons=userIcons;}else{ console.log("自定义主题包数据异常，没有主题包启用!"); return;}}
     let ext=nowIcons.ext,url=nowIcons.url,dessert=nowIcons.dessert,i0=nowIcons.i0,i1=nowIcons.i1,i2=nowIcons.i2,i3=nowIcons.i3,i4=nowIcons.i4,i5=nowIcons.i5,i6=nowIcons.i6,i7=nowIcons.i7,i8=nowIcons.i8,i9=nowIcons.i9,i10=nowIcons.i10,
         i11=nowIcons.i11,i12=nowIcons.i12,i13=nowIcons.i13,i14=nowIcons.i14,i15=nowIcons.i15,i16=nowIcons.i16,i17=nowIcons.i17,i18=nowIcons.i18,i19=nowIcons.i19,i20=nowIcons.i20,i21=nowIcons.i21,i22=nowIcons.i22;
     if(custom.useOldNames==true){
@@ -141,6 +132,16 @@ function repfunc(){
         $("button[data-original-title*='占星师的耳饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的耳饰/g, "占星师的发饰");return n;});
         $("button[data-original-title*='萌爪耳钉']").attr("data-original-title",function(n,v){ n= v.replace(/萌爪耳钉/g, "天使缎带");return n;});
     }
+    $(".with-padding").text(function(n,v){
+        n= v.replace(/荆棘盾剑/g, "荆棘剑盾");
+        n= n.replace(/饮血魔剑/g, "饮血长枪");
+        n= n.replace(/探险者手环/g, "探险者手套");
+        n= n.replace(/秃鹫手环/g, "秃鹫手套");
+        n= n.replace(/复苏战衣/g, "复苏木甲");
+        n= n.replace(/探险者耳环/g, "探险者头巾");
+        n= n.replace(/占星师的耳饰/g, "占星师的发饰");
+        n= n.replace(/萌爪耳钉/g, "天使缎带");
+        return n;});
     if(ext!=".gif"){ $("button[style*='ys/icon/z/z2']").attr("style",function(n,v){ n= v.replace(/.gif/g, ext);return n;});}
     if(custom.iconPack=="pcr"){
         $("button[data-original-title*='稀有苹果护身符']").attr("data-original-title",function(n,v){ n= v.replace(/稀有苹果护身符/g, "家常的苹果派");return n;});
@@ -152,6 +153,7 @@ function repfunc(){
         $("button[data-original-title*='稀有樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/稀有樱桃护身符/g, "家常的樱桃蛋糕");return n;});
         $("button[data-original-title*='史诗樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/史诗樱桃护身符/g, "美味的樱桃蛋糕");return n;});
         $("button[data-original-title*='传奇樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/传奇樱桃护身符/g, "诱人的樱桃蛋糕");return n;});
+        $(".with-padding").text(function(n,v){n= v.replace(/苹果护身符/g, "苹果派"); n= n.replace(/葡萄护身符/g, "甜甜圈"); n= n.replace(/樱桃护身符/g, "樱桃蛋糕"); return n;});
     }
     $("button[style*='z2105_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2105_/g, url+i0[1]);return n;});
     $("button[style*='z2104_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2104_/g, url+i1[1]);return n;});
@@ -210,12 +212,17 @@ function repfunc(){
  * add CSS
  */
 $('head').append(`<style>
-    .btn.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;line-height: ${Math.floor(parseInt(iconsize)*3/5)}px; }
+    .btn.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px; }
     .btn.fyg_colpzbg.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;}
     .img-rounded { width: 50px; height:50px;}
     .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
 </style>`);
-if(custom.iconPack=="pcr"){
-    $('head').append(`<style>
+if(custom.iconPack=="pcr"){ $('head').append(`<style>
 [data-trigger=hover] {background-blend-mode: normal !important; }
 </style>`);}
+
+
+/**
+ * init
+ */
+$(document).ajaxSuccess(function(){ repfunc();});
