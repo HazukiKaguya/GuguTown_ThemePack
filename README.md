@@ -1,5 +1,5 @@
-# GuguTown_IconPack
-Gugu Town IconPack  
+# GuguTown IconPack
+GuguTown Theme Park Manager.   
 
 ## 安装脚本  
 [Github](https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPack.user.js)  
