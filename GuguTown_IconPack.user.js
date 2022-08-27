@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        GuguTown IconPack
+// @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
 // @version     0.2.4
