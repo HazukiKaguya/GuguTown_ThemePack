@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Gugu Town IconPack
+// @name        GuguTown IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
 // @version     0.2.4
-// @description Gugu Town IconPack.
+// @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
