@@ -15,6 +15,9 @@ GuguTown Theme Park Manager.
 ![image](https://user-images.githubusercontent.com/35645329/186827419-1dceabc5-3683-4bca-90f8-b21448b8149d.png) ![image](https://user-images.githubusercontent.com/35645329/186827478-87e1f2c5-cbe0-4707-a76b-f4af5f39d57d.png)
 
 ## 更新记录
+0.4.2 主题包装备名替换功能，修复bug;   
+0.4.0 兼容战斗记录插件，优化json数据源格式;   
+0.3.0 修复一处bug，为战斗记录页面修复了部分内容;   
 0.2.4 修复性能耗费问题，详情页面名称替换,修复一处bug;   
 0.2.3 上个更新存在性能耗费问题，回滚更新;   
 0.2.2 详情页面名称替换;   
@@ -22,4 +25,4 @@ GuguTown Theme Park Manager.
 0.2   优化CSS样式，修复若干bug;   
 0.1.2 修复一处bug;   
 0.1.1 修复一处bug;   
-0.1   咕咕镇主题包管理器发布;    
+0.1   咕咕镇主题包管理器发布.
