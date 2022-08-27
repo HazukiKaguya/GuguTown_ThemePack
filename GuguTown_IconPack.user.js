@@ -2,12 +2,16 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.2.4
+// @version     0.3.0
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
 // @match       https://www.guguzhen.com/*
+// @exclude     https://www.guguzhen.com/fyg_gift.php
+// @exclude     https://www.guguzhen.com/fyg_shop.php
+// @exclude     https://www.guguzhen.com/fyg_wish.php
+// @exclude     https://www.guguzhen.com/fyg_index.php
 // @run-at      document-end
 // @license     MIT License
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPack.user.js
@@ -76,15 +80,15 @@ const classicIcons={
     "o12":["探险者手套","%E6%8E%A2%E9%99%A9%E8%80%85%E6%89%8B%E5%A5%97"],
     "i13":["旅法师的灵光袍","%E6%97%85%E6%B3%95%E5%B8%88%E7%9A%84%E7%81%B5%E5%85%89%E8%A2%8D"],
     "i14":["挑战斗篷","%E6%8C%91%E6%88%98%E6%96%97%E7%AF%B7"],
-    "i15":["战线支撑者的荆棘重甲","%E6%88%98%E5%9C%BA%E6%94%AF%E6%92%91%E8%80%85%E7%9A%84%E8%8D%86%E6%A3%98%E9%87%8D%E7%94%B2"],
+    "i15":["战线支撑者的荆棘重甲","%E6%88%98%E7%BA%BF%E6%94%AF%E6%92%91%E8%80%85%E7%9A%84%E8%8D%86%E6%A3%98%E9%87%8D%E7%94%B2"],
     "i16":["复苏战衣","%E5%A4%8D%E8%8B%8F%E6%88%98%E8%A1%A3"],
     "i17":["探险者铁甲","%E6%8E%A2%E9%99%A9%E8%80%85%E9%93%81%E7%94%B2"],
     "i18":["探险者皮甲","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9A%AE%E7%94%B2"],
     "i19":["探险者布甲","%E6%8E%A2%E9%99%A9%E8%80%85%E5%B8%83%E7%94%B2"],
     "i20":["萌爪耳钉","%E8%90%8C%E7%88%AA%E8%80%B3%E9%92%89"],
     "o20":["天使缎带","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6"],
-    "i21":["占星师的耳饰","%E5%8D%A0%E6%98%9F%E8%80%85%E7%9A%84%E8%80%B3%E9%A5%B0"],
-    "o21":["占星师的发饰","%E5%8D%A0%E6%98%9F%E8%80%85%E7%9A%84%E5%8F%91%E9%A5%B0"],
+    "i21":["占星师的耳饰","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E8%80%B3%E9%A5%B0"],
+    "o21":["占星师的发饰","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E5%8F%91%E9%A5%B0"],
     "i22":["探险者耳环","%E6%8E%A2%E9%99%A9%E8%80%85%E8%80%B3%E7%8E%AF"],
     "o22":["探险者头巾","%E6%8E%A2%E9%99%A9%E8%80%85%E5%A4%B4%E5%B7%BE"]},iconsize=custom.iconSize;
 if (localStorage.userIcons){ userIcons = JSON.parse(localStorage.userIcons)}
@@ -93,8 +97,11 @@ if (localStorage.userIcons){ userIcons = JSON.parse(localStorage.userIcons)}
 /**
  * main functions
  */
-$(`<p><input type="button" class="iconpack-icons" value="选择主题">&nbsp;&nbsp;&nbsp;<input type="button" class="iconpack-usr" value="输入自定义主题"></p>
-   <p><input type="button" class="iconpack-size" value="图标大小">&nbsp;&nbsp;&nbsp;<input type="checkbox" class="iconpack-switch" value="useOldNames" ${useOldNamesCheck}>切换旧装备名</p>`).insertAfter($("#userd"));
+let panel = document.getElementsByClassName('panel panel-primary')[1];
+let iconconfpanel = document.createElement('span');
+                iconconfpanel.innerHTML =
+                    `&nbsp;<input type="button" class="iconpack-icons" value="选择主题包">&nbsp;<input type="button" class="iconpack-usr" value="输入自定义主题">&nbsp;<input type="button" class="iconpack-size" value="设置图标大小">&nbsp;&nbsp;<input type="checkbox" class="iconpack-switch" value="useOldNames" ${useOldNamesCheck}>切换回旧的装备名称`;
+panel.insertBefore(iconconfpanel, panel.children[0]);
 $(".iconpack-icons").click(function(){
     if (confirm("按【确定】选择主题包，按【取消】恢复默认主题包。")) {
         let IconPack = prompt('输入1使用【公主链接R主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】。', "1");
@@ -109,7 +116,6 @@ $(".iconpack-icons").click(function(){
 $(".iconpack-size").click(function(){
     let IconSize = prompt('请输入图标大小,格式应为32-128间的数字+px\n示例：50px', "50px");
     if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
-    else{ custom.iconSize = '50px'; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
 });
 $(".iconpack-usr").click(function(){
     let userIcon = prompt('请输入自定义主题包的json数据,\n请访问默认显示的url，以查看完整的json格式。', "https://kf.miaola.work/read.php?tid=809121&sf=141&page=21");
@@ -132,7 +138,7 @@ function repfunc(){
         $("button[data-original-title*='占星师的耳饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的耳饰/g, "占星师的发饰");return n;});
         $("button[data-original-title*='萌爪耳钉']").attr("data-original-title",function(n,v){ n= v.replace(/萌爪耳钉/g, "天使缎带");return n;});
     }
-    $(".with-padding").text(function(n,v){
+    $(".with-padding").html(function(n,v){
         n= v.replace(/荆棘盾剑/g, "荆棘剑盾");
         n= n.replace(/饮血魔剑/g, "饮血长枪");
         n= n.replace(/探险者手环/g, "探险者手套");
@@ -153,7 +159,7 @@ function repfunc(){
         $("button[data-original-title*='稀有樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/稀有樱桃护身符/g, "家常的樱桃蛋糕");return n;});
         $("button[data-original-title*='史诗樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/史诗樱桃护身符/g, "美味的樱桃蛋糕");return n;});
         $("button[data-original-title*='传奇樱桃护身符']").attr("data-original-title",function(n,v){ n= v.replace(/传奇樱桃护身符/g, "诱人的樱桃蛋糕");return n;});
-        $(".with-padding").text(function(n,v){n= v.replace(/苹果护身符/g, "苹果派"); n= n.replace(/葡萄护身符/g, "甜甜圈"); n= n.replace(/樱桃护身符/g, "樱桃蛋糕"); return n;});
+        $(".with-padding").html(function(n,v){n= v.replace(/苹果护身符/g, "苹果派"); n= n.replace(/葡萄护身符/g, "甜甜圈"); n= n.replace(/樱桃护身符/g, "樱桃蛋糕"); return n;});
     }
     $("button[style*='z2105_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2105_/g, url+i0[1]);return n;});
     $("button[style*='z2104_']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2104_/g, url+i1[1]);return n;});
@@ -181,6 +187,23 @@ function repfunc(){
     $("button[style*='z903.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z903/g, url+dessert[0]);return n;});
     $("button[style*='z902.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z902/g, url+dessert[1]);return n;});
     $("button[style*='z901.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z901/g, url+dessert[2]);return n;});
+    $("button[style*='z2105.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2105/g, url+i0[1]);return n;});
+    $("button[style*='z2104.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2104/g, url+i1[1]);return n;});
+    $("button[style*='z2109.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2109/g, url+i2[1]);return n;});
+    $("button[style*='z2106.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2106/g, url+i3[1]);return n;});
+    $("button[style*='z2108.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2108/g, url+i4[1]);return n;});
+    $("button[style*='z2107.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2107/g, url+i6[1]);return n;});
+    $("button[style*='z2202.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2202/g, url+i10[1]);return n;});
+    $("button[style*='z2203.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2203/g, url+i11[1]);return n;});
+    $("button[style*='z2201.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2201/g, url+i12[1]);return n;});
+    $("button[style*='z2304.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2304/g, url+i13[1]);return n;});
+    $("button[style*='z2305.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2305/g, url+i15[1]);return n;});
+    $("button[style*='z2301.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2301/g, url+i17[1]);return n;});
+    $("button[style*='z2302.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2302/g, url+i18[1]);return n;});
+    $("button[style*='z2303.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2303/g, url+i19[1]);return n;});
+    $("button[style*='z2403.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2403/g, url+i20[1]);return n;});
+    $("button[style*='z2402.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2402/g, url+i21[1]);return n;});
+    $("button[style*='z2401.gif']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2401/g, url+i22[1]);return n;});
 
     $(".fyg_tc>img[src*='z2105_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2105_/g, url+i0[1]);return n;});
     $(".fyg_tc>img[src*='z2104_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2104_/g, url+i1[1]);return n;});
@@ -219,6 +242,7 @@ $('head').append(`<style>
 </style>`);
 if(custom.iconPack=="pcr"){ $('head').append(`<style>
 [data-trigger=hover] {background-blend-mode: normal !important; }
+[data-toggle=tooltip] {background-blend-mode: normal !important; }
 </style>`);}
 
 
