@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     0.4.4
+// @version     1.0.0
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -20,17 +20,35 @@
 /**
  * default settings
  */
-const defaultConf={"useOldNames":false,"iconPack":"classic","iconSize":"50px","useThemeName":false};
-let useOldNamesCheck ='',useThemeNameCheck ='',custom = defaultConf,userIcons={},timeout = null,nowIcons,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3;
+const defaultConf={"useOldNames":false,"iconPack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无"},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
+let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',custom = defaultConf,userIcons={},yourcard="无",timeout = null,nowIcons,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3;
 if (localStorage.IconPackConf) { custom = JSON.parse(localStorage.IconPackConf) }
 else {localStorage.setItem('IconPackConf', JSON.stringify(defaultConf)); }
-if (custom.useOldNames == true) { useOldNamesCheck = 'checked' }
-if (custom.useThemeName == true) { useThemeNameCheck = 'checked' }
+if (custom.useOldNames == true) { useOldNamesCheck = 'checked'; }
+if (custom.useThemeName == true) { useThemeNameCheck = 'checked'; }
+if (custom.showCG == true) { showCGCheck = 'checked'; }
+if (custom.yourcard != "无") { yourcard = custom.yourcard; }
 const originIcons={
     "url":"ys/icon/",
     "old":"1",
     "ext":".gif",
     "background":"",
+    "魔灯之灵（野怪":"https://sticker.inari.site/null.gif",
+    "六眼飞鱼（野怪":"https://sticker.inari.site/null.gif",
+    "铁皮木人（野怪":"https://sticker.inari.site/null.gif",
+    "迅捷魔蛛（野怪":"https://sticker.inari.site/null.gif",
+    "食铁兽（野怪"  :"https://sticker.inari.site/null.gif",
+    "晶刺豪猪（野怪":"https://sticker.inari.site/null.gif",
+    "舞":["3000","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "默":["3001","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "琳":["3002","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "艾":["3003","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "梦":["3004","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "薇":["3005","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "伊":["3006","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "冥":["3007","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "命":["3008","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "希":["3009","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "level":["普通","幸运","稀有","史诗","传奇"],
     "dessert":["z903","z902","z901"],
     "dessertlevel":["稀有","史诗","传奇"],
@@ -71,6 +89,22 @@ const originIcons={
     "old":"",
     "ext":".gif",
     "background":"",
+    "魔灯之灵（野怪":"https://sticker.inari.site/null.gif",
+    "六眼飞鱼（野怪":"https://sticker.inari.site/null.gif",
+    "铁皮木人（野怪":"https://sticker.inari.site/null.gif",
+    "迅捷魔蛛（野怪":"https://sticker.inari.site/null.gif",
+    "食铁兽（野怪"  :"https://sticker.inari.site/null.gif",
+    "晶刺豪猪（野怪":"https://sticker.inari.site/null.gif",
+    "舞":["3000","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "默":["3001","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "琳":["3002","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "艾":["3003","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "梦":["3004","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "薇":["3005","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "伊":["3006","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "冥":["3007","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "命":["3008","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "希":["3009","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "level":["普通","幸运","稀有","史诗","传奇"],
     "dessert":["apple","grape","cherry"],
     "dessertlevel":["稀有","史诗","传奇"],
@@ -111,8 +145,24 @@ const originIcons={
     "old":"",
     "ext":".gif",
     "background":"normal",
+    "魔灯之灵（野怪":"https://sticker.inari.site/guguicons/pcr/mob/deng.png",
+    "六眼飞鱼（野怪":"https://sticker.inari.site/guguicons/pcr/mob/fish.png",
+    "铁皮木人（野怪":"https://sticker.inari.site/guguicons/pcr/mob/mu.png",
+    "迅捷魔蛛（野怪":"https://sticker.inari.site/guguicons/pcr/mob/zhu.png",
+    "食铁兽（野怪"  :"https://sticker.inari.site/guguicons/pcr/mob/shou.png",
+    "晶刺豪猪（野怪":"https://sticker.inari.site/guguicons/pcr/mob/nzhu.png",
+    "舞":["3000","https://sticker.inari.site/guguicons/pcr/cg/wuu1.png","https://sticker.inari.site/guguicons/pcr/cg/wuu2.png","https://sticker.inari.site/guguicons/pcr/cg/wuu3.png","https://sticker.inari.site/guguicons/pcr/cg/wuu4.png","https://sticker.inari.site/guguicons/pcr/cg/wuu5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "默":["3001","https://sticker.inari.site/guguicons/pcr/cg/mo1.png","https://sticker.inari.site/guguicons/pcr/cg/mo2.png","https://sticker.inari.site/guguicons/pcr/cg/mo3.png","https://sticker.inari.site/guguicons/pcr/cg/mo4.png","https://sticker.inari.site/guguicons/pcr/cg/mo5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "琳":["3002","https://sticker.inari.site/guguicons/pcr/cg/lin1.png","https://sticker.inari.site/guguicons/pcr/cg/lin2.png","https://sticker.inari.site/guguicons/pcr/cg/lin3.png","https://sticker.inari.site/guguicons/pcr/cg/lin4.png","https://sticker.inari.site/guguicons/pcr/cg/lin5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "艾":["3003","https://sticker.inari.site/guguicons/pcr/cg/ai1.png","https://sticker.inari.site/guguicons/pcr/cg/ai2.png","https://sticker.inari.site/guguicons/pcr/cg/ai3.png","https://sticker.inari.site/guguicons/pcr/cg/ai4.png","https://sticker.inari.site/guguicons/pcr/cg/ai5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "梦":["3004","https://sticker.inari.site/guguicons/pcr/cg/meng1.png","https://sticker.inari.site/guguicons/pcr/cg/meng2.png","https://sticker.inari.site/guguicons/pcr/cg/meng3.png","https://sticker.inari.site/guguicons/pcr/cg/meng4.png","https://sticker.inari.site/guguicons/pcr/cg/meng5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "薇":["3005","https://sticker.inari.site/guguicons/pcr/cg/wei1.png","https://sticker.inari.site/guguicons/pcr/cg/wei2.png","https://sticker.inari.site/guguicons/pcr/cg/wei3.png","https://sticker.inari.site/guguicons/pcr/cg/wei4.png","https://sticker.inari.site/guguicons/pcr/cg/wei5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "伊":["3006","https://sticker.inari.site/guguicons/pcr/cg/yi1.png","https://sticker.inari.site/guguicons/pcr/cg/yi2.png","https://sticker.inari.site/guguicons/pcr/cg/yi3.png","https://sticker.inari.site/guguicons/pcr/cg/yi4.png","https://sticker.inari.site/guguicons/pcr/cg/yi5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "冥":["3007","https://sticker.inari.site/guguicons/pcr/cg/ming1.png","https://sticker.inari.site/guguicons/pcr/cg/ming2.png","https://sticker.inari.site/guguicons/pcr/cg/ming3.png","https://sticker.inari.site/guguicons/pcr/cg/ming4.png","https://sticker.inari.site/guguicons/pcr/cg/ming5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "命":["3008","https://sticker.inari.site/guguicons/pcr/cg/life1.png","https://sticker.inari.site/guguicons/pcr/cg/life2.png","https://sticker.inari.site/guguicons/pcr/cg/life3.png","https://sticker.inari.site/guguicons/pcr/cg/life4.png","https://sticker.inari.site/guguicons/pcr/cg/life5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
+    "希":["3009","https://sticker.inari.site/guguicons/pcr/cg/xi1.png","https://sticker.inari.site/guguicons/pcr/cg/xi2.png","https://sticker.inari.site/guguicons/pcr/cg/xi3.png","https://sticker.inari.site/guguicons/pcr/cg/xi4.png","https://sticker.inari.site/guguicons/pcr/cg/xi5.png","https://sticker.inari.site/guguicons/pcr/cg/6.png","https://sticker.inari.site/guguicons/pcr/cg/7.png"],
     "level":["普通","幸运","稀有","史诗","传奇"],
-    "dessert":["pie","donuts","cake"],
+    "dessert":["apie","gdonuts","cakey"],
     "dessertlevel":["家常的","美味的","诱人的"],
     "dessertname":["苹果派","甜甜圈","樱桃蛋糕"],
     "a1":["z2101","z1","探险者之剑","旅人剑","%E6%8E%A2%E9%99%A9%E8%80%85%E4%B9%8B%E5%89%91"],
@@ -154,9 +204,10 @@ if (localStorage.userIcons){ userIcons = JSON.parse(localStorage.userIcons)}
  */
 let panel = document.getElementsByClassName('panel panel-primary')[1];
 let iconconfpanel = document.createElement('span');
-                iconconfpanel.innerHTML =
-                    `&nbsp;<input type="button" class="iconpack-icons" value="选择主题包">&nbsp;<input type="button" class="iconpack-usr" value="输入自定义主题">&nbsp;<input type="button" class="iconpack-size" value="设置图标大小">
-                    &nbsp;&nbsp;<input type="checkbox" class="iconpack-switch" value="useOldNames" ${useOldNamesCheck}>切换回旧的装备名称&nbsp;&nbsp;<input type="checkbox" class="themepack-switch" value="useThemeName" ${useThemeNameCheck}>装备名称替换为主题装备名`;
+iconconfpanel.innerHTML =
+    `&nbsp;<input type="button" class="iconpack-icons" value="选择主题包">&nbsp;<input type="button" class="iconpack-usr" value="输入自定义主题">&nbsp;<input type="button" class="iconpack-size" value="设置图标大小">
+                    &nbsp;&nbsp;<input type="checkbox" class="themepack-showCG" value="showCG" ${showCGCheck}>启用角色立绘&nbsp;&nbsp;<input type="checkbox" class="iconpack-switch" value="useOldNames" ${useOldNamesCheck}>切换回旧的装备名称
+                    &nbsp;&nbsp;<input type="checkbox" class="themepack-switch" value="useThemeName" ${useThemeNameCheck}>装备名称替换为主题装备名<audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio>`;
 panel.insertBefore(iconconfpanel, panel.children[0]);
 $(".iconpack-icons").click(function(){
     if (confirm("按【确定】选择主题包，按【取消】恢复默认主题包。")) {
@@ -179,6 +230,7 @@ $(".iconpack-usr").click(function(){
 });
 $(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
 $(".themepack-switch").click(function(e){ custom.useThemeName = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
+$(".themepack-showCG").click(function(e){ custom.showCG = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
 if(custom.iconPack=="classic"){ nowIcons=classicIcons;sessionStorage.setItem('ThemePack', JSON.stringify(nowIcons));}
 else if(custom.iconPack=="pcr"){ nowIcons=pcrIcons;sessionStorage.setItem('ThemePack', JSON.stringify(nowIcons));}
 else if(custom.iconPack=="off"){ nowIcons=originIcons;sessionStorage.setItem('ThemePack', JSON.stringify(nowIcons));}
@@ -255,7 +307,7 @@ function repfunc(){
         $("button[data-original-title*='占星师的耳饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的耳饰/g, "占星师的发饰");return n;});
         $("button[data-original-title*='萌爪耳钉']").attr("data-original-title",function(n,v){ n= v.replace(/萌爪耳钉/g, "天使缎带");return n;});
         $(".with-padding").html(function(n,v){n= v.replace(/荆棘盾剑/g, "荆棘剑盾");n= n.replace(/饮血魔剑/g, "饮血长枪");n= n.replace(/探险者手环/g, "探险者手套");n= n.replace(/秃鹫手环/g, "秃鹫手套");
-            n= n.replace(/复苏战衣/g, "复苏木甲");n= n.replace(/探险者耳环/g, "探险者头巾");n= n.replace(/占星师的耳饰/g, "占星师的发饰");n= n.replace(/萌爪耳钉/g, "天使缎带");return n;});
+                                              n= n.replace(/复苏战衣/g, "复苏木甲");n= n.replace(/探险者耳环/g, "探险者头巾");n= n.replace(/占星师的耳饰/g, "占星师的发饰");n= n.replace(/萌爪耳钉/g, "天使缎带");return n;});
     }
     if(custom.useThemeName==true){ themenamefunc(); }
 }
@@ -329,6 +381,59 @@ function themenamefunc(){
         n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
     });
 };
+function cardimgfunc(){
+    let imgpanel,cardname;
+    if($(".text-info.fyg_f24.fyg_lh60").length==1){
+        imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;
+        if(cardname.length==1&&imgpanel.children.length==2){
+            if(cardname!=" "){
+                yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('IconPackConf', JSON.stringify(custom));
+                if(nowIcons[cardname][2]!="https://sticker.inari.site/null.gif"){
+                    $(`<p></p><img alt="${cardname}" src="${nowIcons[cardname][2]}" onclick="xxcard(${nowIcons[cardname][0]})" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);
+                }
+            }
+            else{ yourcard="无";custom.yourcard=yourcard;localStorage.setItem('IconPackConf', JSON.stringify(custom));}
+        }
+        if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="${nowIcons[cardname][3]}">`).insertBefore("#backpacks"); }
+        else{$("#bigcardimg").attr('src',nowIcons[cardname][3]);}
+    }
+    if($(".text-info.fyg_f24").length==2){
+        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;$("#bigcardimg").attr('src',nowIcons[cardname][3]);
+    }
+    if($(".col-sm-2.fyg_lh60").length>0){
+        for(let i=0;i<$(".col-sm-2.fyg_lh60").length;i++){
+            imgpanel = document.getElementsByClassName('col-sm-2 fyg_lh60')[i];cardname=imgpanel.children[0].innerText;
+            if(cardname.length==1){
+                imgpanel.style.textAlign="left";
+                $(`<img id="smallcardimg" src="${nowIcons[cardname][1]}" style="vertical-align:top !important;"><span>&nbsp;&nbsp;</span>`).insertBefore(imgpanel.children[0]);
+            }
+        }
+    }
+    if($(".col-md-7.fyg_tr").length>0){
+        for(let i=0;i<$(".col-md-7.fyg_tr").length;i++){
+            imgpanel = document.getElementsByClassName('col-md-7 fyg_tr')[i];cardname=imgpanel.children[0].innerText;
+            if(cardname[cardname.length-3]!="."){
+                cardname=cardname[cardname.length-2];
+                imgpanel.style.backgroundImage=`url("${nowIcons[cardname][4]}")`;imgpanel.style.backgroundSize="cover";
+            }
+        }
+    }
+    if($(".col-md-7.fyg_tl").length>0){
+        for(let i=0;i<$(".col-md-7.fyg_tl").length;i++){
+            imgpanel = document.getElementsByClassName('col-md-7 fyg_tl')[i];cardname=imgpanel.children[0].innerText;
+            let isyg=false;
+            for (let j = 0; j < ygcheck.length; j++) { if (cardname.indexOf(ygcheck[j]) > -1) { imgpanel.style.backgroundImage=`url("${nowIcons[ygcheck[j]]}")`;imgpanel.style.backgroundSize="cover";isyg = true; } }
+            if(cardname[cardname.length-2]!="."&&isyg==false){
+                cardname=cardname[cardname.length-9];
+                imgpanel.style.backgroundImage=`url("${nowIcons[cardname][5]}")`;imgpanel.style.backgroundSize="cover";
+            }
+        }
+    }
+    if($("#eqli2.active").length!=1){
+        $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
+    }
+}
+
 
 /**
  * add CSS
@@ -338,6 +443,7 @@ $('head').append(`<style>
     .btn.fyg_colpzbg.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; background-size:100% 100%;}
     .img-rounded { width: 50px; height:50px;}
     .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
+    #smallcardimg {height:50px;width:50px;}
     [data-trigger=hover] {background-blend-mode: ${nowIcons.background} !important; }
     [data-toggle=tooltip]{background-blend-mode: ${nowIcons.background} !important; }
 </style>`);
@@ -346,7 +452,30 @@ $('head').append(`<style>
 /**
  * init
  */
-$(document).ajaxSuccess(function(){ repfunc();});
+let soundonce=0,sucheck=0,facheck=0;
+$(document).ajaxSuccess(function(){
+    repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}
+    if(soundonce%2==0){
+        console.log("playsound");
+        if($(".alert.with-icon.fyg_tc").length==1){
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){
+                console.log("胜利");++sucheck;//$("#themeSoundPlay").attr('src',nowIcons[yourcard][8]);$("#themeSoundPlay").play();
+            }else{
+                console.log("失败");++facheck;//$("#themeSoundPlay").attr('src',nowIcons[yourcard][8]);$("#themeSoundPlay").play();
+            }
+        }
+        else{
+            if($(".alert.alert-danger.with-icon.fyg_tc").length!=sucheck){
+                console.log("胜利");++sucheck;//$("#themeSoundPlay").attr('src',nowIcons[yourcard][8]);$("#themeSoundPlay").play();
+                //$("#themeSoundPlay").attr('src',"https://patchwiki.biligame.com/images/pcr/1/1b/8h37x4brqmn8otmd2x2tl3njo6x3ogj.mp3");$("#themeSoundPlay")[0].play();
+            }
+            if($(".alert.alert-info.with-icon.fyg_tc").length!=facheck){
+                console.log("失败");++facheck;//$("#themeSoundPlay").attr('src',nowIcons[yourcard][8]);$("#themeSoundPlay").play();
+            }
+        }
+
+    }
+});
 $(document).on('click', ".detaillogitem", function () {
-    repfunc();flogrepfunc();
+    repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc();}
 });
