@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.4.49
+// @version      1.4.54
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -10,6 +10,22 @@
 // @run-at       document-body
 // @license      MIT License
 // ==/UserScript==
+/**
+ * 兼容层
+ */
+let useOldEquipName=false,useThemeEquipName=false,themePackConf,themePack;
+if(sessionStorage.ThemePack){
+    themePackConf=JSON.parse(localStorage.IconPackConf);
+    themePack=JSON.parse(sessionStorage.ThemePack);
+    useOldEquipName=themePackConf.useOldNames;
+    if(useOldEquipName){
+        themePack.a8=themePack.ao8;themePack.a10=themePack.ao10;
+        themePack.w1=themePack.wo1;themePack.w3=themePack.wo3;
+        themePack.c6=themePack.co6;
+        themePack.h1=themePack.ho1;themePack.h2=themePack.ho2;themePack.h3=themePack.ho3;
+    }
+    useThemeEquipName=themePackConf.useThemeName;
+}
 (function() {
     'use strict'
 
@@ -19,7 +35,7 @@
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-08-25 22:00:00';
+    const g_modificationVersion = '2022-08-27 15:30:00';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
@@ -560,24 +576,24 @@
 
     const g_amuletLevelIds = {
         稀有 : 0,
-        家常 : 0,
         史诗 : 1,
-        美味 : 1,
         传奇 : 2,
+        家常 : 0,
+        美味 : 1,
         诱人 : 2
     };
 
     const g_amuletTypeIds = {
         苹果 : 0,
-        的苹 : 0,
         葡萄 : 1,
-        的甜 : 1,
         樱桃 : 2,
+        的苹 : 0,
+        的甜 : 1,
         的樱 : 2
     };
 
-    const g_amuletLevelNames = [ '稀有','史诗','传奇'];
-    const g_amuletTypeNames = [ '苹果','葡萄','樱桃'];
+    const g_amuletLevelNames = [ '稀有', '史诗', '传奇' ];
+    const g_amuletTypeNames = [ '苹果', '葡萄', '樱桃' ];
     const g_amuletBuffs = [
         { index : -1 , name : '力量' , type : 0 , typeName : '苹果' , maxValue : 80 , unit : '点' , shortMark : 'STR' },
         { index : -1 , name : '敏捷' , type : 0 , typeName : '苹果' , maxValue : 80 , unit : '点' , shortMark : 'AGI' },
@@ -596,7 +612,7 @@
         { index : -1 , name : '固定暴击几率' , type : 2 , typeName : '樱桃' , maxValue : 10 , unit : '%' , shortMark : 'CRT' },
         { index : -1 , name : '固定技能几率' , type : 2 , typeName : '樱桃' , maxValue : 10 , unit : '%' , shortMark : 'SKL' },
         { index : -1 , name : '物理防御效果' , type : 2 , typeName : '樱桃' , maxValue : 10 , unit : '%' , shortMark : 'PDEF' },
-        { index : -1 , name : '魔法防御效果' , type : 2 , typeName : '樱桃' , maxValue : 10 , unit : '%' , shortMark : 'MDEF' }];
+        { index : -1 , name : '魔法防御效果' , type : 2 , typeName : '樱桃' , maxValue : 10 , unit : '%' , shortMark : 'MDEF' } ];
 
     const g_amuletBuffMap = new Map();
     g_amuletBuffs.forEach((item, index) => {
@@ -1336,9 +1352,9 @@
     }
 
     const g_equipmentLevelPoints = [ 200, 321, 419, 516, 585 ];
-    const g_equipmentLevelName = [ '普通', '幸运', '稀有', '史诗', '传奇'];
-    const g_equipmentLevelBGColor = [ '#e0e8e8', '#c0e0ff', '#c0ffc0','#ffffc0', '#ffd0d0'];
-    const g_equipmentLevelTipClass = [ 'popover-primary', 'popover-info',  'popover-success','popover-warning', 'popover-danger' ];
+    const g_equipmentLevelName = [ '普通', '幸运', '稀有', '史诗', '传奇' ];
+    const g_equipmentLevelBGColor = [ '#e0e8e8', '#c0e0ff', '#c0ffc0', '#ffffc0', '#ffd0d0' ];
+    const g_equipmentLevelTipClass = [ 'popover-primary', 'popover-info', 'popover-success', 'popover-warning', 'popover-danger' ];
     function equipmentGetLevel(e) {
         let eq = (Array.isArray(e) ? e : equipmentInfoParseNode(e));
         if (eq != null) {
@@ -1827,6 +1843,7 @@
         {
             index : -1,
             name : '反叛者的刺杀弓',
+            theme :themePack.a5[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[0] , factor : 1 / 5 , additive : 30 },
                            { attribute : g_equipAttributes[15] , factor : 1 / 20 , additive : 10 },
@@ -1838,6 +1855,7 @@
         {
             index : -1,
             name : '狂信者的荣誉之刃',
+            theme :themePack.a4[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[0] , factor : 1 / 5 , additive : 20 },
                            { attribute : g_equipAttributes[2] , factor : 1 / 5 , additive : 20 },
@@ -1849,6 +1867,7 @@
         {
             index : -1,
             name : '陨铁重剑',
+            theme :themePack.a9[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[5] , factor : 20 , additive : 0 },
                            { attribute : g_equipAttributes[5] , factor : 20 , additive : 0 },
@@ -1860,6 +1879,7 @@
         {
             index : -1,
             name : '幽梦匕首',
+            theme :themePack.a6[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[0] , factor : 1 / 5 , additive : 0 },
                            { attribute : g_equipAttributes[1] , factor : 1 / 5 , additive : 0 },
@@ -1871,17 +1891,8 @@
         {
             index : -1,
             name : '荆棘盾剑',
-            type : 0,
-            attributes : [ { attribute : g_equipAttributes[21] , factor : 1 / 15 , additive : 10 },
-                           { attribute : g_equipAttributes[22] , factor : 1 / 15 , additive : 0 },
-                           { attribute : g_equipAttributes[17] , factor : 1 , additive : 0 },
-                           { attribute : g_equipAttributes[18] , factor : 1 , additive : 0 } ],
-            merge : null,
-            shortMark : 'SHIELD'
-        },
-        {
-            index : -1,
-            name : '荆棘剑盾',
+            theme :themePack.a8[3],
+            alias : '荆棘剑盾',
             type : 0,
             attributes : [ { attribute : g_equipAttributes[21] , factor : 1 / 15 , additive : 10 },
                            { attribute : g_equipAttributes[22] , factor : 1 / 15 , additive : 0 },
@@ -1893,17 +1904,8 @@
         {
             index : -1,
             name : '饮血魔剑',
-            type : 0,
-            attributes : [ { attribute : g_equipAttributes[0] , factor : 1 / 5 , additive : 50 },
-                           { attribute : g_equipAttributes[13] , factor : 1 / 20 , additive : 10 },
-                           { attribute : g_equipAttributes[23] , factor : 2 , additive : 0 },
-                           { attribute : g_equipAttributes[21] , factor : 1 / 15, additive : 10 } ],
-            merge : null,
-            shortMark : 'SPEAR'
-        },
-        {
-            index : -1,
-            name : '饮血长枪',
+            theme :themePack.a10[3],
+            alias : '饮血长枪',
             type : 0,
             attributes : [ { attribute : g_equipAttributes[0] , factor : 1 / 5 , additive : 50 },
                            { attribute : g_equipAttributes[13] , factor : 1 / 20 , additive : 10 },
@@ -1915,6 +1917,7 @@
         {
             index : -1,
             name : '光辉法杖',
+            theme :themePack.a7[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[1] , factor : 1 / 5 , additive : 0 },
                            { attribute : g_equipAttributes[1] , factor : 1 / 5 , additive : 0 },
@@ -1926,6 +1929,7 @@
         {
             index : -1,
             name : '探险者短弓',
+            theme :themePack.a2[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[5] , factor : 10 , additive : 0 },
                            { attribute : g_equipAttributes[6] , factor : 10 , additive : 0 },
@@ -1937,6 +1941,7 @@
         {
             index : -1,
             name : '探险者短杖',
+            theme :themePack.a3[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[5] , factor : 10 , additive : 0 },
                            { attribute : g_equipAttributes[6] , factor : 10 , additive : 0 },
@@ -1948,6 +1953,7 @@
         {
             index : -1,
             name : '探险者之剑',
+            theme :themePack.a1[3],
             type : 0,
             attributes : [ { attribute : g_equipAttributes[5] , factor : 10 , additive : 0 },
                            { attribute : g_equipAttributes[6] , factor : 10 , additive : 0 },
@@ -1959,6 +1965,7 @@
         {
             index : -1,
             name : '命师的传承手环',
+            theme :themePack.w2[3],
             type : 1,
             attributes : [ { attribute : g_equipAttributes[1] , factor : 1 / 5 , additive : 1 },
                            { attribute : g_equipAttributes[14] , factor : 1 / 20 , additive : 1 },
@@ -1970,17 +1977,8 @@
         {
             index : -1,
             name : '秃鹫手环',
-            type : 1,
-            attributes : [ { attribute : g_equipAttributes[21] , factor : 1 / 15 , additive : 1 },
-                           { attribute : g_equipAttributes[21] , factor : 1 / 15 , additive : 1 },
-                           { attribute : g_equipAttributes[21] , factor : 1 / 15 , additive : 1 },
-                           { attribute : g_equipAttributes[7] , factor : 2 , additive : 0 } ],
-            merge : [ [ 0, 1, 2 ], [ 3 ] ],
-            shortMark : 'VULTURE'
-        },
-        {
-            index : -1,
-            name : '秃鹫手套',
+            theme :themePack.w3[3],
+            alias : '秃鹫手套',
             type : 1,
             attributes : [ { attribute : g_equipAttributes[21] , factor : 1 / 15 , additive : 1 },
                            { attribute : g_equipAttributes[21] , factor : 1 / 15 , additive : 1 },
@@ -1992,17 +1990,8 @@
         {
             index : -1,
             name : '探险者手环',
-            type : 1,
-            attributes : [ { attribute : g_equipAttributes[5] , factor : 10 , additive : 0 },
-                           { attribute : g_equipAttributes[6] , factor : 10 , additive : 0 },
-                           { attribute : g_equipAttributes[7] , factor : 2 , additive : 0 },
-                           { attribute : g_equipAttributes[8] , factor : 10 , additive : 0 } ],
-            merge : null,
-            shortMark : 'GLOVES'
-        },
-        {
-            index : -1,
-            name : '探险者手套',
+            theme :themePack.w1[3],
+            alias : '探险者手套' ,
             type : 1,
             attributes : [ { attribute : g_equipAttributes[5] , factor : 10 , additive : 0 },
                            { attribute : g_equipAttributes[6] , factor : 10 , additive : 0 },
@@ -2014,6 +2003,7 @@
         {
             index : -1,
             name : '旅法师的灵光袍',
+            theme :themePack.c4[3],
             type : 2,
             attributes : [ { attribute : g_equipAttributes[8] , factor : 10 , additive : 0 },
                            { attribute : g_equipAttributes[11] , factor : 60 , additive : 0 },
@@ -2025,6 +2015,7 @@
         {
             index : -1,
             name : '挑战斗篷',
+            theme :themePack.c7[3],
             type : 2,
             attributes : [ { attribute : g_equipAttributes[4] , factor : 1 / 5 , additive : 50 },
                            { attribute : g_equipAttributes[9] , factor : 100 , additive : 0 },
@@ -2036,6 +2027,7 @@
         {
             index : -1,
             name : '战线支撑者的荆棘重甲',
+            theme :themePack.c5[3],
             type : 2,
             attributes : [ { attribute : g_equipAttributes[3] , factor : 1 / 5 , additive : 20 },
                            { attribute : g_equipAttributes[17] , factor : 1 , additive : 0 },
@@ -2047,17 +2039,8 @@
         {
             index : -1,
             name : '复苏战衣',
-            type : 2,
-            attributes : [ { attribute : g_equipAttributes[3] , factor : 1 / 5 , additive : 50 },
-                           { attribute : g_equipAttributes[19] , factor : 5 , additive : 0 },
-                           { attribute : g_equipAttributes[20] , factor : 5 , additive : 0 },
-                           { attribute : g_equipAttributes[10] , factor : 20 , additive : 0 } ],
-            merge : null,
-            shortMark : 'WOOD'
-        },
-        {
-            index : -1,
-            name : '复苏木甲',
+            theme :themePack.c6[3],
+            alias : '复苏木甲',
             type : 2,
             attributes : [ { attribute : g_equipAttributes[3] , factor : 1 / 5 , additive : 50 },
                            { attribute : g_equipAttributes[19] , factor : 5 , additive : 0 },
@@ -2069,6 +2052,7 @@
         {
             index : -1,
             name : '探险者铁甲',
+            theme :themePack.c1[3],
             type : 2,
             attributes : [ { attribute : g_equipAttributes[8] , factor : 20 , additive : 0 },
                            { attribute : g_equipAttributes[17] , factor : 1 , additive : 0 },
@@ -2080,6 +2064,7 @@
         {
             index : -1,
             name : '探险者皮甲',
+            theme :themePack.c2[3],
             type : 2,
             attributes : [ { attribute : g_equipAttributes[8] , factor : 25 , additive : 0 },
                            { attribute : g_equipAttributes[19] , factor : 2 , additive : 0 },
@@ -2091,6 +2076,7 @@
         {
             index : -1,
             name : '探险者布甲',
+            theme :themePack.c3[3],
             type : 2,
             attributes : [ { attribute : g_equipAttributes[8] , factor : 25 , additive : 0 },
                            { attribute : g_equipAttributes[19] , factor : 2 , additive : 0 },
@@ -2102,17 +2088,8 @@
         {
             index : -1,
             name : '萌爪耳钉',
-            type : 3,
-            attributes : [ { attribute : g_equipAttributes[8] , factor : 10 , additive : 0 },
-                           { attribute : g_equipAttributes[9] , factor : 10 , additive : 0 },
-                           { attribute : g_equipAttributes[10] , factor : 5 , additive : 0 },
-                           { attribute : g_equipAttributes[12] , factor : 1 / 30 , additive : 0 } ],
-            merge : null,
-            shortMark : 'RIBBON'
-        },
-        {
-            index : -1,
-            name : '天使缎带',
+            theme :themePack.h3[3],
+            alias : '天使缎带',
             type : 3,
             attributes : [ { attribute : g_equipAttributes[8] , factor : 10 , additive : 0 },
                            { attribute : g_equipAttributes[9] , factor : 10 , additive : 0 },
@@ -2124,17 +2101,8 @@
         {
             index : -1,
             name : '占星师的耳饰',
-            type : 3,
-            attributes : [ { attribute : g_equipAttributes[8] , factor : 5 , additive : 0 },
-                           { attribute : g_equipAttributes[4] , factor : 1 / 5 , additive : 0 },
-                           { attribute : g_equipAttributes[9] , factor : 20 , additive : 0 },
-                           { attribute : g_equipAttributes[19] , factor : 2 , additive : 0 } ],
-            merge : null,
-            shortMark : 'TIARA'
-        },
-        {
-            index : -1,
-            name : '占星师的发饰',
+            theme :themePack.h2[3],
+            alias : '占星师的发饰',
             type : 3,
             attributes : [ { attribute : g_equipAttributes[8] , factor : 5 , additive : 0 },
                            { attribute : g_equipAttributes[4] , factor : 1 / 5 , additive : 0 },
@@ -2146,17 +2114,8 @@
         {
             index : -1,
             name : '探险者耳环',
-            type : 3,
-            attributes : [ { attribute : g_equipAttributes[8] , factor : 10 , additive : 0 },
-                           { attribute : g_equipAttributes[19] , factor : 2 , additive : 0 },
-                           { attribute : g_equipAttributes[20] , factor : 2 , additive : 0 },
-                           { attribute : g_equipAttributes[10] , factor : 4 , additive : 0 } ],
-            merge : null,
-            shortMark : 'SCARF'
-        },
-        {
-            index : -1,
-            name : '探险者头巾',
+            theme :themePack.h1[3],
+            alias : '探险者头巾',
             type : 3,
             attributes : [ { attribute : g_equipAttributes[8] , factor : 10 , additive : 0 },
                            { attribute : g_equipAttributes[19] , factor : 2 , additive : 0 },
@@ -2221,6 +2180,18 @@
         item.index = index;
         g_equipMap.set(item.name, item);
         g_equipMap.set(item.shortMark, item);
+        if (item.alias?.length > 0) {
+            g_equipMap.set(item.alias, item);
+        }
+        else {
+            item.alias = item.name;
+        }
+        if (item.theme?.length > 0) {
+            g_equipMap.set(item.theme, item);
+        }
+        else {
+            item.theme = item.name;
+        }
     });
 
     const g_halos = [
@@ -2775,7 +2746,6 @@
         let waitForBackpacks = setInterval(() => {
             if (document.getElementById('backpacks')?.children?.length > 1) {
                 clearInterval(waitForBackpacks);
-
                 let panel = document.getElementsByClassName('panel panel-primary')[1];
                 let calcBtn = document.createElement('button');
                 let calcDiv = document.createElement('div');
@@ -3105,7 +3075,8 @@
                             `<td><input type="checkbox" class="equip-checkbox equip-item" id="bag-${item[7]}"
                                         original-item="${item.join(',')}" />
                                  <label for="bag-${item[7]}" style="margin-left:5px;cursor:pointer;">
-                                        ${eqMeta.name} - Lv.${item[1]}${item[6] == 1 ? ' - [ 神秘 ]' : ''}</label></td>
+                                        ${useOldEquipName ? (useThemeEquipName ?eqMeta.theme:eqMeta.alias ) : eqMeta.name} - Lv.${item[1]}${item[6] == 1 ? ' - [ 神秘 ]' : ''}
+                                        </label></td>
                              <td>${formatEquipmentAttributes(item, ', ')}</td>`;
                         bag_selector.appendChild(tr);
                     });
@@ -3158,7 +3129,8 @@
                             `<td><input type="checkbox" class="equip-checkbox equip-item" id="equip-${item[7]}"
                                         original-item="${item.join(',')}" />
                                  <label for="equip-${item[7]}" style="margin-left:5px;cursor:pointer;">
-                                        ${eqMeta.name} - Lv.${item[1]}${item[6] == 1 ? ' - [ 神秘 ]' : ''}</label></td>
+                                        ${useOldEquipName ? (useThemeEquipName ?eqMeta.theme:eqMeta.alias ): eqMeta.name} - Lv.${item[1]}${item[6] == 1 ? ' - [ 神秘 ]' : ''}
+                                        </label></td>
                              <td>${formatEquipmentAttributes(item, '</td><td>')}</td>`;
                         eq_selectors[eqMeta.type].appendChild(tr);
                     });
@@ -3911,7 +3883,7 @@
                                         amuletFilterList.appendChild(label);
                                     }
 
-                                    for (let amuletType in g_amuletTypeIds) {
+                                    for (let amuletType of g_amuletTypeNames) {
                                         addAmuletFilterItem(amuletType, g_amuletTypeIds[amuletType], false);
                                     }
                                     addAmuletFilterItem('全部', -1, true);
@@ -4658,7 +4630,7 @@
                                 let op0 = document.createElement('option');
                                 op0.style.backgroundColor = g_equipmentLevelBGColor[lv];
                                 op0.innerText =
-                                    `${eqMeta.name} Lv.${item[1]} - ${item[2]}% ${item[3]}% ` +
+                                    `${useOldEquipName ? (useThemeEquipName ?eqMeta.theme:eqMeta.alias ): eqMeta.name} Lv.${item[1]} - ${item[2]}% ${item[3]}% ` +
                                     `${item[4]}% ${item[5]}% ${item[6] == 1 ? ' - [ 神秘 ]' : ''}`;
                                 op0.title =
                                     `Lv.${item[1]} - ${item[6] == 1 ? '神秘' : ''}${g_equipmentLevelName[lv]}装备\n` +
@@ -5503,7 +5475,6 @@
 
             ignoreMysEquip.checked = (udata.dataBeachSift.ignoreMysEquip ?? false);
             ignoreEquipLevel.value = (udata.dataBeachSift.ignoreEquipLevel ?? "0");
-
             let equipTable = genericPopupQuerySelector('#equip-table');
             let equipTypeColor = [ '#000080', '#008000', '#800080', '#008080' ];
             g_equipments.forEach((equip) => {
@@ -5522,7 +5493,8 @@
                 let equipId = `equip-${equip.index}`;
                 tr.innerHTML =
                     `<td class="equip-td-equip"><input type="checkbox" class="sift-settings-checkbox" id="${equipId}" />
-                         <label class="equip-checkbox-label" for="${equipId}">${equip.name}</label></td>${attrHTML}`;
+                         <label class="equip-checkbox-label" for="${equipId}">${useOldEquipName ? (useThemeEquipName ?equip.theme:equip.alias ) : equip.name}
+                         </label></td>${attrHTML}`;
                 equipTable.appendChild(tr);
             });
 
@@ -5793,12 +5765,13 @@
                 });
                 bag.forEach((item, index) => {
                     let e = item[1];
+                    let eq = g_equipMap.get(e[0]);
                     let isEq = Array.isArray(e);
                     let li = document.createElement('li');
                     li.style.backgroundColor = (isEq ? objectTypeColor[3] : objectTypeColor[e.type]);
                     li.setAttribute('item-index', index);
                     li.setAttribute('original-index', item[0]);
-                    li.innerText = (isEq ? `${g_equipMap.get(e[0]).name} Lv.${e[1]}` : e.formatBuffText());
+                    li.innerText = (isEq ? `${useOldEquipName ? (useThemeEquipName ?eq.theme:eq.alias ) : eq.name} Lv.${e[1]}` :e.formatBuffText());
                     amuletToStoreList.appendChild(li);
                 });
             }
@@ -6205,8 +6178,6 @@
         let pkConfigDiv = document.createElement('div');
         pkConfigDiv.style.className = 'panel-heading';
         pkConfigDiv.style.float = 'right';
-        pkConfigDiv.style.padding = '5px 15px';
-        pkConfigDiv.style.color = 'white';
         pkConfigDiv.innerHTML =
             `<label for="indexRallyCheckbox" style="margin-right:5px;cursor:pointer;">为攻击回合加注索引</label>
              <input type="checkbox" id="indexRallyCheckbox" style="margin-right:15px;" />
@@ -6230,8 +6201,7 @@
                                                   () => { window.location.reload(); },
                                                   null);
 
-        let panel = document.getElementsByClassName('panel panel-primary');
-        panel[1].insertBefore(pkConfigDiv, panel[1].children[0]);
+        document.querySelector('div.panel.panel-primary > div.panel-heading').appendChild(pkConfigDiv);
 
         let div0_pk_text_more = document.createElement('div');
         div0_pk_text_more.setAttribute('id', 'pk_text_more');
