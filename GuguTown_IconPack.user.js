@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     1.4.0
+// @version     1.4.1
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -20,13 +20,14 @@
 /**
  * default settings
  */
-const defaultConf={"useOldNames":false,"iconPack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无","voiceON":false},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
-let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3;
-if (localStorage.IconPackConf) { custom = JSON.parse(localStorage.IconPackConf) }
-else {localStorage.setItem('IconPackConf', JSON.stringify(defaultConf)); }
+const defaultConf={"useOldNames":false,"ThemePack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无","voiceO":false},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
+let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3;
+if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf) }
+else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf)); }
 if (custom.useOldNames == true) { useOldNamesCheck = 'checked'; }
 if (custom.useThemeName == true) { useThemeNameCheck = 'checked'; }
 if (custom.showCG == true) { showCGCheck = 'checked'; }
+if (custom.voiceO == true) { voiceOCheck = 'checked'; }
 const originTheme={
     "url":"ys/icon/",
     "old":"1",
@@ -54,6 +55,7 @@ const originTheme={
     "冥":["3007","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "命":["3008","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "希":["3009","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "voice":["on.mp3","off.mp3"],
     "舞voice":["/vo/",".mp3"],
     "默voice":["/vo/",".mp3"],
     "琳voice":["/vo/",".mp3"],
@@ -122,6 +124,7 @@ const originTheme={
     "冥":["3007","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "命":["3008","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "希":["3009","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "voice":["on.mp3","off.mp3"],
     "舞voice":["/vo/",".mp3"],
     "默voice":["/vo/",".mp3"],
     "琳voice":["/vo/",".mp3"],
@@ -180,16 +183,17 @@ const originTheme={
     "迅捷魔蛛（野怪":"https://p.inari.site/guguicons/test/mob/zhu.png",
     "食铁兽（野怪"  :"https://p.inari.site/guguicons/test/mob/shou.png",
     "晶刺豪猪（野怪":"https://p.inari.site/guguicons/test/mob/nzhu.png",
-    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png","https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png","https://p.inari.site/guguicons/test/cg/mo/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin/1.png","https://p.inari.site/guguicons/test/cg/lin/2.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/4.png","https://p.inari.site/guguicons/test/cg/lin/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai/1.png","https://p.inari.site/guguicons/test/cg/ai/2.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/4.png","https://p.inari.site/guguicons/test/cg/ai/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng/1.png","https://p.inari.site/guguicons/test/cg/meng/2.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/4.png","https://p.inari.site/guguicons/test/cg/meng/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei/1.png","https://p.inari.site/guguicons/test/cg/wei/2.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/4.png","https://p.inari.site/guguicons/test/cg/wei/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi/1.png","https://p.inari.site/guguicons/test/cg/yi/2.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/4.png","https://p.inari.site/guguicons/test/cg/yi/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming/1.png","https://p.inari.site/guguicons/test/cg/ming/2.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/4.png","https://p.inari.site/guguicons/test/cg/ming/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "命":["3008","https://p.inari.site/guguicons/test/cg/life/1.png","https://p.inari.site/guguicons/test/cg/life/2.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/4.png","https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
-    "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xi/2.png","https://p.inari.site/guguicons/test/cg/xi/3.png","https://p.inari.site/guguicons/test/cg/xi/4.png","https://p.inari.site/guguicons/test/cg/xi/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png","https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg/wuu/6.png","https://p.inari.site/guguicons/test/cg/wuu/7.png"],
+    "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png","https://p.inari.site/guguicons/test/cg/mo/5.png","https://p.inari.site/guguicons/test/cg/mo/6.png","https://p.inari.site/guguicons/test/cg/mo/7.png"],
+    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin/1.png","https://p.inari.site/guguicons/test/cg/lin/2.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/4.png","https://p.inari.site/guguicons/test/cg/lin/5.png","https://p.inari.site/guguicons/test/cg/lin/6.png","https://p.inari.site/guguicons/test/cg/lin/7.png"],
+    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai/1.png","https://p.inari.site/guguicons/test/cg/ai/2.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/4.png","https://p.inari.site/guguicons/test/cg/ai/5.png","https://p.inari.site/guguicons/test/cg/ai/6.png","https://p.inari.site/guguicons/test/cg/ai/7.png"],
+    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng/1.png","https://p.inari.site/guguicons/test/cg/meng/2.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/4.png","https://p.inari.site/guguicons/test/cg/meng/5.png","https://p.inari.site/guguicons/test/cg/meng/6.png","https://p.inari.site/guguicons/test/cg/meng/7.png"],
+    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei/1.png","https://p.inari.site/guguicons/test/cg/wei/2.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/4.png","https://p.inari.site/guguicons/test/cg/wei/5.png","https://p.inari.site/guguicons/test/cg/wei/6.png","https://p.inari.site/guguicons/test/cg/wei/7.png"],
+    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi/1.png","https://p.inari.site/guguicons/test/cg/yi/2.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/4.png","https://p.inari.site/guguicons/test/cg/yi/5.png","https://p.inari.site/guguicons/test/cg/yi/6.png","https://p.inari.site/guguicons/test/cg/yi/7.png"],
+    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming/1.png","https://p.inari.site/guguicons/test/cg/ming/2.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/4.png","https://p.inari.site/guguicons/test/cg/ming/5.png","https://p.inari.site/guguicons/test/cg/ming/6.png","https://p.inari.site/guguicons/test/cg/ming/7.png"],
+    "命":["3008","https://p.inari.site/guguicons/test/cg/life/1.png","https://p.inari.site/guguicons/test/cg/life/2.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/4.png","https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg/life/6.png","https://p.inari.site/guguicons/test/cg/life/7.png"],
+    "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xii/2.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/4.png","https://p.inari.site/guguicons/test/cg/xii/5.png","https://p.inari.site/guguicons/test/cg/xii/6.png","https://p.inari.site/guguicons/test/cg/xii/7.png"],
+    "voice":["https://p.inari.site/guguicons/test/vo/on.mp3","https://p.inari.site/guguicons/test/vo/off.mp3"],
     "舞voice":["https://p.inari.site/guguicons/test/vo/wuu/",".mp3"],
     "默voice":["https://p.inari.site/guguicons/test/vo/mo/",".mp3"],
     "琳voice":["https://p.inari.site/guguicons/test/vo/lin/",".mp3"],
@@ -238,42 +242,51 @@ const originTheme={
 let panel = document.getElementsByClassName('panel panel-primary')[1];
 let iconconfpanel = document.createElement('span');
 iconconfpanel.innerHTML =
-    `&nbsp;<input type="button" class="iconpack-icons" value="选择主题包">&nbsp;<input type="button" class="iconpack-usr" value="输入自定义主题">&nbsp;<input type="button" class="iconpack-size" value="设置图标大小">
-                    &nbsp;&nbsp;<input type="checkbox" class="themepack-showCG" value="showCG" ${showCGCheck}>启用角色立绘&nbsp;&nbsp;<input type="checkbox" class="iconpack-switch" value="useOldNames" ${useOldNamesCheck}>切换回旧的装备名称
-                    &nbsp;&nbsp;<input type="checkbox" class="themepack-switch" value="useThemeName" ${useThemeNameCheck}>装备名称替换为主题装备名<audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio>`;
+    `&nbsp;<input type="button" class="themepack-ls" value="选择主题包">&nbsp;<input type="button" class="themepack-usr" value="写入自定义主题">&nbsp;<input type="button" class="icons-size" value="设置图标大小">&nbsp;
+                    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}>使用旧的装备名称&nbsp;
+                    <input type="checkbox" class="themepack-switch" ${useThemeNameCheck}>使用主题装备名称&nbsp;
+                    <input type="checkbox" class="themepack-showCG" ${showCGCheck}>启用角色立绘&nbsp;
+                    <input type="checkbox" class="themepack-voiceO" ${voiceOCheck}>启用角色语音&nbsp;
+                    <audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio>`;
 panel.insertBefore(iconconfpanel, panel.children[0]);
-$(".iconpack-icons").click(function(){
+$(".themepack-ls").click(function(){
     if (confirm("按【确定】选择主题包，按【取消】恢复默认主题包。")) {
-        let IconPack = prompt('输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。', "1");
-        if (IconPack) {
-            if(IconPack=="1"){ console.log('test');custom.iconPack="test"; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
-            else if(IconPack=="2"){ console.log('user');custom.iconPack="user"; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
-            else if(IconPack=="0"){ console.log('off');custom.iconPack="off"; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
-            else{ console.log('classic');custom.iconPack="classic"; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
+        let ThemePack = prompt('输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。', "1");
+        if (ThemePack) {
+            if(ThemePack=="1"){ console.log('test');custom.ThemePack="test"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+            else if(ThemePack=="2"){ console.log('user');custom.ThemePack="user"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+            else if(ThemePack=="0"){ console.log('off');custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+            else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
         }
-    }else{ if(confirm("按【确定】恢复默认主题包，按【取消】则不操作。")){ console.log('classic');custom.iconPack="classic"; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}}
+    }else{ if(confirm("按【确定】恢复默认主题包，按【取消】则不操作。")){ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}}
 });
-$(".iconpack-size").click(function(){
+$(".icons-size").click(function(){
     let IconSize = prompt('请输入图标大小,格式应为32-128间的数字+px\n示例：50px', "50px");
-    if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();}
+    if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
 });
-$(".iconpack-usr").click(function(){
+$(".themepack-usr").click(function(){
     let userTheme = prompt('请输入自定义主题包的json数据,访问\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21\n以查看完整的json格式。',`${localStorage.userTheme}`);
     if (userTheme) { console.log(userTheme); localStorage.setItem('userTheme', userTheme);}
 });
-$(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
-$(".themepack-switch").click(function(e){ custom.useThemeName = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
-$(".themepack-showCG").click(function(e){ custom.showCG = e.target.checked; localStorage.setItem('IconPackConf', JSON.stringify(custom));location.reload();});
-if(custom.iconPack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-else if(custom.iconPack=="test"||custom.iconPack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-else if(custom.iconPack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-else if(custom.iconPack=="user"){
+$(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
+$(".themepack-switch").click(function(e){ custom.useThemeName = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
+$(".themepack-showCG").click(function(e){ custom.showCG = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
+$(".themepack-voiceO").click(function(e){
+    custom.voiceO = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+    if(custom.voiceO==true){$("#themeSoundPlay").attr('src',"pk");}else{$("#themeSoundPlay").attr('src',"pk");}
+    $("#themeSoundPlay").play();
+
+});
+if(custom.ThemePack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+else if(custom.ThemePack=="user"){
     if (localStorage.userTheme){
         userTheme = JSON.parse(localStorage.userTheme);
         if(userTheme.ext!=null){nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-        else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.iconPack="off"; localStorage.setItem('IconPackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+        else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
     }
-    else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.iconPack="off"; localStorage.setItem('IconPackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+    else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 }
 if (custom.yourcard != "无") { yourcard = custom.yourcard;cardvo=nowTheme[yourcard+"voice"]; }
 ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;old=nowTheme.old;
@@ -425,12 +438,12 @@ function cardimgfunc(){
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;
         if(cardname.length==1&&imgpanel.children.length==2){
             if(cardname!=""){
-                yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('IconPackConf', JSON.stringify(custom));
+                yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));
                 if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){
                     $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" onclick="xxcard(${nowTheme[cardname][0]})" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);
                 }
             }
-            else{ yourcard="无";custom.yourcard=yourcard;localStorage.setItem('IconPackConf', JSON.stringify(custom));}
+            else{ yourcard="无";custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));}
         }
         if(cardname==""){
             if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); }
