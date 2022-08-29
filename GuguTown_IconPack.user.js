@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     1.1.0
+// @version     1.2.0
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -164,8 +164,8 @@ const originTheme={
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","neko_"],
     "ho3":["z2403","z7","天使缎带","天使缎带","swirl_"]
 },testTheme={
-    "url":"https://p.inari.site/guguicons/test/",
-    "old":"",
+    "url":"https://p.inari.site/guguicons/test/eq/",
+    "old":"0",
     "ext":".gif",
     "background":"normal",
     "backsize":"background-size:100% 100%;",
@@ -180,16 +180,16 @@ const originTheme={
     "迅捷魔蛛（野怪":"https://p.inari.site/guguicons/test/mob/zhu.png",
     "食铁兽（野怪"  :"https://p.inari.site/guguicons/test/mob/shou.png",
     "晶刺豪猪（野怪":"https://p.inari.site/guguicons/test/mob/nzhu.png",
-    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu1.png","https://p.inari.site/guguicons/test/cg/wuu2.png","https://p.inari.site/guguicons/test/cg/wuu3.png","https://p.inari.site/guguicons/test/cg/wuu4.png","https://p.inari.site/guguicons/test/cg/wuu5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "默":["3001","https://p.inari.site/guguicons/test/cg/mo1.png","https://p.inari.site/guguicons/test/cg/mo2.png","https://p.inari.site/guguicons/test/cg/mo3.png","https://p.inari.site/guguicons/test/cg/mo4.png","https://p.inari.site/guguicons/test/cg/mo5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin1.png","https://p.inari.site/guguicons/test/cg/lin2.png","https://p.inari.site/guguicons/test/cg/lin3.png","https://p.inari.site/guguicons/test/cg/lin4.png","https://p.inari.site/guguicons/test/cg/lin5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai1.png","https://p.inari.site/guguicons/test/cg/ai2.png","https://p.inari.site/guguicons/test/cg/ai3.png","https://p.inari.site/guguicons/test/cg/ai4.png","https://p.inari.site/guguicons/test/cg/ai5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng1.png","https://p.inari.site/guguicons/test/cg/meng2.png","https://p.inari.site/guguicons/test/cg/meng3.png","https://p.inari.site/guguicons/test/cg/meng4.png","https://p.inari.site/guguicons/test/cg/meng5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei1.png","https://p.inari.site/guguicons/test/cg/wei2.png","https://p.inari.site/guguicons/test/cg/wei3.png","https://p.inari.site/guguicons/test/cg/wei4.png","https://p.inari.site/guguicons/test/cg/wei5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi1.png","https://p.inari.site/guguicons/test/cg/yi2.png","https://p.inari.site/guguicons/test/cg/yi3.png","https://p.inari.site/guguicons/test/cg/yi4.png","https://p.inari.site/guguicons/test/cg/yi5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming1.png","https://p.inari.site/guguicons/test/cg/ming2.png","https://p.inari.site/guguicons/test/cg/ming3.png","https://p.inari.site/guguicons/test/cg/ming4.png","https://p.inari.site/guguicons/test/cg/ming5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "命":["3008","https://p.inari.site/guguicons/test/cg/life1.png","https://p.inari.site/guguicons/test/cg/life2.png","https://p.inari.site/guguicons/test/cg/life3.png","https://p.inari.site/guguicons/test/cg/life4.png","https://p.inari.site/guguicons/test/cg/life5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
-    "希":["3009","https://p.inari.site/guguicons/test/cg/xi1.png","https://p.inari.site/guguicons/test/cg/xi2.png","https://p.inari.site/guguicons/test/cg/xi3.png","https://p.inari.site/guguicons/test/cg/xi4.png","https://p.inari.site/guguicons/test/cg/xi5.png","https://p.inari.site/guguicons/test/cg/6.png","https://p.inari.site/guguicons/test/cg/7.png"],
+    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png","https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png","https://p.inari.site/guguicons/test/cg/mo/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin/1.png","https://p.inari.site/guguicons/test/cg/lin/2.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/4.png","https://p.inari.site/guguicons/test/cg/lin/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai/1.png","https://p.inari.site/guguicons/test/cg/ai/2.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/4.png","https://p.inari.site/guguicons/test/cg/ai/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng/1.png","https://p.inari.site/guguicons/test/cg/meng/2.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/4.png","https://p.inari.site/guguicons/test/cg/meng/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei/1.png","https://p.inari.site/guguicons/test/cg/wei/2.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/4.png","https://p.inari.site/guguicons/test/cg/wei/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi/1.png","https://p.inari.site/guguicons/test/cg/yi/2.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/4.png","https://p.inari.site/guguicons/test/cg/yi/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming/1.png","https://p.inari.site/guguicons/test/cg/ming/2.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/4.png","https://p.inari.site/guguicons/test/cg/ming/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "命":["3008","https://p.inari.site/guguicons/test/cg/life/1.png","https://p.inari.site/guguicons/test/cg/life/2.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/4.png","https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
+    "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xi/2.png","https://p.inari.site/guguicons/test/cg/xi/3.png","https://p.inari.site/guguicons/test/cg/xi/4.png","https://p.inari.site/guguicons/test/cg/xi/5.png","https://p.inari.site/guguicons/test/cg//6.png","https://p.inari.site/guguicons/test/cg//7.png"],
     "舞voice":["https://p.inari.site/guguicons/test/vo/wuu/",".mp3"],
     "默voice":["https://p.inari.site/guguicons/test/vo/mo/",".mp3"],
     "琳voice":["https://p.inari.site/guguicons/test/vo/lin/",".mp3"],
@@ -200,37 +200,37 @@ const originTheme={
     "冥voice":["https://p.inari.site/guguicons/test/vo/ming/",".mp3"],
     "命voice":["https://p.inari.site/guguicons/test/vo/life/",".mp3"],
     "希voice":["https://p.inari.site/guguicons/test/vo/xi/",".mp3"],
-    "a1":["z2101","z1","探险者之剑","旅人剑","%E6%8E%A2%E9%99%A9%E8%80%85%E4%B9%8B%E5%89%91"],
-    "a2":["z2102","z2","探险者短弓","猎人弓","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E5%BC%93"],
+    "a1":["z2101","z1","探险者之剑","旅人剑","%E6%8E%A2%E9%99%A9%E8%80%85%E4%B9%8B%E5%89%91/"],
+    "a2":["z2102","z2","探险者短弓","猎人弓","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E5%BC%93/"],
     "a3":["z2103","z3","探险者短杖","香木法杖","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E6%9D%96"],
-    "a4":["z2104","z4","狂信者的荣誉之刃","妖刀血鸦","%E7%8B%82%E4%BF%A1%E8%80%85%E7%9A%84%E8%8D%A3%E8%AA%89%E4%B9%8B%E5%88%83"],
-    "a5":["z2105","z2","反叛者的刺杀弓","深渊之弓","%E5%8F%8D%E5%8F%9B%E8%80%85%E7%9A%84%E5%88%BA%E6%9D%80%E5%BC%93"],
-    "a6":["z2106","z4","幽梦匕首","黑曜石天黑剑","%E5%B9%BD%E6%A2%A6%E5%8C%95%E9%A6%96"],
-    "a7":["z2107","z3","光辉法杖","棒棒糖手杖","%E5%85%89%E8%BE%89%E6%B3%95%E6%9D%96"],
-    "a8":["z2108","z1","荆棘盾剑","盖亚之斧","%E8%8D%86%E6%A3%98%E7%9B%BE%E5%89%91"],
-    "ao8":["z2108","z1","荆棘剑盾","盖亚之斧","%E8%8D%86%E6%A3%98%E7%9B%BE%E5%89%91"],
-    "a9":["z2109","z1","陨铁重剑","勇气星核剑","%E9%99%A8%E9%93%81%E9%87%8D%E5%89%91"],
-    "a10":["z2110","z2110","饮血魔剑","混沌之刃","%E9%A5%AE%E8%A1%80%E9%AD%94%E5%89%91"],
-    "ao10":["z2110","z2110","饮血长枪","毁灭之伤冥神枪","%E9%A5%AE%E8%A1%80%E9%95%BF%E6%9E%AA"],
-    "w1":["z2201","z5","探险者手环","旅者手镯","%E6%8E%A2%E9%99%A9%E8%80%85%E6%89%8B%E7%8E%AF"],
-    "wo1":["z2201","z5","探险者手套","旅者拳套","%E6%8E%A2%E9%99%A9%E8%80%85%E6%89%8B%E5%A5%97"],
-    "w2":["z2202","z8","命师的传承手环","睿智手镯","%E5%91%BD%E5%B8%88%E7%9A%84%E4%BC%A0%E6%89%BF%E6%89%8B%E7%8E%AF"],
-    "w3":["z2203","z5","秃鹫手环","朋克手镯","%E7%A7%83%E9%B9%AB%E6%89%8B%E7%8E%AF"],
-    "wo3":["z2203","z5","秃鹫手套","深红爪","%E7%A7%83%E9%B9%AB%E6%89%8B%E5%A5%97"],
-    "c1":["z2301","z9","探险者铁甲","重金属护甲","%E6%8E%A2%E9%99%A9%E8%80%85%E9%93%81%E7%94%B2"],
-    "c2":["z2302","z10","探险者皮甲","皮革工作服","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9A%AE%E7%94%B2"],
-    "c3":["z2303","z10","探险者布甲","旅者长袍","%E6%8E%A2%E9%99%A9%E8%80%85%E5%B8%83%E7%94%B2"],
-    "c4":["z2304","z11","旅法师的灵光袍","魔导师的长袍","%E6%97%85%E6%B3%95%E5%B8%88%E7%9A%84%E7%81%B5%E5%85%89%E8%A2%8D"],
-    "c5":["z2305","z9","战线支撑者的荆棘重甲","霸王树之棘针铠","%E6%88%98%E7%BA%BF%E6%94%AF%E6%92%91%E8%80%85%E7%9A%84%E8%8D%86%E6%A3%98%E9%87%8D%E7%94%B2"],
-    "c6":["z2306","z2306","复苏战衣","翠绿灵衣","%E5%A4%8D%E8%8B%8F%E6%88%98%E8%A1%A3"],
-    "co6":["z2306","z2306","复苏木甲","翠绿灵衣","%E5%A4%8D%E8%8B%8F%E6%88%98%E8%A1%A3"],
-    "c7":["z2307","z2307","挑战斗篷","黑玛瑙之祈装衣","%E6%8C%91%E6%88%98%E6%96%97%E7%AF%B7"],
-    "h1":["z2401","z7","探险者耳环","旅者耳环","%E6%8E%A2%E9%99%A9%E8%80%85%E8%80%B3%E7%8E%AF"],
-    "ho1":["z2401","z7","探险者头巾","旅者头巾","%E6%8E%A2%E9%99%A9%E8%80%85%E5%A4%B4%E5%B7%BE"],
-    "h2":["z2402","z7","占星师的耳饰","海神耳饰","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E8%80%B3%E9%A5%B0"],
-    "ho2":["z2402","z7","占星师的发饰","桜花の月夜簪","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E5%8F%91%E9%A5%B0"],
-    "h3":["z2403","z7","萌爪耳钉","精灵王护石","%E8%90%8C%E7%88%AA%E8%80%B3%E9%92%89"],
-    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6"]},iconsize=custom.iconSize;
+    "a4":["z2104","z4","狂信者的荣誉之刃","妖刀血鸦","%E7%8B%82%E4%BF%A1%E8%80%85%E7%9A%84%E8%8D%A3%E8%AA%89%E4%B9%8B%E5%88%83/"],
+    "a5":["z2105","z2","反叛者的刺杀弓","深渊之弓","%E5%8F%8D%E5%8F%9B%E8%80%85%E7%9A%84%E5%88%BA%E6%9D%80%E5%BC%93/"],
+    "a6":["z2106","z4","幽梦匕首","黑曜石天黑剑","%E5%B9%BD%E6%A2%A6%E5%8C%95%E9%A6%96/"],
+    "a7":["z2107","z3","光辉法杖","棒棒糖手杖","%E5%85%89%E8%BE%89%E6%B3%95%E6%9D%96/"],
+    "a8":["z2108","z1","荆棘盾剑","盖亚之斧","%E8%8D%86%E6%A3%98%E7%9B%BE%E5%89%91/"],
+    "ao8":["z2108","z1","荆棘剑盾","盖亚之斧","%E8%8D%86%E6%A3%98%E7%9B%BE%E5%89%91/"],
+    "a9":["z2109","z1","陨铁重剑","勇气星核剑","%E9%99%A8%E9%93%81%E9%87%8D%E5%89%91/"],
+    "a10":["z2110","z2110","饮血魔剑","混沌之刃","%E9%A5%AE%E8%A1%80%E9%AD%94%E5%89%91/"],
+    "ao10":["z2110","z2110","饮血长枪","毁灭之伤冥神枪","%E9%A5%AE%E8%A1%80%E9%95%BF%E6%9E%AA/"],
+    "w1":["z2201","z5","探险者手环","旅者手镯","%E6%8E%A2%E9%99%A9%E8%80%85%E6%89%8B%E7%8E%AF/"],
+    "wo1":["z2201","z5","探险者手套","旅者拳套","%E6%8E%A2%E9%99%A9%E8%80%85%E6%89%8B%E5%A5%97/"],
+    "w2":["z2202","z8","命师的传承手环","睿智手镯","%E5%91%BD%E5%B8%88%E7%9A%84%E4%BC%A0%E6%89%BF%E6%89%8B%E7%8E%AF/"],
+    "w3":["z2203","z5","秃鹫手环","朋克手镯","%E7%A7%83%E9%B9%AB%E6%89%8B%E7%8E%AF/"],
+    "wo3":["z2203","z5","秃鹫手套","深红爪","%E7%A7%83%E9%B9%AB%E6%89%8B%E5%A5%97/"],
+    "c1":["z2301","z9","探险者铁甲","重金属护甲","%E6%8E%A2%E9%99%A9%E8%80%85%E9%93%81%E7%94%B2/"],
+    "c2":["z2302","z10","探险者皮甲","皮革工作服","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9A%AE%E7%94%B2/"],
+    "c3":["z2303","z10","探险者布甲","旅者长袍","%E6%8E%A2%E9%99%A9%E8%80%85%E5%B8%83%E7%94%B2/"],
+    "c4":["z2304","z11","旅法师的灵光袍","魔导师的长袍","%E6%97%85%E6%B3%95%E5%B8%88%E7%9A%84%E7%81%B5%E5%85%89%E8%A2%8D/"],
+    "c5":["z2305","z9","战线支撑者的荆棘重甲","霸王树之棘针铠","%E6%88%98%E7%BA%BF%E6%94%AF%E6%92%91%E8%80%85%E7%9A%84%E8%8D%86%E6%A3%98%E9%87%8D%E7%94%B2/"],
+    "c6":["z2306","z2306","复苏战衣","翠绿灵衣","%E5%A4%8D%E8%8B%8F%E6%88%98%E8%A1%A3/"],
+    "co6":["z2306","z2306","复苏木甲","翠绿灵衣","%E5%A4%8D%E8%8B%8F%E6%88%98%E8%A1%A3/"],
+    "c7":["z2307","z2307","挑战斗篷","黑玛瑙之祈装衣","%E6%8C%91%E6%88%98%E6%96%97%E7%AF%B7/"],
+    "h1":["z2401","z7","探险者耳环","旅者耳环","%E6%8E%A2%E9%99%A9%E8%80%85%E8%80%B3%E7%8E%AF/"],
+    "ho1":["z2401","z7","探险者头巾","旅者头巾","%E6%8E%A2%E9%99%A9%E8%80%85%E5%A4%B4%E5%B7%BE/"],
+    "h2":["z2402","z7","占星师的耳饰","海神耳饰","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E8%80%B3%E9%A5%B0/"],
+    "ho2":["z2402","z7","占星师的发饰","桜花の月夜簪","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E5%8F%91%E9%A5%B0/"],
+    "h3":["z2403","z7","萌爪耳钉","精灵王护石","%E8%90%8C%E7%88%AA%E8%80%B3%E9%92%89/"],
+    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6/"]},iconsize=custom.iconSize;
 
 /**
  * main functions
@@ -420,11 +420,11 @@ function themenamefunc(){
     });
 };
 function cardimgfunc(){
-    let imgpanel,cardname;
+    let imgpanel,cardname,cardnamec;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;
         if(cardname.length==1&&imgpanel.children.length==2){
-            if(cardname!=" "){
+            if(cardname!=""){
                 yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('IconPackConf', JSON.stringify(custom));
                 if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){
                     $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" onclick="xxcard(${nowTheme[cardname][0]})" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);
@@ -432,12 +432,18 @@ function cardimgfunc(){
             }
             else{ yourcard="无";custom.yourcard=yourcard;localStorage.setItem('IconPackConf', JSON.stringify(custom));}
         }
-        if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="${nowTheme[cardname][3]}">`).insertBefore("#backpacks"); }
-        else{$("#bigcardimg").attr('src',nowTheme[cardname][3]);}
+        if(cardname==""){
+            if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); }
+            if($("#eqli2.active").length==1){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); }
+        }
+        else{
+            if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="${nowTheme[cardname][3]}">`).insertBefore("#backpacks"); }
+            else {$("#bigcardimg").attr('src',nowTheme[cardname][3]);}
+        }
     }
     if($(".text-info.fyg_f24").length==2){
         cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;$("#bigcardimg").attr('src',nowTheme[cardname][3]);
-        tempvo=nowTheme[cardname+"voice"];$("#themeSoundPlay").attr('src',tempvo[0]+5+tempvo[1]);$("#themeSoundPlay").play();
+        tempvo=nowTheme[cardname+"voice"];//$("#themeSoundPlay").attr('src',tempvo[0]+5+tempvo[1]);$("#themeSoundPlay").play();
     }
     if($(".col-sm-2.fyg_lh60").length>0){
         for(let i=0;i<$(".col-sm-2.fyg_lh60").length;i++){
@@ -495,7 +501,6 @@ let soundonce=0,sucheck=0,facheck=0;
 $(document).ajaxSuccess(function(){
     repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}
     if(soundonce%2==0){
-        console.log("playsound");
         if($(".alert.with-icon.fyg_tc").length==1){
             if($(".alert.alert-danger.with-icon.fyg_tc").length>0){
                 console.log("胜利");++sucheck;//$("#themeSoundPlay").attr('src',cardvo[0]+3+cardvo[1]);$("#themeSoundPlay").play();
@@ -513,13 +518,15 @@ $(document).ajaxSuccess(function(){
             }
         }
         if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0){
-            console.log("levelup");//$("#themeSoundPlay").attr('src',expvo[0]+9+expvo[1]);$("#themeSoundPlay").play();
+            console.log("levelup");let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];
+            console.log(expcard[5])
+            //$("#themeSoundPlay").attr('src',expvo[0]+9+expvo[1]);$("#themeSoundPlay").play();
         }
     }
 });
 $(document).on('click', ".detaillogitem", function () {
     repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc();}
-}).on('click', ".btnAutoTask", function () { //         $("#themeSoundPlay").attr('src',cardvo[0]+2+cardvo[1]);$("#themeSoundPlay").play();
+}).on('click', ".btnAutoTask", function () { //         $("#themeSoundPlay").attr('src',cardvo[0]+"pk"+cardvo[1]);$("#themeSoundPlay").play();
 }).on('click', "#middlecardimg", function () { //       $("#themeSoundPlay").attr('src',cardvo[0]+5+cardvo[1]);$("#themeSoundPlay").play();
 }).on('click', ".equip_one_key_link", function () { //  $("#themeSoundPlay").attr('src',cardvo[0]+6+cardvo[1]);$("#themeSoundPlay").play();
 }).on('click', "a[onclick*='gx_sxds']", function () { //$("#themeSoundPlay").attr('src',cardvo[0]+8+cardvo[1]);$("#themeSoundPlay").play();
