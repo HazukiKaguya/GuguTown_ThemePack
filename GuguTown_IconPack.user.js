@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     1.4.1
+// @version     2.0.0
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -21,7 +21,7 @@
  * default settings
  */
 const defaultConf={"useOldNames":false,"ThemePack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无","voiceO":false},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
-let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3;
+let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
 if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf) }
 else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf)); }
 if (custom.useOldNames == true) { useOldNamesCheck = 'checked'; }
@@ -203,7 +203,7 @@ const originTheme={
     "伊voice":["https://p.inari.site/guguicons/test/vo/yi/",".mp3"],
     "冥voice":["https://p.inari.site/guguicons/test/vo/ming/",".mp3"],
     "命voice":["https://p.inari.site/guguicons/test/vo/life/",".mp3"],
-    "希voice":["https://p.inari.site/guguicons/test/vo/xi/",".mp3"],
+    "希voice":["https://p.inari.site/guguicons/test/vo/xii/",".mp3"],
     "a1":["z2101","z1","探险者之剑","旅人剑","%E6%8E%A2%E9%99%A9%E8%80%85%E4%B9%8B%E5%89%91/"],
     "a2":["z2102","z2","探险者短弓","猎人弓","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E5%BC%93/"],
     "a3":["z2103","z3","探险者短杖","香木法杖","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E6%9D%96"],
@@ -239,6 +239,17 @@ const originTheme={
 /**
  * main functions
  */
+if(custom.ThemePack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+else if(custom.ThemePack=="user"){
+    if (localStorage.userTheme){
+        userTheme = JSON.parse(localStorage.userTheme);
+        if(userTheme.ext!=null){nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+        else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+    }
+    else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+}
 let panel = document.getElementsByClassName('panel panel-primary')[1];
 let iconconfpanel = document.createElement('span');
 iconconfpanel.innerHTML =
@@ -273,21 +284,10 @@ $(".themepack-switch").click(function(e){ custom.useThemeName = e.target.checked
 $(".themepack-showCG").click(function(e){ custom.showCG = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
 $(".themepack-voiceO").click(function(e){
     custom.voiceO = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-    if(custom.voiceO==true){$("#themeSoundPlay").attr('src',"pk");}else{$("#themeSoundPlay").attr('src',"pk");}
-    $("#themeSoundPlay").play();
-
+    if(custom.voiceO==true){$("#themeSoundPlay").attr('src',nowTheme.voice[0]);}else{$("#themeSoundPlay").attr('src',nowTheme.voice[1]);}
+    $("#themeSoundPlay")[0].play();
 });
-if(custom.ThemePack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-else if(custom.ThemePack=="user"){
-    if (localStorage.userTheme){
-        userTheme = JSON.parse(localStorage.userTheme);
-        if(userTheme.ext!=null){nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-        else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-    }
-    else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-}
+
 if (custom.yourcard != "无") { yourcard = custom.yourcard;cardvo=nowTheme[yourcard+"voice"]; }
 ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;old=nowTheme.old;
 a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;
@@ -433,7 +433,7 @@ function themenamefunc(){
     });
 };
 function cardimgfunc(){
-    let imgpanel,cardname,cardnamec;
+    let imgpanel,cardname,cardnamec;tempvo=false;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;
         if(cardname.length==1&&imgpanel.children.length==2){
@@ -455,8 +455,8 @@ function cardimgfunc(){
         }
     }
     if($(".text-info.fyg_f24").length==2){
-        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;$("#bigcardimg").attr('src',nowTheme[cardname][3]);
-        tempvo=nowTheme[cardname+"voice"];//$("#themeSoundPlay").attr('src',tempvo[0]+5+tempvo[1]);$("#themeSoundPlay").play();
+        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
+        if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}
     }
     if($(".col-sm-2.fyg_lh60").length>0){
         for(let i=0;i<$(".col-sm-2.fyg_lh60").length;i++){
@@ -491,6 +491,22 @@ function cardimgfunc(){
         $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
     }
 }
+$(document).on('click',"#btnAutoTask",function(){ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};battlecheck=-20;collecheck=-10;})
+.on('click', "#equip_one_key_link" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "#binding_popup_link" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "a[onclick*='gx_sxds']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='gox(']",function(){ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};collecheck=0;})
+.on('click', "button[onclick*='jgjg(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};battlecheck=0;})
+.on('click', "button[onclick*='puton(']" ,function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='halosave(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='b_forge(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='b_forca(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='b_forcbs(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='gx_cxjd(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'reset'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='expcard(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='cmaxup(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "button[onclick*='upcard(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}});
 
 
 /**
@@ -510,47 +526,22 @@ $('head').append(`<style>
 /**
  * init
  */
-let soundonce=0,sucheck=0,facheck=0;
-$(document).ajaxSuccess(function(){
+$(document).on('click', ".detaillogitem", function () { repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc();}})
+.ajaxSuccess(function(){
     repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}
-    if(soundonce%2==0){
+    if(soundonce%2==0&&custom.voiceO==true&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
         if($(".alert.with-icon.fyg_tc").length==1){
-            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){
-                console.log("胜利");++sucheck;//$("#themeSoundPlay").attr('src',cardvo[0]+3+cardvo[1]);$("#themeSoundPlay").play();
-            }else{
-                console.log("失败");++facheck;//$("#themeSoundPlay").attr('src',cardvo[0]+4+cardvo[1]);$("#themeSoundPlay").play();
-            }
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
+            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);}
         }
-        else{
-            if($(".alert.alert-danger.with-icon.fyg_tc").length!=sucheck){
-                console.log("胜利");++sucheck;//$("#themeSoundPlay").attr('src',cardvo[0]+3+cardvo[1]);$("#themeSoundPlay").play();
-                //$("#themeSoundPlay").attr('src',"https://patchwiki.biligame.com/images/pcr/1/1b/8h37x4brqmn8otmd2x2tl3njo6x3ogj.mp3");$("#themeSoundPlay")[0].play();
-            }
-            if($(".alert.alert-info.with-icon.fyg_tc").length!=facheck){
-                console.log("失败");++facheck;//$("#themeSoundPlay").attr('src',cardvo[0]+4+cardvo[1]);$("#themeSoundPlay").play();
-            }
+        else {
+            if($(".alert.alert-danger.with-icon.fyg_tc").length!=sucheck){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
+            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);}
         }
-        if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0){
-            console.log("levelup");let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];
-            console.log(expcard[5])
-            //$("#themeSoundPlay").attr('src',expvo[0]+9+expvo[1]);$("#themeSoundPlay").play();
-        }
+        ++battlecheck;$("#themeSoundPlay")[0].play();
     }
-});
-$(document).on('click', ".detaillogitem", function () {
-    repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc();}
-}).on('click', ".btnAutoTask", function () { //         $("#themeSoundPlay").attr('src',cardvo[0]+"pk"+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "#middlecardimg", function () { //       $("#themeSoundPlay").attr('src',cardvo[0]+5+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', ".equip_one_key_link", function () { //  $("#themeSoundPlay").attr('src',cardvo[0]+6+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "a[onclick*='gx_sxds']", function () { //$("#themeSoundPlay").attr('src',cardvo[0]+8+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='b_forge(']", function () { // $("#themeSoundPlay").attr('src',cardvo[0]+0+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='b_forcbs(']", function () { //$("#themeSoundPlay").attr('src',tempvo[0]+0+tempvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='b_forca(']", function () { // $("#themeSoundPlay").attr('src',cardvo[0]+1+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='gox(']", function () { //     $("#themeSoundPlay").attr('src',cardvo[0]+1+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='jgjg(']", function () { //    $("#themeSoundPlay").attr('src',cardvo[0]+2+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='upcard(']", function () { //  $("#themeSoundPlay").attr('src',tempvo[0]+6+tempvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='expcard(']", function () { // $("#themeSoundPlay").attr('src',tempvo[0]+7+tempvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='gx_cxjd(']", function () {//$("#themeSoundPlay").attr('src',tempvo[0]+8+tempvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='puton(']", function () { //   $("#themeSoundPlay").attr('src',cardvo[0]+9+cardvo[1]);$("#themeSoundPlay").play();
-}).on('click', "button[onclick*='halosave(']", function () { //$("#themeSoundPlay").attr('src',tempvo[0]+9+tempvo[1]);$("#themeSoundPlay").play();
+    if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0&&collecheck<1){
+            let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];
+            $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);++collecheck;$("#themeSoundPlay")[0].play();
+    }
 });
