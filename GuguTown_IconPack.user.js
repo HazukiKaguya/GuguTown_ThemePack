@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.0.8
+// @version     2.0.9
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -513,11 +513,11 @@ function cardimgfunc(){
 };
 $("#themeSoundPlay")[0].addEventListener('ended', function(){
     if(soundonce%2==0&&custom.voiceO==true&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
-        if($(".alert.with-icon.fyg_tc").length==1&&$(".alert.with-icon.fyg_tc").length!=sucheck+facheck){
+        if($(".alert.with-icon.fyg_tc").length==1){
             if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
             else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};++battlecheck;$("#themeSoundPlay")[0].play();
         }
-        else if($(".alert.with-icon.fyg_tc").length>1&&$(".alert.with-icon.fyg_tc").length!=sucheck+facheck){
+        else if($(".alert.with-icon.fyg_tc").length>1){
             if($(".alert.alert-danger.with-icon.fyg_tc").length!=sucheck){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
             else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};++battlecheck;$("#themeSoundPlay")[0].play();
         };
@@ -527,7 +527,8 @@ $("#themeSoundPlay")[0].addEventListener('ended', function(){
         $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);$("#themeSoundPlay")[0].play();
     };
 });
-$(document).on('click', "button", function() { ccard=false;}).on('click', "[onclick*='xxcard(']", function() { ccard=false;}).on('click', "#middlecardimg", function() { showbig=true;})
+$(document).on('click', "button", function() { ccard=false;})
+.on('click', "[onclick*='xxcard(']", function() { ccard=false;}).on('click', "#middlecardimg", function() { showbig=true;})
 .on('click', "button[onclick*='upcard(']" , function() { yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));cardvo=nowTheme[yourcard+"voice"];})
 .on('click', "#btnAutoTask", function () { battlecheck=-20;collecheck=-10;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "#equip_one_key_link" , function() {ccard=false; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
@@ -543,7 +544,8 @@ $(document).on('click', "button", function() { ccard=false;}).on('click', "[oncl
 .on('click', "button[onclick*='gx_cxjd(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'reset'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='expcard(']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'exp'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='cmaxup(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};});
+.on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', '#keepPkRecordCheckbox', function(e){if(e.target.checked){if($(".alert.alert-danger.with-icon.fyg_tc").length==1){sucheck=1;facheck=0;}else if($(".alert.alert-info.with-icon.fyg_tc").length==1){sucheck=0;facheck=1;};}else{location.reload();}});
 
 
 /**
