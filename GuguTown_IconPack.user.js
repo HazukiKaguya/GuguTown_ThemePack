@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.0.3
+// @version     2.0.4
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -21,7 +21,7 @@
  * default settings
  */
 const defaultConf={"useOldNames":false,"ThemePack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无","voiceO":false},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
-let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo=false,tempca,ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
+let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,showbig=false,nowTheme,cardvo,tempvo=false,tempca,ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
 if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf) }
 else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf)); }
 if (custom.useOldNames == true) { useOldNamesCheck = 'checked'; }
@@ -489,9 +489,10 @@ function cardimgfunc(){
             }
         }
     }
-    if($("#eqli2.active").length!=1){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); };ccard=false;
+    if($("#eqli2.active").length!=1&&showbig!=true){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); };ccard=false;showbig=false;
 }
-$(document).on('click', "button[onclick*='upcard(']" , function() { ccard=true;yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));cardvo=nowTheme[yourcard+"voice"];})
+$(document).on('click', "#middlecardimg",function() {showbig=true;})
+.on('click', "button[onclick*='upcard(']" , function() { ccard=true;yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));cardvo=nowTheme[yourcard+"voice"];})
 .on('click', "#btnAutoTask", function () { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};battlecheck=-20;collecheck=-10;})
 .on('click', "#equip_one_key_link" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "#binding_popup_link" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
