@@ -15,6 +15,12 @@ GuguTown Theme Park Manager.
 ![image](https://user-images.githubusercontent.com/35645329/186827419-1dceabc5-3683-4bca-90f8-b21448b8149d.png) ![image](https://user-images.githubusercontent.com/35645329/186827478-87e1f2c5-cbe0-4707-a76b-f4af5f39d57d.png)
 
 ## 更新记录
+2.0.1 语音功能进一步兼容数据采集插件，修复若干bug;   
+2.0.0 主题包语音功能实装;   
+1.4.1 fix url;   
+1.4.0 修复若干bug;   
+1.1.0 优化CSS样式;   
+1.0.1 修复自定义主题的读取bug;   
 1.0.0 角色立绘功能实装;   
 0.4.4 fix bugs;   
 0.4.2 主题包装备名替换功能，修复bug;   
