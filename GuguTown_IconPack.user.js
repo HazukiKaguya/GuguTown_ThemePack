@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.0.5
+// @version     2.0.6
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -434,6 +434,13 @@ function themenamefunc(){
         n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
     });
 };
+function tempvofunc(){
+    tempvo=false;
+    if($(".text-info.fyg_f24").length==2){
+        let cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
+        if(ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}
+    }
+}
 function cardimgfunc(){
     let imgpanel,cardname,cardnamec;tempvo=false;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
@@ -542,4 +549,4 @@ $('head').append(`<style>
  * init
  */
 $(document).on('click', ".detaillogitem", function () { repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc();}})
-.ajaxSuccess(function(){ repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}});
+.ajaxSuccess(function(){ repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}else if(custom.showCG == false&&custom.voiceO==true){tempvofunc();}});
