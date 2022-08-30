@@ -2,16 +2,12 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.0.9
+// @version     2.1.0
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
 // @match       https://www.guguzhen.com/*
-// @exclude     https://www.guguzhen.com/fyg_gift.php
-// @exclude     https://www.guguzhen.com/fyg_shop.php
-// @exclude     https://www.guguzhen.com/fyg_wish.php
-// @exclude     https://www.guguzhen.com/fyg_index.php
 // @run-at      document-end
 // @license     MIT License
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPack.user.js
@@ -267,13 +263,13 @@ else if(custom.ThemePack=="user"){
 }
 else{alert("存在异常！")};
 if($('.themepack-ls').length==0){
-    $(`<span>&nbsp;<input type="button" class="themepack-ls" value="选择主题包">&nbsp;<input type="button" class="themepack-usr" value="写入自定义主题">&nbsp;<input type="button" class="icons-size" value="设置图标大小">&nbsp;
+    $(`<p></p><span><input type="button" class="themepack-ls" value="选择主题包">&nbsp;<input type="button" class="themepack-usr" value="写入自定义主题">&nbsp;<input type="button" class="icons-size" value="设置图标大小">&nbsp;
                     <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}>使用旧的装备名称&nbsp;
                     <input type="checkbox" class="themepack-switch" ${useThemeNameCheck}>使用主题装备名称&nbsp;
                     <input type="checkbox" class="themepack-showCG" ${showCGCheck}>启用角色立绘&nbsp;
                     <input type="checkbox" class="themepack-voiceO" ${voiceOCheck}>启用角色语音&nbsp;
                     <audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio></span>`
-     ).insertBefore($('.panel.panel-primary')[1].children[0]);};
+     ).insertBefore($('hr')[0])};
 $(".themepack-ls").click(function(){
     if (confirm("按【确定】选择主题包，按【取消】恢复默认主题包。")) {
         let ThemePack = prompt('输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。', "1");
@@ -553,6 +549,8 @@ $(document).on('click', "button", function() { ccard=false;})
  */
 $('head').append(`<style>
     .btn.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px;${nowTheme.backsize}}
+    .btn.fyg_tr.fyg_mp3{ width:  !important; height:  !important;}
+    .btn.fyg_tl.fyg_mp3{ width:  !important; height:  !important;}
     .btn.fyg_colpzbg.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; ${nowTheme.wqbacksize}}
     .img-rounded { width: 50px; height:50px;}
     .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
