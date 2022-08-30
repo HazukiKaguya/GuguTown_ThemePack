@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.0.0
+// @version     2.0.1
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -206,7 +206,7 @@ const originTheme={
     "希voice":["https://p.inari.site/guguicons/test/vo/xii/",".mp3"],
     "a1":["z2101","z1","探险者之剑","旅人剑","%E6%8E%A2%E9%99%A9%E8%80%85%E4%B9%8B%E5%89%91/"],
     "a2":["z2102","z2","探险者短弓","猎人弓","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E5%BC%93/"],
-    "a3":["z2103","z3","探险者短杖","香木法杖","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E6%9D%96"],
+    "a3":["z2103","z3","探险者短杖","香木法杖","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E6%9D%96/"],
     "a4":["z2104","z4","狂信者的荣誉之刃","妖刀血鸦","%E7%8B%82%E4%BF%A1%E8%80%85%E7%9A%84%E8%8D%A3%E8%AA%89%E4%B9%8B%E5%88%83/"],
     "a5":["z2105","z2","反叛者的刺杀弓","深渊之弓","%E5%8F%8D%E5%8F%9B%E8%80%85%E7%9A%84%E5%88%BA%E6%9D%80%E5%BC%93/"],
     "a6":["z2106","z4","幽梦匕首","黑曜石天黑剑","%E5%B9%BD%E6%A2%A6%E5%8C%95%E9%A6%96/"],
@@ -507,7 +507,24 @@ $(document).on('click',"#btnAutoTask",function(){ if(custom.voiceO==true){ $("#t
 .on('click', "button[onclick*='cmaxup(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "button[onclick*='upcard(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}});
-
+$("#themeSoundPlay")[0].addEventListener('ended', function(){
+    if(soundonce%2==0&&custom.voiceO==true&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
+        if($(".alert.with-icon.fyg_tc").length==1&&$(".alert.with-icon.fyg_tc").length!=sucheck+facheck){
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
+            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);}
+            ++battlecheck;$("#themeSoundPlay")[0].play();
+        }
+        else if($(".alert.with-icon.fyg_tc").length>1&&$(".alert.with-icon.fyg_tc").length!=sucheck+facheck) {
+            if($(".alert.alert-danger.with-icon.fyg_tc").length!=sucheck){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
+            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);}
+            ++battlecheck;$("#themeSoundPlay")[0].play();
+        }
+    }
+    if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0&&collecheck<1){
+        let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];++collecheck;
+        $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);$("#themeSoundPlay")[0].play();
+    }
+});
 
 /**
  * add CSS
@@ -527,21 +544,4 @@ $('head').append(`<style>
  * init
  */
 $(document).on('click', ".detaillogitem", function () { repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc();}})
-.ajaxSuccess(function(){
-    repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}
-    if(soundonce%2==0&&custom.voiceO==true&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
-        if($(".alert.with-icon.fyg_tc").length==1){
-            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
-            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);}
-        }
-        else {
-            if($(".alert.alert-danger.with-icon.fyg_tc").length!=sucheck){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
-            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);}
-        }
-        ++battlecheck;$("#themeSoundPlay")[0].play();
-    }
-    if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0&&collecheck<1){
-            let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];
-            $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);++collecheck;$("#themeSoundPlay")[0].play();
-    }
-});
+.ajaxSuccess(function(){ repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}});
