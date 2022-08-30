@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.0.1
+// @version     2.0.2
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -21,7 +21,7 @@
  * default settings
  */
 const defaultConf={"useOldNames":false,"ThemePack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无","voiceO":false},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
-let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
+let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo=false,ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
 if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf) }
 else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf)); }
 if (custom.useOldNames == true) { useOldNamesCheck = 'checked'; }
@@ -243,12 +243,11 @@ if(custom.ThemePack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('T
 else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="user"){
-    if (localStorage.userTheme){
-        userTheme = JSON.parse(localStorage.userTheme);
-        if(userTheme.ext!=null){nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-        else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
-    }
-    else{ console.log("自定义主题包数据异常，没有主题包启用!");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
+    if (localStorage.userTheme){userTheme = JSON.parse(localStorage.userTheme);
+        if(userTheme.h3!=null){nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));if(userTheme.舞==null&&custom.showCG==true){alert('此自定义主题包立绘功能不可用！请更新主题包或关闭立绘功能！')};
+                               if(userTheme.voice==null&&custom.voiceO==true){alert('此自定义主题包语音功能不可用！请更新主题包或关闭语音功能！')};}
+        else{ alert("自定义主题包json数据彻底过期，请及时更新！主题包未启用！");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}}
+    else{ alert("自定义主题包json数据不存在，主题包未启用！");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 }
 let panel = document.getElementsByClassName('panel panel-primary')[1];
 let iconconfpanel = document.createElement('span');
@@ -265,12 +264,14 @@ $(".themepack-ls").click(function(){
         let ThemePack = prompt('输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。', "1");
         if (ThemePack) {
             if(ThemePack=="1"){ console.log('test');custom.ThemePack="test"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
-            else if(ThemePack=="2"){ console.log('user');custom.ThemePack="user"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+            else if(ThemePack=="2"){ if (localStorage.userTheme){userTheme = JSON.parse(localStorage.userTheme);if(userTheme.h3!=null){
+                    console.log('user');custom.ThemePack="user";localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();nowTheme=userTheme;
+                    sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));if(userTheme.舞==null){alert('此自定义主题包立绘功能不可用！')};if(userTheme.voice==null){alert('此自定义主题包语音功能不可用！')};}
+                 else{ alert("自定义主题包json数据彻底过期，请及时更新！主题未变更！")}}else{ alert("自定义主题包json数据不存在，主题未变更！")}}
             else if(ThemePack=="0"){ console.log('off');custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
             else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
         }
-    }else{ if(confirm("按【确定】恢复默认主题包，按【取消】则不操作。")){ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}}
-});
+    }else{ if(confirm("按【确定】恢复默认主题包，按【取消】则不操作。")){ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}}});
 $(".icons-size").click(function(){
     let IconSize = prompt('请输入图标大小,格式应为32-128间的数字+px\n示例：50px', "50px");
     if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
@@ -357,10 +358,10 @@ function repfunc(){
         $("button[data-original-title*='探险者耳环']").attr("data-original-title",function(n,v){ n= v.replace(/探险者耳环/g, "探险者头巾");return n;});
         $("button[data-original-title*='占星师的耳饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的耳饰/g, "占星师的发饰");return n;});
         $("button[data-original-title*='萌爪耳钉']").attr("data-original-title",function(n,v){ n= v.replace(/萌爪耳钉/g, "天使缎带");return n;});
-        $(".with-padding").html(function(n,v){n= v.replace(/荆棘盾剑/g, "荆棘剑盾");n= n.replace(/饮血魔剑/g, "饮血长枪");n= n.replace(/探险者手环/g, "探险者手套");n= n.replace(/秃鹫手环/g, "秃鹫手套");
-                                              n= n.replace(/复苏战衣/g, "复苏木甲");n= n.replace(/探险者耳环/g, "探险者头巾");n= n.replace(/占星师的耳饰/g, "占星师的发饰");n= n.replace(/萌爪耳钉/g, "天使缎带");return n;});
-    }
-    if(custom.useThemeName==true){ themenamefunc(); }
+        $(".with-padding").html(function(n,v){
+            n= v.replace(/荆棘盾剑/g, "荆棘剑盾");n= n.replace(/饮血魔剑/g, "饮血长枪");n= n.replace(/探险者手环/g, "探险者手套");n= n.replace(/秃鹫手环/g, "秃鹫手套");
+            n= n.replace(/复苏战衣/g, "复苏木甲");n= n.replace(/探险者耳环/g, "探险者头巾");n= n.replace(/占星师的耳饰/g, "占星师的发饰");n= n.replace(/萌爪耳钉/g, "天使缎带");return n;});
+    };if(custom.useThemeName==true){ themenamefunc(); }
 }
 function flogrepfunc(){
     if(custom.useOldNames!=true){
@@ -369,7 +370,8 @@ function flogrepfunc(){
         $("button[data-original-title*='探险者手套']").attr("data-original-title",function(n,v){ n= v.replace(/探险者手套/g, "探险者手环");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w1[4]+old);return n;});
         $("button[data-original-title*='秃鹫手套']").attr("data-original-title",function(n,v){ n= v.replace(/秃鹫手套/g, "秃鹫手环");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z5/g, purl+w3[4]+old);return n;});
         $("button[data-original-title*='复苏木甲']").attr("data-original-title",function(n,v){ n= v.replace(/复苏木甲/g, "复苏战衣");return n;});
-        $("button[data-original-title*='探险者头巾']").attr("data-original-title",function(n,v){ n= v.replace(/探险者头巾/g, "探险者耳环");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h1[4]+old);return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
+        $("button[data-original-title*='探险者头巾']").attr("data-original-title",function(n,v){ n= v.replace(/探险者头巾/g, "探险者耳环");return n;})
+            .attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h1[4]+old);return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
         $("button[data-original-title*='占星师的发饰']").attr("data-original-title",function(n,v){ n= v.replace(/占星师的发饰/g, "占星师的耳饰");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h2[4]+old);return n;});
         $("button[data-original-title*='天使缎带']").attr("data-original-title",function(n,v){ n= v.replace(/天使缎带/g, "萌爪耳钉");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h3[4]+old);return n;});
     }
@@ -454,7 +456,7 @@ function cardimgfunc(){
             else {$("#bigcardimg").attr('src',nowTheme[cardname][3]);}
         }
     }
-    if($(".text-info.fyg_f24").length==2){
+    if($(".text-info.fyg_f24").length==2&&ccard!=true){
         cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
         if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}
     }
@@ -487,11 +489,10 @@ function cardimgfunc(){
             }
         }
     }
-    if($("#eqli2.active").length!=1){
-        $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
-    }
+    if($("#eqli2.active").length!=1){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); };ccard=false;
 }
-$(document).on('click',"#btnAutoTask",function(){ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};battlecheck=-20;collecheck=-10;})
+$(document).on('click', "button[onclick*='upcard(']" , function() { ccard=true;})
+.on('click', "#btnAutoTask", function () { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};battlecheck=-20;collecheck=-10;})
 .on('click', "#equip_one_key_link" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "#binding_popup_link" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "a[onclick*='gx_sxds']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
@@ -505,7 +506,6 @@ $(document).on('click',"#btnAutoTask",function(){ if(custom.voiceO==true){ $("#t
 .on('click', "button[onclick*='gx_cxjd(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'reset'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "button[onclick*='expcard(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "button[onclick*='cmaxup(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();}})
-.on('click', "button[onclick*='upcard(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();}});
 $("#themeSoundPlay")[0].addEventListener('ended', function(){
     if(soundonce%2==0&&custom.voiceO==true&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
