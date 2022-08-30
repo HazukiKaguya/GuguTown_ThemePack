@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.1.0
+// @version     2.1.1
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -17,7 +17,7 @@
  * default settings
  */
 const defaultConf={"useOldNames":false,"ThemePack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无","voiceO":false},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
-let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,showbig=false,nowTheme,cardvo,tempvo=false,tempca,
+let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo=false,tempca,
     ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
 if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf);}
 else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf));};
@@ -474,7 +474,7 @@ function cardimgfunc(){
         if(cardname.length==1&&imgpanel.children.length==2){
             if(cardname!=""){
                 yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-                if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){ $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" onclick="xxcard(${nowTheme[cardname][0]})" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
+                if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){ $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
             }else{ yourcard="无";custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
         };
         if(cardname==""){
@@ -505,44 +505,56 @@ function cardimgfunc(){
             if(cardname[cardname.length-2]!="."&&isyg==false){ cardname=cardname[cardname.length-9];imgpanel.style.backgroundImage=`url("${nowTheme[cardname][5]}")`;imgpanel.style.backgroundSize="cover"; };
         };
     };
-    if($("#eqli2.active").length!=1&&showbig!=true){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};showbig=false;
+    if($("#eqli2.active").length!=1){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};
 };
-$("#themeSoundPlay")[0].addEventListener('ended', function(){
+
+$("#themeSoundPlay")[0].addEventListener('ended', function(){battlevofunc();});
+
+function battlevofunc(){
     if(soundonce%2==0&&custom.voiceO==true&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
-        if($(".alert.with-icon.fyg_tc").length==1){
-            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
-            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};++battlecheck;$("#themeSoundPlay")[0].play();
+        if($(".alert.with-icon.fyg_tc").length!=1){
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>sucheck){ $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);};
+            if($(".alert.alert-info.with-icon.fyg_tc").length>facheck){ $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};
         }
-        else if($(".alert.with-icon.fyg_tc").length>1){
-            if($(".alert.alert-danger.with-icon.fyg_tc").length!=sucheck){ ++sucheck;$("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);}
-            else{ ++facheck;$("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};++battlecheck;$("#themeSoundPlay")[0].play();
-        };
+        else{
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);};
+            if($(".alert.alert-info.with-icon.fyg_tc").length>0){ $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};
+        }
+        ++battlecheck;$("#themeSoundPlay")[0].play();
     };
     if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0&&collecheck<1){
         let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];++collecheck;
         $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);$("#themeSoundPlay")[0].play();
     };
-});
-$(document).on('click', "button", function() { ccard=false;})
-.on('click', "[onclick*='xxcard(']", function() { ccard=false;}).on('click', "#middlecardimg", function() { showbig=true;})
+};
+$(document).on('blur', "#btnAutoTask", function () { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button", function() { ccard=false;}).on('click', "[onclick*='xxcard(']", function() { ccard=false;})
 .on('click', "button[onclick*='upcard(']" , function() { yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));cardvo=nowTheme[yourcard+"voice"];})
-.on('click', "#btnAutoTask", function () { battlecheck=-20;collecheck=-10;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "#equip_one_key_link" , function() {ccard=false; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "#binding_popup_link" , function() {ccard=false; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='gx_sxds']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='gox(']",function(){ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};collecheck=0;})
-.on('click', "button[onclick*='jgjg(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};battlecheck=0;})
-.on('click', "button[onclick*='puton(']" ,function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
+.on('click', "a[onclick*='gx_gt(']" ,function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button[onclick*='giftop']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button[onclick*='xyck(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button[onclick*='gox(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};collecheck=0;})
+.on('click', "button[onclick*='xyre(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button[onclick*='puton(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "button[onclick*='halosave(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='b_forge(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='b_forca(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='b_forcbs(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='gx_cxjd(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'reset'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button[onclick*='gx_cxjd(']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'reset'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='expcard(']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'exp'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='cmaxup(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', '#keepPkRecordCheckbox', function(e){if(e.target.checked){if($(".alert.alert-danger.with-icon.fyg_tc").length==1){sucheck=1;facheck=0;}else if($(".alert.alert-info.with-icon.fyg_tc").length==1){sucheck=0;facheck=1;};}else{location.reload();}});
-
+.on('click', "button[onclick*='cmaxup(']" , function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button[onclick*='updstat(']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "a[onclick*='eqlip(1),eqbp(1)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "a[onclick*='eqlip(3),eqbp(3)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "a[onclick*='eqlip(4),eqbp(4)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "button[onclick*='jgjg(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};
+    sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;facheck=$(".alert.alert-info.with-icon.fyg_tc").length;battlecheck=0;})
+.on('click', "#middlecardimg",function(){if($('#eqli2.active').length==1&&tempvo!=cardvo){ xxcard(nowTheme[yourcard][0]);}
+    else{ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*3)+cardvo[1]);$("#themeSoundPlay")[0].play();};};});
 
 /**
  * add CSS
