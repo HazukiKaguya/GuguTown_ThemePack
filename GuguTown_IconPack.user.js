@@ -244,8 +244,8 @@ else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;s
 else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="user"){
     if (localStorage.userTheme){userTheme = JSON.parse(localStorage.userTheme);
-        if(userTheme.h3!=null){nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));if(userTheme.舞==null&&custom.showCG==true){alert('此自定义主题包立绘功能不可用！请更新主题包或关闭立绘功能！')};
-                               if(userTheme.voice==null&&custom.voiceO==true){alert('此自定义主题包语音功能不可用！请更新主题包或关闭语音功能！')};}
+        if(userTheme.h3!=null){nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));if(userTheme.舞==null&&custom.showCG==true){alert('此自定义主题包立绘功能不可用！请更新主题包或关闭立绘功能！');custom.showCG=false;};
+                               if(userTheme.voice==null&&custom.voiceO==true){alert('此自定义主题包语音功能不可用！请更新主题包或关闭语音功能！')};custom.voiceO=false;}
         else{ alert("自定义主题包json数据彻底过期，请及时更新！主题包未启用！");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}}
     else{ alert("自定义主题包json数据不存在，主题包未启用！");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 }
