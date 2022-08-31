@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.1.1
+// @version     2.1.2
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -14,18 +14,20 @@
 // ==/UserScript==
 'use strict';
 /**
- * default settings
+ * settings
  */
-const defaultConf={"useOldNames":false,"ThemePack":"classic","iconSize":"50px","useThemeName":false,"showCG":false,"yourcard":"无","voiceO":false},ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"];
-let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',custom = defaultConf,userTheme={},yourcard="无",timeout = null,nowTheme,cardvo,tempvo=false,tempca,
-    ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
-if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf);}
-else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf));};
-if (custom.useOldNames == true) { useOldNamesCheck = 'checked'; };
-if (custom.useThemeName == true) { useThemeNameCheck = 'checked'; };
-if (custom.showCG == true) { showCGCheck = 'checked'; };
-if (custom.voiceO == true) { voiceOCheck = 'checked'; };
-const originTheme={
+const defaultConf={
+    "useOldNames":false,
+    "ThemePack":"classic",
+    "iconSize":"50px",
+    "kanbansize":"100",
+    "useThemeName":false,
+    "showKanban":false,
+    "showCG":false,
+    "voiceO":false,
+    "yourcard":"舞"
+}
+,originTheme={
     "url":"ys/icon/",
     "old":"1",
     "ext":".gif",
@@ -94,8 +96,8 @@ const originTheme={
     "ho2":["z2402","z7","占星师的发饰","占星师的发饰","z/z2402_"],
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","z/z2403_"],
     "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"]
-},
-      classicTheme={
+}
+,classicTheme={
     "url":"https://sticker.inari.site/guguicons/old/",
     "old":"",
     "ext":".gif",
@@ -164,8 +166,8 @@ const originTheme={
     "ho2":["z2402","z7","占星师的发饰","占星师的发饰","swirl_"],
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","neko_"],
     "ho3":["z2403","z7","天使缎带","天使缎带","swirl_"]
-},
-      testTheme={
+}
+,testTheme={
     "url":"https://p.inari.site/guguicons/test/eq/",
     "old":"0",
     "ext":".gif",
@@ -182,16 +184,16 @@ const originTheme={
     "迅捷魔蛛（野怪":"https://p.inari.site/guguicons/test/mob/zhu.png",
     "食铁兽（野怪"  :"https://p.inari.site/guguicons/test/mob/shou.png",
     "晶刺豪猪（野怪":"https://p.inari.site/guguicons/test/mob/nzhu.png",
-    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png","https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg/wuu/6.png","https://p.inari.site/guguicons/test/cg/wuu/7.png"],
-    "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png","https://p.inari.site/guguicons/test/cg/mo/5.png","https://p.inari.site/guguicons/test/cg/mo/6.png","https://p.inari.site/guguicons/test/cg/mo/7.png"],
-    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin/1.png","https://p.inari.site/guguicons/test/cg/lin/2.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/4.png","https://p.inari.site/guguicons/test/cg/lin/5.png","https://p.inari.site/guguicons/test/cg/lin/6.png","https://p.inari.site/guguicons/test/cg/lin/7.png"],
-    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai/1.png","https://p.inari.site/guguicons/test/cg/ai/2.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/4.png","https://p.inari.site/guguicons/test/cg/ai/5.png","https://p.inari.site/guguicons/test/cg/ai/6.png","https://p.inari.site/guguicons/test/cg/ai/7.png"],
-    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng/1.png","https://p.inari.site/guguicons/test/cg/meng/2.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/4.png","https://p.inari.site/guguicons/test/cg/meng/5.png","https://p.inari.site/guguicons/test/cg/meng/6.png","https://p.inari.site/guguicons/test/cg/meng/7.png"],
-    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei/1.png","https://p.inari.site/guguicons/test/cg/wei/2.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/4.png","https://p.inari.site/guguicons/test/cg/wei/5.png","https://p.inari.site/guguicons/test/cg/wei/6.png","https://p.inari.site/guguicons/test/cg/wei/7.png"],
-    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi/1.png","https://p.inari.site/guguicons/test/cg/yi/2.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/4.png","https://p.inari.site/guguicons/test/cg/yi/5.png","https://p.inari.site/guguicons/test/cg/yi/6.png","https://p.inari.site/guguicons/test/cg/yi/7.png"],
-    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming/1.png","https://p.inari.site/guguicons/test/cg/ming/2.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/4.png","https://p.inari.site/guguicons/test/cg/ming/5.png","https://p.inari.site/guguicons/test/cg/ming/6.png","https://p.inari.site/guguicons/test/cg/ming/7.png"],
-    "命":["3008","https://p.inari.site/guguicons/test/cg/life/1.png","https://p.inari.site/guguicons/test/cg/life/2.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/4.png","https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg/life/6.png","https://p.inari.site/guguicons/test/cg/life/7.png"],
-    "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xii/2.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/4.png","https://p.inari.site/guguicons/test/cg/xii/5.png","https://p.inari.site/guguicons/test/cg/xii/6.png","https://p.inari.site/guguicons/test/cg/xii/7.png"],
+    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png","https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/0.png","https://p.inari.site/guguicons/test/cg/wuu/0.png"],
+    "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png","https://p.inari.site/guguicons/test/cg/mo/5.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/0.png","https://p.inari.site/guguicons/test/cg/mo/0.png"],
+    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin/1.png","https://p.inari.site/guguicons/test/cg/lin/2.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/4.png","https://p.inari.site/guguicons/test/cg/lin/5.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/0.png","https://p.inari.site/guguicons/test/cg/lin/0.png"],
+    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai/1.png","https://p.inari.site/guguicons/test/cg/ai/2.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/4.png","https://p.inari.site/guguicons/test/cg/ai/5.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/0.png","https://p.inari.site/guguicons/test/cg/ai/0.png"],
+    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng/1.png","https://p.inari.site/guguicons/test/cg/meng/2.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/4.png","https://p.inari.site/guguicons/test/cg/meng/5.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/0.png","https://p.inari.site/guguicons/test/cg/meng/0.png"],
+    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei/1.png","https://p.inari.site/guguicons/test/cg/wei/2.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/4.png","https://p.inari.site/guguicons/test/cg/wei/5.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/0.png","https://p.inari.site/guguicons/test/cg/wei/0.png"],
+    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi/1.png","https://p.inari.site/guguicons/test/cg/yi/2.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/4.png","https://p.inari.site/guguicons/test/cg/yi/5.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/0.png","https://p.inari.site/guguicons/test/cg/yi/0.png"],
+    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming/1.png","https://p.inari.site/guguicons/test/cg/ming/2.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/4.png","https://p.inari.site/guguicons/test/cg/ming/5.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/0.png","https://p.inari.site/guguicons/test/cg/ming/0.png"],
+    "命":["3008","https://p.inari.site/guguicons/test/cg/life/1.png","https://p.inari.site/guguicons/test/cg/life/2.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/4.png","https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/0.png","https://p.inari.site/guguicons/test/cg/life/0.png"],
+    "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xii/2.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/4.png","https://p.inari.site/guguicons/test/cg/xii/5.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/0.png","https://p.inari.site/guguicons/test/cg/xii/0.png"],
     "voice":["https://p.inari.site/guguicons/test/vo/on.mp3","https://p.inari.site/guguicons/test/vo/off.mp3"],
     "舞voice":["https://p.inari.site/guguicons/test/vo/wuu/",".mp3"],
     "默voice":["https://p.inari.site/guguicons/test/vo/mo/",".mp3"],
@@ -233,12 +235,17 @@ const originTheme={
     "h2":["z2402","z7","占星师的耳饰","海神耳饰","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E8%80%B3%E9%A5%B0/"],
     "ho2":["z2402","z7","占星师的发饰","桜花の月夜簪","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E5%8F%91%E9%A5%B0/"],
     "h3":["z2403","z7","萌爪耳钉","精灵王护石","%E8%90%8C%E7%88%AA%E8%80%B3%E9%92%89/"],
-    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6/"]},iconsize=custom.iconSize;
-
-
-/**
- * main functions
- */
+    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6/"]
+}
+,ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"],nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',kanbanCheck='',custom = defaultConf,userTheme={},timeout = null,nowTheme,tempvo=false,tempca,tpkanban,kanban,kanbanimg,ww,wh,
+    ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0;
+if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf);} else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf));};
+if (!custom.yourcard ) { custom.yourcard=defaultConf.yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
+if (!custom.kanbansize){ custom.kanbansize=defaultConf.kanbansize;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
+if (custom.showCG == true) { showCGCheck = 'checked'; };
+if (custom.voiceO == true) { voiceOCheck = 'checked'; };
+if (custom.useThemeName==true){ useThemeNameCheck='checked';};
 if(custom.ThemePack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
@@ -261,15 +268,38 @@ else if(custom.ThemePack=="user"){
     }
     else{ alert("自定义主题包json数据不存在，主题包未启用！");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
 }
-else{alert("存在异常！")};
+else{nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
+let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize;
+if (custom.showKanban == true){ kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked'}else{kanbanimg=nullimg;};
+ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;old=nowTheme.old;
+a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;
+c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
+if(custom.useOldNames==true){ useOldNamesCheck='checked'; a8=nowTheme.ao8;a10=nowTheme.ao10;w1=nowTheme.wo1;w3=nowTheme.wo3;c6=nowTheme.co6;h1=nowTheme.ho1;h2=nowTheme.ho2;h3=nowTheme.ho3; };
+
+/**
+ * functions
+ */
+/* kanban Html */
+tpkanban = document.createElement("div");ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
+if (localStorage.imgmove != null) {
+        let imgmove = JSON.parse(localStorage.imgmove);
+        tpkanban.innerHTML = `<div id = "tpkanban" style = "position:fixed;left:${Math.floor(imgmove[0] * ww)}px;top:${Math.floor(imgmove[1] * wh)}px;z-index:88;cursor:pointer;" >
+        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`;
+}
+else {
+        tpkanban.innerHTML = `<div id = "tpkanban" style = "position:fixed;left:5px;top:100px;z-index:88;cursor:pointer;" >
+        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`;
+};document.body.appendChild(tpkanban);kanban = document.getElementById("tpkanban"); window.onload = function () { drag(kanban); };
+/* setting menu Html */
 if($('.themepack-ls').length==0){
-    $(`<p></p><span><input type="button" class="themepack-ls" value="选择主题包">&nbsp;<input type="button" class="themepack-usr" value="写入自定义主题">&nbsp;<input type="button" class="icons-size" value="设置图标大小">&nbsp;
-                    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}>使用旧的装备名称&nbsp;
-                    <input type="checkbox" class="themepack-switch" ${useThemeNameCheck}>使用主题装备名称&nbsp;
-                    <input type="checkbox" class="themepack-showCG" ${showCGCheck}>启用角色立绘&nbsp;
-                    <input type="checkbox" class="themepack-voiceO" ${voiceOCheck}>启用角色语音&nbsp;
-                    <audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio></span>`
+    $(`<p></p><span>
+    <input type="button" class="themepack-ls" value="选择主题包">&nbsp;<input type="button" class="themepack-usr" value="写入自定义主题">&nbsp;
+    <input type="button" class="icons-size" value="图标大小">&nbsp;<input type="button" class="kanban-size" value="看板大小">&nbsp;
+    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}>使用旧的装备名称&nbsp;<input type="checkbox" class="themepack-switch" ${useThemeNameCheck}>使用主题装备名称&nbsp;
+    <input type="checkbox" class="themepack-showCG" ${showCGCheck}>启用立绘&nbsp;<input type="checkbox" class="themepack-voiceO" ${voiceOCheck}>启用语音&nbsp;<input type="checkbox" class="themepack-showKB" ${kanbanCheck}>启用看板&nbsp;
+    <audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio></span>`
      ).insertBefore($('hr')[0])};
+/* settings menu func */
 $(".themepack-ls").click(function(){
     if (confirm("按【确定】选择主题包，按【取消】恢复默认主题包。")) {
         let ThemePack = prompt('输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。', "1");
@@ -302,6 +332,10 @@ $(".icons-size").click(function(){
     let IconSize = prompt('请输入图标大小,格式应为32-128间的数字+px\n示例：50px', "50px");
     if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
 });
+$(".kanban-size").click(function(){
+    let KanbanSize = prompt('请输入看板大小,数字为百分比', "100");
+    if (KanbanSize) { custom.kanbansize = KanbanSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
+});
 $(".themepack-usr").click(function(){
     let userTheme = prompt('请输入自定义主题包的json数据,访问\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21\n以查看完整的json格式。',`${localStorage.userTheme}`);
     if (userTheme) { console.log(userTheme); localStorage.setItem('userTheme', userTheme);};
@@ -309,16 +343,59 @@ $(".themepack-usr").click(function(){
 $(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
 $(".themepack-switch").click(function(e){ custom.useThemeName = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
 $(".themepack-showCG").click(function(e){ custom.showCG = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
+$(".themepack-showKB").click(function(e){ custom.showKanban = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
 $(".themepack-voiceO").click(function(e){
     custom.voiceO = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));
     if(custom.voiceO==true){$("#themeSoundPlay").attr('src',nowTheme.voice[0]);}else{$("#themeSoundPlay").attr('src',nowTheme.voice[1]);};
     $("#themeSoundPlay")[0].play();
 });
-if (custom.yourcard != "无") { yourcard = custom.yourcard;}else{yourcard = "默";};cardvo=nowTheme[yourcard+"voice"];
-ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;old=nowTheme.old;
-a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;
-c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
-if(custom.useOldNames==true){ a8=nowTheme.ao8;a10=nowTheme.ao10;w1=nowTheme.wo1;w3=nowTheme.wo3;c6=nowTheme.co6;h1=nowTheme.ho1;h2=nowTheme.ho2;h3=nowTheme.ho3; };
+/* kanban drag */
+function drag(obj){
+    ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
+    let l,t,i,s;
+    obj.onmousedown = function (event) {
+        obj.setCapture && obj.setCapture(); event = event || window.event;
+        l = obj.style.left;t = obj.style.top; let ol = event.clientX - obj.offsetLeft, ot = event.clientY - obj.offsetTop;
+        document.onmousemove = function (event) { event = event || window.event; obj.style.left = event.clientX - ol + "px"; obj.style.top = event.clientY - ot + "px"; };
+        document.onmouseup = function () {
+            document.onmousemove = null; document.onmouseup = null;
+            obj.releaseCapture && obj.releaseCapture(); i = obj.style.left; s = obj.style.top;
+            if (l == i && t == s&&custom.voiceO==true) {
+                $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();
+            }
+            else {
+                if (parseInt(i) < 0) { obj.style.left = '0px'; i = 0 }
+                else if (parseInt(i) > 0.95 * ww) { i = 0.95; obj.style.left = 0.95 * ww + 'px' }
+                else if (parseInt(i) < 0.95 * ww) { i = parseInt(i) / ww }
+                if (parseInt(s) < 0) { obj.style.top = 0.1 * wh + 'px'; s = 0.1 }
+                else if (parseInt(s) > 0.9 * wh) { s = 0.9; obj.style.top = 0.9 * wh + 'px' }
+                else if (parseInt(s) < 0.9 * wh) { s = parseInt(s) / wh }
+                localStorage.setItem('imgmove', JSON.stringify([i, s]));
+            };
+        }; return false;
+    };
+    obj.addEventListener('touchmove', function (event) {
+        event.preventDefault();
+        if (event.targetTouches.length == 1) {
+            let touch = event.targetTouches[0];
+            if (touch.clientX >= 0) {
+                if (touch.clientX < ww - 60) { obj.style.left = touch.clientX + 'px'; l = touch.clientX / ww }
+                else { obj.style.left = 0.82 * ww + 'px'; l = 0.82 }
+            } else if (touch.clientX < 0) { obj.style.left = '0px'; l = 0 }
+            if (touch.clientY > 0) {
+                if (touch.clientY < 0.99 * wh) { obj.style.top = touch.clientY + 'px'; t = touch.clientY / wh }
+                else { obj.style.top = 0.99 * wh + 'px'; t = 0.99 }
+            } else if (touch.clientY < 0.05 * wh) { obj.style.top = 0.05 * wh + 'px'; t = 0.05 }
+            localStorage.setItem('imgmove', JSON.stringify([l, t]));
+        }
+    }); return false;
+};
+/* kanban resize */
+window.onresize = function(){
+    let temp = $('#tpkanban'); ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
+        if (localStorage.imgmove != null) { let imgmove = JSON.parse(localStorage.imgmove); temp[0].style.left = imgmove[0] * ww + 'px'; temp[0].style.top = imgmove[1] * wh + 'px'; }
+}
+/* replace to Theme icons */
 function repfunc(){
     if(ext!=".gif"){ $("button[style*='ys/icon/z']").attr("style",function(n,v){ n= v.replace(/.gif/g, ext);return n;});};
     $("button[style*='z2101']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]);n=n.replace(/ys\/icon\/z2101/g, purl+a1[4]+old);return n;});
@@ -389,6 +466,7 @@ function repfunc(){
     };
     if(custom.useThemeName==true){ themenamefunc(); };
 };
+/* replace to old eqName */
 function flogrepfunc(){
     if(custom.useOldNames!=true){
         $("button[data-original-title*='荆棘剑盾']").attr("data-original-title",function(n,v){ n= v.replace(/荆棘剑盾/g, "荆棘盾剑");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a8[4]+old);return n;});
@@ -442,6 +520,7 @@ function flogrepfunc(){
     $("button[data-original-title*='"+h2[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h2[4]+old);return n;});
     $("button[data-original-title*='"+h3[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h3[4]+old);return n;});
 };
+/* replace to Theme eqName */
 function themenamefunc(){
     $("button[data-original-title]").attr("data-original-title",function(n,v){
         n= v.replace(/探险者之剑/g, a1[3]);n= n.replace(/探险者短弓/g, a2[3]);n= n.replace(/探险者短杖/g, a3[3]);n= n.replace(/狂信者的荣誉之刃/g, a4[3]);n= n.replace(/反叛者的刺杀弓/g, a5[3]);n= n.replace(/幽梦匕首/g, a6[3]);
@@ -460,22 +539,16 @@ function themenamefunc(){
         n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
     });
 };
-function tempvofunc(){
-    tempvo=false;
-    if($(".text-info.fyg_f24").length==2){
-        let cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
-        if(ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};
-    };
-}
+/* Theme fgimg Realization */
 function cardimgfunc(){
     let imgpanel,cardname,cardnamec;tempvo=false;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;
         if(cardname.length==1&&imgpanel.children.length==2){
             if(cardname!=""){
-                yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+                yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};
                 if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){ $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
-            }else{ yourcard="无";custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
+            }else{ yourcard="舞";custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};};
         };
         if(cardname==""){
             if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
@@ -484,7 +557,7 @@ function cardimgfunc(){
     };
     if($(".text-info.fyg_f24").length==2){
         cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
-        if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};
+        if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
     };
     if($(".col-sm-2.fyg_lh60").length>0){
         for(let i=0;i<$(".col-sm-2.fyg_lh60").length;i++){
@@ -507,31 +580,53 @@ function cardimgfunc(){
     };
     if($("#eqli2.active").length!=1){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};
 };
-
-$("#themeSoundPlay")[0].addEventListener('ended', function(){battlevofunc();});
-
-function battlevofunc(){
-    if(soundonce%2==0&&custom.voiceO==true&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
+/* Detal voice Realization */
+function tempvofunc(){
+    tempvo=false;
+    if($(".text-info.fyg_f24").length==2){
+        let cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
+        if(ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
+    };
+}
+/* Battle Voice Realization */
+function battlefunc(){
+    if(soundonce%2==0&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
+        let battleCG;
         if($(".alert.with-icon.fyg_tc").length!=1){
-            if($(".alert.alert-danger.with-icon.fyg_tc").length>sucheck){ $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);};
-            if($(".alert.alert-info.with-icon.fyg_tc").length>facheck){ $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>sucheck){
+                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);
+                battleCG=nowTheme[yourcard][6];
+            };
+            if($(".alert.alert-info.with-icon.fyg_tc").length>facheck){
+                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);
+                battleCG=nowTheme[yourcard][7];
+            };
         }
         else{
-            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){ $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);};
-            if($(".alert.alert-info.with-icon.fyg_tc").length>0){ $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);};
-        }
-        ++battlecheck;$("#themeSoundPlay")[0].play();
+            if($(".alert.alert-danger.with-icon.fyg_tc").length>0){
+                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);
+                battleCG=nowTheme[yourcard][6];
+            };
+            if($(".alert.alert-info.with-icon.fyg_tc").length>0){
+                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);
+                battleCG=nowTheme[yourcard][7];
+            };
+        };
+        if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};
+        if(custom.showKanban==true){battlecgfunc(battleCG);};++battlecheck;
     };
     if($("button[class*='fyg_colpz05bg'][style*='b4.gif']").length>0&&collecheck<1){
         let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];++collecheck;
-        $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);$("#themeSoundPlay")[0].play();
+        $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};
     };
 };
+/* Battle CG Realization */
+function battlecgfunc(battleCG){ $(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg)},3000);};
+/* Theme voice Realization */
 $(document).on('blur', "#btnAutoTask", function () { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button", function() { ccard=false;}).on('click', "[onclick*='xxcard(']", function() { ccard=false;})
-.on('click', "button[onclick*='upcard(']" , function() { yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));cardvo=nowTheme[yourcard+"voice"];})
-.on('click', "#bigcardimg",function(){ if(custom.voiceO==true){ if(!tempvo)tempvo=cardvo;$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "#equip_one_key_link" , function() {ccard=false; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*3)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "#bigcardimg",function(){if(!tempvo)tempvo=cardvo;if(custom.voiceO==true){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "#equip_one_key_link" , function() {ccard=false; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "#binding_popup_link" , function() {ccard=false; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='gx_sxds']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='gx_gt(']" ,function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
@@ -553,8 +648,12 @@ $(document).on('blur', "#btnAutoTask", function () { if(custom.voiceO==true){ $(
 .on('click', "a[onclick*='eqlip(4),eqbp(4)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='jgjg(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};
     sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;facheck=$(".alert.alert-info.with-icon.fyg_tc").length;battlecheck=0;})
+.on('click', "button[onclick*='upcard(']" , function() { ccard=true;yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+    cardvo=nowTheme[yourcard+"voice"];kanbanimg=nowTheme[yourcard][2];$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);
+    if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};})
 .on('click', "#middlecardimg",function(){if($('#eqli2.active').length==1&&tempvo!=cardvo){ xxcard(nowTheme[yourcard][0]);}
-    else{ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*3)+cardvo[1]);$("#themeSoundPlay")[0].play();};};});
+    else{ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};};});
+
 
 /**
  * add CSS
@@ -577,3 +676,4 @@ $('head').append(`<style>
  */
 $(document).on('click', ".detaillogitem", function () { repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc(); };})
 .ajaxSuccess(function(){ repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}else if(custom.showCG == false&&custom.voiceO==true){ tempvofunc();};});
+$("#themeSoundPlay")[0].addEventListener('ended', function(){ battlefunc();});
