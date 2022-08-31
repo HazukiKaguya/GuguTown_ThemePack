@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.4
+// @version      1.5.5
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -19,7 +19,7 @@
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-09-01 02:34:00';
+    const g_modificationVersion = '2022-09-01 07:20:00';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
