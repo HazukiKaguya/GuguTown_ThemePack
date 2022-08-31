@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.1.2
+// @version     2.1.4
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -184,16 +184,16 @@ const defaultConf={
     "迅捷魔蛛（野怪":"https://p.inari.site/guguicons/test/mob/zhu.png",
     "食铁兽（野怪"  :"https://p.inari.site/guguicons/test/mob/shou.png",
     "晶刺豪猪（野怪":"https://p.inari.site/guguicons/test/mob/nzhu.png",
-    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png","https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/0.png","https://p.inari.site/guguicons/test/cg/wuu/0.png"],
-    "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png","https://p.inari.site/guguicons/test/cg/mo/5.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/0.png","https://p.inari.site/guguicons/test/cg/mo/0.png"],
-    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin/1.png","https://p.inari.site/guguicons/test/cg/lin/2.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/4.png","https://p.inari.site/guguicons/test/cg/lin/5.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/0.png","https://p.inari.site/guguicons/test/cg/lin/0.png"],
-    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai/1.png","https://p.inari.site/guguicons/test/cg/ai/2.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/4.png","https://p.inari.site/guguicons/test/cg/ai/5.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/0.png","https://p.inari.site/guguicons/test/cg/ai/0.png"],
-    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng/1.png","https://p.inari.site/guguicons/test/cg/meng/2.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/4.png","https://p.inari.site/guguicons/test/cg/meng/5.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/0.png","https://p.inari.site/guguicons/test/cg/meng/0.png"],
-    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei/1.png","https://p.inari.site/guguicons/test/cg/wei/2.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/4.png","https://p.inari.site/guguicons/test/cg/wei/5.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/0.png","https://p.inari.site/guguicons/test/cg/wei/0.png"],
-    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi/1.png","https://p.inari.site/guguicons/test/cg/yi/2.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/4.png","https://p.inari.site/guguicons/test/cg/yi/5.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/0.png","https://p.inari.site/guguicons/test/cg/yi/0.png"],
-    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming/1.png","https://p.inari.site/guguicons/test/cg/ming/2.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/4.png","https://p.inari.site/guguicons/test/cg/ming/5.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/0.png","https://p.inari.site/guguicons/test/cg/ming/0.png"],
-    "命":["3008","https://p.inari.site/guguicons/test/cg/life/1.png","https://p.inari.site/guguicons/test/cg/life/2.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/4.png","https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/0.png","https://p.inari.site/guguicons/test/cg/life/0.png"],
-    "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xii/2.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/4.png","https://p.inari.site/guguicons/test/cg/xii/5.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/0.png","https://p.inari.site/guguicons/test/cg/xii/0.png"],
+    "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png","https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/0.png"],
+    "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png","https://p.inari.site/guguicons/test/cg/mo/5.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/0.png"],
+    "琳":["3002","https://p.inari.site/guguicons/test/cg/lin/1.png","https://p.inari.site/guguicons/test/cg/lin/2.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/4.png","https://p.inari.site/guguicons/test/cg/lin/5.png","https://p.inari.site/guguicons/test/cg/lin/3.png","https://p.inari.site/guguicons/test/cg/lin/0.png"],
+    "艾":["3003","https://p.inari.site/guguicons/test/cg/ai/1.png","https://p.inari.site/guguicons/test/cg/ai/2.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/4.png","https://p.inari.site/guguicons/test/cg/ai/5.png","https://p.inari.site/guguicons/test/cg/ai/3.png","https://p.inari.site/guguicons/test/cg/ai/0.png"],
+    "梦":["3004","https://p.inari.site/guguicons/test/cg/meng/1.png","https://p.inari.site/guguicons/test/cg/meng/2.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/4.png","https://p.inari.site/guguicons/test/cg/meng/5.png","https://p.inari.site/guguicons/test/cg/meng/3.png","https://p.inari.site/guguicons/test/cg/meng/0.png"],
+    "薇":["3005","https://p.inari.site/guguicons/test/cg/wei/1.png","https://p.inari.site/guguicons/test/cg/wei/2.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/4.png","https://p.inari.site/guguicons/test/cg/wei/5.png","https://p.inari.site/guguicons/test/cg/wei/3.png","https://p.inari.site/guguicons/test/cg/wei/0.png"],
+    "伊":["3006","https://p.inari.site/guguicons/test/cg/yi/1.png","https://p.inari.site/guguicons/test/cg/yi/2.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/4.png","https://p.inari.site/guguicons/test/cg/yi/5.png","https://p.inari.site/guguicons/test/cg/yi/3.png","https://p.inari.site/guguicons/test/cg/yi/0.png"],
+    "冥":["3007","https://p.inari.site/guguicons/test/cg/ming/1.png","https://p.inari.site/guguicons/test/cg/ming/2.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/4.png","https://p.inari.site/guguicons/test/cg/ming/5.png","https://p.inari.site/guguicons/test/cg/ming/3.png","https://p.inari.site/guguicons/test/cg/ming/0.png"],
+    "命":["3008","https://p.inari.site/guguicons/test/cg/life/1.png","https://p.inari.site/guguicons/test/cg/life/2.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/4.png","https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/0.png"],
+    "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xii/2.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/4.png","https://p.inari.site/guguicons/test/cg/xii/5.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/0.png"],
     "voice":["https://p.inari.site/guguicons/test/vo/on.mp3","https://p.inari.site/guguicons/test/vo/off.mp3"],
     "舞voice":["https://p.inari.site/guguicons/test/vo/wuu/",".mp3"],
     "默voice":["https://p.inari.site/guguicons/test/vo/mo/",".mp3"],
@@ -280,16 +280,16 @@ if(custom.useOldNames==true){ useOldNamesCheck='checked'; a8=nowTheme.ao8;a10=no
  * functions
  */
 /* kanban Html */
-tpkanban = document.createElement("div");ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
+let tpkanbanHTML = '';ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
 if (localStorage.imgmove != null) {
         let imgmove = JSON.parse(localStorage.imgmove);
-        tpkanban.innerHTML = `<div id = "tpkanban" style = "position:fixed;left:${Math.floor(imgmove[0] * ww)}px;top:${Math.floor(imgmove[1] * wh)}px;z-index:88;cursor:pointer;" >
-        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`;
+        tpkanbanHTML =$( `<div id = "tpkanban" style = "position:fixed;left:${Math.floor(imgmove[0] * ww)}px;top:${Math.floor(imgmove[1] * wh)}px;z-index:88;cursor:pointer;" >
+        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');
 }
 else {
-        tpkanban.innerHTML = `<div id = "tpkanban" style = "position:fixed;left:5px;top:100px;z-index:88;cursor:pointer;" >
-        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`;
-};document.body.appendChild(tpkanban);kanban = document.getElementById("tpkanban"); window.onload = function () { drag(kanban); };
+        tpkanbanHTML = $(`<div id = "tpkanban" style = "position:fixed;left:5px;top:100px;z-index:88;cursor:pointer;" >
+        <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');;
+};kanban = document.getElementById("tpkanban"); window.onload = function () { drag(kanban); };
 /* setting menu Html */
 if($('.themepack-ls').length==0){
     $(`<p></p><span>
@@ -543,17 +543,19 @@ function themenamefunc(){
 function cardimgfunc(){
     let imgpanel,cardname,cardnamec;tempvo=false;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
-        imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;
+        imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;console.log(cardname.length);
         if(cardname.length==1&&imgpanel.children.length==2){
-            if(cardname!=""){
-                yourcard=cardname;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};
-                if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){ $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
-            }else{ yourcard="舞";custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};};
-        };
-        if(cardname==""){
+            yourcard=cardname;custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};
+            if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){ $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
+            if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="${nowTheme[cardname][3]}">`).insertBefore("#backpacks"); } else {$("#bigcardimg").attr('src',nowTheme[cardname][3]);};
+        }
+        else if(cardname.length==0){
+            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};
             if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
             if($("#eqli2.active").length==1){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); };
-        }else{ if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="${nowTheme[cardname][3]}">`).insertBefore("#backpacks"); } else {$("#bigcardimg").attr('src',nowTheme[cardname][3]);}; };
+        };
     };
     if($(".text-info.fyg_f24").length==2){
         cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
@@ -632,7 +634,7 @@ $(document).on('blur', "#btnAutoTask", function () { if(custom.voiceO==true){ $(
 .on('click', "a[onclick*='gx_gt(']" ,function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='giftop']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='xyck(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='gox(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};collecheck=0;})
+.on('click', "button[onclick*='gox(']" , function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};collecheck=0;battlecheck=1;})
 .on('click', "button[onclick*='xyre(']", function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='puton(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
 .on('click', "button[onclick*='halosave(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
@@ -646,8 +648,8 @@ $(document).on('blur', "#btnAutoTask", function () { if(custom.voiceO==true){ $(
 .on('click', "a[onclick*='eqlip(1),eqbp(1)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(3),eqbp(3)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(4),eqbp(4)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='jgjg(']",function() { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};
-    sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;facheck=$(".alert.alert-info.with-icon.fyg_tc").length;battlecheck=0;})
+.on('click', "button[onclick*='jgjg(']",function() { battlecheck=0;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};
+    sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;facheck=$(".alert.alert-info.with-icon.fyg_tc").length;})
 .on('click', "button[onclick*='upcard(']" , function() { ccard=true;yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));
     cardvo=nowTheme[yourcard+"voice"];kanbanimg=nowTheme[yourcard][2];$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);
     if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};})
