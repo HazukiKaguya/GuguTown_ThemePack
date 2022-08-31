@@ -18,7 +18,7 @@
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-09-01 02:34:00';
+    const g_modificationVersion = '2022-09-01 06:50:00';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
@@ -2414,7 +2414,7 @@
                     if (tips?.length > 0) {
                         btn.innerText = `我的角色（${tips}）`;
                         if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
-                           if($('#goxpanel').length==0){ window.location.href='fyg_equip.php'; };
+                           if($('#goxpanel').length==0){ window.location.href='fyg_equip.php'; }else{alert('检测到存在收割机插件，请使用收割机的自动制造功能！')};
                         };
                         if (btn.className.indexOf('btn-danger') < 0) {
                             let onck=false;btn.className += ' btn-danger';
