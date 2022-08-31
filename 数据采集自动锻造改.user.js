@@ -2414,6 +2414,7 @@
                     if (tips?.length > 0) {
                         btn.innerText = `我的角色（${tips}）`;
                         if (btn.className.indexOf('btn-danger') < 0) {
+                            let onck=false;
                             btn.className += ' btn-danger';
                             if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
                                 if(tips.indexOf('宝石')==-1){
@@ -2424,20 +2425,21 @@
                                 };
                             };
                             if(tips.indexOf('装备')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4);b_forge();
+                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forge(']")[0].click();} });onck=false;
                             };
                             if(tips.indexOf('卡片')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4);b_forca();
+                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forca(']")[0].click();} });onck=false;
                             };
                             if(tips.indexOf('宝石')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4);
-                                if(localStorage.getItem(g_stoneAuto1StorageKey)=='true'){b_forcbs(1);}
-                                else if(localStorage.getItem(g_stoneAuto2StorageKey)=='true'){b_forcbs(2);}
-                                else if(localStorage.getItem(g_stoneAuto3StorageKey)=='true'){b_forcbs(3);}
-                                else if(localStorage.getItem(g_stoneAuto4StorageKey)=='true'){b_forcbs(4);}
-                                else if(localStorage.getItem(g_stoneAuto5StorageKey)=='true'){b_forcbs(5);}
-                                else if(localStorage.getItem(g_stoneAuto6StorageKey)=='true'){b_forcbs(6);};
-                                /* b_forcbs(3); 1是红石，2是银石，3是金石，4是梦石，5是虚石，6是幻石 */
+                                eqlip(4);eqbp(4);$(document).ajaxSuccess(function(){
+                                    if(onck==false){
+                                       onck=true;if(localStorage.getItem(g_stoneAuto1StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto2StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto3StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto4StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto5StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto6StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();};
+                                    };});onck=false;
                             };
                         }
                         tip = true;
