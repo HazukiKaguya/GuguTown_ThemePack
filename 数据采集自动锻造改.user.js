@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.4
+// @version      1.5.5
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -2413,17 +2413,11 @@
                 if (btn.innerText.indexOf('我的角色') >= 0) {
                     if (tips?.length > 0) {
                         btn.innerText = `我的角色（${tips}）`;
+                        if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
+                           if($('#goxpanel').length==0){ window.location.href='fyg_equip.php'; };
+                        };
                         if (btn.className.indexOf('btn-danger') < 0) {
-                            let onck=false;
-                            btn.className += ' btn-danger';
-                            if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
-                                if(tips.indexOf('宝石')==-1){
-                                    window.location.href='fyg_equip.php';
-                                }
-                                else if(tips.indexOf('宝石')>-1&&$('#goxpanel').length==0){
-                                    window.location.href='fyg_equip.php';
-                                };
-                            };
+                            let onck=false;btn.className += ' btn-danger';
                             if(tips.indexOf('装备')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
                                 eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forge(']")[0].click();} });onck=false;
                             };
