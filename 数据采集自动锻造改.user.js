@@ -2428,11 +2428,11 @@
                                 eqlip(4);eqbp(4);$(document).ajaxSuccess(function(){
                                     if(onck==false){
                                        onck=true;if(localStorage.getItem(g_stoneAuto1StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto2StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto3StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto4StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto5StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();}
-                                        else if(localStorage.getItem(g_stoneAuto6StorageKey)=='true'){$("button[onclick*='b_forcbs(1']")[0].click();};
+                                        else if(localStorage.getItem(g_stoneAuto2StorageKey)=='true'){$("button[onclick*='b_forcbs(2']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto3StorageKey)=='true'){$("button[onclick*='b_forcbs(3']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto4StorageKey)=='true'){$("button[onclick*='b_forcbs(4']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto5StorageKey)=='true'){$("button[onclick*='b_forcbs(5']")[0].click();}
+                                        else if(localStorage.getItem(g_stoneAuto6StorageKey)=='true'){$("button[onclick*='b_forcbs(6']")[0].click();};
                                     };});onck=false;
                             };
                         }
