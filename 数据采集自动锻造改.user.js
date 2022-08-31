@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.3
+// @version      1.5.4
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -35,7 +35,13 @@
     const g_autoTaskEnabledStorageKey = g_kfUser + '_autoTaskEnabled';
     const g_autoTaskCheckStoneProgressStorageKey = g_kfUser + '_autoTaskCheckStoneProgress';
     const g_indexRallyStorageKey = g_kfUser + '_indexRally';
-    const g_stoneAutoStorageKey = g_kfUser + '_stoneAuto';
+    const g_forgeAutoStorageKey = g_kfUser + '_forgeAuto';
+    const g_stoneAuto1StorageKey = g_kfUser + '_stoneAuto1';
+    const g_stoneAuto2StorageKey = g_kfUser + '_stoneAuto2';
+    const g_stoneAuto3StorageKey = g_kfUser + '_stoneAuto3';
+    const g_stoneAuto4StorageKey = g_kfUser + '_stoneAuto4';
+    const g_stoneAuto5StorageKey = g_kfUser + '_stoneAuto5';
+    const g_stoneAuto6StorageKey = g_kfUser + '_stoneAuto6';
     const g_keepPkRecordStorageKey = g_kfUser + '_keepPkRecord';
     const g_amuletGroupsStorageKey = g_kfUser + '_amulet_groups';
     const g_equipmentExpandStorageKey = g_kfUser + '_equipment_Expand';
@@ -49,7 +55,10 @@
     const g_beachBGStorageKey = g_kfUser + '_beach_BG';
 
     const g_userDataStorageKeyConfig = [ g_kfUser, g_autoTaskEnabledStorageKey, g_autoTaskCheckStoneProgressStorageKey,
-                                         g_indexRallyStorageKey,g_stoneAutoStorageKey, g_keepPkRecordStorageKey, g_amuletGroupsStorageKey,
+                                         g_indexRallyStorageKey,g_forgeAutoStorageKey,
+                                         g_stoneAuto1StorageKey,g_stoneAuto2StorageKey,g_stoneAuto3StorageKey,
+                                         g_stoneAuto4StorageKey,g_stoneAuto5StorageKey,g_stoneAuto6StorageKey,
+                                         g_keepPkRecordStorageKey, g_amuletGroupsStorageKey,
                                          g_equipmentExpandStorageKey, g_equipmentStoreExpandStorageKey, g_equipmentBGStorageKey,
                                          g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey,
                                          g_stoneProgressHaloTipStorageKey, g_ignoreWishpoolExpirationStorageKey,
@@ -2406,7 +2415,7 @@
                         btn.innerText = `我的角色（${tips}）`;
                         if (btn.className.indexOf('btn-danger') < 0) {
                             btn.className += ' btn-danger';
-                            if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#stoneAutoCheckbox')[0].checked){
+                            if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
                                 window.location.href='fyg_equip.php';
                             };
                             if(tips.indexOf('装备')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
@@ -2416,7 +2425,14 @@
                                 eqlip(4);eqbp(4);b_forca();
                             }
                             else if(tips.indexOf('宝石')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4);/* b_forcbs(3); 1是红石，2是银石，3是金石，4是梦石，5是虚石，6是幻石 */
+                                eqlip(4);eqbp(4);
+                                if(localStorage.getItem(g_stoneAuto1StorageKey)=='true'){b_forcbs(1);}
+                                else if(localStorage.getItem(g_stoneAuto2StorageKey)=='true'){b_forcbs(2);}
+                                else if(localStorage.getItem(g_stoneAuto3StorageKey)=='true'){b_forcbs(3);}
+                                else if(localStorage.getItem(g_stoneAuto4StorageKey)=='true'){b_forcbs(4);}
+                                else if(localStorage.getItem(g_stoneAuto5StorageKey)=='true'){b_forcbs(5);}
+                                else if(localStorage.getItem(g_stoneAuto6StorageKey)=='true'){b_forcbs(6);};
+                                /* b_forcbs(3); 1是红石，2是银石，3是金石，4是梦石，5是虚石，6是幻石 */
                             };
                         }
                         tip = true;
@@ -2433,7 +2449,8 @@
             }
         }
 
-        let storageKeys = [ g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey, g_stoneProgressHaloTipStorageKey ];
+        let storageKeys = [ g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey, g_stoneProgressHaloTipStorageKey,
+                            g_stoneAuto1StorageKey,g_stoneAuto2StorageKey,g_stoneAuto3StorageKey,g_stoneAuto4StorageKey,g_stoneAuto5StorageKey,g_stoneAuto6StorageKey];
         let tipEnabled = [];
         storageKeys.forEach((e) => {
             if (localStorage.getItem(e) == 'true') {
@@ -5279,17 +5296,37 @@
                     if (divs.length == 3) {
                         let storageKeys = [ g_stoneProgressEquipTipStorageKey,
                                             g_stoneProgressCardTipStorageKey,
-                                            g_stoneProgressHaloTipStorageKey
+                                            g_stoneProgressHaloTipStorageKey,
+                                            g_stoneAuto1StorageKey,g_stoneAuto2StorageKey,
+                                            g_stoneAuto3StorageKey,g_stoneAuto4StorageKey,
+                                            g_stoneAuto5StorageKey,g_stoneAuto6StorageKey
                                           ];
                         let i = 0;
                         for (let tip of divs) {
                             let div = document.createElement('div');
                             let id = 'stoneProgressTipCheckbox_' + i;
-                            div.innerHTML =
+                            if(i!=2){
+                                div.innerHTML =
                                 `<label for="${id}" style="margin-right:5px;cursor:pointer;">100% 进度提醒</label>
                                  <input type="checkbox" id="${id}" />`;
-                            setupConfigCheckbox(div.querySelector('#' + id), storageKeys[i++], null, null);
-                            tip.appendChild(div);
+                                tip.appendChild(div);
+                                setupConfigCheckbox(div.querySelector('#' + id), storageKeys[i++], null, null);
+                            }
+                            else{
+                                div.innerHTML =`<label style="margin-right:5px;cursor:pointer;">自动收集:</label>
+                                <label for="stone1" style="margin-right:5px;cursor:pointer;">红石</label><input type="checkbox" id="stone1" />
+                                <label for="stone2" style="margin-right:5px;cursor:pointer;">银石</label><input type="checkbox" id="stone2" />
+                                <label for="stone3" style="margin-right:5px;cursor:pointer;">金石</label><input type="checkbox" id="stone3" />
+                                <label for="stone4" style="margin-right:5px;cursor:pointer;">梦石</label><input type="checkbox" id="stone4" />
+                                <label for="stone5" style="margin-right:5px;cursor:pointer;">虚石</label><input type="checkbox" id="stone5" />
+                                <label for="stone6" style="margin-right:5px;cursor:pointer;">幻石</label><input type="checkbox" id="stone6" />&nbsp;&nbsp;
+                                <label for="${id}" style="margin-right:5px;cursor:pointer;">100% 进度提醒</label><input type="checkbox" id="${id}" />`;
+                                tip.appendChild(div);
+                                setupConfigCheckbox(div.querySelector('#' + id), storageKeys[i++], null, null);
+                                for(let j=1;j<6;j++){
+                                    setupConfigCheckbox(div.querySelector('#stone' + j), storageKeys[j+2], null, null);
+                                }
+                            }
                         }
                     }
                 }
@@ -6240,8 +6277,8 @@
         pkConfigDiv.style.className = 'panel-heading';
         pkConfigDiv.style.float = 'right';
         pkConfigDiv.innerHTML =
-            `<label for="stoneAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度自动锻造</label>
-             <input type="checkbox" id="stoneAutoCheckbox" style="margin-right:15px;" />
+            `<label for="forgeAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度自动锻造</label>
+             <input type="checkbox" id="forgeAutoCheckbox" style="margin-right:15px;" />
              <label for="indexRallyCheckbox" style="margin-right:5px;cursor:pointer;">为攻击回合加注索引</label>
              <input type="checkbox" id="indexRallyCheckbox" style="margin-right:15px;" />
              <label for="keepPkRecordCheckbox" style="margin-right:5px;cursor:pointer;">暂时保持战斗记录</label>
@@ -6249,9 +6286,9 @@
              <label for="autoTaskEnabledCheckbox" style="margin-right:5px;cursor:pointer;">允许执行自定义任务</label>
              <input type="checkbox" id="autoTaskEnabledCheckbox" />`;
 
-        let stoneAuto = setupConfigCheckbox(pkConfigDiv.querySelector('#stoneAutoCheckbox'),
-                                                  g_stoneAutoStorageKey,
-                                                  (checked) => { stoneAuto = checked; },
+        let forgeAuto = setupConfigCheckbox(pkConfigDiv.querySelector('#forgeAutoCheckbox'),
+                                                  g_forgeAutoStorageKey,
+                                                  (checked) => { forgeAuto = checked; },
                                                   null);
 
         let indexRally = setupConfigCheckbox(pkConfigDiv.querySelector('#indexRallyCheckbox'),
