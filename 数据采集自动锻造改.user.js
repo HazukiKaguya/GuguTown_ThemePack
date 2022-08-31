@@ -2416,7 +2416,7 @@
                                 eqlip(4);eqbp(4);b_forca();
                             }
                             else if(tips.indexOf('宝石')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4);
+                                eqlip(4);eqbp(4);/* b_forcbs(3); 1是红石，2是银石，3是金石，4是梦石，5是虚石，6是幻石 */
                             };
                         }
                         tip = true;
