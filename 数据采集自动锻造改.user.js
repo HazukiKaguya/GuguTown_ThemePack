@@ -2416,15 +2416,20 @@
                         if (btn.className.indexOf('btn-danger') < 0) {
                             btn.className += ' btn-danger';
                             if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
-                                window.location.href='fyg_equip.php';
+                                if(tips.indexOf('宝石')==-1){
+                                    window.location.href='fyg_equip.php';
+                                }
+                                else if(tips.indexOf('宝石')>-1&&$('#goxpanel').length==0){
+                                    window.location.href='fyg_equip.php';
+                                };
                             };
                             if(tips.indexOf('装备')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
                                 eqlip(4);eqbp(4);b_forge();
-                            }
-                            else if(tips.indexOf('卡片')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
+                            };
+                            if(tips.indexOf('卡片')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
                                 eqlip(4);eqbp(4);b_forca();
-                            }
-                            else if(tips.indexOf('宝石')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
+                            };
+                            if(tips.indexOf('宝石')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
                                 eqlip(4);eqbp(4);
                                 if(localStorage.getItem(g_stoneAuto1StorageKey)=='true'){b_forcbs(1);}
                                 else if(localStorage.getItem(g_stoneAuto2StorageKey)=='true'){b_forcbs(2);}
