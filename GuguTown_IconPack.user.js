@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.1.5
+// @version     2.1.6
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -541,20 +541,19 @@ function themenamefunc(){
 };
 /* Theme fgimg Realization */
 function cardimgfunc(){
-    let imgpanel,cardname,cardnamec;tempvo=false;
+    let imgpanel,cardname,cardnamec;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
-        imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;console.log(cardname.length);
-        if(cardname.length==1&&imgpanel.children.length==2){
+        if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
+        imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
+        if(cardname.length==1){
             yourcard=cardname;custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-            kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};
-            if(nowTheme[cardname][2]!="https://sticker.inari.site/null.gif"){ $(`<p></p><img id="middlecardimg" src="${nowTheme[cardname][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
-            if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="${nowTheme[cardname][3]}">`).insertBefore("#backpacks"); } else {$("#bigcardimg").attr('src',nowTheme[cardname][3]);};
+            kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};$("#bigcardimg").attr('src',nowTheme[yourcard][3]);
+            if(nowTheme[yourcard][2]!="https://sticker.inari.site/null.gif"&&imgpanel.children.length==2){ $(`<p></p><img id="middlecardimg" src="${nowTheme[yourcard][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
         }
         else if(cardname.length==0){
             yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
             kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};
-            if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
-            if($("#eqli2.active").length==1){ $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif"); };
+            $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
         };
     };
     if($(".text-info.fyg_f24").length==2){
