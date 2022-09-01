@@ -2,7 +2,7 @@
 // @name        Gugu Town IconPack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
 // @homepage    https://github.com/HazukiKaguya
-// @version     2.1.4
+// @version     2.1.5
 // @description GuguTown Theme Park Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
@@ -289,7 +289,7 @@ if (localStorage.imgmove != null) {
 else {
         tpkanbanHTML = $(`<div id = "tpkanban" style = "position:fixed;left:5px;top:100px;z-index:88;cursor:pointer;" >
         <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');;
-};kanban = document.getElementById("tpkanban"); window.onload = function () { drag(kanban); };
+};kanban = document.getElementById("tpkanban");drag(kanban);
 /* setting menu Html */
 if($('.themepack-ls').length==0){
     $(`<p></p><span>
