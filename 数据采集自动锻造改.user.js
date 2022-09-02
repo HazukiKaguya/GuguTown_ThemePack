@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.5.1
+// @version      1.5.5.2
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -2420,17 +2420,18 @@
                     if (tips?.length > 0) {
                         btn.innerText = `我的角色（${tips}）`;
                         if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
-                            if($('#goxpanel').length==0){ window.location.href='fyg_equip.php'; }
-                            else if($('#goxtip div')[0].children[0].checked==false){ window.location.href='fyg_equip.php'; }
-                            else{console.log( $('#goxtip div')[0].children[0].checked);console.log( $('#goxtip2 div')[0].children[0].checked);};
+                            if($('#goxpanel').length==0){ window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;}
+                            else if($('#goxtip div')[0].children[0].checked==false){ window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;}
+                            else if($('#goxtip2 div')[0].children[0].checked==false){ window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;}
+                            else{btn.innerText = `我的角色`;};
                         };
                         if (btn.className.indexOf('btn-danger') < 0) {
                             btn.className += ' btn-danger';let onck=false;
                             if(tips.indexOf('装备')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forge(']")[0].click();} });onck=false;
+                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forge(']")[0].click();} });onck=false;btn.innerText = `我的角色`;
                             };
                             if(tips.indexOf('卡片')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
-                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forca(']")[0].click();} });onck=false;
+                                eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forca(']")[0].click();} });onck=false;btn.innerText = `我的角色`;
                             };
                             if(tips.indexOf('宝石')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
                                 eqlip(4);eqbp(4);$(document).ajaxSuccess(function(){
@@ -2441,7 +2442,7 @@
                                         else if(localStorage.getItem(g_stoneAuto4StorageKey)=='true'){$("button[onclick*='b_forcbs(4']")[0].click();}
                                         else if(localStorage.getItem(g_stoneAuto5StorageKey)=='true'){$("button[onclick*='b_forcbs(5']")[0].click();}
                                         else if(localStorage.getItem(g_stoneAuto6StorageKey)=='true'){$("button[onclick*='b_forcbs(6']")[0].click();};
-                                    };});onck=false;
+                                    };});onck=false;btn.innerText = `我的角色`;
                             };
                         }
                         tip = true;
