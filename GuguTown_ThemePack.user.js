@@ -2,7 +2,7 @@
 // @name        GuguTown ThemePack
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     2.1.6
+// @version     2.1.7
 // @description GuguTown ThemePark Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
