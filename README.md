@@ -6,7 +6,7 @@ GuguTown Theme Park Manager.
 [GreasyFork](https://greasyfork.org/scripts/450204)  
 
 ## 赞助  
-如果你喜欢这个插件，可以用以下链接试用Vultr来赞助我的云同步账号服务器/图床服务器的费用。  
+如果你喜欢这个插件，可以用以下链接试用Vultr来赞助我的图床服务器的费用。  
 [Refer Vultr.com and earn $10 per paid signup](https://www.vultr.com/?ref=7365869)  
 [Tell A Friend about Vultr and Earn up to $35 for referring clients!](https://www.vultr.com/?ref=9023177-8H)  
 
