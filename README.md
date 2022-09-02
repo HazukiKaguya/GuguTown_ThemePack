@@ -1,4 +1,4 @@
-# GuguTown IconPack
+# GuguTown Theme Pack
 GuguTown Theme Park Manager.   
 
 ## 安装脚本  
