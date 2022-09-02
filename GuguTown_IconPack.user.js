@@ -1,16 +1,16 @@
 // ==UserScript==
-// @name        Gugu Town IconPack
-// @namespace   https://github.com/HazukiKaguya/GuguTown_IconPack
-// @homepage    https://github.com/HazukiKaguya
+// @name        GuguTown ThemePack
+// @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
+// @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @version     2.1.6
-// @description GuguTown Theme Park Manager.
+// @description GuguTown ThemePark Manager.
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
 // @match       https://www.guguzhen.com/*
 // @run-at      document-end
 // @license     MIT License
-// @updateURL   https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPack.user.js
+// @updateURL   https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_ThemePack.user.js
 // ==/UserScript==
 'use strict';
 /**
