@@ -1,22 +1,22 @@
 // ==UserScript==
-// @name        GuguTown ThemePark Manager
+// @name        GuguTown ThemePack Manager
 // @name:zh-CN  咕咕镇主题包管理器
 // @name:zh-TW  咕咕鎮主題包管理器
-// @name:ja     咕咕镇テメパック マネージャー
-// @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePark
-// @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePark
-// @version     2.2.1
-// @description WebGame GuguTown ThemePark Manager.
+// @name:ja     咕咕镇テーマパックマネージャー
+// @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
+// @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
+// @version     2.2.2
+// @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
-// @description:ja オンラインゲーム 咕咕镇 テメパック マネージャー
+// @description:ja オンラインゲーム 咕咕镇 テーマパック マネージャー
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
 // @match       https://www.guguzhen.com/*
 // @run-at      document-end
 // @license     MIT License
-// @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePark/raw/main/GuguTown_ThemePark.user.js
+// @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // ==/UserScript==
 'use strict';
 /**
@@ -79,12 +79,12 @@ const defaultConf={
 
     },
     "ja": {
-        "initUFG":"このユーザー テメパックの立ち絵機能は使用できません！このテメパックを更新するか、立ち絵機能無効化してください。",
-        "initUVO":"このユーザー テメパックのボイス機能は使用できません！このテメパックを更新するか、ボイス機能無効化してください。",
-        "initUOT":"このユーザー テメパックのJSONは古くなっています！このテメパックをできるだけ早く更新してください！テメパックが有効になっていません！",
-        "initUNU":"このユーザー テメパックのJSONは存在しません！テメパックが有効になっていません！",
-        "menuTheme":"テメパック",
-        "menuUser":"ユーザー テメパック入力",
+        "initUFG":"このユーザー テーマパックの立ち絵機能は使用できません！このテーマパックを更新するか、立ち絵機能無効化してください。",
+        "initUVO":"このユーザー テーマパックのボイス機能は使用できません！このテーマパックを更新するか、ボイス機能無効化してください。",
+        "initUOT":"このユーザー テーマパックのJSONは古くなっています！このテーマパックをできるだけ早く更新してください！テーマパックが有効になっていません！",
+        "initUNU":"このユーザー テーマパックのJSONは存在しません！テーマパックが有効になっていません！",
+        "menuTheme":"テーマパック",
+        "menuUser":"ユーザー テーマパック入力",
         "menuIcon":"アイコンサイズ",
         "menuKanban":"看板サイズ",
         "menuOldEQ":"旧装備名を使用",
@@ -92,20 +92,20 @@ const defaultConf={
         "menuSCG":"立ち絵機能",
         "menuSVO":"ボイス機能",
         "menuSKB":"看板娘機能",
-        "themeSW":"【OK】をクリックしてテメパックを切り替えます； \n【キャンセル】をクリックするとデフォルトのテメパックが使用されます。",
-        "themeSA":"1 を入力して【テスト テメパック】を使用；2 を入力して【ユーザー テメパック】を使用；\n0 を入力して【オリジナル テメパック】を使用；その他のテキストを入力して【クラシック テメパック】を使用；\n【テスト テメパック】テーマ装備名の著作権は cygames に帰属します。",
-        "themeDF":"【OK】をクリックして【クラシック テメパック】を使用します；\nキャンセルする場合は【キャンセル】をクリックしてください。",
+        "themeSW":"【OK】をクリックしてテーマパックを切り替えます； \n【キャンセル】をクリックするとデフォルトのテーマパックが使用されます。",
+        "themeSA":"1 を入力して【テスト テーマパック】を使用；2 を入力して【ユーザー テーマパック】を使用；\n0 を入力して【オリジナル テーマパック】を使用；その他のテキストを入力して【クラシック テーマパック】を使用；\n【テスト テーマパック】テーマ装備名の著作権は cygames に帰属します。",
+        "themeDF":"【OK】をクリックして【クラシック テーマパック】を使用します；\nキャンセルする場合は【キャンセル】をクリックしてください。",
         "iconUA":"アイコンのサイズを入力してください。32 ～ 128 の数値で px を使用する必要があります。\n 例： 50px",
         "kanbanUA":"看板のサイズを入力してください。％を除いた数値である必要があります。\n 例： 100",
-        "menuUA":"ユーザー テメパックの JSON データを入力してください。完全な JSON 形式を表示するには、以下のリンクにアクセスしてください。"
+        "menuUA":"カスタマイズ テーマパックの JSON データを入力してください。完全な JSON 形式を表示するには、以下のリンクにアクセスしてください。"
 
     },
     "en": {
-        "initUFG":"The CG Function in this User ThemePark is unavailable! Please Update This ThemePark or Turn Off CG Function!",
-        "initUVO":"The Voice Function in this User ThemePark is unavailable! Please Update This ThemePark or Turn Off Voice Function!",
-        "initUOT":"The JSON of this User ThemePark is out of date! Please Update This ThemePark ASAP! ThemePark not activated!",
-        "initUNU":"The JSON of this User ThemePark is non-existent! ThemePark not activated!",
-        "menuTheme":"ThemePark",
+        "initUFG":"The CG Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off CG Function!",
+        "initUVO":"The Voice Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off Voice Function!",
+        "initUOT":"The JSON of this User ThemePack is out of date! Please Update This ThemePack ASAP! ThemePack not activated!",
+        "initUNU":"The JSON of this User ThemePack is non-existent! ThemePack not activated!",
+        "menuTheme":"ThemePack",
         "menuUser":"Input UserTheme",
         "menuIcon":"IconSize",
         "menuKanban":"KanbanSize",
@@ -114,12 +114,12 @@ const defaultConf={
         "menuSCG":"CG ON",
         "menuSVO":"Voice ON",
         "menuSKB":"Kanban ON",
-        "themeSW":"click【ok】 to switch ThemePark; click【cancel】 to use default ThemePack.",
-        "themeSA":"input 1 to use 【Test ThemePark】;\ninput 2 to use【User ThemePark】;\ninput 0 to use 【origin ThemePark】;\ninput any other text to use 【classic ThemePark】;\nThe copyright of ThemeEquipName in 【Test ThemePark】 belongs to cygames.",
-        "themeDF":"click【ok】to use 【origin ThemePark】; click【cancel】to cancel.",
+        "themeSW":"click【ok】 to switch ThemePack; click【cancel】 to use default ThemePack.",
+        "themeSA":"input 1 to use 【Test ThemePack】;\ninput 2 to use【User ThemePack】;\ninput 0 to use 【origin ThemePack】;\ninput any other text to use 【classic ThemePack】;\nThe copyright of ThemeEquipName in 【Test ThemePack】 belongs to cygames.",
+        "themeDF":"click【ok】to use 【origin ThemePack】; click【cancel】to cancel.",
         "iconUA":"Please input the size of Icons, it should be a num in 32-128 with px\n example: 50px",
         "kanbanUA":"Please input the size of kanban, it should be a num without %\n example: 100",
-        "menuUA":"Please input The JSON data of UserThemePark,\nAccess the link below to see the complete JSON format."
+        "menuUA":"Please input The JSON data of UserThemePack,\n Access the link below to see the complete JSON format."
     }
 }
 ,originTheme={
