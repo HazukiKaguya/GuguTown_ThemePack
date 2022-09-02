@@ -1,5 +1,5 @@
-# GuguTown Theme Pack
-GuguTown Theme Park Manager.   
+# GuguTown ThemePack
+WebGame GuguTown ThemePack Manager.   
 
 ## 安装脚本  
 [GreasyFork](https://greasyfork.org/scripts/450204)  
