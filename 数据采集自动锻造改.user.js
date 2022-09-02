@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.5.2
+// @version      1.5.5.5
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -2420,10 +2420,7 @@
                     if (tips?.length > 0) {
                         btn.innerText = `我的角色（${tips}）`;
                         if(tips.indexOf('100%')>-1&&window.location.href.indexOf('fyg_equip.php')==-1&&$('#forgeAutoCheckbox')[0].checked){
-                            if($('#goxpanel').length==0){ window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;}
-                            else if($('#goxtip div')[0].children[0].checked==false){ window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;}
-                            else if($('#goxtip2 div')[0].children[0].checked==false){ window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;}
-                            else{btn.innerText = `我的角色`;};
+                            window.open('fyg_equip.php', '_blank'); btn.innerText = `我的角色`;
                         };
                         if (btn.className.indexOf('btn-danger') < 0) {
                             btn.className += ' btn-danger';let onck=false;
