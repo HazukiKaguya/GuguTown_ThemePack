@@ -2,7 +2,7 @@
 GuguTown Theme Park Manager.   
 
 ## 安装脚本  
-[Github](https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_IconPack.user.js)  
+[Github](https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js)  
 [GreasyFork](https://greasyfork.org/scripts/450204)  
 
 ## 赞助  
