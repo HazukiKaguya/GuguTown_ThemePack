@@ -1,16 +1,22 @@
 // ==UserScript==
-// @name        GuguTown ThemePack
+// @name        GuguTown ThemePack Manager
+// @name:zh-CN  咕咕镇主题包管理器
+// @name:zh-TW  咕咕鎮主題包管理器
+// @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     2.1.7
-// @description GuguTown ThemePark Manager.
+// @version     2.2.0
+// @description WebGame GuguTown ThemePark Manager.
+// @description:zh-CN 气人页游 咕咕镇 主题包管理器。
+// @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
+// @description:ja オンラインゲーム 咕咕镇 テーマパック マネージャー
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
 // @match       https://www.guguzhen.com/*
 // @run-at      document-end
 // @license     MIT License
-// @updateURL   https://github.com/HazukiKaguya/GuguTown_IconPack/raw/main/GuguTown_ThemePack.user.js
+// @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // ==/UserScript==
 'use strict';
 /**
@@ -25,7 +31,96 @@ const defaultConf={
     "showKanban":false,
     "showCG":false,
     "voiceO":false,
+    "language":"zh",
     "yourcard":"舞"
+}
+,Language = {
+    "zh": {
+        "initUFG":"此自定义主题包立绘功能不可用！请更新主题包或关闭立绘功能！",
+        "initUVO":"此自定义主题包语音功能不可用！请更新主题包或关闭语音功能！",
+        "initUOT":"自定义主题包json数据彻底过期，请及时更新！主题包未启用！",
+        "initUNU":"自定义主题包json数据不存在，主题包未启用！",
+        "menuTheme":"主题包",
+        "menuUser":"写入自定义主题",
+        "menuIcon":"图标大小",
+        "menuKanban":"看板大小",
+        "menuOldEQ":"使用旧的装备名称",
+        "menuThemeEQ":"使用主题装备名称",
+        "menuSCG":"启用立绘",
+        "menuSVO":"启用语音",
+        "menuSKB":"启用看板",
+        "themeSW":"按【确定】选择主题包，按【取消】恢复默认主题包。",
+        "themeSA":"输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。",
+        "themeDF":"按【确定】恢复默认主题包，按【取消】则不操作。",
+        "iconUA":"请输入图标大小,格式应为32-128间的数字+px\n示例：50px",
+        "kanbanUA":"请输入看板大小,数字为百分比。",
+        "menuUA":"请输入自定义主题包的json数据,访问以下链接以查看完整的json格式。"
+    },
+    "zht": {
+        "initUFG":"此自定義主題包立繪功能不可用！請更新主題包或關閉立繪功能！",
+        "initUVO":"此自定義主題包語音功能不可用！請更新主題包或關閉語音功能！",
+        "initUOT":"自定義主題包json數據徹底過期，請及時更新！主題包未啟用！",
+        "initUNU":"自定義主題包json數據不存在，主題包未啟用！",
+        "menuTheme":"主題包",
+        "menuUser":"寫入自定義主題",
+        "menuIcon":"圖標大小",
+        "menuKanban":"看板大小",
+        "menuOldEQ":"使用舊的裝備名稱",
+        "menuThemeEQ":"使用主題裝備名稱",
+        "menuSCG":"啟用立繪",
+        "menuSVO":"啟用語音",
+        "menuSKB":"啟用看板",
+        "themeSW":"按【確定】選擇主題包，按【取消】恢複默認主題包。",
+        "themeSA":"輸入1使用【測試用主題包】；輸入2使用【自定義主題包】；\n輸入0不啟用主題更改；輸入其他使用【舊版風格主題包】；\n【測試用主題包】中的主題裝備名稱版權歸Cygames所有。",
+        "themeDF":"按【確定】恢複默認主題包，按【取消】則不操作。",
+        "iconUA":"請輸入圖標大小,格式應為32-128間的數字+px\n示例：50px",
+        "kanbanUA":"請輸入看板大小,數字為百分比。",
+        "menuUA":"請輸入自定義主題包的json數據,訪問以下連結以查看完整的json格式。"
+
+    },
+    "ja": {
+        "initUFG":"このユーザー テーマパックの立ち絵機能は使用できません！このテーマパックを更新するか、立ち絵機能無効化してください。",
+        "initUVO":"このユーザー テーマパックのボイス機能は使用できません！このテーマパックを更新するか、ボイス機能無効化してください。",
+        "initUOT":"このユーザー テーマパックのJSONは古くなっています！このテーマパックをできるだけ早く更新してください！テーマパックが有効になっていません！",
+        "initUNU":"このユーザー テーマパックのJSONは存在しません！テーマパックが有効になっていません！",
+        "menuTheme":"テーマパック",
+        "menuUser":"ユーザー テーマパック入力",
+        "menuIcon":"アイコンサイズ",
+        "menuKanban":"看板サイズ",
+        "menuOldEQ":"旧装備名を使用",
+        "menuThemeEQ":"テーマ装備名を使用",
+        "menuSCG":"立ち絵機能",
+        "menuSVO":"ボイス機能",
+        "menuSKB":"看板娘機能",
+        "themeSW":"【OK】をクリックしてテーマパックを切り替えます； \n【キャンセル】をクリックするとデフォルトのテーマパックが使用されます。",
+        "themeSA":"1 を入力して【テスト テーマパック】を使用；2 を入力して【ユーザー テーマパック】を使用；\n0 を入力して【オリジナル テーマパック】を使用；その他のテキストを入力して【クラシック テーマパック】を使用；\n【テスト テーマパック】テーマ装備名の著作権は cygames に帰属します。",
+        "themeDF":"【OK】をクリックして【クラシック テーマパック】を使用します；\nキャンセルする場合は【キャンセル】をクリックしてください。",
+        "iconUA":"アイコンのサイズを入力してください。32 ～ 128 の数値で px を使用する必要があります。\n 例： 50px",
+        "kanbanUA":"看板のサイズを入力してください。％を除いた数値である必要があります。\n 例： 100",
+        "menuUA":"カスタマイズ テーマパックの JSON データを入力してください。完全な JSON 形式を表示するには、以下のリンクにアクセスしてください。"
+
+    },
+    "en": {
+        "initUFG":"The CG Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off CG Function!",
+        "initUVO":"The Voice Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off Voice Function!",
+        "initUOT":"The JSON of this User ThemePack is out of date! Please Update This ThemePack ASAP! ThemePack not activated!",
+        "initUNU":"The JSON of this User ThemePack is non-existent! ThemePack not activated!",
+        "menuTheme":"ThemePack",
+        "menuUser":"Input UserTheme",
+        "menuIcon":"IconSize",
+        "menuKanban":"KanbanSize",
+        "menuOldEQ":"Old Equip Name",
+        "menuThemeEQ":"Theme Equip Name",
+        "menuSCG":"CG ON",
+        "menuSVO":"Voice ON",
+        "menuSKB":"Kanban ON",
+        "themeSW":"click【ok】 to switch ThemePack; click【cancel】 to use default ThemePack.",
+        "themeSA":"input 1 to use 【Test ThemePack】;\ninput 2 to use【User ThemePack】;\ninput 0 to use 【origin ThemePack】;\ninput any other text to use 【classic ThemePack】;\nThe copyright of ThemeEquipName in 【Test ThemePack】 belongs to cygames.",
+        "themeDF":"click【ok】to use 【origin ThemePack】; click【cancel】to cancel.",
+        "iconUA":"Please input the size of Icons, it should be a num in 32-128 with px\n example: 50px",
+        "kanbanUA":"Please input the size of kanban, it should be a num without %\n example: 100",
+        "menuUA":"Please input The JSON data of UserThemePack,\nAccess the link below to see the complete JSON format."
+    }
 }
 ,originTheme={
     "url":"ys/icon/",
@@ -243,6 +338,7 @@ let useOldNamesCheck ='',useThemeNameCheck ='',showCGCheck='',voiceOCheck='',kan
 if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf);} else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf));};
 if (!custom.yourcard ) { custom.yourcard=defaultConf.yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
 if (!custom.kanbansize){ custom.kanbansize=defaultConf.kanbansize;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
+if (!custom.language ) { custom.language=defaultConf.language;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};const lang=Language[custom.language];
 if (custom.showCG == true) { showCGCheck = 'checked'; };
 if (custom.voiceO == true) { voiceOCheck = 'checked'; };
 if (custom.useThemeName==true){ useThemeNameCheck='checked';};
@@ -255,26 +351,29 @@ else if(custom.ThemePack=="user"){
         if(userTheme.h3!=null){
             nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
             if(userTheme.舞==null&&custom.showCG==true){
-                alert('此自定义主题包立绘功能不可用！请更新主题包或关闭立绘功能！');custom.showCG=false;
+                alert(lang.initUFG);custom.showCG=false;
             };
             if(userTheme.voice==null&&custom.voiceO==true){
-                alert('此自定义主题包语音功能不可用！请更新主题包或关闭语音功能！');custom.voiceO=false;
+                alert(lang.initUVO);custom.voiceO=false;
             };
         }
         else{
-            alert("自定义主题包json数据彻底过期，请及时更新！主题包未启用！");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            alert(lang.initUOT);custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));
             nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
         };
     }
-    else{ alert("自定义主题包json数据不存在，主题包未启用！");custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
+    else{ alert(lang.initUNU);custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
 }
 else{nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
 let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize;
 if (custom.showKanban == true){ kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked'}else{kanbanimg=nullimg;};
-ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;old=nowTheme.old;
+ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;old=nowTheme.old;
 a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;
 c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
 if(custom.useOldNames==true){ useOldNamesCheck='checked'; a8=nowTheme.ao8;a10=nowTheme.ao10;w1=nowTheme.wo1;w3=nowTheme.wo3;c6=nowTheme.co6;h1=nowTheme.ho1;h2=nowTheme.ho2;h3=nowTheme.ho3; };
+if(nowTheme["dessertlevel-"+custom.language]){dessertlevel=nowTheme["dessertlevel-"+custom.language];}else{dessertlevel=nowTheme.dessertlevel;};
+if(nowTheme["dessertname-"+custom.language]){dessertname=nowTheme["dessertname-"+custom.language];}else{dessertname=nowTheme.dessertname;};
+
 
 /**
  * functions
@@ -292,17 +391,27 @@ else {
 };kanban = document.getElementById("tpkanban");drag(kanban);
 /* setting menu Html */
 if($('.themepack-ls').length==0){
-    $(`<p></p><span>
-    <input type="button" class="themepack-ls" value="选择主题包">&nbsp;<input type="button" class="themepack-usr" value="写入自定义主题">&nbsp;
-    <input type="button" class="icons-size" value="图标大小">&nbsp;<input type="button" class="kanban-size" value="看板大小">&nbsp;
-    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}>使用旧的装备名称&nbsp;<input type="checkbox" class="themepack-switch" ${useThemeNameCheck}>使用主题装备名称&nbsp;
-    <input type="checkbox" class="themepack-showCG" ${showCGCheck}>启用立绘&nbsp;<input type="checkbox" class="themepack-voiceO" ${voiceOCheck}>启用语音&nbsp;<input type="checkbox" class="themepack-showKB" ${kanbanCheck}>启用看板&nbsp;
-    <audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio></span>`
+    $(`<p></p><span><input type="button" class="themelang" value="文A">&nbsp;
+    <input type="button" class="themepack-ls" value="${lang.menuTheme}">&nbsp;<input type="button" class="themepack-usr" value="${lang.menuUser}">&nbsp;
+    <input type="button" class="icons-size" value="${lang.menuIcon}">&nbsp;<input type="button" class="kanban-size" value="${lang.menuKanban}">&nbsp;
+    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}>${lang.menuOldEQ}&nbsp;<input type="checkbox" class="themepack-switch" ${useThemeNameCheck}>${lang.menuThemeEQ}&nbsp;
+    <input type="checkbox" class="themepack-showCG" ${showCGCheck}>${lang.menuSCG}&nbsp;<input type="checkbox" class="themepack-voiceO" ${voiceOCheck}>${lang.menuSVO}&nbsp;<input type="checkbox" class="themepack-showKB" ${kanbanCheck}>${lang.menuSKB}&nbsp;
+    <audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio><script src="https://sticker.inari.site/js/spine-webgl.min.js"></span>`
      ).insertBefore($('hr')[0])};
 /* settings menu func */
+$(".themelang").click(function(){
+    let ThemeLang = prompt('输入 zh 使用【简体中文】；\n輸入 zht 使用【繁體中文】；\nja を入力 表示言語【日本語】；\nInput en To show in 【English】.', "zh");
+    if (ThemeLang) {
+        if(ThemeLang=="zh"){ custom.language="zh"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+        else if(ThemeLang=="zht"){ custom.language="zht"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+        else if(ThemeLang=="ja"){ custom.language="ja"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+        else if(ThemeLang=="en"){ custom.language="en"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
+        else{ custom.language="zh"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
+    };
+});
 $(".themepack-ls").click(function(){
-    if (confirm("按【确定】选择主题包，按【取消】恢复默认主题包。")) {
-        let ThemePack = prompt('输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。', "1");
+    if (confirm(lang.themeSW)) {
+        let ThemePack = prompt(lang.themeSA, "1");
         if (ThemePack) {
             if(ThemePack=="0"){ console.log('off');custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
             else if(ThemePack=="1"){ console.log('test');custom.ThemePack="test"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload(); }
@@ -312,32 +421,32 @@ $(".themepack-ls").click(function(){
                     if(userTheme.h3!=null){
                         console.log('user');custom.ThemePack="user";localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();nowTheme=userTheme;
                         sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
-                        if(userTheme.舞==null){ alert('此自定义主题包立绘功能不可用！') };
-                        if(userTheme.voice==null){ alert('此自定义主题包语音功能不可用！') };
+                        if(userTheme.舞==null){ alert(lang.initUFG) };
+                        if(userTheme.voice==null){ alert(lang.initUVO) };
                     }
-                    else{ alert("自定义主题包json数据彻底过期，请及时更新！主题未变更！") };
+                    else{ alert(lang.initUOT) };
                 }
-                else{ alert("自定义主题包json数据不存在，主题未变更！") };
+                else{ alert(lang.initUNU) };
             }
             else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
         };
     }
     else{
-        if(confirm("按【确定】恢复默认主题包，按【取消】则不操作。")){
+        if(confirm(lang.themeDF)){
             console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();
         };
     };
 });
 $(".icons-size").click(function(){
-    let IconSize = prompt('请输入图标大小,格式应为32-128间的数字+px\n示例：50px', "50px");
+    let IconSize = prompt(lang.iconUA, "50px");
     if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
 });
 $(".kanban-size").click(function(){
-    let KanbanSize = prompt('请输入看板大小,数字为百分比', "100");
+    let KanbanSize = prompt(lang.kanbanUA, "100");
     if (KanbanSize) { custom.kanbansize = KanbanSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
 });
 $(".themepack-usr").click(function(){
-    let userTheme = prompt('请输入自定义主题包的json数据,访问\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21\n以查看完整的json格式。',`${localStorage.userTheme}`);
+    let userTheme = prompt(lang.menuUA+'\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21',`${localStorage.userTheme}`);
     if (userTheme) { console.log(userTheme); localStorage.setItem('userTheme', userTheme);};
 });
 $(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
@@ -547,13 +656,14 @@ function cardimgfunc(){
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
         if(cardname.length==1){
             yourcard=cardname;custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-            kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};$("#bigcardimg").attr('src',nowTheme[yourcard][3]);
+            kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',nowTheme[yourcard][3]);
+            if(custom.showKanban==true){/*$(".tpkanban").attr('src', kanbanimg);*/};
             if(nowTheme[yourcard][2]!="https://sticker.inari.site/null.gif"&&imgpanel.children.length==2){ $(`<p></p><img id="middlecardimg" src="${nowTheme[yourcard][2]}" style="cursor: pointer;"><p></p>`).insertAfter(imgpanel.children[1]);};
         }
         else if(cardname.length==0){
             yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-            kanbanimg=nowTheme[yourcard][2];if(custom.showKanban==true){$(".tpkanban").attr('src', kanbanimg)};
-            $("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
+            kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
+            if(custom.showKanban==true){/*$(".tpkanban").attr('src', kanbanimg);*/};
         };
     };
     if($(".text-info.fyg_f24").length==2){
@@ -622,7 +732,7 @@ function battlefunc(){
     };
 };
 /* Battle CG Realization */
-function battlecgfunc(battleCG){ $(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg)},3000);};
+function battlecgfunc(battleCG){ /*$(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg);},3000);*/};
 /* Theme voice Realization */
 $(document).on('blur', "#btnAutoTask", function () { if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button", function() { ccard=false;}).on('click', "[onclick*='xxcard(']", function() { ccard=false;})
@@ -645,6 +755,7 @@ $(document).on('blur', "#btnAutoTask", function () { if(custom.voiceO==true){ $(
 .on('click', "button[onclick*='cmaxup(']" , function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='updstat(']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(1),eqbp(1)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "a[onclick*='eqlip(2),eqbp(2)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(3),eqbp(3)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(4),eqbp(4)']", function() { ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='jgjg(']",function() { battlecheck=0;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};
