@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.5
+// @version      1.5.5.1
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -9,7 +9,6 @@
 // @connect      www.guguzhen.com
 // @license      MIT License
 // ==/UserScript==
-
 (function() {
     'use strict'
 
@@ -19,7 +18,7 @@
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-09-01 07:25:00';
+    const g_modificationVersion = '2022-09-02 10:40:00';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
@@ -36,13 +35,6 @@
     const g_autoTaskEnabledStorageKey = g_kfUser + '_autoTaskEnabled';
     const g_autoTaskCheckStoneProgressStorageKey = g_kfUser + '_autoTaskCheckStoneProgress';
     const g_indexRallyStorageKey = g_kfUser + '_indexRally';
-    const g_forgeAutoStorageKey = g_kfUser + '_forgeAuto';
-    const g_stoneAuto1StorageKey = g_kfUser + '_stoneAuto1';
-    const g_stoneAuto2StorageKey = g_kfUser + '_stoneAuto2';
-    const g_stoneAuto3StorageKey = g_kfUser + '_stoneAuto3';
-    const g_stoneAuto4StorageKey = g_kfUser + '_stoneAuto4';
-    const g_stoneAuto5StorageKey = g_kfUser + '_stoneAuto5';
-    const g_stoneAuto6StorageKey = g_kfUser + '_stoneAuto6';
     const g_keepPkRecordStorageKey = g_kfUser + '_keepPkRecord';
     const g_amuletGroupsStorageKey = g_kfUser + '_amulet_groups';
     const g_equipmentExpandStorageKey = g_kfUser + '_equipment_Expand';
@@ -51,15 +43,21 @@
     const g_stoneProgressEquipTipStorageKey = g_kfUser + '_stone_ProgressEquipTip';
     const g_stoneProgressCardTipStorageKey = g_kfUser + '_stone_ProgressCardTip';
     const g_stoneProgressHaloTipStorageKey = g_kfUser + '_stone_ProgressHaloTip';
+    const g_forgeAutoStorageKey = g_kfUser + '_forgeAuto';
+    const g_stoneAuto1StorageKey = g_kfUser + '_stoneAuto1';
+    const g_stoneAuto2StorageKey = g_kfUser + '_stoneAuto2';
+    const g_stoneAuto3StorageKey = g_kfUser + '_stoneAuto3';
+    const g_stoneAuto4StorageKey = g_kfUser + '_stoneAuto4';
+    const g_stoneAuto5StorageKey = g_kfUser + '_stoneAuto5';
+    const g_stoneAuto6StorageKey = g_kfUser + '_stoneAuto6';
     const g_ignoreWishpoolExpirationStorageKey = g_kfUser + '_ignoreWishpoolExpiration';
     const g_beachForceExpandStorageKey = g_kfUser + '_beach_forceExpand';
     const g_beachBGStorageKey = g_kfUser + '_beach_BG';
 
     const g_userDataStorageKeyConfig = [ g_kfUser, g_autoTaskEnabledStorageKey, g_autoTaskCheckStoneProgressStorageKey,
-                                         g_indexRallyStorageKey,g_forgeAutoStorageKey,
+                                         g_indexRallyStorageKey, g_keepPkRecordStorageKey, g_amuletGroupsStorageKey,g_forgeAutoStorageKey,
                                          g_stoneAuto1StorageKey,g_stoneAuto2StorageKey,g_stoneAuto3StorageKey,
                                          g_stoneAuto4StorageKey,g_stoneAuto5StorageKey,g_stoneAuto6StorageKey,
-                                         g_keepPkRecordStorageKey, g_amuletGroupsStorageKey,
                                          g_equipmentExpandStorageKey, g_equipmentStoreExpandStorageKey, g_equipmentBGStorageKey,
                                          g_stoneProgressEquipTipStorageKey, g_stoneProgressCardTipStorageKey,
                                          g_stoneProgressHaloTipStorageKey, g_ignoreWishpoolExpirationStorageKey,
@@ -1436,8 +1434,9 @@
         ids ??= [];
         let cl = (container?.length ?? 0);
         if (cl > 0 && amulets?.length > 0) {
+            maxCount ??= cl;
             let ams = amuletNodesToArray(container);
-            for (let i = ams.length - 1; i >= 0 && amulets.length > 0 && ids.length < (maxCount ?? cl); i--) {
+            for (let i = ams.length - 1; i >= 0 && amulets.length > 0 && ids.length < maxCount; i--) {
                 for (let j = amulets.length - 1; j >= 0; j--) {
                     if (ams[i].compareTo(amulets[j]) == 0) {
                         amulets.splice(j, 1);
@@ -1454,8 +1453,9 @@
         ids ??= [];
         let cl = (container?.length ?? 0);
         if (cl > 0 && equips?.length > 0) {
+            maxCount ??= cl;
             let eqs = equipmentNodesToInfoArray(container);
-            for (let i = eqs.length - 1; i >= 0 && equips.length > 0 && ids.length < (maxCount ?? cl); i--) {
+            for (let i = eqs.length - 1; i >= 0 && equips.length > 0 && ids.length < maxCount; i--) {
                 for (let j = equips.length - 1; j >= 0; j--) {
                     if (equipmentInfoComparer(eqs[i], equips[j]) == 0) {
                         equips.splice(j, 1);
@@ -1537,7 +1537,7 @@
                 top: 0;
                 bottom: 0;
                 right: 0;
-                z-index: 9999;
+                z-index: 99;
                 display: none;
                 justify-content: center;
                 align-items: center;
@@ -1812,16 +1812,16 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const g_roles = [
-        { index : -1 , id : 3000 , name : '舞' , shortMark : 'WU' },
-        { index : -1 , id : 3001 , name : '默' , shortMark : 'MO' },
-        { index : -1 , id : 3002 , name : '琳' , shortMark : 'LIN' },
-        { index : -1 , id : 3003 , name : '艾' , shortMark : 'AI' },
-        { index : -1 , id : 3004 , name : '梦' , shortMark : 'MENG' },
-        { index : -1 , id : 3005 , name : '薇' , shortMark : 'WEI' },
-        { index : -1 , id : 3006 , name : '伊' , shortMark : 'YI' },
-        { index : -1 , id : 3007 , name : '冥' , shortMark : 'MING' },
-        { index : -1 , id : 3008 , name : '命' , shortMark : 'MIN' },
-        { index : -1 , id : 3009 , name : '希' , shortMark : 'XI' }
+        { index : -1 , id : 3000 , name : '舞' , hasG : true , shortMark : 'WU' },
+        { index : -1 , id : 3001 , name : '默' , hasG : false , shortMark : 'MO' },
+        { index : -1 , id : 3002 , name : '琳' , hasG : false , shortMark : 'LIN' },
+        { index : -1 , id : 3003 , name : '艾' , hasG : false , shortMark : 'AI' },
+        { index : -1 , id : 3004 , name : '梦' , hasG : false , shortMark : 'MENG' },
+        { index : -1 , id : 3005 , name : '薇' , hasG : false , shortMark : 'WEI' },
+        { index : -1 , id : 3006 , name : '伊' , hasG : false , shortMark : 'YI' },
+        { index : -1 , id : 3007 , name : '冥' , hasG : false , shortMark : 'MING' },
+        { index : -1 , id : 3008 , name : '命' , hasG : false , shortMark : 'MIN' },
+        { index : -1 , id : 3009 , name : '希' , hasG : true , shortMark : 'XI' }
     ];
 
     const g_roleMap = new Map();
@@ -2131,8 +2131,10 @@
     function defaultEquipmentNodeComparer(setting, eqKey, eq1, eq2) {
         let eqMeta = g_equipMap.get(eqKey);
         let delta = [];
-        let minorAdv = 0;
+        let majorAdv = 0;
+        let majorEq = 0;
         let majorDis = 0;
+        let minorAdv = 0;
 
         eqMeta.attributes.forEach((attr, index) => {
             let d = Math.trunc((eq1[0] * attr.factor + attr.additive) * eq1[index + 1]) -
@@ -2153,14 +2155,17 @@
             let sum = 0;
             indices.forEach((index) => { sum += delta[index]; });
             if (sum > 0) {
-                return true;
+                majorAdv++;
             }
             else if (sum < 0) {
                 majorDis++;
             }
+            else {
+                majorEq++;
+            }
         };
 
-        return (majorDis == 0 && minorAdv > 0);
+        return { majorAdv : majorAdv, majorEq : majorEq, majorDis : majorDis, minorAdv : minorAdv };
     }
 
     function formatEquipmentAttributes(e, itemSeparator) {
@@ -2192,10 +2197,10 @@
         if (g_useOldEquipName) {
             g_oldEquipNames.forEach((item) => {
                 if (!g_equipMap.has(item[1])) {
-                    let eq = g_equipMap.get(item[0]);
-                    if (eq != undefined) {
-                        eq.alias = item[1];
-                        g_equipMap.set(eq.alias, eq);
+                    let eqMeta = g_equipMap.get(item[0]);
+                    if (eqMeta != undefined) {
+                        eqMeta.alias = item[1];
+                        g_equipMap.set(eqMeta.alias, eqMeta);
                     }
                 }
             });
@@ -2203,10 +2208,10 @@
         if (g_useThemeEquipName) {
             for(let item in theme) {
                 if (theme[item][3]?.length > 0 && !g_equipMap.has(theme[item][3])) {
-                    let eq = g_equipMap.get(theme[item][2]);
-                    if (eq != undefined) {
-                        eq.alias = theme[item][3];
-                        g_equipMap.set(eq.alias, eq);
+                    let eqMeta = g_equipMap.get(theme[item][2]);
+                    if (eqMeta != undefined) {
+                        eqMeta.alias = theme[item][3];
+                        g_equipMap.set(eqMeta.alias, eqMeta);
                     }
                 }
             }
@@ -2420,7 +2425,7 @@
                             else{console.log( $('#goxtip div')[0].children[0].checked);console.log( $('#goxtip2 div')[0].children[0].checked);};
                         };
                         if (btn.className.indexOf('btn-danger') < 0) {
-                            let onck=false;btn.className += ' btn-danger';
+                            btn.className += ' btn-danger';let onck=false;
                             if(tips.indexOf('装备')>-1&&window.location.href.indexOf('fyg_equip.php')>-1){
                                 eqlip(4);eqbp(4); $(document).ajaxSuccess(function(){ if(onck==false){ onck=true; $("button[onclick*='b_forge(']")[0].click();} });onck=false;
                             };
@@ -2504,19 +2509,17 @@
         function doConfig() {
             let fixedContent =
                 '<div style="padding:20px 10px 10px 0px;color:blue;font-size:15px;"><b>请勿随意修改配置项，' +
-                `除非您知道它的准确用途并且设置为正确的值，否则可能导致插件工作异常。<span id="${g_genericPopupInformationTipsId}" ` +
+                `除非您知道它的准确用途并且设置为正确的值，否则可能导致插件工作异常<span id="${g_genericPopupInformationTipsId}" ` +
                 'style="float:right;color:red;"></span></b></div>';
             let mainContent =
                 `<style> #config-table { width:100%; }
-                         #config-table tr.config-tr { }
-                         #config-table tr.config-tr-alt { background-color:${g_genericPopupBackgroundColorAlt}; }
                          #config-table th { width:20%; }
                          #config-table th.config-th-name { width:60%; }
                          #config-table th.config-th-button { width:20%; }
                          #config-table button.config-restore-value { width:50%; }
-                 </style>
+                         table tr.alt { background-color:${g_genericPopupBackgroundColorAlt}; } </style>
                  <div class="${g_genericPopupTopLineDivClass}"><table id="config-table">
-                 <tr><th class="config-th-name">配置项</th><th>值</th><th class="config-th-button"></th></tr></table><div>`;
+                 <tr class="alt"><th class="config-th-name">配置项</th><th>值</th><th class="config-th-button"></th></tr></table><div>`;
 
             genericPopupSetFixedContent(fixedContent);
             genericPopupSetContent('插件设置', mainContent);
@@ -2524,7 +2527,7 @@
             let configTable = genericPopupQuerySelector('#config-table');
             g_configs.forEach((item, index) => {
                 let tr = document.createElement('tr');
-                tr.className = 'config-tr' + ((index & 1) == 0 ? ' config-tr-alt' : '');
+                tr.className = ((index & 1) == 0 ? '' : 'alt');
                 tr.setAttribute('config-item', item.id);
                 tr.innerHTML =
                     `<td><div data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="${item.tips}">${item.name}<div></td>
@@ -2821,6 +2824,8 @@
                 let calcDiv = document.createElement('div');
 
                 calcBtn.innerText = '导出计算器';
+                calcBtn.style.marginLeft = '3px';
+                calcBtn.disabled = 'disabled';
                 calcBtn.onclick = (() => {});
 
                 panel.insertBefore(calcBtn, panel.children[0]);
@@ -2861,7 +2866,7 @@
                     let asyncObserver = new MutationObserver(() => {
                         if (--asyncOperations == 1) {
                             asyncObserver.disconnect();
-                            --asyncOperations;
+                            asyncOperations = 0;
                         }
                     });
                     asyncObserver.observe(document.getElementById('backpacks'), { childList : true , subtree : true });
@@ -2899,12 +2904,12 @@
 
                     let scheduledObjects = { equips : [] , amulets : [] };
                     function beginScheduleBag() {
-                        genericPopupQuerySelectorAll('div.bag-div input.equip-checkbox.equip-item').forEach((e) => {
+                        genericPopupQuerySelectorAll('table.bag-list input.equip-checkbox.equip-item').forEach((e) => {
                             if (e.checked) {
                                 scheduledObjects.equips.push(e.getAttribute('original-item').split(','));
                             }
                         });
-                        genericPopupQuerySelectorAll('div.bag-div input.equip-checkbox.amulet-item').forEach((e) => {
+                        genericPopupQuerySelectorAll('table.bag-list input.equip-checkbox.amulet-item').forEach((e) => {
                             if (e.checked) {
                                 scheduledObjects.amulets.push((new Amulet()).fromBuffText(e.getAttribute('original-item')));
                             }
@@ -3049,24 +3054,29 @@
                     }
 
                     let fixedContent =
-                        '<div style="padding:20px 10px 10px 0px;color:blue;font-size:15px;"><b>' +
-                          '<li>背包表中被选中的项将在操作过程中暂时移入仓库，操作完成后未被丢弃或转换为果核的项会恢复回背包。</li>' +
-                          '<li>护符表中被选中的护符会被销毁并转换为果核，此操作不可逆，请谨慎使用。</li>' +
-                          '<li>装备表中被选中的装备会被丢弃，丢弃后的装备将出现在海滩上，并在24小时后消失，在它消失前您可随时捡回。</li>' +
-                          '<li>正在使用的装备不会出现在装备表中，如果您想要丢弃正在使用的装备，请首先将它替换下来。</li>' +
+                        '<div style="padding:20px 10px 10px 0px;color:blue;font-size:15px;"><b><ul>' +
+                          '<li>背包表中被选中的项将在操作过程中暂时移入仓库，操作完成后未被丢弃或转换为果核的项会恢复回背包</li>' +
+                          '<li>护符表中被选中的护符会被销毁并转换为果核，此操作不可逆，请谨慎使用</li>' +
+                          '<li>装备表中被选中的装备会被丢弃，丢弃后的装备将出现在海滩上，并在24小时后消失，在它消失前您可随时捡回</li>' +
+                          '<li>正在使用的装备不会出现在装备表中，如果您想要丢弃正在使用的装备，请首先将它替换下来</li>' +
                           `<li id="${g_genericPopupInformationTipsId}" style="color:red;">` +
                              `<input type="checkbox" id="disclaimer-check" />` +
                              `<label for="disclaimer-check" style="margin-left:5px;cursor:pointer;">` +
-                              `本人已仔细阅读并完全理解以上全部注意事项，愿意独立承担所有因此操作而引起的一切后果及损失。</label></li></b></div>`;
+                              `本人已仔细阅读并完全理解以上全部注意事项，愿意独立承担所有因此操作而引起的一切后果及损失</label></li></ul></b></div>`;
                     const mainStyle =
-                          '<style> .group-menu { position:relative; display:inline-block; color:blue; font-size:20px; cursor:pointer; } ' +
+                          '<style> .group-menu { position:relative;' +
+                                                'display:inline-block;' +
+                                                'color:blue;' +
+                                                'font-size:20px;' +
+                                                'cursor:pointer; } ' +
                                   '.group-menu-items { display:none;' +
                                                       'position:absolute;' +
                                                       'font-size:15px;' +
                                                       'word-break:keep-all;' +
-                                                      'white-space:nowrap; ' +
+                                                      'white-space:nowrap;' +
                                                       'margin:0 auto;' +
                                                       'width:fit-content;' +
+                                                      'z-index:999;' +
                                                       'background-color:white;' +
                                                       'box-shadow:0px 8px 16px 4px rgba(0, 0, 0, 0.2);' +
                                                       'padding:15px 30px; } '+
@@ -3084,22 +3094,23 @@
                               'table.equip-list { width:100%; } ' +
                                   'table.equip-list th.object-name { width:36%; text-align:left; } ' +
                                   'table.equip-list th.object-property { width:16%; text-align:left; } ' +
+                              'table tr.alt { background-color:' + g_genericPopupBackgroundColorAlt + '; } ' +
                           '</style>';
                     const menuItems =
-                          '<div class="group-menu-items">' +
+                          '<div class="group-menu-items"><ul>' +
                               '<li class="group-menu-item"><a href="#bag-div">背包</a></li>' +
                               '<li class="group-menu-item"><a href="#amulets-div">护符</a></li>' +
                               '<li class="group-menu-item"><a href="#equips1-div">武器装备</a></li>' +
                               '<li class="group-menu-item"><a href="#equips2-div">手臂装备</a></li>' +
                               '<li class="group-menu-item"><a href="#equips3-div">身体装备</a></li>' +
                               '<li class="group-menu-item"><a href="#equips4-div">头部装备</a></li>' +
-                          '</div>';
+                          '</ul></div>';
                     const bagTable =
-                          '<table class="bag-list"><tr><th class="object-name">内容</th><th class="object-property">属性</th></tr></table>';
+                          '<table class="bag-list"><tr class="alt"><th class="object-name">内容</th><th class="object-property">属性</th></tr></table>';
                     const amuletTable =
-                          '<table class="amulet-list"><tr><th class="object-name">护符</th><th class="object-property">属性</th></tr></table>';
+                          '<table class="amulet-list"><tr class="alt"><th class="object-name">护符</th><th class="object-property">属性</th></tr></table>';
                     const equipTable =
-                          '<table class="equip-list"><tr><th class="object-name">装备</th><th class="object-property">属性</th>' +
+                          '<table class="equip-list"><tr class="alt"><th class="object-name">装备</th><th class="object-property">属性</th>' +
                              '<th class="object-property"></th><th class="object-property"></th><th class="object-property"></th></tr></table>';
                     const btnGroup =
                           '<button type="button" class="btn-group-selection" select-type="2">反选</button>' +
@@ -3107,18 +3118,18 @@
                           '<button type="button" class="btn-group-selection" select-type="0">全选</button>';
                     const mainContent =
                         `${mainStyle}
-                         <div class="${g_genericPopupTopLineDivClass} bag-div" id ="bag-div">
+                         <div class="${g_genericPopupTopLineDivClass} bag-div" id="bag-div">
                            <b class="group-menu">背包 （选中 <span>0</span>，空闲 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${bagTable}</div>
-                         <div class="${g_genericPopupTopLineDivClass}" id ="amulets-div">
+                         <div class="${g_genericPopupTopLineDivClass}" id="amulets-div">
                            <b class="group-menu">护符 （选中 <span>0</span>）（★：已加入护符组） ▼${menuItems}</b>${btnGroup}<p />${amuletTable}</div>
-                         <div class="${g_genericPopupTopLineDivClass}" id ="equips1-div">
+                         <div class="${g_genericPopupTopLineDivClass}" id="equips1-div">
                            <b class="group-menu">武器装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div>
-                         <div class="${g_genericPopupTopLineDivClass}" id ="equips2-div">
-                           <b class="group-menu">手臂装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div></div>
-                         <div class="${g_genericPopupTopLineDivClass}" id ="equips3-div">
-                           <b class="group-menu">身体装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div></div>
-                         <div class="${g_genericPopupTopLineDivClass}" id ="equips4-div">
-                           <b class="group-menu">头部装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div></div>`;
+                         <div class="${g_genericPopupTopLineDivClass}" id="equips2-div">
+                           <b class="group-menu">手臂装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="equips3-div">
+                           <b class="group-menu">身体装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="equips4-div">
+                           <b class="group-menu">头部装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div>`;
 
                     genericPopupSetFixedContent(fixedContent);
                     genericPopupSetContent('清理库存', mainContent);
@@ -3187,6 +3198,7 @@
                         amulet_selector.appendChild(tr);
                     });
 
+                    let eqIndex = 0;
                     let eq_selectors = genericPopupQuerySelectorAll('table.equip-list');
                     let storeEquips = equipmentNodesToInfoArray(document.querySelectorAll(storeObjectsQueryString));
                     storeEquips.concat(bagEquips).sort((e1, e2) => {
@@ -3200,9 +3212,9 @@
                         let tr = document.createElement('tr');
                         tr.style.backgroundColor = g_equipmentLevelBGColor[lv];
                         tr.innerHTML =
-                            `<td><input type="checkbox" class="equip-checkbox equip-item" id="equip-${item[7]}"
+                            `<td><input type="checkbox" class="equip-checkbox equip-item" id="equip-${++eqIndex}"
                                         original-item="${item.join(',')}" />
-                                 <label for="equip-${item[7]}" style="margin-left:5px;cursor:pointer;">
+                                 <label for="equip-${eqIndex}" style="margin-left:5px;cursor:pointer;">
                                         ${eqMeta.alias} - Lv.${item[1]}${item[6] == 1 ? ' - [ 神秘 ]' : ''}</label></td>
                              <td>${formatEquipmentAttributes(item, '</td><td>')}</td>`;
                         eq_selectors[eqMeta.type].appendChild(tr);
@@ -3510,26 +3522,32 @@
 
                                     genericPopupSetContent(
                                         '护符组管理',
-                                        '<style> .group-menu { position:relative; display:inline-block; font-size:20px; cursor:pointer; } ' +
+                                        '<style> .group-menu { position:relative;' +
+                                                              'display:inline-block;' +
+                                                              'color:blue;' +
+                                                              'font-size:20px;' +
+                                                              'cursor:pointer; } ' +
                                                 '.group-menu-items { display:none;' +
                                                                     'position:absolute;' +
                                                                     'font-size:15px;' +
                                                                     'word-break:keep-all;' +
-                                                                    'white-space:nowrap; ' +
+                                                                    'white-space:nowrap;' +
                                                                     'margin:0 auto;' +
                                                                     'width:fit-content;' +
+                                                                    'z-index:999;' +
                                                                     'background-color:white;' +
                                                                     'box-shadow:0px 8px 16px 4px rgba(0, 0, 0, 0.2);' +
-                                                                    'padding:15px 30px; } '+
+                                                                    'padding:15px 30px; } ' +
                                                 '.group-menu-item { } ' +
                                                 '.group-menu:hover .group-menu-items { display:block; } ' +
                                                 '.group-menu-items .group-menu-item:hover { background-color:#bbddff; } ' +
                                         '</style>' +
                                         '<div id="popup_amulet_groups" style="margin-top:15px;"></div>');
                                     let amuletContainer = genericPopupQuerySelector('#popup_amulet_groups');
-                                    let groupMenu = document.createElement('div');
-                                    groupMenu.className = 'group-menu-items';
-                                    groupMenu.style.zIndex = amuletContainer.style.zIndex + 1;
+                                    let groupMenuDiv = document.createElement('div');
+                                    groupMenuDiv.className = 'group-menu-items';
+                                    groupMenuDiv.innerHTML = '<ul></ul>';
+                                    let groupMenu = groupMenuDiv.firstChild;
 
                                     if (bagGroup != null) {
                                         let groupDiv = document.createElement('div');
@@ -3717,7 +3735,7 @@
                                     }
 
                                     genericPopupQuerySelectorAll('.group-menu')?.forEach((e) => {
-                                        e.appendChild(groupMenu.cloneNode(true));
+                                        e.appendChild(groupMenuDiv.cloneNode(true));
                                     });
 
                                     if (bagGroup != null) {
@@ -4238,6 +4256,7 @@
                     }, 500);
                 }
 
+                const g_genCalcCfgPopupLinkId = 'gen_calc_cfg_popup_link';
                 const g_bindingPopupLinkId = 'binding_popup_link';
                 const g_cardOnekeyLinkId = 'card_one_key_link';
                 const g_bindingSolutionId = 'binding_solution_div';
@@ -4269,7 +4288,8 @@
                         if (roleInfo.length == 2 && haloInfo.length == 3) {
                             const infoHTML =
                                   `<div style="display:block;width:100%;color:#0000c0;text-align:center;font-size:20px;padding-top:50px;"><b>
-                                   <p></p><span style="width:100%;">当前卡片已经由 [ ${roleInfo[1]} ] 临时切换至 [ ${g_roleMap.get(roleId)?.name ?? 'UNKNOW'} ]</span><br><br>
+                                   <p></p><span style="width:100%;">当前卡片已经由 [ ${roleInfo[1]} ] 临时切换至 ` +
+                                  `[ ${g_roleMap.get(roleId)?.name ?? 'UNKNOW'} ]</span><br><br>
                                    <p></p><span style="width:100%;">请切换至搜刮页面尽快完成搜刮操作</span><br><br>
                                    <p></p><span style="width:100%;">并返回本页面点击“恢复”按钮以恢复之前的卡片和光环设置</span></b></div>`;
                             genericPopupSetContent(`临时装备卡片 [ ${g_roleMap.get(roleId)?.name ?? 'UNKNOW'} ]`, infoHTML);
@@ -4610,8 +4630,7 @@
                 const BINDING_ELEMENT_SEPARATOR = '|';
 
                 function showBindingPopup() {
-                    let roleId = g_roleMap.get(document.querySelector('#backpacks > div.row > div.col-md-3 > span.text-info.fyg_f24')
-                                                      ?.innerText)?.id;
+                    let role = g_roleMap.get(document.querySelector('#backpacks > div.row > div.col-md-3 > span.text-info.fyg_f24')?.innerText);
                     let cardInfos = document.querySelector('#backpacks').querySelectorAll('.icon.icon-angle-down.text-primary');
                     let roleLv = cardInfos[0].innerText.match(/\d+/)[0];
                     let roleQl = cardInfos[1].innerText.match(/\d+/)[0];
@@ -4621,15 +4640,15 @@
                     for (let i = 1; i <= 6; i++) {
                         rolePt.push(document.getElementById('sjj' + i).innerText);
                     }
-                    if (roleId == undefined || roleLv == undefined || roleQl == undefined || roleHs == undefined) {
+                    if (role == undefined || roleLv == undefined || roleQl == undefined || roleHs == undefined) {
                         alert('读取卡片信息失败，无法执行绑定操作！');
                         return;
                     }
 
                     let bind_info = null;
                     let udata = loadUserConfigData();
-                    if (udata.dataBind[roleId] != null) {
-                        bind_info = udata.dataBind[roleId];
+                    if (udata.dataBind[role.id] != null) {
+                        bind_info = udata.dataBind[role.id];
                     }
 
                     genericPopupInitialize();
@@ -4641,9 +4660,10 @@
                                 '.binding-names { display:none;' +
                                                  'position:absolute;' +
                                                  'word-break:keep-all;' +
-                                                 'white-space:nowrap; ' +
+                                                 'white-space:nowrap;' +
                                                  'margin:0 auto;' +
                                                  'width:100%;' +
+                                                 'z-index:999;' +
                                                  'background-color:white;' +
                                                  'box-shadow:0px 8px 16px 4px rgba(0, 0, 0, 0.2);' +
                                                  'padding:10px 20px; } '+
@@ -4655,12 +4675,12 @@
                         `（不超过31个字符，请仅使用大、小写英文字母、数字、连字符、下划线及中文字符）：` +
                         `<span id="${g_genericPopupInformationTipsId}" style="float:right;color:red;"></span></b></div>
                          <div style="width:100%;padding:0px 10px 20px 0px;"><div class="binding-list">
-                         <input type="text" id="binding_name" maxlength="31" style="display:inline-block;width:100%;" />
-                         <div class="binding-names" id="binding_list"></div></div></div>`;
+                         <input type="text" id="binding_name" style="display:inline-block;width:100%;" maxlength="31" />
+                         <div class="binding-names" id="binding_list"><ul></ul></div></div></div>`;
                     const mainContent =
                         `<style> .equipment_label    { display:inline-block; width:15%; }
                                  .equipment_selector { display:inline-block; width:84%; color:#145ccd; float:right; }
-                                 div > li { cursor:pointer; } div > li:hover { background-color:#bbddff; } </style>
+                                  ul > li { cursor:pointer; } </style>
                          <div class="${g_genericPopupTopLineDivClass}" id="role_export_div" style="display:none;">
                          <div style="height:200px;">
                               <textarea id="role_export_string" readonly="true" style="height:100%;width:100%;resize:none;"></textarea></div>
@@ -4676,7 +4696,7 @@
                          <div class="${g_genericPopupTopLineDivClass}" id="amulet_selector" style="display:block;"><div></div></div>`;
 
                     genericPopupSetFixedContent(fixedContent);
-                    genericPopupSetContent(`${g_roleMap.get(roleId)?.name ?? 'UNKNOW'} - ${roleLv} 级`, mainContent);
+                    genericPopupSetContent(`${role.name} - ${roleLv} 级`, mainContent);
 
                     let eq_selectors = genericPopupQuerySelectorAll('select.equipment_selector');
                     let asyncOperations = 3;
@@ -4702,16 +4722,16 @@
                             equipment.forEach((item) => {
                                 let eqMeta = g_equipMap.get(item[0]);
                                 let lv = equipmentGetLevel(item);
-                                let op0 = document.createElement('option');
-                                op0.style.backgroundColor = g_equipmentLevelBGColor[lv];
-                                op0.innerText =
+                                let op = document.createElement('option');
+                                op.style.backgroundColor = g_equipmentLevelBGColor[lv];
+                                op.innerText =
                                     `${eqMeta.alias} Lv.${item[1]} - ${item[2]}% ${item[3]}% ` +
                                     `${item[4]}% ${item[5]}% ${item[6] == 1 ? ' - [ 神秘 ]' : ''}`;
-                                op0.title =
+                                op.title =
                                     `Lv.${item[1]} - ${item[6] == 1 ? '神秘' : ''}${g_equipmentLevelName[lv]}装备\n` +
                                     `${formatEquipmentAttributes(item, '\n')}`;
-                                op0.value = item.slice(0, -1).join(',');
-                                eq_selectors[eqMeta.type].appendChild(op0);
+                                op.value = item.slice(0, -1).join(',');
+                                eq_selectors[eqMeta.type].appendChild(op);
                             });
 
                             eq_selectors.forEach((eqs) => {
@@ -4739,7 +4759,7 @@
                             let haloSelector = genericPopupQuerySelector('#halo_selector');
                             haloSelector.innerHTML =
                                 `<style> .halo_group { display:block; width:25%; float:left; text-align:center; border-left:1px solid grey; }
-                                         div > a { display:inline-block; width:90px; } div > a:hover { background-color:#bbddff; } </style>
+                                         div > a { display:inline-block; width:90px; } </style>
                                  <div>${haloInfo}</div>
                                  <p></p>
                                  <div class="halo_group"></div>
@@ -4817,8 +4837,8 @@
                         });
                         let h = parseInt(haloMax);
                         if (sum <= h && halo.length <= parseInt(roleHs)) {
-                            let roleInfo = [ g_roleMap.get(roleId).shortMark, roleLv, roleHs, roleQl ];
-                            if (roleId == 3000 || roleId == 3009) {
+                            let roleInfo = [ role.shortMark, roleLv, roleHs, roleQl ];
+                            if (role.hasG) {
                                 roleInfo.splice(1, 0, 'G=' + roleGv);
                             }
 
@@ -4874,13 +4894,13 @@
                     function unbindAll() {
                         if (confirm('这将清除本卡片全部绑定方案，继续吗？')) {
                             let udata = loadUserConfigData();
-                            if (udata.dataBind[roleId] != null) {
-                                delete udata.dataBind[roleId];
+                            if (udata.dataBind[role.id] != null) {
+                                delete udata.dataBind[role.id];
                             }
                             saveUserConfigData(udata);
                             bindingName.value = BINDING_NAME_DEFAULT;
                             bindingList.innerHTML = '';
-                            refreshBindingSelector(roleId);
+                            refreshBindingSelector(role.id);
                             genericPopupShowInformationTips('解除全部绑定成功', 5000);
                         }
                     };
@@ -4903,16 +4923,16 @@
                                 let bi = null;
                                 let udata = loadUserConfigData();
                                 if (bindings.length > 0) {
-                                    udata.dataBind[roleId] = bindings.join(BINDING_SEPARATOR);
+                                    udata.dataBind[role.id] = bindings.join(BINDING_SEPARATOR);
                                     bindingName.value = bindingList.children[0].innerText;
                                     bi = bindingList.children[0].getAttribute('original-item');
                                 }
-                                else if(udata.dataBind[roleId] != null) {
-                                    delete udata.dataBind[roleId];
+                                else if(udata.dataBind[role.id] != null) {
+                                    delete udata.dataBind[role.id];
                                     bindingName.value = BINDING_NAME_DEFAULT;
                                 }
                                 saveUserConfigData(udata);
-                                refreshBindingSelector(roleId);
+                                refreshBindingSelector(role.id);
                                 representBinding(bi);
                                 genericPopupShowInformationTips(bn + '：解绑成功', 5000);
                             }
@@ -4948,9 +4968,9 @@
                                 }
 
                                 let udata = loadUserConfigData();
-                                udata.dataBind[roleId] = bindings.join(BINDING_SEPARATOR);
+                                udata.dataBind[role.id] = bindings.join(BINDING_SEPARATOR);
                                 saveUserConfigData(udata);
-                                refreshBindingSelector(roleId);
+                                refreshBindingSelector(role.id);
                                 genericPopupShowInformationTips(bindingName.value + '：绑定成功', 5000);
                             }
                             else {
@@ -5058,7 +5078,7 @@
                         amuletCount.innerText = ac;
                     }
 
-                    let bindingList = genericPopupQuerySelector('#binding_list');
+                    let bindingList = genericPopupQuerySelector('#binding_list').firstChild;
                     let bindingName = genericPopupQuerySelector('#binding_name');
                     let haloPoints = null;
                     let haloSlots = null;
@@ -5070,20 +5090,22 @@
                     let amuletGroupCount = (amuletGroups?.count() ?? 0);
                     if (amuletGroupCount > 0) {
                         amuletContainer.innerHTML =
-                            '护符组：已选定 <span id="amulet_count">0</span> 个护符<span style="float:right;margin-right:5px;">加载顺序</span><p></p>';
+                            '护符组：已选定 <span id="amulet_count">0</span> 个护符' +
+                            '<span style="float:right;margin-right:5px;">加载顺序</span><p /><ul></ul>';
                         amuletCount = genericPopupQuerySelector('#amulet_count');
                         amuletCount.style.color = '#0000c0';
                         let amuletArray = amuletGroups.toArray().sort((a, b) => a.name < b.name ? -1 : 1);
+                        let amuletGroupContainer = amuletContainer.lastChild;
                         for (let i = 0; i < amuletGroupCount; i++) {
-                            let li0 = document.createElement('li');
-                            li0.className = 'amulet_item';
-                            li0.setAttribute('original-item', amuletArray[i].name);
-                            li0.title = amuletArray[i].formatBuffSummary('', '', '\n', false);
-                            li0.innerHTML =
+                            let li = document.createElement('li');
+                            li.className = 'amulet_item';
+                            li.setAttribute('original-item', amuletArray[i].name);
+                            li.title = amuletArray[i].formatBuffSummary('', '', '\n', false);
+                            li.innerHTML =
                                 `<a href="#">${amuletArray[i].name} [${amuletArray[i].count()}]</a>` +
                                 `<span style="color:#0000c0;width:40;float:right;margin-right:5px;"></span>`;
-                            li0.onclick = selector_amulet;
-                            amuletContainer.appendChild(li0);
+                            li.onclick = selector_amulet;
+                            amuletGroupContainer.appendChild(li);
                         }
                     }
                     else {
@@ -5128,11 +5150,11 @@
                             elements[elements.length - 1] = binding.join(BINDING_ELEMENT_SEPARATOR);
                         }
 
-                        let op0 = document.createElement('li');
-                        op0.className = 'binding-name';
-                        op0.innerText = (elements.length > 1 ? elements[0] : BINDING_NAME_DEFAULT);
-                        op0.setAttribute('original-item', elements[elements.length - 1]);
-                        bindingList.appendChild(op0);
+                        let op = document.createElement('li');
+                        op.className = 'binding-name';
+                        op.innerText = (elements.length > 1 ? elements[0] : BINDING_NAME_DEFAULT);
+                        op.setAttribute('original-item', elements[elements.length - 1]);
+                        bindingList.appendChild(op);
                     });
 
                     let timer = setInterval(() => {
@@ -5199,6 +5221,695 @@
                     }, 200);
                 };
 
+                function showCalcConfigGenPopup() {
+                    let role = g_roleMap.get(document.querySelector('#backpacks > div.row > div.col-md-3 > span.text-info.fyg_f24')?.innerText);
+                    let cardInfos = document.querySelector('#backpacks').querySelectorAll('.icon.icon-angle-down.text-primary');
+                    let roleLv = cardInfos[0].innerText.match(/\d+/)[0];
+                    let roleQl = cardInfos[1].innerText.match(/\d+/)[0];
+                    let roleHs = cardInfos[2].innerText.match(/\d+/)[0];
+                    let roleGv = (cardInfos[3]?.innerText.match(/\d+/)[0] ?? '0');
+                    let roleTotalPt = Math.trunc((roleLv * 3 + 6) * (1 + roleQl / 100));
+                    let rolePt = [];
+                    for (let i = 1; i <= 6; i++) {
+                        rolePt.push(document.getElementById('sjj' + i).innerText);
+                    }
+                    if (role == undefined || roleLv == undefined || roleQl == undefined || roleHs == undefined) {
+                        alert('读取卡片信息失败，无法执行配置操作！');
+                        return;
+                    }
+
+                    genericPopupInitialize();
+                    genericPopupShowProgressMessage('读取中，请稍候...');
+
+                    const monsters = [
+                        {
+                            name : '铁皮木人',
+                            shortMark : 'MU2'
+                        },
+                        {
+                            name : '迅捷魔蛛',
+                            shortMark : 'ZHU2'
+                        },
+                        {
+                            name : '魔灯之灵',
+                            shortMark : 'DENG2'
+                        },
+                        {
+                            name : '食铁兽',
+                            shortMark : 'SHOU2'
+                        },
+                        {
+                            name : '六眼飞鱼',
+                            shortMark : 'YU2'
+                        },
+                        {
+                            name : '晶刺豪猪',
+                            shortMark : 'HAO2'
+                        }
+                    ];
+
+                    let fixedContent =
+                        '<div style="padding:20px 10px 10px 0px;color:blue;font-size:16px;"><b><ul>' +
+                          '<li>使用本功能前请首先仔细阅读咕咕镇计算器相关说明以便对其中涉及到的概念及元素建立基本认识</li>' +
+                          '<li>此功能只生成指定角色的PVE配置，若需供其他角色使用请在相应角色页面使用此功能或自行正确修改配置</li>' +
+                          '<li>此功能只生成计算器可用的基础PVE配置，若需使用计算器提供的其它高级功能请自行正确修改配置</li>' +
+                          '<li>此功能并未进行完整的数据合法性检查，并不保证生成的配置100%正确，所以请仔细阅读说明并正确使用各项设置</li>' +
+                          `<li id="${g_genericPopupInformationTipsId}" style="color:red;">初次使用时请仔细阅读各部分的设置说明</li></ul></b></div>`;
+                    const mainStyle =
+                          '<style> .group-menu { position:relative;' +
+                                                'display:inline-block;' +
+                                                'color:blue;' +
+                                                'font-size:20px;' +
+                                                'cursor:pointer; } ' +
+                                  '.group-menu-items { display:none;' +
+                                                      'position:absolute;' +
+                                                      'font-size:15px;' +
+                                                      'word-break:keep-all;' +
+                                                      'white-space:nowrap;' +
+                                                      'margin:0 auto;' +
+                                                      'width:fit-content;' +
+                                                      'z-index:999;' +
+                                                      'background-color:white;' +
+                                                      'box-shadow:0px 8px 16px 4px rgba(0, 0, 0, 0.2);' +
+                                                      'padding:15px 30px; } ' +
+                                  '.group-menu-item { } ' +
+                                  '.group-menu:hover .group-menu-items { display:block; } ' +
+                                  '.group-menu-items .group-menu-item:hover { background-color:#bbddff; } ' +
+                              '.section-help-text { font-size:15px; color:navy; } ' +
+                              'b > span { color:purple; } ' +
+                              'button.btn-group-selection { width:80px; float:right; } ' +
+                              'table.mon-list { width:100%; } ' +
+                                  'table.mon-list th.mon-name { width:25%; text-align:left; } ' +
+                                  'table.mon-list th.mon-progress { width:25%; text-align:left; } ' +
+                                  'table.mon-list th.mon-level { width:25%; text-align:left; } ' +
+                                  'table.mon-list th.mon-baselevel { width:25%; text-align:left; } ' +
+                              'table.role-info { width:100%; } ' +
+                                  'table.role-info th.role-item { width:30%; text-align:left; } ' +
+                                  'table.role-info th.role-points { width:10%; text-align:left; } ' +
+                                  'table.role-info th.role-operation { width:10%; text-align:center; } ' +
+                              'table.equip-list { width:100%; } ' +
+                                  'table.equip-list th.equip-name { width:36%; text-align:left; } ' +
+                                  'table.equip-list th.equip-property { width:16%; text-align:left; } ' +
+                              'table.misc-config { width:100%; } ' +
+                                  'table.misc-config th { width:20%; text-align:center; } ' +
+                                  'table.misc-config td { text-align:center; } ' +
+                              'table tr.alt { background-color:' + g_genericPopupBackgroundColorAlt + '; } ' +
+                          '</style>';
+                    const menuItems =
+                          '<div class="group-menu-items"><ul>' +
+                              '<li class="group-menu-item"><a href="#mon-div">野怪</a></li>' +
+                              '<li class="group-menu-item"><a href="#role-div">角色</a></li>' +
+                              '<li class="group-menu-item"><a href="#equips1-div">武器装备</a></li>' +
+                              '<li class="group-menu-item"><a href="#equips2-div">手臂装备</a></li>' +
+                              '<li class="group-menu-item"><a href="#equips3-div">身体装备</a></li>' +
+                              '<li class="group-menu-item"><a href="#equips4-div">头部装备</a></li>' +
+                              '<li class="group-menu-item"><a href="#halo-div">光环</a></li>' +
+                              '<li class="group-menu-item"><a href="#amulet-div">护符</a></li>' +
+                              '<li class="group-menu-item"><a href="#misc-div">其它</a></li><hr>' +
+                              '<li class="group-menu-item"><a href="#result-div">生成结果</a></li>' +
+                          '</ul></div>';
+                    const monTable =
+                          '<table class="mon-list"><tr class="alt"><th class="mon-name">名称</th><th class="mon-progress">段位进度（0% - 100%）</th>' +
+                             '<th class="mon-level">进度等级</th><th class="mon-baselevel">基础等级（0%进度）</th></tr></table>';
+                    const roleTable =
+                          '<table class="role-info"><tr class="alt"><th class="role-item">设置</th>' +
+                             '<th class="role-points">力量</th><th class="role-points">敏捷</th><th class="role-points">智力</th>' +
+                             '<th class="role-points">体魄</th><th class="role-points">精神</th><th class="role-points">意志</th>' +
+                             '<th class="role-operation">操作</th></tr><tr>' +
+                             '<td>属性点下限（须大于0）<span id ="role-points-summary" style="float:right;margin-right:5px;"></span></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="1" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="1" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="1" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="1" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="1" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="1" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><button type="button" class="role-points-text-reset" style="width:100%;" value="1">重置</td></tr><tr class="alt">' +
+                             '<td>属性点上限（0为无限制）</td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="0" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="0" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="0" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="0" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="0" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" class="role-points-text" style="width:90%;" value="0" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><button type="button" class="role-points-text-reset" style="width:100%;" value="0">重置</td>' +
+                             '</tr></table>';
+                    const equipTable =
+                          '<table class="equip-list"><tr class="alt"><th class="equip-name">装备</th><th class="equip-property">属性</th>' +
+                             '<th class="equip-property"></th><th class="equip-property"></th><th class="equip-property"></th></tr></table>';
+                    const miscTable =
+                          '<table class="misc-config"><tr class="alt">' +
+                             '<th>计算线程数</th><th>最大组合数</th><th>单组测试次数</th><th>置信区间测试阈值（%）</th><th>输出计算进度</th></tr><tr>' +
+                             '<td><input type="text" style="width:90%;" original-item="THREADS" value="4" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" style="width:90%;" original-item="SEEDMAX" value="1000000" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" style="width:90%;" original-item="TESTS" value="1000" oninput="value=value.replace(/[^\\d]/g,\'\');" /></td>' +
+                             '<td><input type="text" style="width:90%;" original-item="CITEST" value="1" oninput="value=value.replace(/[^\\d.]/g,\'\');" /></td>' +
+                             '<td><input type="text" style="width:90%;" original-item="VERBOSE" value="1" oninput="value=value.replace(/[^\\d.]/g,\'\');" /></td></tr></table>';
+                    const btnGroup =
+                          '<button type="button" class="btn-group-selection" select-type="2">反选</button>' +
+                          '<button type="button" class="btn-group-selection" select-type="1">全不选</button>' +
+                          '<button type="button" class="btn-group-selection" select-type="0">全选</button>';
+                    const mainContent =
+                        `${mainStyle}
+                         <div class="${g_genericPopupTopLineDivClass}" id="mon-div">
+                           <b class="group-menu">野怪设置 （选中 <span>${monsters.length}</span>） ▼${menuItems}</b>${btnGroup}<hr>
+                             <span class="section-help-text">` +
+                             `只有勾选行的野怪信息才会被写入配置，且这些信息与选定角色相关。段位进度和等级必须对应，例如选定卡片当前段位60%进度迅捷魔蛛` +
+                             `的等级为200级，则在迅捷魔蛛一行的段位进度栏填60，等级栏填200，程序将自动计算得到0%进度迅捷魔蛛的估计基础等级为167。</span>
+                              <hr>${monTable}<hr><b style="display:inline-block;width:100%;text-align:center;">起始进度 ` +
+                             `<input type="text" class="mon-batch-data" style="width:40px;" maxlength="3" value="0"
+                                     oninput="value=value.replace(/[^\\d]/g,'');" /> %，以 ` +
+                             `<input type="text" class="mon-batch-data" style="width:40px;" maxlength="2" value="0"
+                                     oninput="value=value.replace(/[^\\d]/g,'');" /> % 进度差或以 ` +
+                             `<input type="text" class="mon-batch-data" style="width:40px;" maxlength="3" value="0"
+                                     oninput="value=value.replace(/[^\\d]/g,'');" /> 级差为间隔额外生成 ` +
+                             `<input type="text" class="mon-batch-data" style="width:40px;" maxlength="1" value="0"
+                                     oninput="value=value.replace(/[^\\d]/g,'');" /> 批野怪数据</b><hr>
+                              <span class="section-help-text"">此功能可以生成多批阶梯等级的野怪配置，计算器可根据这些信息计算当野怪等级` +
+                             `在一定范围内浮动时的近似最优策略。野怪的等级由其基础等级及进度加成共同决定（进度等级=基础等级×（1+（进度÷300））），` +
+                             `多批之间的级差可由进度差或绝对级差指定，当进度差和绝对级差同时被指定（均大于0）且需生成多批数据（额外生成大于0）时默认使用` +
+                             `进度差进行计算，当进度差和绝对级差同时为0或额外生成为0时将不会生成额外批次数据。需要注意的是（起始进度+（进度差×批次数））` +
+                             `允许大于100，因为大于100的进度仍然可以计算得到有效的野怪等级。</span></div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="role-div">
+                           <b class="group-menu">角色基础设置 （${role.name}，${roleLv}级，${roleQl}%品质，${role.hasG ? `${roleGv}成长值，` : ''}` +
+                             `${roleTotalPt}属性点） ▼${menuItems}</b><hr><span class="section-help-text">` +
+                             `属性点下限初始值为指定角色当前点数分配方案，直接使用这些值主要用于胜率验证、装备及光环技能选择等情况，全部置1表示由计算器从` +
+                             `头开始计算近似最佳点数分配（该行末的重置按钮将属性点下限全部置1）。也可为各点数设置合理的下限值（必须大于0且总和小于等于总` +
+                             `可用属性点数）并由计算器分配剩余点数，这一般用于角色升级后可用点数增加、指定加点方案大致方向并进行装备、光环选择等情况，在` +
+                             `其它条件相同的情况下，越少的剩余点数将节约越多的计算时间。属性点上限用于指定特定属性点数分配的上限，设为0表示无限制。合理地` +
+                             `设置上限可以节约计算时间，典型的应用场景为将某些明确无需加点的属性上限设为1（例如3速角色的敏捷、血量系的精神等，以及通常情况` +
+                             `下梦、默仅敏捷、智力、精神为0，其它皆为1，当然特殊加点除外），而将其它设为0（该行末的重置按钮将属性点上限全部置0）。</span><hr>
+                              <input type="checkbox" id="role-useWishpool" checked /><label for="role-useWishpool"
+                                     style="margin-left:5px;cursor:pointer;">使用许愿池数据</label><hr>${roleTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id ="equips1-div">
+                           <b class="group-menu">武器装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<hr>
+                             <span class="section-help-text">` +
+                             `某类装备中如果只选中其中一件则意味着固定使用此装备；选中多件表示由计算器从选中的装备中选择一件合适（不保证最优）的装备；` +
+                             `不选等同于全选，即由计算器在全部同类装备中进行选择。一般原则是尽可能多地固定使用装备，留给计算器的选择越多意味着计算所花` +
+                             `的时间将越长（根据其它设置及硬件算力，可能长至数天）。</span><hr>${equipTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="equips2-div">
+                           <b class="group-menu">手臂装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="equips3-div">
+                           <b class="group-menu">身体装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="equips4-div">
+                           <b class="group-menu">头部装备 （选中 <span>0</span>） ▼${menuItems}</b>${btnGroup}<p />${equipTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="halo-div">
+                           <b class="group-menu">光环技能 ▼${menuItems}</b><hr><span class="section-help-text">` +
+                             `在选用的光环技能栏选择基本可以确定使用的的光环技能（例如血量重剑系几乎肯定会带沸血之志而护盾法系及某些反伤系带波澜不惊的` +
+                             `可能性非常大），如果设置正确（光环点数未超范围）则计算器只需补齐空闲的技能位，所以这里指定的光环越多则计算所需时间越少。` +
+                             `排除的光环用于指定几乎不可能出现在计算结果中的光环（例如护盾系可以排除沸血之志而法系基本可排除破壁之心，在技能位不足的情` +
+                             `况下启程系列可以考虑全部排除），计算器在寻找优势方案时不会使用这些光环技能进行尝试，所以在有空闲技能位和光环点数充足的情况` +
+                             `下，排除的光环技能越多则所需计算时间越少。选用与排除的技能允许重复，如果发生这种情况将强制选用。</span><hr>
+                              <div style="display:flex;position:relative;width:100%;font-size:15px;"><div id="halo_selector"></div></div></div>
+                         <div class="${g_genericPopupTopLineDivClass}" id ="amulet-div">
+                           <b class="group-menu">护符 ▼${menuItems}</b><hr><span class="section-help-text">` +
+                             `护符配置可以省略，或由当前背包的内容决定，如果有预先定义的护符组也可以使用护符组的组合。使用第二及第三种方式时需考虑背包容` +
+                             `量（包括许愿池的背包加成及时限）。</span><hr><div style="font-size:15px;">
+                              <input type="radio" class="amulet-config" name="amulet-config" id="amulet-config-none" />
+                                  <label for="amulet-config-none" style="cursor:pointer;margin-left:5px;">无</label><br>
+                              <input type="radio" class="amulet-config" name="amulet-config" id="amulet-config-bag" checked />
+                                  <label for="amulet-config-bag" style="cursor:pointer;margin-left:5px;">当前背包内容（悬停查看）</label><br>
+                              <input type="radio" class="amulet-config" name="amulet-config" id="amulet-config-groups" />
+                                  <label for="amulet-config-groups" style="cursor:pointer;margin-left:5px;">护符组（在组名称上悬停查看）</label>
+                              <div id="amulet_selector" style="display:block;padding:0px 20px 0px 20px;"></div></div></div>
+                         <div class="${g_genericPopupTopLineDivClass}" id ="misc-div">
+                           <b class="group-menu">其它 ▼${menuItems}</b><hr><span class="section-help-text">` +
+                             `除非清楚修改以下配置项将会造成的影响，如无特殊需要请保持默认值。</span><ul class="section-help-text">` +
+                             `<li>计算线程数：计算所允许使用的最大线程数，较大的值可以提高并行度从而减少计算用时，但超出处理器物理限制将适得其反，` +
+                                 `合理的值应小于处理器支持的物理线程数（推荐值：处理器物理线程数-1或-2）</li>` +
+                             `<li>最大组合数：如果给定配置所产生的组合数超过此值将会造成精度下降，但过大的值可能会造成内存不足，且过大的组合数需求` +
+                                 `通常意味着待定项目过多，计算将异常耗时，请尝试多固定一些装备及光环技能项，多排除一些无用的光环技能项</li>` +
+                             `<li>单组测试次数：特定的点数分配、装备、光环等组合与目标战斗过程的模拟次数，较高的值一般会产生可信度较高的结果，但会` +
+                                 `消耗较长的计算时间（此设置仅在置信区间测试阈值设为0时生效）</li>` +
+                             `<li>置信区间测试阈值：不使用固定的测试次数而以置信区间阈值代替，当测试结果的置信区间达到此值时计算终止，此设置生效` +
+                                 `（不为0）时单组测试次数设置将被忽略</li>` +
+                             `<li>输出计算进度：1为计算过程中在命令行窗口中显示计算时间、进度等信息，0为无显示</li></ul><hr>${miscTable}</div>
+                         <div class="${g_genericPopupTopLineDivClass}" id="result-div">
+                           <b class="group-menu">生成配置 ▼${menuItems}</b><hr><span class="section-help-text">` +
+                             `生成配置文本后一种方式是将其内容复制至计算器目录中的“newkf.in”文件替换其内容并保存（使用文本编辑器），然后运行计算器` +
+                             `执行文件（32位系统：newkf.bat或newkf.exe，64位系统：newkf-64.bat或newkf_64.exe）在其中输入anpc（小写）命令并` +
+                             `回车然后等待计算完成。另一种使用方式是将生成的配置文本另存为一个ansi编码（重要）的文本文件，名称自定，然后将此文件用` +
+                             `鼠标拖放至前述的计算器执行文件上，待程序启动后同样使用anpc命令开始计算。</span><hr><div style="height:200px;">
+                              <textarea id="export-result" style="height:100%;width:100%;resize:none;"></textarea></div>
+                           <div style="padding:10px 0px 20px 0px;">
+                              <button type="button" style="float:right;margin-left:1px;" id="do-export">生成</button>
+                              <button type="button" style="float:right;" id="copy-to-clipboard">复制导出内容至剪贴板</button></div></div>`;
+
+                    genericPopupSetFixedContent(fixedContent);
+                    genericPopupSetContent('咕咕镇计算器配置生成（PVE）', mainContent);
+
+                    genericPopupQuerySelectorAll('button.btn-group-selection').forEach((btn) => { btn.onclick = batchSelection; });
+                    function batchSelection(e) {
+                        let selType = parseInt(e.target.getAttribute('select-type'));
+                        let selCount = 0;
+                        e.target.parentNode.querySelectorAll('input.generic-checkbox').forEach((chk) => {
+                            if (chk.checked = (selType == 2 ? !chk.checked : selType == 0)) {
+                                selCount++;
+                            }
+                        });
+                        e.target.parentNode.firstElementChild.firstElementChild.innerText = selCount;
+                    }
+
+                    let asyncOperations = 3;
+
+                    let equipItemCount = 0;
+                    let bag, store;
+                    beginReadObjects(
+                        bag = [],
+                        store = [],
+                        () => {
+                            let equipment = equipmentNodesToInfoArray(bag);
+                            equipmentNodesToInfoArray(store, equipment);
+                            equipmentNodesToInfoArray(document.querySelectorAll(cardingObjectsQueryString), equipment);
+
+                            let eqIndex = 0;
+                            let eq_selectors = genericPopupQuerySelectorAll('table.equip-list');
+                            equipment.sort((e1, e2) => {
+                                if (e1[0] != e2[0]) {
+                                    return (g_equipMap.get(e1[0]).index - g_equipMap.get(e2[0]).index);
+                                }
+                                return -equipmentInfoComparer(e1, e2);
+                            }).forEach((item) => {
+                                let eqMeta = g_equipMap.get(item[0]);
+                                let lv = equipmentGetLevel(item);
+                                let tr = document.createElement('tr');
+                                tr.style.backgroundColor = g_equipmentLevelBGColor[lv];
+                                tr.innerHTML =
+                                    `<td><input type="checkbox" class="generic-checkbox equip-checkbox equip-item" id="equip-${++eqIndex}"
+                                                original-item="${item.slice(0, -1).join(' ')}" />
+                                         <label for="equip-${eqIndex}" style="margin-left:5px;cursor:pointer;">
+                                                ${eqMeta.alias} - Lv.${item[1]}${item[6] == 1 ? ' - [ 神秘 ]' : ''}</label></td>
+                                     <td>${formatEquipmentAttributes(item, '</td><td>')}</td>`;
+                                eq_selectors[eqMeta.type].appendChild(tr);
+                            });
+                            equipItemCount = equipment.length;
+
+                            let bagGroup = amuletCreateGroupFromArray('temp', amuletNodesToArray(bag));
+                            if (bagGroup.isValid()) {
+                                let radio = genericPopupQuerySelector('#amulet-config-bag');
+                                radio.setAttribute('original-item', `AMULET ${bagGroup.formatBuffShortMark(' ', ' ', false)} ENDAMULET`);
+                                radio.nextElementSibling.title = radio.title = bagGroup.formatBuffSummary('', '', '\n', false);
+                            }
+                            asyncOperations--;
+                        },
+                        null);
+
+                    const highlightBackgroundColor = '#80c0f0';
+                    let haloMax = 0;
+                    let haloGroupItemMax = 0;
+                    let haloPoints = null;
+                    let haloSlots = null;
+                    let currentHalo;
+                    beginReadRoleAndHalo(
+                        null,
+                        currentHalo = [],
+                        () => {
+                            haloMax = currentHalo[0];
+                            let haloInfo =
+                                `天赋点：<span style="color:#0000c0;"><span id="halo_points">0</span> / ${haloMax}</span>，` +
+                                `技能位：<span style="color:#0000c0;"><span id="halo_slots">0</span> / ${roleHs}</span>`;
+                            let haloSelector = genericPopupQuerySelector('#halo_selector');
+                            haloSelector.innerHTML =
+                                `<style>
+                                    .halo_group { display:block; width:25%; float:left; text-align:center; border-left:1px solid grey; }
+                                    .halo_group_exclude { display:block; width:25%; float:left; text-align:center; border-left:1px solid grey; }
+                                     div > a { display:inline-block; width:90%; } </style>
+                                 <div><b style="margin-right:15px;">选用的光环技能：</b>${haloInfo}
+                                 <p />
+                                 <div class="halo_group"></div>
+                                 <div class="halo_group"></div>
+                                 <div class="halo_group"></div>
+                                 <div class="halo_group" style="border-right:1px solid grey;"></div></div>
+                                 <div><b>排除的光环技能：</b>
+                                 <p />
+                                 <div class="halo_group_exclude"></div>
+                                 <div class="halo_group_exclude"></div>
+                                 <div class="halo_group_exclude"></div>
+                                 <div class="halo_group_exclude" style="border-right:1px solid grey;"></div></div>`;
+                            let haloGroups = haloSelector.querySelectorAll('.halo_group');
+                            let haloExGroups = haloSelector.querySelectorAll('.halo_group_exclude');
+                            let group = -1;
+                            let points = -1;
+                            g_halos.forEach((item) => {
+                                if (item.points != points) {
+                                    points = item.points;
+                                    group++;
+                                }
+                                let a = document.createElement('a');
+                                a.href = '#';
+                                a.className = 'halo_item';
+                                a.innerText = item.name + ' ' + item.points;
+                                haloGroups[group].appendChild(a.cloneNode(true));
+                                if (haloGroups[group].children.length > haloGroupItemMax) {
+                                    haloGroupItemMax = haloGroups[group].children.length;
+                                }
+                                a.className = 'halo_item_exclude';
+                                haloExGroups[group].appendChild(a);
+                            });
+
+                            function selector_halo() {
+                                let hp = parseInt(haloPoints.innerText);
+                                let hs = parseInt(haloSlots.innerText);
+                                if ($(this).attr('item-selected') != 1) {
+                                    $(this).attr('item-selected', 1);
+                                    $(this).css('background-color', highlightBackgroundColor);
+                                    hp += parseInt($(this).text().split(' ')[1]);
+                                    hs++;
+                                }
+                                else {
+                                    $(this).attr('item-selected', 0);
+                                    $(this).css('background-color', g_genericPopupBackgroundColor);
+                                    hp -= parseInt($(this).text().split(' ')[1]);
+                                    hs--;
+                                }
+                                haloPoints.innerText = hp;
+                                haloSlots.innerText = hs;
+                                haloPoints.style.color = (hp <= haloMax ? '#0000c0' : 'red');
+                                haloSlots.style.color = (hs <= roleHs ? '#0000c0' : 'red');
+                            }
+
+                            haloPoints = genericPopupQuerySelector('#halo_points');
+                            haloSlots = genericPopupQuerySelector('#halo_slots');
+                            $('.halo_item').each(function(i, e) {
+                                $(e).on('click', selector_halo);
+                                $(e).attr('original-item', $(e).text().split(' ')[0]);
+                            });
+
+                            function selector_halo_exclude() {
+                                if ($(this).attr('item-selected') != 1) {
+                                    $(this).attr('item-selected', 1);
+                                    $(this).css('background-color', highlightBackgroundColor);
+                                }
+                                else {
+                                    $(this).attr('item-selected', 0);
+                                    $(this).css('background-color', g_genericPopupBackgroundColor);
+                                }
+                            }
+
+                            $('.halo_item_exclude').each(function(i, e) {
+                                $(e).on('click', selector_halo_exclude);
+                                $(e).attr('original-item', $(e).text().split(' ')[0]);
+                            });
+                            asyncOperations--;
+                        },
+                        null);
+
+                    let wishpool;
+                    beginReadWishpool(
+                        wishpool = [],
+                        null,
+                        () => {
+                            wishpool = wishpool.slice(-7);
+                            asyncOperations--;
+                        },
+                        null);
+
+                    let mon_selector = genericPopupQuerySelector('table.mon-list');
+                    monsters.forEach((e, i) => {
+                        let tr = document.createElement('tr');
+                        tr.className = ((i & 1) == 0 ? '' : 'alt');
+                        tr.setAttribute('original-item', e.shortMark);
+                        tr.innerHTML =
+                            `<td><input type="checkbox" class="generic-checkbox mon-checkbox mon-item" id="mon-item-${i}" checked />
+                                 <label for="mon-item-${i}" style="margin-left:5px;cursor:pointer;">${e.name}</label></td>
+                             <td><input type="text" class="mon-textbox" style="width:80%;" maxlength="3" value="0"
+                                        oninput="value=value.replace(/[^\\d]/g,'');" /> %</td>
+                             <td><input type="text" class="mon-textbox" style="width:80%;" value="1"
+                                        oninput="value=value.replace(/[^\\d]/g,'');" /></td>
+                             <td>1</td>`;
+                        mon_selector.appendChild(tr);
+                    });
+                    mon_selector.querySelectorAll('input.mon-textbox').forEach((e) => { e.onchange = monDataChange; });
+                    function monDataChange(e) {
+                        let tr = e.target.parentNode.parentNode;
+                        let p = parseInt(tr.children[1].firstChild.value);
+                        let l = parseInt(tr.children[2].firstChild.value);
+                        if (!isNaN(p) && !isNaN(l) && p >= 0 && p <= 100 && l > 0) {
+                            tr.children[3].innerText = Math.ceil(l / (1 + (p / 300)));
+                        }
+                        else {
+                            tr.children[3].innerHTML = '<b style="color:red;">输入不合法</b>';
+                        }
+                    }
+
+                    let roleInfo = genericPopupQuerySelector('table.role-info');
+                    let rolePtsSum = roleInfo.querySelector('#role-points-summary');
+                    let textPts = roleInfo.querySelectorAll('input.role-points-text');
+                    for (let i = 0; i < 6; i++) {
+                        textPts[i].value = rolePt[i];
+                        textPts[i].onchange = rolePtsChanged;
+                    }
+                    rolePtsChanged();
+                    function rolePtsChanged() {
+                        let ptsSum = 0;
+                        for (let i = 0; i < 6; i++) {
+                            let pt = parseInt(textPts[i].value);
+                            if (isNaN(pt) || pt < 1) {
+                                textPts[i].value = '1';
+                                pt = 1;
+                            }
+                            ptsSum += pt;
+                        }
+                        rolePtsSum.innerText = `（${ptsSum} / ${roleTotalPt}）`;
+                        rolePtsSum.style.color = (ptsSum > roleTotalPt ? 'red' : 'blue');
+                    }
+                    roleInfo.querySelectorAll('button.role-points-text-reset').forEach((item) => {
+                        item.onclick = ((e) => {
+                            e.target.parentNode.parentNode.querySelectorAll('input.role-points-text').forEach((item) => {
+                                item.value = e.target.value;
+                            });
+                            if (e.target.value == '1') {
+                                rolePtsChanged();
+                            }
+                        });
+                    });
+
+                    let amuletContainer = genericPopupQuerySelector('#amulet_selector');
+                    amuletContainer.innerHTML = '已选定 <span id="amulet_count">0</span> 个护符<p /><ul style="cursor:pointer;"></ul>';
+                    let amuletCount = genericPopupQuerySelector('#amulet_count');
+                    amuletCount.style.color = '#0000c0';
+                    let amuletGroups = amuletLoadGroups();
+                    let amuletGroupCount = (amuletGroups?.count() ?? 0);
+                    if (amuletGroupCount > 0) {
+                        let amuletArray = amuletGroups.toArray().sort((a, b) => a.name < b.name ? -1 : 1);
+                        let amuletGroupContainer = amuletContainer.lastChild;
+                        for (let i = 0; i < amuletGroupCount; i++) {
+                            let li = document.createElement('li');
+                            li.className = 'amulet_item';
+                            li.setAttribute('original-item', amuletArray[i].name);
+                            li.title = amuletArray[i].formatBuffSummary('', '', '\n', false);
+                            li.innerHTML = `<a href="#">${amuletArray[i].name} [${amuletArray[i].count()}]</a>`;
+                            li.onclick = selector_amulet;
+                            amuletGroupContainer.appendChild(li);
+                        }
+                    }
+                    function selector_amulet() {
+                        let ac = parseInt(amuletCount.innerText);
+                        let tc = parseInt($(this).text().match(/\[(\d+)\]/)[1]);
+                        if ($(this).attr('item-selected') != 1) {
+                            $(this).attr('item-selected', 1);
+                            $(this).css('background-color', highlightBackgroundColor);
+                            ac += tc;
+                        }
+                        else {
+                            $(this).attr('item-selected', 0);
+                            $(this).css('background-color', g_genericPopupBackgroundColor);
+                            ac -= tc;
+                        }
+                        amuletCount.innerText = ac;
+                    }
+
+                    function collectConfigData() {
+                        let cfg = [ haloMax, '', `${role.shortMark}${role.hasG ? ' G=' + roleGv : ''} ${roleLv} ${roleHs} ${roleQl}` ];
+                        if (genericPopupQuerySelector('#role-useWishpool').checked) {
+                            cfg.push('WISH ' + wishpool.join(' '));
+                        }
+
+                        let amchk = genericPopupQuerySelectorAll('input.amulet-config');
+                        if (amchk[1].checked) {
+                            let am = amchk[1].getAttribute('original-item');
+                            if (am?.length > 0) {
+                                cfg.push(am);
+                            }
+                        }
+                        else if (amchk[2].checked) {
+                            let ag = new AmuletGroup();
+                            ag.name = 'temp';
+                            $('.amulet_item').each(function(i, e) {
+                                if ($(e).attr('item-selected') == 1) {
+                                    ag.merge(amuletGroups.get($(e).attr('original-item')));
+                                }
+                            });
+                            if (ag.isValid()) {
+                                cfg.push(`AMULET ${ag.formatBuffShortMark(' ', ' ', false)} ENDAMULET`);
+                            }
+                        }
+
+                        let pts = [];
+                        let ptsMax = [ 'MAXATTR' ];
+                        genericPopupQuerySelectorAll('input.role-points-text').forEach((e, i) => {
+                            if (i < 6) {
+                                pts.push(e.value);
+                            }
+                            else {
+                                ptsMax.push(e.value);
+                            }
+                        });
+                        cfg.push(pts.join(' '));
+
+                        let eq = [ [], [], [], [] ];
+                        genericPopupQuerySelectorAll('table.equip-list').forEach((t, ti) => {
+                            let equ = t.querySelectorAll('input.equip-checkbox.equip-item');
+                            let eqsel = [];
+                            equ.forEach((e, ei) => {
+                                let eqstr = e.getAttribute('original-item');
+                                if (e.checked) {
+                                    eq[ti].push(eqstr);
+                                }
+                                else {
+                                    eqsel.push(eqstr);
+                                }
+                            });
+                            if (eq[ti].length == 0) {
+                                eq[ti] = eqsel;
+                            }
+                        });
+                        let eqsel = [];
+                        eq.forEach((e) => {
+                            if (e.length == 1) {
+                                cfg.push(e[0]);
+                            }
+                            else {
+                                cfg.push('NONE');
+                                eqsel = eqsel.concat(e);
+                            }
+                        });
+
+                        let halo = [];
+                        $('.halo_item').each(function(i, e) {
+                            if ($(e).attr('item-selected') == 1) {
+                                halo.push(g_haloMap.get($(e).attr('original-item')).shortMark);
+                            }
+                        });
+                        cfg.push(halo.length > 0 ? halo.length + ' ' + halo.join(' ') : '0');
+                        cfg.push('');
+
+                        if (eqsel.length > 0) {
+                            cfg.push('GEAR\n    ' + eqsel.join('\n    ') + '\nENDGEAR');
+                            cfg.push('');
+                        }
+
+                        let monText = genericPopupQuerySelector('#mon-div').querySelectorAll('input.mon-batch-data');
+                        let startProg = parseInt(monText[0].value);
+                        let progStep = parseInt(monText[1].value);
+                        let lvlstep = parseInt(monText[2].value);
+                        let batCount = parseInt(monText[3].value);
+                        console.log(monText);
+                        let mon = [];
+                        mon_selector.querySelectorAll('input.mon-checkbox.mon-item').forEach((e) => {
+                            if (e.checked) {
+                                let tr = e.parentNode.parentNode;
+                                let baseLvl = parseInt(tr.children[3].innerText);
+                                if (!isNaN(baseLvl)) {
+                                    mon.push({ mon : tr.getAttribute('original-item'), level : baseLvl });
+                                }
+                            }
+                        });
+                        if (mon.length > 0) {
+                            cfg.push('NPC');
+                            const sp = '        ';
+                            mon.forEach((e) => {
+                                let bl = Math.trunc(e.level * (1 + startProg / 300));
+                                cfg.push('    ' + (e.mon + sp).substring(0, 8) + (bl + sp).substring(0, 8) + '0');
+                                if (batCount > 0 && progStep == 0 && lvlstep > 0) {
+                                    e.level = bl;
+                                }
+                            });
+                            while (batCount > 0) {
+                                cfg.push('');
+                                if (progStep > 0) {
+                                    startProg += progStep;
+                                    mon.forEach((e) => {
+                                        cfg.push('    ' + (e.mon + sp).substring(0, 8) +
+                                                 (Math.trunc(e.level * (1 + startProg / 300)) + sp).substring(0, 8) + '0');
+                                    });
+                                }
+                                else if (lvlstep > 0) {
+                                    mon.forEach((e) => {
+                                        cfg.push('    ' + (e.mon + sp).substring(0, 8) +
+                                                 ((e.level += lvlstep) + sp).substring(0, 8) + '0');
+                                    });
+                                }
+                                else {
+                                    cfg.pop();
+                                    break;
+                                }
+                                batCount--;
+                            }
+                            cfg.push('ENDNPC');
+                            cfg.push('');
+                        }
+
+                        genericPopupQuerySelector('table.misc-config').querySelectorAll('input').forEach((e) => {
+                            cfg.push(e.getAttribute('original-item') + ' ' + e.value);
+                        });
+                        cfg.push('REDUCERATE 3 10');
+                        cfg.push('PCWEIGHT 1 1');
+                        cfg.push('DEFENDER 0');
+                        cfg.push('');
+
+                        cfg.push(ptsMax.join(' '));
+                        halo = [];
+                        $('.halo_item_exclude').each(function(i, e) {
+                            if ($(e).attr('item-selected') == 1) {
+                                halo.push(g_haloMap.get($(e).attr('original-item')).shortMark);
+                            }
+                        });
+                        if (halo.length > 0) {
+                            cfg.push('AURAFILTER ' + halo.join('_'));
+                        }
+
+                        return cfg;
+                    }
+
+                    let timer = setInterval(() => {
+                        if (asyncOperations == 0) {
+                            clearInterval(timer);
+                            httpRequestClearAll();
+
+                            genericPopupQuerySelectorAll('input.generic-checkbox').forEach((e) => { e.onchange = genericCheckboxStateChange; });
+                            function genericCheckboxStateChange(e) {
+                                let countSpan = e.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.firstElementChild;
+                                countSpan.innerText = parseInt(countSpan.innerText) + (e.target.checked ? 1 : -1);
+                            }
+
+                            genericPopupQuerySelector('#copy-to-clipboard').onclick = (() => {
+                                genericPopupQuerySelector('#export-result').select();
+                                if (document.execCommand('copy')) {
+                                    genericPopupShowInformationTips('导出内容已复制到剪贴板');
+                                }
+                                else {
+                                    genericPopupShowInformationTips('复制失败，请进行手工复制（CTRL+A, CTRL+C）');
+                                }
+                            });
+
+                            genericPopupQuerySelector('#do-export').onclick = (() => {
+                                genericPopupQuerySelector('#export-result').value = '';
+                                let string = collectConfigData().join('\n') + '\n';
+                                if (string?.length > 0) {
+                                    genericPopupQuerySelector('#export-result').value = string;
+                                }
+                            });
+
+                            genericPopupSetContentSize(Math.min(4000, Math.max(window.innerHeight - 400, 400)),
+                                                       Math.min(1000, Math.max(window.innerWidth - 200, 600)),
+                                                       true);
+                            genericPopupAddCloseButton();
+                            genericPopupCloseProgressMessage();
+                            genericPopupShowModal(true);
+                        }
+                    }, 200);
+                }
+
                 function refreshBindingSelector(roleId) {
                     let bindingsolutionDiv = document.getElementById(g_bindingSolutionId);
                     let bindingList = document.getElementById(g_bindingListSelectorId);
@@ -5218,10 +5929,10 @@
                     if (bindings?.length > 0) {
                         bindings.forEach((item) => {
                             let elements = item.split(BINDING_NAME_SEPARATOR);
-                            let op0 = document.createElement('option');
-                            op0.value = roleId + BINDING_NAME_SEPARATOR + elements[elements.length - 1];
-                            op0.innerText = (elements.length > 1 ? elements[0] : BINDING_NAME_DEFAULT);
-                            bindingList.appendChild(op0);
+                            let op = document.createElement('option');
+                            op.value = roleId + BINDING_NAME_SEPARATOR + elements[elements.length - 1];
+                            op.innerText = (elements.length > 1 ? elements[0] : BINDING_NAME_DEFAULT);
+                            bindingList.appendChild(op);
                         });
                         bindingsolutionDiv.style.display = 'inline-block';
                     }
@@ -5231,14 +5942,14 @@
                 }
 
                 function addBindBtn() {
-                    let mountedRoleId = g_roleMap.get(document.getElementById('carding')
-                                                             ?.querySelector('div.text-info.fyg_f24.fyg_lh60')
-                                                             ?.children[0]?.innerText)?.id;
                     let roleId = g_roleMap.get(document.querySelector('#backpacks > div.row > div.col-md-3 > span.text-info.fyg_f24')
                                                       ?.innerText)?.id;
 
-                    function bindingLinks(e) {
-                        if (e.target.id == g_bindingPopupLinkId) {
+                    function toolsLinks(e) {
+                        if (e.target.id == g_genCalcCfgPopupLinkId) {
+                            showCalcConfigGenPopup();
+                        }
+                        else if (e.target.id == g_bindingPopupLinkId) {
                             showBindingPopup();
                         }
                         else if (e.target.id == g_equipOnekeyLinkId) {
@@ -5247,32 +5958,42 @@
                     }
 
                     let bindingAnchor = document.querySelector('#backpacks > div.row > div.col-md-12').parentNode.nextSibling;
-                    let bindingContainer = document.createElement('div');
-                    bindingContainer.className = 'btn-group';
-                    bindingContainer.style.display = 'block';
-                    bindingContainer.style.width = '100%';
-                    bindingContainer.style.marginTop = '15px';
-                    bindingContainer.style.fontSize = '18px';
-                    bindingContainer.style.padding = '10px';
-                    bindingContainer.style.borderRadius = '5px';
-                    bindingContainer.style.color = '#0000c0';
-                    bindingContainer.style.backgroundColor = '#ebf2f9';
-                    bindingAnchor.parentNode.insertBefore(bindingContainer, bindingAnchor);
+                    let toolsContainer = document.createElement('div');
+                    toolsContainer.className = 'btn-group';
+                    toolsContainer.style.display = 'block';
+                    toolsContainer.style.width = '100%';
+                    toolsContainer.style.marginTop = '15px';
+                    toolsContainer.style.fontSize = '18px';
+                    toolsContainer.style.padding = '10px';
+                    toolsContainer.style.borderRadius = '5px';
+                    toolsContainer.style.color = '#0000c0';
+                    toolsContainer.style.backgroundColor = '#ebf2f9';
+                    bindingAnchor.parentNode.insertBefore(toolsContainer, bindingAnchor);
+
+                    let genCalcCfgLink = document.createElement('span');
+                    genCalcCfgLink.setAttribute('class', 'fyg_lh30');
+                    genCalcCfgLink.style.width = '25%';
+                    genCalcCfgLink.style.textAlign = 'left';
+                    genCalcCfgLink.style.display = 'inline-block';
+                    genCalcCfgLink.innerHTML =
+                        `<a href="#" style="text-decoration:underline;" id="${g_genCalcCfgPopupLinkId}">生成计算器PVE配置</a>`;
+                    genCalcCfgLink.querySelector('#' + g_genCalcCfgPopupLinkId).onclick = toolsLinks;
+                    toolsContainer.appendChild(genCalcCfgLink);
 
                     let bindingLink = document.createElement('span');
                     bindingLink.setAttribute('class', 'fyg_lh30');
-                    bindingLink.style.width = '30%';
+                    bindingLink.style.width = '25%';
                     bindingLink.style.textAlign = 'left';
                     bindingLink.style.display = 'inline-block';
                     bindingLink.innerHTML =
                         `<a href="#" style="text-decoration:underline;" id="${g_bindingPopupLinkId}">绑定（装备 光环 护符）</a>`;
-                    bindingLink.querySelector('#' + g_bindingPopupLinkId).onclick = bindingLinks;
-                    bindingContainer.appendChild(bindingLink);
+                    bindingLink.querySelector('#' + g_bindingPopupLinkId).onclick = toolsLinks;
+                    toolsContainer.appendChild(bindingLink);
 
                     let bindingsolutionDiv = document.createElement('div');
                     bindingsolutionDiv.id = g_bindingSolutionId;
                     bindingsolutionDiv.style.display = 'none';
-                    bindingsolutionDiv.style.width = '70%';
+                    bindingsolutionDiv.style.width = '50%';
 
                     let bindingList = document.createElement('select');
                     bindingList.id = g_bindingListSelectorId;
@@ -5287,10 +6008,10 @@
                     applyLink.style.width = '20%';
                     applyLink.style.textAlign = 'right';
                     applyLink.style.display = 'inline-block';
-                    applyLink.innerHTML = `<a href="#" style="text-decoration:underline;" id="${g_equipOnekeyLinkId}">应用此方案</a>`;
-                    applyLink.querySelector('#' + g_equipOnekeyLinkId).onclick = bindingLinks;
+                    applyLink.innerHTML = `<a href="#" style="text-decoration:underline;" id="${g_equipOnekeyLinkId}">应用方案</a>`;
+                    applyLink.querySelector('#' + g_equipOnekeyLinkId).onclick = toolsLinks;
                     bindingsolutionDiv.appendChild(applyLink);
-                    bindingContainer.appendChild(bindingsolutionDiv);
+                    toolsContainer.appendChild(bindingsolutionDiv);
 
                     refreshBindingSelector(roleId);
                 }
@@ -5413,9 +6134,9 @@
                             break;
                         }
                         case 1: {
-                            let roleId = g_roleMap.get(document.querySelector('#backpacks > div.row > div.col-md-3 > span.text-info.fyg_f24')
-                                                              ?.innerText)?.id;
-                            if (roleId != undefined) {
+                            let role = g_roleMap.get(document.querySelector(
+                                '#backpacks > div.row > div.col-md-3 > span.text-info.fyg_f24')?.innerText);
+                            if (role != undefined) {
                                 calcBtn.disabled = '';
                                 calcBtn.onclick = (() => {
                                     calcDiv.innerHTML =
@@ -5427,12 +6148,12 @@
                                     })
                                     let text = $('.pop_text');
                                     let cardInfos = document.querySelector('#backpacks').querySelectorAll('.icon.icon-angle-down.text-primary');
-                                    let cardInfo = [ g_roleMap.get(roleId)?.shortMark ?? 'UNKNOW',
+                                    let cardInfo = [ role.shortMark,
                                                      cardInfos[0].innerText.match(/\d+/)[0],
                                                      cardInfos[2].innerText.match(/\d+/)[0],
                                                      cardInfos[1].innerText.match(/\d+/)[0]
                                                    ];
-                                    if (roleId == 3000 || roleId == 3009) {
+                                    if (role.hasG) {
                                         cardInfo.splice(1, 0, 'G=' + (cardInfos[3]?.innerText.match(/\d+/)[0] ?? '0'));
                                     }
                                     let points = [];
@@ -5526,30 +6247,29 @@
             loadTheme();
 
             let fixedContent =
-                '<div style="padding:20px 0px 10px;"><b><ul style="font-size:15px;color:#0000c0;">' +
+                '<div style="font-size:15px;color:#0000c0;padding:20px 0px 10px;"><b><ul>' +
                 '<li>被勾选的装备不会被展开，不会产生与已有装备的对比列表，但传奇、史诗及有神秘属性的装备除外</li>' +
-                '<li>未勾选的属性被视为主要属性，海滩装备的任一主要属性值大于已有装备的相应值时即会被展开</li>' +
+                '<li>未勾选的属性被视为主要属性，海滩装备的任一主要属性值大于已有装备的相应值时即有可能被展开，除非已有装备中至少有一件其各项属性均不低于海滩装备</li>' +
                 '<li>被勾选的属性被视为次要属性，当且仅当海滩装备和已有装备的主要属性值完全相等时才会被对比</li>' +
-                '<li>不作为筛选依据的已有装备不会与海滩装备进行直接比较，所以它们不会影响海滩装备的展开与否</li></ul></b></div>';
+                '<li>不作为筛选依据的已有装备不会与海滩装备直接进行比较，这些装备不会影响海滩装备的展开与否</li></ul></b></div>';
             let mainContent =
                 `<style> #equip-table { width:100%; }
-                         #equip-table tr.equip-tr { }
-                         #equip-table tr.equip-tr-alt { background-color:${g_genericPopupBackgroundColorAlt}; }
                          #equip-table th { width:17%; text-align:right; }
                          #equip-table th.equip-th-equip { width:32%; text-align:left; }
                          #equip-table td { display:table-cell; text-align:right; }
                          #equip-table td.equip-td-equip { display:table-cell; text-align:left; }
-                         #equip-table label.equip-checkbox-label { margin-left:5px; cursor:pointer; } </style>
+                         #equip-table label.equip-checkbox-label { margin-left:5px; cursor:pointer; }
+                         table tr.alt { background-color:${g_genericPopupBackgroundColorAlt}; } </style>
                  <div class="${g_genericPopupTopLineDivClass}" style="color:#800080;">
                    <b style="display:inline-block;width:30%;">不作为筛选依据的已有装备：</b>
                    <span style="display:inline-block;width:33%;;text-align:center;">
                      <input type="checkbox" id="ignoreMysEquip" style="margin-right:5px;" />
                      <label for="ignoreMysEquip" style="cursor:pointer;">神秘装备</label></span>
                    <b style="display:inline-block;width:33%;text-align:right;">低于 ` +
-                     `<input type="text" id="ignoreEquipLevel" maxlength="3" style="width:40px;"
-                             oninput="value=value.replace(/[^\\d]/g,'');" value="0" /> 级的装备</b></div>
+                     `<input type="text" id="ignoreEquipLevel" style="width:40px;" maxlength="3" value="0"
+                             oninput="value=value.replace(/[^\\d]/g,'');" /> 级的装备</b></div>
                  <div class="${g_genericPopupTopLineDivClass}"><table id="equip-table">
-                 <tr><th class="equip-th-equip"><input type="checkbox" id="equip-name-check" />
+                 <tr class="alt"><th class="equip-th-equip"><input type="checkbox" id="equip-name-check" />
                  <label class= "equip-checkbox-label" for="equip-name-check">装备名称</label></th>
                  <th>装备属性</th><th /><th /><th /></tr></table><div>`;
 
@@ -5580,7 +6300,7 @@
             g_equipments.forEach((equip) => {
                 let tr = document.createElement('tr');
                 tr.id = `equip-index-${equip.index}`;
-                tr.className = 'equip-tr' + ((equip.index & 1) == 0 ? ' equip-tr-alt' : '');
+                tr.className = ((equip.index & 1) == 0 ? '' : 'alt');
                 tr.setAttribute('equip-abbr', equip.shortMark);
                 tr.style.color = equipTypeColor[equip.type];
                 let attrHTML = '';
@@ -6144,8 +6864,18 @@
                                     let e1 = [ parseInt(e[1]), parseInt(e[2]), parseInt(e[3]), parseInt(e[4]), parseInt(e[5]) ];
                                     let e2 = [ stLv, parseInt(equipment[j][2]), parseInt(equipment[j][3]),
                                                parseInt(equipment[j][4]), parseInt(equipment[j][5]) ];
-                                    if (isExpanding = defaultEquipmentNodeComparer(setting, e[0], e1, e2)) {
-                                        break;
+                                    let res = defaultEquipmentNodeComparer(setting, e[0], e1, e2);
+                                    if (res.majorAdv == 0) {
+                                        if (res.minorAdv == 0) {
+                                            isExpanding = false;
+                                            break;
+                                        }
+                                        else if (!isExpanding) {
+                                            isExpanding = (res.majorDis == 0);
+                                        }
+                                    }
+                                    else {
+                                        isExpanding = true;
                                     }
                                 }
                             }
@@ -6281,7 +7011,7 @@
         pkConfigDiv.style.className = 'panel-heading';
         pkConfigDiv.style.float = 'right';
         pkConfigDiv.innerHTML =
-            `<label for="forgeAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度自动锻造</label>
+            `<label for="forgeAutoCheckbox" style="margin-right:5px;cursor:pointer;">满进度自动生成</label>
              <input type="checkbox" id="forgeAutoCheckbox" style="margin-right:15px;" />
              <label for="indexRallyCheckbox" style="margin-right:5px;cursor:pointer;">为攻击回合加注索引</label>
              <input type="checkbox" id="indexRallyCheckbox" style="margin-right:15px;" />
