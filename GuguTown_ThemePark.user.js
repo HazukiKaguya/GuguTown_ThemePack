@@ -2,14 +2,14 @@
 // @name        GuguTown ThemePark Manager
 // @name:zh-CN  咕咕镇主题包管理器
 // @name:zh-TW  咕咕鎮主題包管理器
-// @name:ja     咕咕镇テーマパックマネージャー
+// @name:ja     咕咕镇テメパック マネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePark
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePark
 // @version     2.2.1
 // @description WebGame GuguTown ThemePark Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
-// @description:ja オンラインゲーム 咕咕镇 テーマパック マネージャー
+// @description:ja オンラインゲーム 咕咕镇 テメパック マネージャー
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
