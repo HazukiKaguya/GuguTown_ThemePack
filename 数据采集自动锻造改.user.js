@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.5.5
+// @version      1.5.6.1
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
 // @author       paraii
 // @match        https://www.guguzhen.com/*
@@ -18,7 +18,7 @@
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-09-02 10:40:00';
+    const g_modificationVersion = '2022-09-03 20:50:00';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
@@ -2525,7 +2525,7 @@
             let configTable = genericPopupQuerySelector('#config-table');
             g_configs.forEach((item, index) => {
                 let tr = document.createElement('tr');
-                tr.className = ((index & 1) == 0 ? '' : 'alt');
+                tr.className = ('config-tr' + ((index & 1) == 0 ? '' : ' alt'));
                 tr.setAttribute('config-item', item.id);
                 tr.innerHTML =
                     `<td><div data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="${item.tips}">${item.name}<div></td>
@@ -6298,7 +6298,7 @@
             g_equipments.forEach((equip) => {
                 let tr = document.createElement('tr');
                 tr.id = `equip-index-${equip.index}`;
-                tr.className = ((equip.index & 1) == 0 ? '' : 'alt');
+                tr.className = ('equip-tr' + ((equip.index & 1) == 0 ? '' : ' alt'));
                 tr.setAttribute('equip-abbr', equip.shortMark);
                 tr.style.color = equipTypeColor[equip.type];
                 let attrHTML = '';
@@ -7094,7 +7094,6 @@
             stoneProgressTip();
             setupNotificationClicker();
         })).observe(document.querySelector('#pklist'), { characterData : true, childList : true, subtree : true });
-
         if (autoTaskEnabled) {
             let btngroup0 = document.createElement('div');
             btngroup0.setAttribute('class', 'action_selector');
