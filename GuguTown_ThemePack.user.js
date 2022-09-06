@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.5
+// @version     3.0.6
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -447,7 +447,7 @@ else if(custom.ThemePack=="user"){
     else{ alert(lang.initUNU);custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
 }
 else{nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize,spineJson=nowTheme[yourcard+"spine"];
+let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize;if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
 if (custom.showKanban == true&&nowTheme.spine==true){spinert=nowTheme.spinert;kanbanCheck='checked';}else if(custom.showKanban == true){kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked';}else{kanbanimg=nullimg;};
 if(nowTheme["dessertlevel-"+custom.language]){nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
 if(nowTheme["dessertname-"+custom.language]){nowTheme.dessertname=nowTheme["dessertname-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
@@ -1012,6 +1012,7 @@ function cardimgfunc(){
             if(cardname[cardname.length-2]!="."&&isyg==false){ cardname=cardname[cardname.length-9];imgpanel.style.backgroundImage=`url("${nowTheme[cardname][5]}")`;imgpanel.style.backgroundSize="cover"; };
         };
     };
+    if(nowTheme.spine!=true){spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
     if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype); if($("#eqli2.active").length!=1){$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};};
 };
 /* Detal Voice&Kanban Realization */
@@ -1030,8 +1031,9 @@ function equipKBVOfunc(){
     if($(".text-info.fyg_f24").length==2){
         cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;tempvo=nowTheme[cardname+"voice"];
         if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
-        loading=false;spineload(nowTheme[cardname+"spine"].name, nowTheme[cardname+"spine"].type);
+        if(nowTheme.spine==true){loading=false;spineload(nowTheme[cardname+"spine"].name, nowTheme[cardname+"spine"].type);};
     };
+    if(nowTheme.spine!=true){spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
     if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype);};
 };
 /* Battle Voice Realization */
