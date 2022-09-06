@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.0
+// @version     3.0.1
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -527,7 +527,8 @@ function drag(obj){
             document.onmousemove = null; document.onmouseup = null;
             obj.releaseCapture && obj.releaseCapture(); i = obj.style.left; s = obj.style.top;
             if (l == i && t == s&&custom.voiceO==true) {
-                $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();
+                if(tempvo!=false){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();}
+                else{$("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();}
                 playAnimation(['000000_dear_smile','idle']);
             }
             else {
