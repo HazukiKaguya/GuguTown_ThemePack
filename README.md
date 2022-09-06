@@ -14,6 +14,7 @@ WebGame GuguTown ThemePack Manager.
 ![image](https://user-images.githubusercontent.com/35645329/186827419-1dceabc5-3683-4bca-90f8-b21448b8149d.png) ![image](https://user-images.githubusercontent.com/35645329/186827478-87e1f2c5-cbe0-4707-a76b-f4af5f39d57d.png)
 
 ## 更新记录
+3.0.1 修复角色详情页看板点击语音不是详情页角色语音的问题;   
 3.0.0 全新的基于Spine的看板与战斗动画方法;   
 2.1.6 修复从当前装备卡详情页面回到全部卡片页面后点击立绘图不跳转详情页的bug;   
 2.1.5 看板移动兼容收割机插件;   
