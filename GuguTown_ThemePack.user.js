@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.1.0
+// @version     3.1.1
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -565,10 +565,11 @@ function drag(obj){
 /* Kanban Resize */
 window.onresize = function(){
     let temp = $('#divkanban'),imgmove,kbw,kbh; ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;
-    if(localStorage.imgmove != null){imgmove = JSON.parse(localStorage.imgmove)} else{kbw=0;kbh=ww-3*Math.floor(custom.kanbansize )};
-    if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-    if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
-    temp[0].style.left = kbw + 'px'; temp[0].style.top = kbh + 'px';
+    if(localStorage.imgmove != null){
+        imgmove = JSON.parse(localStorage.imgmove);
+        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+    } else{kbw=0;kbh=ww-3*Math.floor(custom.kanbansize )}; temp[0].style.left = kbw + 'px'; temp[0].style.top = kbh + 'px';
 };
 /* Kanban Spine functions */
 let lastFrameTime = Date.now() / 1000,canvas,shader, batcher, gl, skeletonRenderer, shapes, activeSkeleton = "", pendingAnimation = '', animationQueue = [], speedFactor = 1, animationState, forceNoLoop,
