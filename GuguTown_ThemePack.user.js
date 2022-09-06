@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.1.1
+// @version     3.1.2
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -481,14 +481,11 @@ let pagetype=24;if (window.location.href.indexOf('pk.php') > -1||window.location
  * Insert Script Html Codes.
  */
 /* Kanban Html */
-let tpkanbanHTML = '';ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
+let tpkanbanHTML = '',imgmove=[0,0.6],kbw,kbh;ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
 if (custom.showKanban==true&&nowTheme.spine==true) {
-    let imgmove,kbw,kbh;
-    if(localStorage.imgmove != null){
-        imgmove = JSON.parse(localStorage.imgmove);
-        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
-    } else{kbw=0;kbh=ww-300};
+    if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove);};
+    if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+    if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
     tpkanbanHTML =$( `<div class="tool" style ="display:none;">
         <span> 动画:</span><select id="animationList"></select><input id="setAnimation" type="button" value="播放">
     </div>
@@ -496,12 +493,9 @@ if (custom.showKanban==true&&nowTheme.spine==true) {
     <canvas id="tpkanban" width="360" height="300"></canvas></div>`).insertBefore('body');
 }
 else if (custom.showKanban==true){
-    let imgmove,kbw,kbh;
-    if(localStorage.imgmove != null){
-        imgmove = JSON.parse(localStorage.imgmove);
-        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
-    } else{kbw=0;kbh=ww-300};
+    if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove); };
+    if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+    if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
     tpkanbanHTML =$( `<div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;width:${365*Math.floor(custom.kanbansize )/100}px; height=${305*Math.floor(custom.kanbansize )/100}px;" >
     <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');
 }
@@ -564,12 +558,11 @@ function drag(obj){
 };drag(kanban);
 /* Kanban Resize */
 window.onresize = function(){
-    let temp = $('#divkanban'),imgmove,kbw,kbh; ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;
-    if(localStorage.imgmove != null){
-        imgmove = JSON.parse(localStorage.imgmove);
-        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
-    } else{kbw=0;kbh=ww-3*Math.floor(custom.kanbansize )}; temp[0].style.left = kbw + 'px'; temp[0].style.top = kbh + 'px';
+    let temp = $('#divkanban'); ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;
+    if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove); };
+    if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+    if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+    temp[0].style.left = kbw + 'px'; temp[0].style.top = kbh + 'px';
 };
 /* Kanban Spine functions */
 let lastFrameTime = Date.now() / 1000,canvas,shader, batcher, gl, skeletonRenderer, shapes, activeSkeleton = "", pendingAnimation = '', animationQueue = [], speedFactor = 1, animationState, forceNoLoop,
