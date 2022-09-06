@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.1.3
+// @version     3.1.4
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -662,8 +662,8 @@ function loadTexture() {
                 let created = !!window.skeleton.skeleton;
                 if (created) { window.skeleton.state.clearTracks(); window.skeleton.state.clearListeners(); gl.deleteTexture(currentTexture.texture);};
                 let imgTexture = new spine.webgl.GLTexture(gl, img); URL.revokeObjectURL(img.src);
-                atlas = new spine.TextureAtlas(atlasText, function (path) { return imgTexture; });
-                currentTexture = imgTexture; atlasLoader = new spine.AtlasAttachmentLoader(atlas);
+                let atlas = new spine.TextureAtlas(atlasText, function (path) { return imgTexture; });
+                currentTexture = imgTexture; let atlasLoader = new spine.AtlasAttachmentLoader(atlas);
                 let baseId = loadingSkeleton.baseId,additionAnimations = Object.values(generalAdditionAnimations[baseId]),animationCount = 0,classAnimCount = currentClassAnimData.data.count;
                 animationCount += classAnimCount; let unitAnimCount = currentCharaAnimData.data.count; animationCount += unitAnimCount;
                 additionAnimations.forEach(function (i) { animationCount += i.count; });
@@ -681,7 +681,7 @@ function loadTexture() {
                 additionAnimations.forEach(function (i) { newBuff.set(new Uint8Array(i.data), offset);offset += i.data.byteLength;})
                 let skeletonBinary = new spine.SkeletonBinary(atlasLoader),skeletonData = skeletonBinary.readSkeletonData(newBuff.buffer),skeleton = new spine.Skeleton(skeletonData);
                 skeleton.setSkinByName('default'); let bounds = calculateBounds(skeleton);
-                animationStateData = new spine.AnimationStateData(skeleton.data);
+                let animationStateData = new spine.AnimationStateData(skeleton.data);
                 animationState = new spine.AnimationState(animationStateData);
                 animationState.setAnimation(0, getClass(currentClass) + '_idle', true);
                 animationState.addListener({
