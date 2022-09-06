@@ -12,7 +12,7 @@
 
 ## 功能一览
 
-![image](https://user-images.githubusercontent.com/35645329/186827419-1dceabc5-3683-4bca-90f8-b21448b8149d.png) ![image](https://user-images.githubusercontent.com/35645329/186827478-87e1f2c5-cbe0-4707-a76b-f4af5f39d57d.png)
+![image](https://user-images.githubusercontent.com/35645329/188587836-b063a430-8b91-466f-829b-ab14457efd49.png)![image](https://user-images.githubusercontent.com/35645329/188587776-dc0ff056-704b-48f1-b803-8c32ffb478f7.png)
 
 ## 更新记录
 3.0.3 为拖拽增加动画;    
