@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.1
+// @version     3.0.2
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -1058,7 +1058,7 @@ $(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 
 .on('click', "#bigcardimg",function(){if(!tempvo)tempvo=cardvo;if(custom.voiceO==true){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "#equip_one_key_link" , function() {ccard=false;playAnimation(['standBy']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "#binding_popup_link" , function() {ccard=false;playAnimation(['standBy']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='gx_sxds']",function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "a[onclick*='gx_sxds']",function() { playAnimation(['000000_eat_normal']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='gx_gt(']" ,function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='giftop']",function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='xyck(']", function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
