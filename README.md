@@ -12,7 +12,7 @@ If you like this plugin, you can click the below Vultr links and use it.
 
 ## Functions
 
-![image](https://user-images.githubusercontent.com/35645329/186827419-1dceabc5-3683-4bca-90f8-b21448b8149d.png) ![image](https://user-images.githubusercontent.com/35645329/186827478-87e1f2c5-cbe0-4707-a76b-f4af5f39d57d.png)
+![image](https://user-images.githubusercontent.com/35645329/188587101-412da1d5-847f-487d-8432-b47612ec6083.png)![image](https://user-images.githubusercontent.com/35645329/188587287-845ee909-c236-4b7a-9331-15e63a15160d.png)
 
 ## Changelogs
 3.0.3 add drag animation;    
