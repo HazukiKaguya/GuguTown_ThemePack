@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.7
+// @version     3.0.8
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -415,7 +415,7 @@ const defaultConf={
 }
 ,ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"],nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 let useOldNamesCheck ='',useThemeNameCheck ='',Multilingual='',showCGCheck='',voiceOCheck='',kanbanCheck='',custom = defaultConf,userTheme={},timeout = null,nowTheme,tempvo=false,tempca,tpkanban,kanban,kanbanimg,ww,wh,
-    ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,spinert,nowEquip;
+    ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,spinert,nowEquip,spineJson;
 if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf);} else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf));};
 if (localStorage.nowEquip) { nowEquip = localStorage.nowEquip;};
 if (!custom.yourcard ) { custom.yourcard=defaultConf.yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
@@ -447,7 +447,8 @@ else if(custom.ThemePack=="user"){
     else{ alert(lang.initUNU);custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
 }
 else{nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize;if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
+let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize;
+if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
 if (custom.showKanban == true&&nowTheme.spine==true){spinert=nowTheme.spinert;kanbanCheck='checked';}else if(custom.showKanban == true){kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked';}else{kanbanimg=nullimg;};
 if(nowTheme["dessertlevel-"+custom.language]){nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
 if(nowTheme["dessertname-"+custom.language]){nowTheme.dessertname=nowTheme["dessertname-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
