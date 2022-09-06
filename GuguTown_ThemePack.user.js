@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.8
+// @version     3.0.9
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -897,7 +897,11 @@ function repfunc(){
         $(".with-padding").html(function(n,v){
             n= v.replace(/荆棘盾剑/g, "荆棘剑盾");n= n.replace(/饮血魔剑/g, "饮血长枪");n= n.replace(/探险者手环/g, "探险者手套");n= n.replace(/秃鹫手环/g, "秃鹫手套");
             n= n.replace(/复苏战衣/g, "复苏木甲");n= n.replace(/探险者耳环/g, "探险者头巾");n= n.replace(/占星师的耳饰/g, "占星师的发饰");n= n.replace(/萌爪耳钉/g, "天使缎带");return n;});
-    }else{ $(".fyg_tc>img[src*='z2110_']").attr("src",function(n,v){ nowEquip=10;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2110_/g,purl+a10[4]);return n;}); };
+    }else{
+        $(".fyg_tc>img[src*='z2110_']").attr("src",function(n,v){ nowEquip=10;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2110_/g,purl+a10[4]);return n;});
+        $(".fyg_tc>img[src*='z2201_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2201_/g, purl+w1[4]);return n;});
+        $(".fyg_tc>img[src*='z2203_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]);return n;});
+    };
     if(custom.useThemeName==true){ themenamefunc(); } else if(nowTheme["equip-"+custom.language]){ themenamefunc(); };localStorage.setItem('nowEquip', nowEquip);
 };
 /* Replace to Old-Equip-Name */
