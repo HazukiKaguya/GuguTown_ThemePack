@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.6
+// @version     3.0.7
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -370,17 +370,17 @@ const defaultConf={
     "命voice":["https://p.inari.site/guguicons/test/vo/life/",".mp3"],
     "希voice":["https://p.inari.site/guguicons/test/vo/xii/",".mp3"],
     "spine":true,
-    "spinert":["https://sticker.inari.site/api/common/","https://sticker.inari.site/api/unit/","https://sticker.inari.site/api/bg.jpg"],
-    "舞spine":{"name":"wuu/","type":"6","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
-    "默spine":{"name":"mo/","type":"7","hasRarity6":true,"wi":-350,"hi":-42,"re":0.8},
-    "琳spine":{"name":"lin/","type":"5","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
-    "艾spine":{"name":"ai/","type":"8","hasRarity6":true,"wi":-320,"hi":-64,"re":0.8},
-    "梦spine":{"name":"meng/","type":"4","hasRarity6":false,"wi":-320,"hi":-42,"re":0.8},
-    "薇spine":{"name":"wei/","type":"1","hasRarity6":true,"wi":-360,"hi":-42,"re":0.8},
-    "伊spine":{"name":"yi/","type":"8","hasRarity6":false,"wi":-380,"hi":-92,"re":0.8},
-    "冥spine":{"name":"min/","type":"3","hasRarity6":true,"wi":-350,"hi":-48,"re":0.8},
-    "命spine":{"name":"life/","type":"1","hasRarity6":false,"wi":-360,"hi":-36,"re":1.0},
-    "希spine":{"name":"xii/","type":"10","hasRarity6":false,"wi":-370,"hi":-64,"re":0.8},
+    "spinert":["https://sticker.inari.site/api/common/","https://","https://sticker.inari.site/api/bg.jpg"],
+    "舞spine":{"name":"sticker.inari.site/api/unit/wuu/","type":"6","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
+    "默spine":{"name":"sticker.inari.site/api/unit/mo/","type":"7","hasRarity6":true,"wi":-350,"hi":-42,"re":0.8},
+    "琳spine":{"name":"sticker.inari.site/api/unit/lin/","type":"5","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
+    "艾spine":{"name":"sticker.inari.site/api/unit/ai/","type":"8","hasRarity6":true,"wi":-320,"hi":-64,"re":0.8},
+    "梦spine":{"name":"sticker.inari.site/api/unit/meng/","type":"4","hasRarity6":false,"wi":-320,"hi":-42,"re":0.8},
+    "薇spine":{"name":"sticker.inari.site/api/unit/wei/","type":"1","hasRarity6":true,"wi":-360,"hi":-42,"re":0.8},
+    "伊spine":{"name":"sticker.inari.site/api/unit/yi/","type":"8","hasRarity6":false,"wi":-380,"hi":-92,"re":0.8},
+    "冥spine":{"name":"sticker.inari.site/api/unit/min/","type":"3","hasRarity6":true,"wi":-350,"hi":-48,"re":0.8},
+    "命spine":{"name":"sticker.inari.site/api/unit/life/","type":"1","hasRarity6":false,"wi":-360,"hi":-36,"re":1.0},
+    "希spine":{"name":"sticker.inari.site/api/unit/xii/","type":"10","hasRarity6":false,"wi":-370,"hi":-64,"re":0.8},
     "a1":["z2101","z1","探险者之剑","旅人剑","%E6%8E%A2%E9%99%A9%E8%80%85%E4%B9%8B%E5%89%91/"],
     "a2":["z2102","z2","探险者短弓","猎人弓","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E5%BC%93/"],
     "a3":["z2103","z3","探险者短杖","香木法杖","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E6%9D%96/"],
@@ -483,9 +483,11 @@ let pagetype=24;if (window.location.href.indexOf('pk.php') > -1||window.location
 let tpkanbanHTML = '';ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
 if (custom.showKanban==true&&nowTheme.spine==true) {
     let imgmove,kbw,kbh;
-    if(localStorage.imgmove != null){imgmove = JSON.parse(localStorage.imgmove)} else{kbw=0;kbh=ww-300};
-    if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-    if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+    if(localStorage.imgmove != null){
+        imgmove = JSON.parse(localStorage.imgmove);
+        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+    } else{kbw=0;kbh=ww-300};
     tpkanbanHTML =$( `<div class="tool" style ="display:none;">
         <span> 动画:</span><select id="animationList"></select><input id="setAnimation" type="button" value="播放">
     </div>
@@ -494,9 +496,11 @@ if (custom.showKanban==true&&nowTheme.spine==true) {
 }
 else if (custom.showKanban==true){
     let imgmove,kbw,kbh;
-    if(localStorage.imgmove != null){imgmove = JSON.parse(localStorage.imgmove)} else{kbw=0;kbh=ww-300};
-    if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
-    if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+    if(localStorage.imgmove != null){
+        imgmove = JSON.parse(localStorage.imgmove);
+        if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
+        if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
+    } else{kbw=0;kbh=ww-300};
     tpkanbanHTML =$( `<div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;width:${365*Math.floor(custom.kanbansize )/100}px; height=${305*Math.floor(custom.kanbansize )/100}px;" >
     <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');
 }
