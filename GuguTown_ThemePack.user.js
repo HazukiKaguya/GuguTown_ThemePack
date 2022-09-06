@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.2
+// @version     3.0.3
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -521,8 +521,8 @@ function drag(obj){
     let l,t,i,s;
     obj.onmousedown = function (event) {
         obj.setCapture && obj.setCapture(); event = event || window.event;
-        l = obj.style.left;t = obj.style.top; let ol = event.clientX - obj.offsetLeft, ot = event.clientY - obj.offsetTop;
-        document.onmousemove = function (event) { event = event || window.event; obj.style.left = event.clientX - ol + "px"; obj.style.top = event.clientY - ot + "px"; };
+        l = obj.style.left;t = obj.style.top; let ol = event.clientX - obj.offsetLeft, ot = event.clientY - obj.offsetTop;let dragrun=true;
+        document.onmousemove = function (event) { event = event || window.event; obj.style.left = event.clientX - ol + "px"; obj.style.top = event.clientY - ot + "px"; if(dragrun){playAnimation(['run']);dragrun=false;};};
         document.onmouseup = function () {
             document.onmousemove = null; document.onmouseup = null;
             obj.releaseCapture && obj.releaseCapture(); i = obj.style.left; s = obj.style.top;
@@ -538,7 +538,7 @@ function drag(obj){
                 if (parseInt(s) < 0) { obj.style.top ='0px'; s = 0;}
                 else if (parseInt(s) > wh-3*Math.floor(custom.kanbansize)) { s = 0.68; obj.style.top = wh-3*Math.floor(custom.kanbansize) + 'px';}
                 else if (parseInt(s) < wh-3*Math.floor(custom.kanbansize)) { s = parseInt(s) / wh;};
-                localStorage.setItem('imgmove', JSON.stringify([i, s]));
+                localStorage.setItem('imgmove', JSON.stringify([i, s]));playAnimation(['idle']);
             };
         }; return false;
     };
