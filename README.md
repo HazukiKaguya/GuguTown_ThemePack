@@ -1,4 +1,4 @@
-English | [Chinese](readme_ZH)  
+English | [Chinese](README_zh.md)  
 # GuguTown ThemePack
 WebGame GuguTown ThemePack Manager.   
 
