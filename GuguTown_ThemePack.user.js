@@ -15,7 +15,7 @@
 // @copyright   2022- Hazukikaguya
 // @match       https://www.guguzhen.com/*
 // @run-at      document-end
-// @require     https://sticker.inari.site/js/spine-webgl.min.js
+// @require     https://fastly.jsdelivr.net/gh/HazukiKaguya/GuguTown_ThemePack/spine-webgl.min.js
 // @license     MIT License
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // ==/UserScript==
