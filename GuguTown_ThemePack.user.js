@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.1.2
+// @version     3.1.3
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -448,7 +448,7 @@ else if(custom.ThemePack=="user"){
 }
 else{nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
 let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize;
-if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
+if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
 if (custom.showKanban == true&&nowTheme.spine==true){spinert=nowTheme.spinert;kanbanCheck='checked';}else if(custom.showKanban == true){kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked';}else{kanbanimg=nullimg;};
 if(nowTheme["dessertlevel-"+custom.language]){nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
 if(nowTheme["dessertname-"+custom.language]){nowTheme.dessertname=nowTheme["dessertname-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
@@ -604,7 +604,8 @@ function spineinit() {
     /* Create a simple shader, mesh, model-view-projection matrix and SkeletonRenderer. */
     shader = spine.webgl.Shader.newTwoColoredTextured(gl); batcher = new spine.webgl.PolygonBatcher(gl);
     mvp.ortho2d(0, 0, 512 - 1, 512 - 1); skeletonRenderer = new spine.webgl.SkeletonRenderer(gl); shapes = new spine.webgl.ShapeRenderer(gl);
-    spineJson=nowTheme[yourcard+"spine"]; spineload(spineJson.name, pagetype);
+    if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
+    spineload(spineJson.name, pagetype);
 };
 function spineload(name, type) {
     if (custom.showKanban != true||nowTheme.spine!=true||loading) return; loading = true;
@@ -1107,7 +1108,9 @@ $(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 
     else{ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};};})
 .on('click', "button[onclick*='upcard(']",function(){
     ccard=true;yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-    cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];kanbanimg=nowTheme[yourcard][2];$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);
+    cardvo=nowTheme[yourcard+"voice"]; kanbanimg=nowTheme[yourcard][2];
+    if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
+   $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);
     loading = false;spineload(spineJson.name, pagetype);playAnimation(['standBy']);
     if(custom.showKanban==true&&nowTheme.spine!=true){$(".tpkanban").attr('src', kanbanimg)};
     if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};});
