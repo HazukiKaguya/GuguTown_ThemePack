@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.9
+// @version     3.1.0
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -1048,21 +1048,23 @@ function equipKBVOfunc(){
 /* Battle Voice Realization */
 function battlefunc(){
     if(soundonce%2==0&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
-        let battleCG,battleSF;
+        let battleCG;
         if($(".alert.with-icon.fyg_tc").length!=1){
             if($(".alert.alert-danger.with-icon.fyg_tc").length>sucheck){
-                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];battleCG=nowTheme[yourcard][6];battleSF=[spjoy];
+                let spjoy=$("option[value*=joyResult]")[0].value.split(',');playAnimation([spjoy[0]]);battleCG=nowTheme[yourcard][6];
+                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);
             };
             if($(".alert.alert-info.with-icon.fyg_tc").length>facheck){
-                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);battleCG=nowTheme[yourcard][7];battleSF=['damage','die','landing'];
+                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);battleCG=nowTheme[yourcard][7];playAnimation(['damage','die','landing']);
             };
         }
         else{
             if($(".alert.alert-danger.with-icon.fyg_tc").length>0){
-                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];battleCG=nowTheme[yourcard][6];battleSF=[spjoy];
+                let spjoy=$("option[value*=joyResult]")[0].value.split(',');playAnimation([spjoy[0]]);battleCG=nowTheme[yourcard][6];
+                $("#themeSoundPlay").attr('src',cardvo[0]+'win'+cardvo[1]);
             };
             if($(".alert.alert-info.with-icon.fyg_tc").length>0){
-                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);battleCG=nowTheme[yourcard][7];battleSF=['damage','die','landing'];
+                $("#themeSoundPlay").attr('src',cardvo[0]+'lose'+cardvo[1]);battleCG=nowTheme[yourcard][7];playAnimation(['damage','die','landing']);
             };
         };
         if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};if(custom.showKanban==true){battlecgfunc(battleCG);};++battlecheck;
@@ -1073,7 +1075,7 @@ function battlefunc(){
     };
 };
 /* Battle CG Realization */
-function battlecgfunc(battleCG,battleSF){ if(nowTheme.spine!=true){$(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg);},3000);}; playAnimation(battleSF);};
+function battlecgfunc(battleCG){ if(nowTheme.spine!=true){$(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg);},3000);}; };
 /* Theme Voice Realization */
 $(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 'hold','joy_long_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button", function() { ccard=false;}).on('click', "[onclick*='xxcard(']", function() { ccard=false;})
