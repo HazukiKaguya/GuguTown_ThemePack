@@ -15,6 +15,8 @@ If you like this plugin, you can click the below Vultr links and use it.
 ![image](https://user-images.githubusercontent.com/35645329/188587101-412da1d5-847f-487d-8432-b47612ec6083.png)![image](https://user-images.githubusercontent.com/35645329/188587287-845ee909-c236-4b7a-9331-15e63a15160d.png)
 
 ## Changelogs
+3.0.8 fix a bug;   
+3.0.5 fix a bug;   
 3.0.3 add drag animation;    
 3.0.1 char detail page ,kanban click voice fixed;   
 3.0.0 Total New Spine-Webgl Based kanban&animations;   
