@@ -1,4 +1,4 @@
-[English](README.md) | Chinese  
+[英文](README.md) | 中文  
 # 咕咕镇主题包管理器
 气人页游咕咕镇的主题包管理器插件  
 
