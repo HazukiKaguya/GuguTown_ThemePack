@@ -6,7 +6,7 @@
 [GreasyFork](https://greasyfork.org/scripts/450204)  
 
 ## 赞助    
-If you like this plugin, you can click the below Vultr links and use it.   
+如果你喜欢本插件，你可以点击以下Vultr链接并注册使用来支持我。    
 [Refer Vultr.com and earn $10 per paid signup](https://www.vultr.com/?ref=7365869)  
 [Tell A Friend about Vultr and Earn up to $35 for referring clients!](https://www.vultr.com/?ref=9023177-8H)  
 
