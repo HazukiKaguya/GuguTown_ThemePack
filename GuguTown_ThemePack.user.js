@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.0.3
+// @version     3.0.4
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -526,10 +526,9 @@ function drag(obj){
         document.onmouseup = function () {
             document.onmousemove = null; document.onmouseup = null;
             obj.releaseCapture && obj.releaseCapture(); i = obj.style.left; s = obj.style.top;
-            if (l == i && t == s&&custom.voiceO==true) {
-                if(tempvo!=false){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();}
-                else{$("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();}
-                playAnimation(['000000_dear_smile','idle']);
+            if (l == i && t == s) {
+                if(custom.voiceO==true&&tempvo!=false){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();}
+                else if(custom.voiceO==true){$("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();}; playAnimation(['000000_dear_smile','idle']);
             }
             else {
                 if (parseInt(i) < 0) { obj.style.left = '0px'; i = 0;}
@@ -971,7 +970,7 @@ function themenamefunc(){
 };
 /* Theme Fgimg Realization */
 function cardimgfunc(){
-    let imgpanel,cardname,cardnamec;
+    let imgpanel,cardname;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
@@ -1015,14 +1014,26 @@ function cardimgfunc(){
     };
     if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype); if($("#eqli2.active").length!=1){$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};};
 };
-/* Detal Voice Realization */
-function tempvofunc(){
-    tempvo=false;
-    if($(".text-info.fyg_f24").length==2){
-        let cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
-        if(ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
+/* Detal Voice&Kanban Realization */
+function equipKBVOfunc(){
+    let cardname;
+    if($(".text-info.fyg_f24.fyg_lh60").length==1){
+        let imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
+        if(cardname.length==1){
+            yourcard=cardname;custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
+        }
+        else if(cardname.length==0){
+            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));pagetype=nowEquip;
+        };
     };
-}
+    if($(".text-info.fyg_f24").length==2){
+        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;tempvo=nowTheme[cardname+"voice"];
+        if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
+        loading=false;spineload(nowTheme[cardname+"spine"].name, nowTheme[cardname+"spine"].type);
+    };
+    if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype);};
+};
 /* Battle Voice Realization */
 function battlefunc(){
     if(soundonce%2==0&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
@@ -1074,7 +1085,7 @@ $(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 
 .on('click', "button[style*='float: right;']", function(e) { if(e.target.innerText=="装备"){playAnimation(['000000_eat_normal']);};})
 .on('click', "button[onclick*='updstat(']", function() { ccard=true;playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(1),eqbp(1)']", function() { loading = false;ccard=true;playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='eqlip(2),eqbp(2)']", function() { loading = false;ccard=true;playAnimation(['000000_dear_smile']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};})
+.on('click', "a[onclick*='eqlip(2),eqbp(2)']", function() { loading = false;ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(3),eqbp(3)']", function() { loading = false;ccard=true;playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "a[onclick*='eqlip(4),eqbp(4)']", function() { loading = false;ccard=true;playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
 .on('click', "button[onclick*='expcard(']", function() {
@@ -1119,6 +1130,6 @@ $('head').append(`<style>
  * Final init.
  */
 $(document).on('click', ".detaillogitem", function () { repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc(); };})
-.ajaxSuccess(function(){ repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}else if(custom.showCG == false&&custom.voiceO==true){ tempvofunc(); };});
+.ajaxSuccess(function(){ repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVOfunc() };});
 $("#themeSoundPlay")[0].addEventListener('ended', function(){ battlefunc();});
 if(custom.showKanban==true&&nowTheme.spine==true){spineinit();};
