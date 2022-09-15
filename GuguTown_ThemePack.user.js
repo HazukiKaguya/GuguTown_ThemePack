@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.1.5
+// @version     3.1.6
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -13,8 +13,8 @@
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
-// @match       https://*guguzhen.com/*
-// @match       https://*momozhen.com/*
+// @match       https://www.guguzhen.com/*
+// @match       https://www.momozhen.com/*
 // @run-at      document-end
 // @require     https://greasyfork.org/scripts/450822-spine-webgl/code/spine-webgl.js?version=1090283
 // @license     MIT License
