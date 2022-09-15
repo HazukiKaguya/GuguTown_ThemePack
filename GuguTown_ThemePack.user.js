@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.1.6
+// @version     3.2.0
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -13,8 +13,8 @@
 // @icon        https://sticker.inari.site/favicon.ico
 // @author      Hazuki Kaguya
 // @copyright   2022- Hazukikaguya
-// @match       https://www.guguzhen.com/*
-// @match       https://www.momozhen.com/*
+// @match       https://*.guguzhen.com/*
+// @match       https://*.momozhen.com/*
 // @run-at      document-end
 // @require     https://greasyfork.org/scripts/450822-spine-webgl/code/spine-webgl.js?version=1090283
 // @license     MIT License
@@ -506,8 +506,11 @@ if($('.themepack-ls').length==0){
     $(`<p></p><span><input type="button" class="themelang" value="文A">&nbsp;
     <input type="button" class="themepack-ls" value="${lang.menuTheme}">&nbsp;<input type="button" class="themepack-usr" value="${lang.menuUser}">&nbsp;
     <input type="button" class="icons-size" value="${lang.menuIcon}">&nbsp;<input type="button" class="kanban-size" value="${lang.menuKanban}">&nbsp;
-    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}>${lang.menuOldEQ}&nbsp;<input type="checkbox" class="themepack-equip" ${useThemeNameCheck}>${lang.menuThemeEQ}&nbsp;
-    <input type="checkbox" class="themepack-showCG" ${showCGCheck}>${lang.menuSCG}&nbsp;<input type="checkbox" class="themepack-voiceO" ${voiceOCheck}>${lang.menuSVO}&nbsp;<input type="checkbox" class="themepack-showKB" ${kanbanCheck}>${lang.menuSKB}&nbsp;
+    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}><span class="thememenu">${lang.menuOldEQ}</span>&nbsp;
+    <input type="checkbox" class="themepack-equip" ${useThemeNameCheck}><span class="thememenu">${lang.menuThemeEQ}</span>&nbsp;
+    <input type="checkbox" class="themepack-showCG" ${showCGCheck}><span class="thememenu">${lang.menuSCG}</span>&nbsp;
+    <input type="checkbox" class="themepack-voiceO" ${voiceOCheck}><span class="thememenu">${lang.menuSVO}</span>&nbsp;
+    <input type="checkbox" class="themepack-showKB" ${kanbanCheck}><span class="thememenu">${lang.menuSKB}</span>&nbsp;
     <input type="checkbox" class="themepack-switch" ${Multilingual} style="display:none"><audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio>
     </span>`).insertBefore($('hr')[0])};
 
@@ -1121,11 +1124,12 @@ $(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 
  * Add Script CSS.
  */
 $('head').append(`<style>
-    .btn.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px;${nowTheme.backsize}}
+    div[style='width:1200px;margin: 0 auto;'] { width: 80% !important;max-width:1200px;}
+    .btn.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px;${nowTheme.backsize}}
     .btn.fyg_tr.fyg_mp3{ width: 263px !important; height: 40px !important;}
     .btn.fyg_tl.fyg_mp3{ width: 263px !important; height: 40px !important;}
     .btn.fyg_tc.fyg_mp3{ width: 536px !important; height: 40px !important;}
-    .btn.fyg_colpzbg.fyg_mp3 { width: ${iconsize} !important; height: ${iconsize} !important; ${nowTheme.wqbacksize}}
+    .btn.fyg_colpzbg.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important; ${nowTheme.wqbacksize}}
     .img-rounded { width: 50px; height:50px;}
     .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
     #smallcardimg {height:50px;width:50px;}
@@ -1135,6 +1139,24 @@ $('head').append(`<style>
 	.tool>span {white-space: nowrap}
 </style>`);
 if(nowTheme.spinert){$('head').append(`<style>#divkanban:hover{background:url(${nowTheme.spinert[2]});background-size:cover;}</style>`);};
+if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Phone') > -1){
+    $('head').append(`<style>
+    select,body,h4,h5,i,.fyg_f14,h3,button,input,span,.panel-body,.col-sm-8 {font-size:28px !important;}
+    h2,.panel-heading,.fyg_f18,.col-sm-2.fyg_lh60{font-size:32px !important;}
+    .col-sm-2.fyg_lh60[style='text-align: left;']{width:180px;white-space: pre-wrap;}
+    .text-info.fyg_f24.fyg_lh60>span,.text-info.fyg_f24,.col-sm-2.fyg_lh60[style='text-align: left;']>span{font-size:48px !important;}
+    .progress{height:24px !important;}
+    div[class*='progress-bar']{font-size:26px !important;line-height:24px;}
+    p{font-size:26px !important;}
+    div[class='btn'],div[class='btn btn-primary'],.with-padding.bg-special.fyg_f14,.icon.icon-diamond{font-size:24px !important;}
+    .btn.btn-block.dropdown-toggle.fyg_lh30{font-size:18px !important;}
+    button[onclick*='b_forcbs(']{white-space: pre-wrap;}
+    .img-rounded,#smallcardimg {height:100px;width:100px;}
+    .btn.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;line-height: ${Math.floor(parseInt(iconsize)*1.2)-1}px;}
+    .btn.fyg_colpzbg.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;}
+    .fyg_tc>.btn.fyg_colpzbg.fyg_mp3.fyg_tc{width:120px !important;height: 160px !important;line-height:42px;}
+    .btn.btn-primary.btn-group.dropup {height:160px !important;}
+</style>`);};
 
 
 /**
