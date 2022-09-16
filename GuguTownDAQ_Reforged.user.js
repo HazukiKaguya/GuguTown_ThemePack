@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name         咕咕镇数据采集
 // @namespace    https://greasyfork.org/users/448113
-// @version      1.5.8.1
+// @version      1.6.1.1
 // @description  咕咕镇数据采集，目前采集已关闭，兼作助手
-// @author       paraii
+// @author       paraii & zyxboy
 // @match        https://www.guguzhen.com/*
 // @match        https://www.momozhen.com/*
 // @grant        GM_xmlhttpRequest
+// @connect      www.guguzhen.com
 // @connect      www.momozhen.com
 // @license      MIT License
+// @updateURL    https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTownDAQ_Reforged.user.js
 // ==/UserScript==
 (function() {
     'use strict'
@@ -19,7 +21,7 @@
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const g_modificationVersion = '2022-09-15 19:22:22';
+    const g_modificationVersion = '2022-09-17 02:22:22';
 
     const g_navigatorSelector = 'div.panel > div.panel-body > div.row > div.col-md-10 > div > ';
     let kfUserSpan = document.querySelector(g_navigatorSelector + 'span.fyg_colpz06.fyg_f24');
@@ -1860,7 +1862,9 @@
         { index : 20 , type : 1 , name : '魔法减伤' },
         { index : 21 , type : 0 , name : '生命偷取' },
         { index : 22 , type : 0 , name : '伤害反弹' },
-        { index : 23 , type : 1 , name : '附加魔穿' }
+        { index : 23 , type : 1 , name : '附加魔穿' },
+        { index : 24 , type : 1 , name : '技能概率' },
+        { index : 25 , type : 1 , name : '暴击概率' }
     ];
 
     const g_equipments = [
@@ -2006,6 +2010,17 @@
                            { attribute : g_equipAttributes[8] , factor : 10 , additive : 0 } ],
             merge : null,
             shortMark : 'GLOVES'
+        },
+        {
+             index : -1,
+            name : '海星戒指',
+            type : 1,
+            attributes : [ { attribute : g_equipAttributes[16] , factor : 1 / 2 , additive : 0 },
+                           { attribute : g_equipAttributes[23] , factor : 1 / 2 , additive : 0 },
+                           { attribute : g_equipAttributes[24] , factor : 4 / 5 , additive : 0 },
+                           { attribute : g_equipAttributes[25] , factor : 4 / 5 , additive : 0 } ],
+            merge : null,
+            shortMark : 'RING'
         },
         {
             index : -1,
