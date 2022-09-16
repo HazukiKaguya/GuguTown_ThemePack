@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.2.0
+// @version     3.2.2
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -60,7 +60,7 @@ const defaultConf={
         "kanbanUA":"请输入看板大小,数字为百分比。",
         "menuUA":"请输入自定义主题包的json数据,访问以下链接以查看完整的json格式。",
         "equip":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                 "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带"]
+                 "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指"]
     },
     "zht":{
         "initUFG":"此自定義主題包立繪功能不可用！請更新主題包或關閉立繪功能！",
@@ -83,7 +83,7 @@ const defaultConf={
         "kanbanUA":"請輸入看板大小,數字為百分比。",
         "menuUA":"請輸入自定義主題包的json數據,訪問以下連結以查看完整的json格式。",
         "equip":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶"]
+                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指"]
     },
     "ja": {
         "initUFG":"このユーザー テーマパックの立ち絵機能は使用できません！このテーマパックを更新するか、立ち絵機能無効化してください。",
@@ -107,7 +107,7 @@ const defaultConf={
         "menuUA":"カスタマイズ テーマパックの JSON データを入力してください。完全な JSON 形式を表示するには、以下のリンクにアクセスしてください。",
         "equip":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
                  "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン"]
+                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪"]
     },
     "en": {
         "initUFG":"The CG Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off CG Function!",
@@ -131,7 +131,7 @@ const defaultConf={
         "menuUA":"Please input The JSON data of UserThemePack,\n Access the link below to see the complete JSON format.",
         "equip":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
                  "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
-                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon"]
+                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"]
     }
 }
 ,originTheme={
@@ -139,19 +139,20 @@ const defaultConf={
     "old":"1",
     "ext":".gif",
     "background":"",
+    "kanbanbg":"https://sticker.inari.site/api/null.gif",
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:100% 100%;",
     "level":["普通","幸运","稀有","史诗","传奇"],
     "equip-zh":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带"],
+                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指"],
     "equip-zht":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶"],
+                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指"],
     "equip-ja":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
                  "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン"],
+                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪"],
     "equip-en":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
                  "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
-                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon"],
+                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"],
     "dessert":["z903","z902","z901"],
     "dessertlevel":["稀有","史诗","传奇"],
     "dessertlevel-zht":["稀有","史詩","傳奇"],
@@ -205,6 +206,7 @@ const defaultConf={
     "w2":["z2202","z8","命师的传承手环","命师的传承手环","z/z2202_"],
     "w3":["z2203","z5","秃鹫手环","秃鹫手环","z/z2203_"],
     "wo3":["z2203","z5","秃鹫手套","秃鹫手套","z/z2203_"],
+    "w4":["z2204","z2204","海星戒指","海星戒指","z/z2204_"],
     "c1":["z2301","z9","探险者铁甲","探险者铁甲","z/z2301_"],
     "c2":["z2302","z10","探险者皮甲","探险者皮甲","z/z2302_"],
     "c3":["z2303","z10","探险者布甲","探险者布甲","z/z2303_"],
@@ -225,19 +227,20 @@ const defaultConf={
     "old":"",
     "ext":".gif",
     "background":"",
+    "kanbanbg":"https://sticker.inari.site/api/null.gif",
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:80% 80%;",
     "level":["普通","幸运","稀有","史诗","传奇"],
     "equip-zh":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带"],
+                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指"],
     "equip-zht":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶"],
+                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指"],
     "equip-ja":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
                  "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン"],
+                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪"],
     "equip-en":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
                  "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
-                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon"],
+                 "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"],
     "dessert":["apple","grape","cherry"],
     "dessertlevel":["稀有","史诗","传奇"],
     "dessertlevel-zht":["稀有","史詩","傳奇"],
@@ -291,6 +294,7 @@ const defaultConf={
     "w2":["z2202","z8","命师的传承手环","命师的传承手环","bracelet_"],
     "w3":["z2203","z5","秃鹫手环","秃鹫手环","bracelet_"],
     "wo3":["z2203","z5","秃鹫手套","秃鹫手套","gloves_"],
+    "w4":["z2204","z2204","海星戒指","海星戒指","bracelet_"],
     "c1":["z2301","z9","探险者铁甲","探险者铁甲","armour_"],
     "c2":["z2302","z10","探险者皮甲","探险者皮甲","clothes_"],
     "c3":["z2303","z10","探险者布甲","探险者布甲","clothes_"],
@@ -311,19 +315,20 @@ const defaultConf={
     "old":"0",
     "ext":".gif",
     "background":"normal",
+    "kanbanbg":"https://sticker.inari.site/api/bg.jpg",
     "backsize":"background-size:100% 100%;",
     "wqbacksize":"background-size:100% 100%;",
     "level":["普通","幸运","稀有","史诗","传奇"],
-    "equip-zh":["旅人剑","猎人弓","香木法杖","妖刀血鸦","深渊之弓","黑曜石天黑剑","棒棒糖手杖","盖亚之斧","盖亚之斧","勇气星核剑","混沌之刃","毁灭之伤冥神枪","旅者手镯","旅者拳套","睿智手镯","朋克手镯","深红爪",
-                "重金属护甲","皮革工作服","旅者长袍","魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结"],
-    "equip-zht":["旅人劍","獵人弓","檀香之杖","妖刀血鴉","深淵之弓","天黑劍奧比修斯","棒棒糖手杖","蓋亞之斧","蓋亞之斧","星核劍艾爾茲修奈德","渾沌之劍","冥神槍毀滅苦痛","旅者手镯","旅者拳套","睿智手镯","龐克棘刺手環","深紅之爪",
-                "重金屬盔甲","皮革工作服","旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結"],
-    "equip-ja":["旅立ちの剣","狩人の弓","香木の杖","妖刀血鴉","アビスボウ","天黒剣オブシウス","ロリポップステッキ","ガイアアクス","ガイアアクス","星核剣エルツシュナイド","カオスブレード","冥神槍ドゥームペイン",
-                "旅立ちのミサンガ","旅立ちのパンチ","ソフォスブレスレット","パンクニードルバングル","クリムゾンクロー","ヘビーメタルアーマー","革のサロペット","旅立ちのローブ","魔導師のローブ","覇王樹の棘針鎧",
-                "翠緑の霊衣","翠緑の霊衣","黒瑪瑙の祈装衣","旅立ちの耳環","旅立ちの頭巾","海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐"],
-    "equip-en":["Iron Blade","Hunter's Bow","Fragrant Wood Wand","Blood Raven Demon Blade","Abyss Bow","Heavenly Black Obsidian Sword","Lolipop Stick","Gaia Axe","Gaia Axe","Star Core Sword - Erst Schneide","Chaos Blade",
-                "Nether God Spear, Doom Pain","Journey Bracelet","Journey Punches","Sophos Bracelet","Punk Bangle","Crimson Claw","Heavy Metal Armor","Leather Overalls","Journey Robe","Magician's Robe","Thorn of the Great Tree Armor",
-                "Viridian Spiritual Dress","Viridian Spiritual Dress","Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon"],
+    "equip-zh":["旅人剑","猎人弓","香木法杖","妖刀血鸦","深渊之弓","黑曜石天黑剑","棒棒糖手杖","盖亚之斧","盖亚之斧","勇气星核剑","混沌之刃","毁灭之伤冥神枪","旅者手镯","旅者拳套","睿智手镯","朋克手镯","深红爪","重金属护甲","皮革工作服","旅者长袍",
+                "魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结","永恒绿戒"],
+    "equip-zht":["旅人劍","獵人弓","檀香之杖","妖刀血鴉","深淵之弓","天黑劍奧比修斯","棒棒糖手杖","蓋亞之斧","蓋亞之斧","星核劍艾爾茲修奈德","渾沌之劍","冥神槍毀滅苦痛","旅者手镯","旅者拳套","睿智手镯","龐克棘刺手環","深紅之爪","重金屬盔甲","皮革工作服",
+                 "旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結","常青之綠戒"],
+    "equip-ja":["旅立ちの剣","狩人の弓","香木の杖","妖刀血鴉","アビスボウ","天黒剣オブシウス","ロリポップステッキ","ガイアアクス","ガイアアクス","星核剣エルツシュナイド","カオスブレード","冥神槍ドゥームペイン","旅立ちのミサンガ","旅立ちのパンチ",
+                "ソフォスブレスレット","パンクニードルバングル","クリムゾンクロー","ヘビーメタルアーマー","革のサロペット","旅立ちのローブ","魔導師のローブ","覇王樹の棘針鎧","翠緑の霊衣","翠緑の霊衣","黒瑪瑙の祈装衣","旅立ちの耳環","旅立ちの頭巾",
+                "海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐","常盤の緑環"],
+    "equip-en":["Iron Blade","Hunter's Bow","Fragrant Wood Wand","Blood Raven Demon Blade","Abyss Bow","Heavenly Black Obsidian Sword","Lolipop Stick","Gaia Axe","Gaia Axe","Star Core Sword - Erst Schneide","Chaos Blade","Nether God Spear, Doom Pain",
+                "Journey Bracelet","Journey Punches","Sophos Bracelet","Punk Bangle","Crimson Claw","Heavy Metal Armor","Leather Overalls","Journey Robe","Magician's Robe","Thorn of the Great Tree Armor","Viridian Spiritual Dress","Viridian Spiritual Dress",
+                "Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon","Evergreen Ring"],
     "dessert":["pie","donuts","cake"],
     "dessertlevel":["家常的","美味的","诱人的"],
     "dessertlevel-zht":["家常的","美味的","誘人的"],
@@ -371,7 +376,7 @@ const defaultConf={
     "命voice":["https://p.inari.site/guguicons/test/vo/life/",".mp3"],
     "希voice":["https://p.inari.site/guguicons/test/vo/xii/",".mp3"],
     "spine":true,
-    "spinert":["https://sticker.inari.site/api/common/","https://","https://sticker.inari.site/api/bg.jpg"],
+    "spinert":["https://sticker.inari.site/api/common/","https://"],
     "舞spine":{"name":"sticker.inari.site/api/unit/wuu/","type":"6","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
     "默spine":{"name":"sticker.inari.site/api/unit/mo/","type":"7","hasRarity6":true,"wi":-350,"hi":-42,"re":0.8},
     "琳spine":{"name":"sticker.inari.site/api/unit/lin/","type":"5","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
@@ -399,6 +404,7 @@ const defaultConf={
     "w2":["z2202","z8","命师的传承手环","睿智手镯","%E5%91%BD%E5%B8%88%E7%9A%84%E4%BC%A0%E6%89%BF%E6%89%8B%E7%8E%AF/"],
     "w3":["z2203","z5","秃鹫手环","朋克手镯","%E7%A7%83%E9%B9%AB%E6%89%8B%E7%8E%AF/"],
     "wo3":["z2203","z5","秃鹫手套","深红爪","%E7%A7%83%E9%B9%AB%E6%89%8B%E5%A5%97/"],
+    "w4":["z2204","z2204","海星戒指","永恒绿戒","%E6%B5%B7%E6%98%9F%E6%88%92%E6%8C%87/"],
     "c1":["z2301","z9","探险者铁甲","重金属护甲","%E6%8E%A2%E9%99%A9%E8%80%85%E9%93%81%E7%94%B2/"],
     "c2":["z2302","z10","探险者皮甲","皮革工作服","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9A%AE%E7%94%B2/"],
     "c3":["z2303","z10","探险者布甲","旅者长袍","%E6%8E%A2%E9%99%A9%E8%80%85%E5%B8%83%E7%94%B2/"],
@@ -416,7 +422,7 @@ const defaultConf={
 }
 ,ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"],nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 let useOldNamesCheck ='',useThemeNameCheck ='',Multilingual='',showCGCheck='',voiceOCheck='',kanbanCheck='',custom = defaultConf,userTheme={},timeout = null,nowTheme,tempvo=false,tempca,tpkanban,kanban,kanbanimg,ww,wh,
-    ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,spinert,nowEquip,spineJson;
+    ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,spinert,nowEquip,spineJson;
 if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf);} else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf));};
 if (localStorage.nowEquip) { nowEquip = localStorage.nowEquip;};
 if (!custom.yourcard ) { custom.yourcard=defaultConf.yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
@@ -453,26 +459,23 @@ if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"
 if (custom.showKanban == true&&nowTheme.spine==true){spinert=nowTheme.spinert;kanbanCheck='checked';}else if(custom.showKanban == true){kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked';}else{kanbanimg=nullimg;};
 if(nowTheme["dessertlevel-"+custom.language]){nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
 if(nowTheme["dessertname-"+custom.language]){nowTheme.dessertname=nowTheme["dessertname-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-if(custom.useThemeName==true){
-    Multilingual='checked';let equipName=nowTheme["equip-"+custom.language];
-    nowTheme.a1[3]=equipName[0];nowTheme.a2[3]=equipName[1];nowTheme.a3[3]=equipName[2];nowTheme.a4[3]=equipName[3];nowTheme.a5[3]=equipName[4];nowTheme.a6[3]=equipName[5];
-    nowTheme.a7[3]=equipName[6];nowTheme.a8[3]=equipName[7];nowTheme.ao8[3]=equipName[8];nowTheme.a9[3]=equipName[9];nowTheme.a10[3]=equipName[10];nowTheme.ao10[3]=equipName[11];
-    nowTheme.w1[3]=equipName[12];nowTheme.wo1[3]=equipName[13];nowTheme.w2[3]=equipName[14];nowTheme.w3[3]=equipName[15];nowTheme.wo3[3]=equipName[16];
-    nowTheme.c1[3]=equipName[17];nowTheme.c2[3]=equipName[18];nowTheme.c3[3]=equipName[19];nowTheme.c4[3]=equipName[20];nowTheme.c5[3]=equipName[21];nowTheme.c6[3]=equipName[22];nowTheme.co6[3]=equipName[23];nowTheme.c7[3]=equipName[24];
-    nowTheme.h1[3]=equipName[25];nowTheme.ho1[3]=equipName[26];nowTheme.h2[3]=equipName[27];nowTheme.ho2[3]=equipName[28];nowTheme.h3[3]=equipName[29];nowTheme.ho3[3]=equipName[30];
-    sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
-}else if(nowTheme["equip-"+custom.language]){
-    Multilingual='checked';let equipName=Language[custom.language].equip;
-    nowTheme.a1[3]=equipName[0];nowTheme.a2[3]=equipName[1];nowTheme.a3[3]=equipName[2];nowTheme.a4[3]=equipName[3];nowTheme.a5[3]=equipName[4];nowTheme.a6[3]=equipName[5];
-    nowTheme.a7[3]=equipName[6];nowTheme.a8[3]=equipName[7];nowTheme.ao8[3]=equipName[8];nowTheme.a9[3]=equipName[9];nowTheme.a10[3]=equipName[10];nowTheme.ao10[3]=equipName[11];
-    nowTheme.w1[3]=equipName[12];nowTheme.wo1[3]=equipName[13];nowTheme.w2[3]=equipName[14];nowTheme.w3[3]=equipName[15];nowTheme.wo3[3]=equipName[16];
-    nowTheme.c1[3]=equipName[17];nowTheme.c2[3]=equipName[18];nowTheme.c3[3]=equipName[19];nowTheme.c4[3]=equipName[20];nowTheme.c5[3]=equipName[21];nowTheme.c6[3]=equipName[22];nowTheme.co6[3]=equipName[23];nowTheme.c7[3]=equipName[24];
-    nowTheme.h1[3]=equipName[25];nowTheme.ho1[3]=equipName[26];nowTheme.h2[3]=equipName[27];nowTheme.ho2[3]=equipName[28];nowTheme.h3[3]=equipName[29];nowTheme.ho3[3]=equipName[30];
-    sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
-};
+let equipName;
+if(custom.useThemeName==true){ Multilingual='checked';equipName=nowTheme["equip-"+custom.language];}
+else if(nowTheme["equip-"+custom.language]){ Multilingual='checked';equipName=Language[custom.language].equip;};
+
+nowTheme.a1[3]=equipName[0];nowTheme.a2[3]=equipName[1];nowTheme.a3[3]=equipName[2];nowTheme.a4[3]=equipName[3];nowTheme.a5[3]=equipName[4];nowTheme.a6[3]=equipName[5];
+nowTheme.a7[3]=equipName[6];nowTheme.a8[3]=equipName[7];nowTheme.ao8[3]=equipName[8];nowTheme.a9[3]=equipName[9];nowTheme.a10[3]=equipName[10];nowTheme.ao10[3]=equipName[11];
+nowTheme.w1[3]=equipName[12];nowTheme.wo1[3]=equipName[13];nowTheme.w2[3]=equipName[14];nowTheme.w3[3]=equipName[15];nowTheme.wo3[3]=equipName[16];nowTheme.w4[3]=equipName[31];
+nowTheme.c1[3]=equipName[17];nowTheme.c2[3]=equipName[18];nowTheme.c3[3]=equipName[19];nowTheme.c4[3]=equipName[20];nowTheme.c5[3]=equipName[21];nowTheme.c6[3]=equipName[22];nowTheme.co6[3]=equipName[23];nowTheme.c7[3]=equipName[24];
+nowTheme.h1[3]=equipName[25];nowTheme.ho1[3]=equipName[26];nowTheme.h2[3]=equipName[27];nowTheme.ho2[3]=equipName[28];nowTheme.h3[3]=equipName[29];nowTheme.ho3[3]=equipName[30];
+sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
+
 ext=nowTheme.ext;purl=nowTheme.url;dessert=nowTheme.dessert;old=nowTheme.old;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;
-a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;
-c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
+a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;
+w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;w4=nowTheme.w4;
+c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;
+h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
+
 if(custom.useOldNames==true){ useOldNamesCheck='checked'; a8=nowTheme.ao8;a10=nowTheme.ao10;w1=nowTheme.wo1;w3=nowTheme.wo3;c6=nowTheme.co6;h1=nowTheme.ho1;h2=nowTheme.ho2;h3=nowTheme.ho3; };
 if(localStorage.nowEquip){nowEquip=localStorage.nowEquip;}else{nowEquip=spineJson.type;};
 let pagetype=24;if (window.location.href.indexOf('pk.php') > -1||window.location.href.indexOf('equip.php') > -1) { pagetype=nowEquip; };
@@ -844,6 +847,7 @@ function repfunc(){
     $("button[style*='z2201']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2201_/g, purl+w1[4]);n=n.replace(/ys\/icon\/z2201/g, purl+w1[4]+old);return n;});
     $("button[style*='z2202']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2202_/g, purl+w2[4]);n=n.replace(/ys\/icon\/z2202/g, purl+w2[4]+old);return n;});
     $("button[style*='z2203']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]);n=n.replace(/ys\/icon\/z2203/g, purl+w3[4]+old);return n;});
+    $("button[style*='z2204']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2204_/g, purl+w4[4]);n=n.replace(/ys\/icon\/z2204/g, purl+w4[4]+old);return n;});
     $("button[style*='z2301']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2301_/g, purl+c1[4]);n=n.replace(/ys\/icon\/z2301/g, purl+c1[4]+old);return n;});
     $("button[style*='z2302']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2302_/g, purl+c2[4]);n=n.replace(/ys\/icon\/z2302/g, purl+c2[4]+old);return n;});
     $("button[style*='z2303']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2303_/g, purl+c3[4]);n=n.replace(/ys\/icon\/z2303/g, purl+c3[4]+old);return n;});
@@ -871,6 +875,7 @@ function repfunc(){
     $(".fyg_tc>img[src*='z2108_']").attr("src",function(n,v){ loading = false;nowEquip=3;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2108_/g, purl+a8[4]);return n;});
     $(".fyg_tc>img[src*='z2109_']").attr("src",function(n,v){ loading = false;nowEquip=5;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]);return n;});
     $(".fyg_tc>img[src*='z2202_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2202_/g, purl+w2[4]);return n;});
+    $(".fyg_tc>img[src*='z2204_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2204_/g, purl+w4[4]);return n;});
     $(".fyg_tc>img[src*='z2301_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2301_/g, purl+c1[4]);return n;});
     $(".fyg_tc>img[src*='z2302_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2302_/g, purl+c2[4]);return n;});
     $(".fyg_tc>img[src*='z2303_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2303_/g, purl+c3[4]);return n;});
@@ -903,7 +908,9 @@ function repfunc(){
     };
     if(custom.useThemeName==true){ themenamefunc(); } else if(nowTheme["equip-"+custom.language]){ themenamefunc(); };localStorage.setItem('nowEquip', nowEquip);
 };
-/* Replace to Old-Equip-Name */
+/* Replace to Old-Equip-Name
+ * 此处旧版装备图标替换已进入计划报废倒计时
+ */
 function flogrepfunc(){
     if(custom.useOldNames!=true){
         $("button[data-original-title*='荆棘剑盾']").attr("data-original-title",function(n,v){ n= v.replace(/荆棘剑盾/g, "荆棘盾剑");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a8[4]+old);return n;});
@@ -962,7 +969,7 @@ function themenamefunc(){
     $("button[data-original-title]").attr("data-original-title",function(n,v){
         n= v.replace(/探险者之剑/g, a1[3]);n= n.replace(/探险者短弓/g, a2[3]);n= n.replace(/探险者短杖/g, a3[3]);n= n.replace(/狂信者的荣誉之刃/g, a4[3]);n= n.replace(/反叛者的刺杀弓/g, a5[3]);n= n.replace(/幽梦匕首/g, a6[3]);
         n= n.replace(/光辉法杖/g, a7[3]);n= n.replace(/荆棘盾剑/g, a8[3]);n= n.replace(/荆棘剑盾/g, a8[3]);n= n.replace(/陨铁重剑/g, a9[3]);n= n.replace(/饮血魔剑/g, a10[3]);n= n.replace(/饮血长枪/g, a10[3]);
-        n= n.replace(/探险者手环/g, w1[3]);n= n.replace(/探险者手套/g, w1[3]);n= n.replace(/命师的传承手环/g, w2[3]);n= n.replace(/秃鹫手环/g, w3[3]);n= n.replace(/秃鹫手套/g, w3[3]);
+        n= n.replace(/探险者手环/g, w1[3]);n= n.replace(/探险者手套/g, w1[3]);n= n.replace(/命师的传承手环/g, w2[3]);n= n.replace(/秃鹫手环/g, w3[3]);n= n.replace(/秃鹫手套/g, w3[3]);n= n.replace(/海星戒指/g, w4[3]);
         n= n.replace(/探险者铁甲/g, c1[3]);n= n.replace(/探险者皮甲/g, c2[3]);n= n.replace(/探险者布甲/g, c3[3]);n= n.replace(/旅法师的灵光袍/g, c4[3]);n= n.replace(/战线支撑者的荆棘重甲/g, c5[3]);
         n= n.replace(/复苏战衣/g, c6[3]);n= n.replace(/复苏木甲/g, c6[3]);n= n.replace(/挑战斗篷/g, c7[3]);
         n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
@@ -970,7 +977,7 @@ function themenamefunc(){
     $(".with-padding").html(function(n,v){
         n= v.replace(/探险者之剑/g, a1[3]);n= n.replace(/探险者短弓/g, a2[3]);n= n.replace(/探险者短杖/g, a3[3]);n= n.replace(/狂信者的荣誉之刃/g, a4[3]);n= n.replace(/反叛者的刺杀弓/g, a5[3]);n= n.replace(/幽梦匕首/g, a6[3]);
         n= n.replace(/光辉法杖/g, a7[3]);n= n.replace(/荆棘盾剑/g, a8[3]);n= n.replace(/荆棘剑盾/g, a8[3]);n= n.replace(/陨铁重剑/g, a9[3]);n= n.replace(/饮血魔剑/g, a10[3]);n= n.replace(/饮血长枪/g, a10[3]);
-        n= n.replace(/探险者手环/g, w1[3]);n= n.replace(/探险者手套/g, w1[3]);n= n.replace(/命师的传承手环/g, w2[3]);n= n.replace(/秃鹫手环/g, w3[3]);n= n.replace(/秃鹫手套/g, w3[3]);
+        n= n.replace(/探险者手环/g, w1[3]);n= n.replace(/探险者手套/g, w1[3]);n= n.replace(/命师的传承手环/g, w2[3]);n= n.replace(/秃鹫手环/g, w3[3]);n= n.replace(/秃鹫手套/g, w3[3]);n= n.replace(/海星戒指/g, w4[3]);
         n= n.replace(/探险者铁甲/g, c1[3]);n= n.replace(/探险者皮甲/g, c2[3]);n= n.replace(/探险者布甲/g, c3[3]);n= n.replace(/旅法师的灵光袍/g, c4[3]);n= n.replace(/战线支撑者的荆棘重甲/g, c5[3]);
         n= n.replace(/复苏战衣/g, c6[3]);n= n.replace(/复苏木甲/g, c6[3]);n= n.replace(/挑战斗篷/g, c7[3]);
         n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
@@ -1124,7 +1131,7 @@ $(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 
  * Add Script CSS.
  */
 $('head').append(`<style>
-    div[style='width:1200px;margin: 0 auto;'] { width: 95% !important;max-width:1200px;}
+    div[style='width:1200px;margin: 0 auto;'] { width: 80% !important;max-width:1200px;}
     .btn.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px;${nowTheme.backsize}}
     .btn.fyg_tr.fyg_mp3{ width: 263px !important; height: 40px !important;}
     .btn.fyg_tl.fyg_mp3{ width: 263px !important; height: 40px !important;}
@@ -1138,7 +1145,7 @@ $('head').append(`<style>
     .tool {position: fixed;top: 0;width: 100%;z-index: 1;cursor: default}
 	.tool>span {white-space: nowrap}
 </style>`);
-if(nowTheme.spinert){$('head').append(`<style>#divkanban:hover{background:url(${nowTheme.spinert[2]});background-size:cover;}</style>`);};
+if(nowTheme.spinert){$('head').append(`<style>#divkanban:hover{background:url(${nowTheme.kanbanbg});background-size:cover;}</style>`);};
 if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Phone') > -1){
     $('head').append(`<style>
     select,body,h4,h5,i,.fyg_f14,h3,button,input,span,.panel-body,.col-sm-8 {font-size:28px !important;}
