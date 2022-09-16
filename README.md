@@ -15,6 +15,9 @@ If you like this plugin, you can click the below Vultr links and use it.
 ![image](https://user-images.githubusercontent.com/35645329/188587101-412da1d5-847f-487d-8432-b47612ec6083.png)![image](https://user-images.githubusercontent.com/35645329/188587287-845ee909-c236-4b7a-9331-15e63a15160d.png)
 
 ## Changelogs
+3.2.2 Add equipment: Starfish Ring;   
+3.2.0 Optimize the display in mobile phone view;   
+3.1.4 Compatible with 360 browser;   
 3.1.2 spine kanban in firefox compatible;   
 3.1.0 fix bugs;     
 3.0.3 add some new animation;       
