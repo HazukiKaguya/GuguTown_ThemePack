@@ -1124,7 +1124,7 @@ $(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 
  * Add Script CSS.
  */
 $('head').append(`<style>
-    div[style='width:1200px;margin: 0 auto;'] { width: 80% !important;max-width:1200px;}
+    div[style='width:1200px;margin: 0 auto;'] { width: 95% !important;max-width:1200px;}
     .btn.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px;${nowTheme.backsize}}
     .btn.fyg_tr.fyg_mp3{ width: 263px !important; height: 40px !important;}
     .btn.fyg_tl.fyg_mp3{ width: 263px !important; height: 40px !important;}
