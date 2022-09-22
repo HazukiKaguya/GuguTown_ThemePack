@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.2.2
+// @version     3.2.4
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -18,25 +18,24 @@
 // @run-at      document-end
 // @require     https://greasyfork.org/scripts/450822-spine-webgl/code/spine-webgl.js?version=1090283
 // @license     MIT License
+// @downloadURL https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // ==/UserScript==
+/* eslint-env jquery */
 'use strict';
 
 
 /**
- * Settings & Primary init.
+ * Settings.
  */
-const defaultConf={
-    "useOldNames":false,
+const defaultConf = {
+    "language":"zh",
     "ThemePack":"classic",
     "iconSize":"50px",
     "kanbansize":"100",
-    "useThemeName":false,
-    "showKanban":false,
-    "showCG":false,
-    "voiceO":false,
-    "language":"zh",
-    "yourcard":"舞"
+    "useOldNames":false,"useThemeName":false,
+    "showKanban":false,"showCG":false,"voiceO":false,
+    "yourcard":"舞",
 }
 ,Language = {
     "zh": {
@@ -44,21 +43,23 @@ const defaultConf={
         "initUVO":"此自定义主题包语音功能不可用！请更新主题包或关闭语音功能！",
         "initUOT":"自定义主题包json数据彻底过期，请及时更新！主题包未启用！",
         "initUNU":"自定义主题包json数据不存在，主题包未启用！",
+        "cuuid":"生成UUID",
         "menuTheme":"主题包",
         "menuUser":"写入自定义主题",
         "menuIcon":"图标大小",
         "menuKanban":"看板大小",
-        "menuOldEQ":"使用旧的装备名称",
-        "menuThemeEQ":"使用主题装备名称",
-        "menuSCG":"启用立绘",
-        "menuSVO":"启用语音",
-        "menuSKB":"启用看板",
+        "menuOldEQ":"旧版装备名",
+        "menuThemeEQ":"主题装备名",
+        "menuSCG":"立绘功能",
+        "menuSVO":"语音功能",
+        "menuSKB":"看板功能",
         "themeSW":"按【确定】选择主题包，按【取消】恢复默认主题包。",
         "themeSA":"输入1使用【测试用主题包】；输入2使用【自定义主题包】；\n输入0不启用主题更改；输入其他使用【旧版风格主题包】；\n【测试用主题包】中的主题装备名称版权归Cygames所有。",
         "themeDF":"按【确定】恢复默认主题包，按【取消】则不操作。",
         "iconUA":"请输入图标大小,格式应为32-128间的数字+px\n示例：50px",
         "kanbanUA":"请输入看板大小,数字为百分比。",
         "menuUA":"请输入自定义主题包的json数据,访问以下链接以查看完整的json格式。",
+        "cloudPass":"请 输入/设置 云同步密码",
         "equip":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
                  "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指"]
     },
@@ -67,21 +68,23 @@ const defaultConf={
         "initUVO":"此自定義主題包語音功能不可用！請更新主題包或關閉語音功能！",
         "initUOT":"自定義主題包json數據徹底過期，請及時更新！主題包未啟用！",
         "initUNU":"自定義主題包json數據不存在，主題包未啟用！",
+        "cuuid":"生成UUID",
         "menuTheme":"主題包",
         "menuUser":"寫入自定義主題",
         "menuIcon":"圖標大小",
         "menuKanban":"看板大小",
-        "menuOldEQ":"使用舊的裝備名稱",
-        "menuThemeEQ":"使用主題裝備名稱",
-        "menuSCG":"啟用立繪",
-        "menuSVO":"啟用語音",
-        "menuSKB":"啟用看板",
+        "menuOldEQ":"舊的裝備名",
+        "menuThemeEQ":"主題裝備名",
+        "menuSCG":"立繪機能",
+        "menuSVO":"語音機能",
+        "menuSKB":"看板機能",
         "themeSW":"按【確定】選擇主題包，按【取消】恢複默認主題包。",
         "themeSA":"輸入1使用【測試用主題包】；輸入2使用【自定義主題包】；\n輸入0不啟用主題更改；輸入其他使用【舊版風格主題包】；\n【測試用主題包】中的主題裝備名稱版權歸Cygames所有。",
         "themeDF":"按【確定】恢複默認主題包，按【取消】則不操作。",
         "iconUA":"請輸入圖標大小,格式應為32-128間的數字+px\n示例：50px",
         "kanbanUA":"請輸入看板大小,數字為百分比。",
         "menuUA":"請輸入自定義主題包的json數據,訪問以下連結以查看完整的json格式。",
+        "cloudPass":"請 輸入/设置 云同步密码",
         "equip":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
                  "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指"]
     },
@@ -90,12 +93,13 @@ const defaultConf={
         "initUVO":"このユーザー テーマパックのボイス機能は使用できません！このテーマパックを更新するか、ボイス機能無効化してください。",
         "initUOT":"このユーザー テーマパックのJSONは古くなっています！このテーマパックをできるだけ早く更新してください！テーマパックが有効になっていません！",
         "initUNU":"このユーザー テーマパックのJSONは存在しません！テーマパックが有効になっていません！",
+        "cuuid":"生成UUID",
         "menuTheme":"テーマパック",
         "menuUser":"ユーザーJSON入力",
         "menuIcon":"アイコンサイズ",
         "menuKanban":"看板サイズ",
-        "menuOldEQ":"旧装備名を使用",
-        "menuThemeEQ":"テーマ装備名を使用",
+        "menuOldEQ":"旧装備名",
+        "menuThemeEQ":"テーマ装備名",
         "menuSCG":"立ち絵機能",
         "menuSVO":"ボイス機能",
         "menuSKB":"看板娘機能",
@@ -105,6 +109,7 @@ const defaultConf={
         "iconUA":"アイコンのサイズを入力してください。32 ～ 128 の数値で px を使用する必要があります。\n 例： 50px",
         "kanbanUA":"看板のサイズを入力してください。％を除いた数値である必要があります。\n 例： 100",
         "menuUA":"カスタマイズ テーマパックの JSON データを入力してください。完全な JSON 形式を表示するには、以下のリンクにアクセスしてください。",
+        "cloudPass":"請 輸入/设置 云同步密码",
         "equip":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
                  "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
                  "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪"]
@@ -114,6 +119,7 @@ const defaultConf={
         "initUVO":"The Voice Function in this User ThemePack is unavailable! Please Update This ThemePack or Turn Off Voice Function!",
         "initUOT":"The JSON of this User ThemePack is out of date! Please Update This ThemePack ASAP! ThemePack not activated!",
         "initUNU":"The JSON of this User ThemePack is non-existent! ThemePack not activated!",
+        "cuuid":"Create UUID",
         "menuTheme":"ThemePack",
         "menuUser":"Input UserTheme",
         "menuIcon":"IconSize",
@@ -129,12 +135,13 @@ const defaultConf={
         "iconUA":"Please input the size of Icons, it should be a num in 32-128 with px\n example: 50px",
         "kanbanUA":"Please input the size of kanban, it should be a num without %\n example: 100",
         "menuUA":"Please input The JSON data of UserThemePack,\n Access the link below to see the complete JSON format.",
+        "cloudPass":"Please input/set cloud sync password",
         "equip":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
                  "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
                  "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"]
     }
 }
-,originTheme={
+,originTheme = {
     "url":"ys/icon/",
     "old":"1",
     "ext":".gif",
@@ -222,7 +229,7 @@ const defaultConf={
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","z/z2403_"],
     "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"]
 }
-,classicTheme={
+,classicTheme = {
     "url":"https://sticker.inari.site/guguicons/old/",
     "old":"",
     "ext":".gif",
@@ -310,7 +317,7 @@ const defaultConf={
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","neko_"],
     "ho3":["z2403","z7","天使缎带","天使缎带","swirl_"]
 }
-,testTheme={
+,testTheme = {
     "url":"https://p.inari.site/guguicons/test/eq/",
     "old":"0",
     "ext":".gif",
@@ -420,14 +427,34 @@ const defaultConf={
     "h3":["z2403","z7","萌爪耳钉","精灵王护石","%E8%90%8C%E7%88%AA%E8%80%B3%E9%92%89/"],
     "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6/"]
 }
-,ygcheck=["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"],nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
-let useOldNamesCheck ='',useThemeNameCheck ='',Multilingual='',showCGCheck='',voiceOCheck='',kanbanCheck='',custom = defaultConf,userTheme={},timeout = null,nowTheme,tempvo=false,tempca,tpkanban,kanban,kanbanimg,ww,wh,
-    ccard=false,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,spinert,nowEquip,spineJson;
-if (localStorage.ThemePackConf) { custom = JSON.parse(localStorage.ThemePackConf);} else {localStorage.setItem('ThemePackConf', JSON.stringify(defaultConf));};
+,ygcheck = ["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"]
+,nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+let mvp=new spine.webgl.Matrix4(),ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,User=$('span.fyg_colpz06.fyg_f24')[0].innerText,momoUser = "momo_"+User,uuidt=localStorage.uuid||""
+,custom,nowTheme,tempca,tpkanban,kanban,kanbanimg,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,nowEquip,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
+,canvas,gl,shader,batcher,skeletonRenderer,loadingSkeleton,currentSkeletonBuffer,animationState,forceNoLoop,currentTexture,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,pagetype=24,speedFactor=1,tempvo=false,ccard=false,loading = false
+,timeout = null,useOldNamesCheck='',useThemeNameCheck='',Multilingual='',tpkanbanHTML='',showCGCheck='',voiceOCheck='',kanbanCheck='',activeSkeleton="",pendingAnimation='',generalAdditionAnimations={},userTheme={},generalBattleSkeletonData={},lang="zh"
+,animationQueue=[],currentClass='1',imgmove=[0,0.6],lastFrameTime=Date.now()/1000,bgColor=[0,0,0,0],additionAnimations=['DEAR','NO_WEAPON','POSING','RACE','RUN_JUMP','SMILE'],currentClassAnimData={type:0,data:{}},currentCharaAnimData={id:0,data:{}}
+,momoConf={},imptConf={};
+momoConf.ThemePackConf={};
+if(window.location.href.indexOf('fyg_login.php') > -1){ localStorage.setItem('cloudGetCheck',false); };
+if(localStorage.getItem('momoConf_'+User)){ momoConf=JSON.parse(localStorage.getItem('momoConf_'+User)); };
+
+
+/**
+ * Functions.
+ */
+/* Core */
+function initConf(){
+if (localStorage.ThemePackConf) {
+    custom = JSON.parse(localStorage.ThemePackConf);
+}
+else{
+    custom =defaultConf; localStorage.setItem('ThemePackConf',JSON.stringify(defaultConf));
+};
 if (localStorage.nowEquip) { nowEquip = localStorage.nowEquip;};
-if (!custom.yourcard ) { custom.yourcard=defaultConf.yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
-if (!custom.kanbansize){ custom.kanbansize=defaultConf.kanbansize;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};
-if (!custom.language ) { custom.language=defaultConf.language;localStorage.setItem('ThemePackConf', JSON.stringify(custom));};const lang=Language[custom.language];
+if (!custom.yourcard ) { custom.yourcard=defaultConf.yourcard; cupdfunc();};
+if (!custom.kanbansize){ custom.kanbansize=defaultConf.kanbansize;cupdfunc();};
+if (!custom.language ) { custom.language=defaultConf.language;cupdfunc();};lang=Language[custom.language];
 if (custom.showCG == true) { showCGCheck = 'checked'; };
 if (custom.voiceO == true) { voiceOCheck = 'checked'; };
 if (custom.useThemeName==true){ useThemeNameCheck='checked';};
@@ -435,31 +462,34 @@ if(custom.ThemePack=="classic"){ nowTheme=classicTheme;sessionStorage.setItem('T
 else if(custom.ThemePack=="test"||custom.ThemePack=="pcr"){ nowTheme=testTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="off"){ nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));}
 else if(custom.ThemePack=="user"){
-    if (localStorage.userTheme){
-        userTheme = JSON.parse(localStorage.userTheme);
-        if(userTheme.h3!=null){
+    if (localStorage.userTheme||momoConf.userTheme){
+        if(localStorage.userTheme&&!momoConf.userTheme){momoConf.userTheme=JSON.parse(localStorage.userTheme);cupdfunc();userTheme=momoConf.userTheme;}
+        else{userTheme=momoConf.userTheme;};
+        if(userTheme.w4!=null){
             nowTheme=userTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
             if(userTheme.舞==null&&custom.showCG==true){
                 alert(lang.initUFG);custom.showCG=false;
+            };
+            if(userTheme.舞==null&&custom.showKanban==true){
+                alert(lang.initUFG);custom.showKanban=false;;
             };
             if(userTheme.voice==null&&custom.voiceO==true){
                 alert(lang.initUVO);custom.voiceO=false;
             };
         }
         else{
-            alert(lang.initUOT);custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            alert(lang.initUOT);custom.ThemePack="off"; cupdfunc();
             nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
         };
     }
-    else{ alert(lang.initUNU);custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
+    else{ alert(lang.initUNU);custom.ThemePack="off"; cupdfunc();nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
 }
 else{nowTheme=originTheme;sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-let yourcard=custom.yourcard,cardvo=nowTheme[yourcard+"voice"],iconsize=custom.iconSize;
+yourcard=custom.yourcard;cardvo=nowTheme[yourcard+"voice"];iconsize=custom.iconSize;
 if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
 if (custom.showKanban == true&&nowTheme.spine==true){spinert=nowTheme.spinert;kanbanCheck='checked';}else if(custom.showKanban == true){kanbanimg=nowTheme[yourcard][2];kanbanCheck='checked';}else{kanbanimg=nullimg;};
 if(nowTheme["dessertlevel-"+custom.language]){nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
 if(nowTheme["dessertname-"+custom.language]){nowTheme.dessertname=nowTheme["dessertname-"+custom.language];sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));};
-let equipName;
 if(custom.useThemeName==true){ Multilingual='checked';equipName=nowTheme["equip-"+custom.language];}
 else if(nowTheme["equip-"+custom.language]){ Multilingual='checked';equipName=Language[custom.language].equip;};
 
@@ -478,15 +508,10 @@ h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
 
 if(custom.useOldNames==true){ useOldNamesCheck='checked'; a8=nowTheme.ao8;a10=nowTheme.ao10;w1=nowTheme.wo1;w3=nowTheme.wo3;c6=nowTheme.co6;h1=nowTheme.ho1;h2=nowTheme.ho2;h3=nowTheme.ho3; };
 if(localStorage.nowEquip){nowEquip=localStorage.nowEquip;}else{nowEquip=spineJson.type;};
-let pagetype=24;if (window.location.href.indexOf('pk.php') > -1||window.location.href.indexOf('equip.php') > -1) { pagetype=nowEquip; };
-
-
-/**
- * Insert Script Html Codes.
- */
-/* Kanban Html */
-let tpkanbanHTML = '',imgmove=[0,0.6],kbw,kbh;ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
-if (custom.showKanban==true&&nowTheme.spine==true) {
+if (window.location.href.indexOf('pk.php') > -1||window.location.href.indexOf('equip.php') > -1) { pagetype=nowEquip; };
+};/* init Configs */
+function insertHTML(){
+  if (custom.showKanban==true&&nowTheme.spine==true) {
     if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove);};
     if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
     if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
@@ -496,33 +521,204 @@ if (custom.showKanban==true&&nowTheme.spine==true) {
     <div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;width:${365*Math.floor(custom.kanbansize )/100}px; height=${305*Math.floor(custom.kanbansize )/100}px;" >
     <canvas id="tpkanban" width="360" height="300"></canvas></div>`).insertBefore('body');
 }
-else if (custom.showKanban==true){
+  else if (custom.showKanban==true){
     if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove); };
     if(imgmove[0]*ww>ww-3.6*Math.floor(custom.kanbansize )){kbw=ww-3.6*Math.floor(custom.kanbansize )}else{kbw=imgmove[0]*ww};
     if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
     tpkanbanHTML =$( `<div id = "divkanban" style = "position:fixed;left:${kbw}px;top:${kbh}px;z-index:88;cursor:pointer;width:${365*Math.floor(custom.kanbansize )/100}px; height=${305*Math.floor(custom.kanbansize )/100}px;" >
     <img class="tpkanban" src = ${kanbanimg} width =${Math.floor(custom.kanbansize ) + "%"} height =${Math.floor(custom.kanbansize ) + "%"}></div>`).insertBefore('body');
 }
-else{tpkanbanHTML = $(`<div id ="divkanban" style ="display:none;"><img class="tpkanban" src = ${kanbanimg}></div>`).insertBefore('body');};kanban = document.getElementById("divkanban");
-/* Setting-Menu Html */
-if($('.themepack-ls').length==0){
-    $(`<p></p><span><input type="button" class="themelang" value="文A">&nbsp;
-    <input type="button" class="themepack-ls" value="${lang.menuTheme}">&nbsp;<input type="button" class="themepack-usr" value="${lang.menuUser}">&nbsp;
-    <input type="button" class="icons-size" value="${lang.menuIcon}">&nbsp;<input type="button" class="kanban-size" value="${lang.menuKanban}">&nbsp;
-    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}><span class="thememenu">${lang.menuOldEQ}</span>&nbsp;
-    <input type="checkbox" class="themepack-equip" ${useThemeNameCheck}><span class="thememenu">${lang.menuThemeEQ}</span>&nbsp;
-    <input type="checkbox" class="themepack-showCG" ${showCGCheck}><span class="thememenu">${lang.menuSCG}</span>&nbsp;
-    <input type="checkbox" class="themepack-voiceO" ${voiceOCheck}><span class="thememenu">${lang.menuSVO}</span>&nbsp;
-    <input type="checkbox" class="themepack-showKB" ${kanbanCheck}><span class="thememenu">${lang.menuSKB}</span>&nbsp;
+  else{tpkanbanHTML = $(`<div id ="divkanban" style ="display:none;"><img class="tpkanban" src = ${kanbanimg}></div>`).insertBefore('body');};kanban = document.getElementById("divkanban");
+  if($('.themepack-ls').length==0){
+    $(`<p></p><span><b>UUID</b> <input type="text" class="themepack-uuid" style="width:80px" value="${uuidt}">
+    <input type="button" class="themepack-cuuid" value="${lang.cuuid}">
+    <input type="button" class="themepack-ls" value="${lang.menuTheme}">
+    <input type="button" class="themepack-usr" value="${lang.menuUser}">
+    <input type="button" class="icons-size" value="${lang.menuIcon}">
+    <input type="button" class="kanban-size" value="${lang.menuKanban}">
+    <input type="checkbox" class="iconpack-switch" ${useOldNamesCheck}><span class="thememenu">${lang.menuOldEQ}</span>
+    <input type="checkbox" class="themepack-equip" ${useThemeNameCheck}><span class="thememenu">${lang.menuThemeEQ}</span>
+    <input type="checkbox" class="themepack-showCG" ${showCGCheck}><span class="thememenu">${lang.menuSCG}</span>
+    <input type="checkbox" class="themepack-voiceO" ${voiceOCheck}><span class="thememenu">${lang.menuSVO}</span>
+    <input type="checkbox" class="themepack-showKB" ${kanbanCheck}><span class="thememenu">${lang.menuSKB}</span>
+    <input type="button" class="themelang" value="文A">
     <input type="checkbox" class="themepack-switch" ${Multilingual} style="display:none"><audio id="themeSoundPlay" controls src="themeSoundPlay.mp3" type="audio/mp3" style="display:none"></audio>
     </span>`).insertBefore($('hr')[0])};
+};/* insert Kanban&Setting-Menu Html */
+function addCSS(){
+$('head').append(`<style>
+    div[style='width:1200px;margin: 0 auto;'] { width: 80% !important;max-width:1200px;}
+    .btn.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px;${nowTheme.backsize}}
+    .btn.fyg_tr.fyg_mp3{ width: 263px !important; height: 40px !important;}
+    .btn.fyg_tl.fyg_mp3{ width: 263px !important; height: 40px !important;}
+    .btn.fyg_tc.fyg_mp3{ width: 536px !important; height: 40px !important;}
+    .btn.fyg_colpzbg.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important; ${nowTheme.wqbacksize}}
+    .img-rounded { width: 50px; height:50px;}
+    .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
+    #smallcardimg {height:50px;width:50px;}
+    [data-trigger=hover] {background-blend-mode: ${nowTheme.background} !important; }
+    [data-toggle=tooltip]{background-blend-mode: ${nowTheme.background} !important; }
+    .tool {position: fixed;top: 0;width: 100%;z-index: 1;cursor: default}
+	.tool>span {white-space: nowrap}
+</style>`);
+if(nowTheme.spinert){$('head').append(`<style>#divkanban:hover{background:url(${nowTheme.kanbanbg});background-size:cover;}</style>`);};
+if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Phone') > -1){
+    $('head').append(`<style>
+    select,body,h4,h5,i,.fyg_f14,h3,button,input,span,.panel-body,.col-sm-8 {font-size:28px !important;}
+    h2,.panel-heading,.fyg_f18,.col-sm-2.fyg_lh60{font-size:32px !important;}
+    .col-sm-2.fyg_lh60[style='text-align: left;']{width:180px;white-space: pre-wrap;}
+    .text-info.fyg_f24.fyg_lh60>span,.text-info.fyg_f24,.col-sm-2.fyg_lh60[style='text-align: left;']>span{font-size:48px !important;}
+    .progress{height:24px !important;}
+    div[class*='progress-bar']{font-size:26px !important;line-height:24px;}
+    p{font-size:26px !important;}
+    div[class='btn'],div[class='btn btn-primary'],.with-padding.bg-special.fyg_f14,.icon.icon-diamond{font-size:24px !important;}
+    .btn.btn-block.dropdown-toggle.fyg_lh30{font-size:18px !important;}
+    button[onclick*='b_forcbs(']{white-space: pre-wrap;}
+    .img-rounded,#smallcardimg {height:100px;width:100px;}
+    .btn.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;line-height: ${Math.floor(parseInt(iconsize)*1.2)-1}px;}
+    .btn.fyg_colpzbg.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;}
+    .fyg_tc>.btn.fyg_colpzbg.fyg_mp3.fyg_tc{width:120px !important;height: 160px !important;line-height:42px;}
+    .btn.btn-primary.btn-group.dropup {height:160px !important;}
+</style>`);};
+};/* add CSS */
+/* GuHelper DAQ & Beach & PK */
+function guHelpfunc(){
+    momoConf.ThemePackConf={};
+    momoConf.BeachConf={};
+    momoConf.guDAQConf={};
+    momoConf.PKConf={};
 
+    if(localStorage.ThemePackConf){momoConf.ThemePackConf=JSON.parse(localStorage.ThemePackConf);};
+    if(localStorage.maxap) { momoConf.PKConf.maxap =localStorage.maxap; };
+    if(localStorage.showSM){ momoConf.PKConf.showSM=localStorage.showSM;};
+    if(localStorage.maxrank){ momoConf.PKConf.maxrank=localStorage.maxrank; };
+    if(localStorage.g_gemid){ momoConf.PKConf.g_gemid=localStorage.g_gemid; };
+    if(localStorage.mainHost){ momoConf.PKConf.mainHost=localStorage.mainHost; };
+    if(localStorage.g_ismake){ momoConf.PKConf.g_ismake=localStorage.g_ismake; };
+    if(localStorage.flashtime) { momoConf.PKConf.flashtime =localStorage.flashtime; };
+    if(localStorage.showcharlv){ momoConf.PKConf.showcharlv=localStorage.showcharlv;};
+    if(localStorage.g_ismanualmake){ momoConf.PKConf.g_ismanualmake = localStorage.g_ismanualmake;};
 
-/**
- * All functions.
- */
-/* Kanban Drag */
-function drag(obj){
+    if(localStorage.getItem('autoBeach_'+User)) { momoConf.BeachConf=JSON.parse(localStorage.getItem('autoBeach_'+User));};
+
+    if(localStorage.over) { momoConf.guDAQConf.over =localStorage.over; };
+    if(localStorage.title){ momoConf.guDAQConf.title=localStorage.title;};
+    if(localStorage.halo_max) { momoConf.guDAQConf.halo_max =localStorage.halo_max; };
+    if(localStorage.cardName) { momoConf.guDAQConf.cardName =localStorage.cardName; };
+    if(localStorage.keepcheck){ momoConf.guDAQConf.keepcheck=localStorage.keepcheck;};
+    if(localStorage.attribute){ momoConf.guDAQConf.attribute=localStorage.attribute;};
+    if(localStorage.beachcheck) { momoConf.guDAQConf.beachcheck=localStorage.beachcheck; };
+    if(localStorage.dataReward) { momoConf.guDAQConf.dataReward=localStorage.dataReward; };
+    if(localStorage.getItem(User+'_beach_BG') ) { momoConf.guDAQConf.beach_BG = localStorage.getItem(User+'_beach_BG') ; };
+    if(localStorage.getItem(User+'_forgeAuto')) { momoConf.guDAQConf.forgeAuto =localStorage.getItem(User+'_forgeAuto'); };
+    if(localStorage.getItem(User+'_stoneAuto1')){ momoConf.guDAQConf.stoneAuto1=localStorage.getItem(User+'_stoneAuto1');};
+    if(localStorage.getItem(User+'_stoneAuto2')){ momoConf.guDAQConf.stoneAuto2=localStorage.getItem(User+'_stoneAuto2');};
+    if(localStorage.getItem(User+'_stoneAuto3')){ momoConf.guDAQConf.stoneAuto3=localStorage.getItem(User+'_stoneAuto3');};
+    if(localStorage.getItem(User+'_stoneAuto4')){ momoConf.guDAQConf.stoneAuto4=localStorage.getItem(User+'_stoneAuto4');};
+    if(localStorage.getItem(User+'_stoneAuto5')){ momoConf.guDAQConf.stoneAuto5=localStorage.getItem(User+'_stoneAuto5');};
+    if(localStorage.getItem(User+'_stoneAuto6')){ momoConf.guDAQConf.stoneAuto6=localStorage.getItem(User+'_stoneAuto6');};
+    if(localStorage.getItem(User+'_indexRally')){ momoConf.guDAQConf.indexRally=localStorage.getItem(User+'_indexRally');};
+    if(localStorage.getItem(User+'_equipment_BG')) { momoConf.guDAQConf.equipment_BG =localStorage.getItem(User+'_equipment_BG'); };
+    if(localStorage.getItem(User+'_keepPkRecord')) { momoConf.guDAQConf.keepPkRecord =localStorage.getItem(User+'_keepPkRecord'); };
+  //if(localStorage.getItem(User+'_amulet_groups')){ momoConf.guDAQConf.amulet_groups=localStorage.getItem(User+'_amulet_groups');};
+    if(localStorage.getItem(User+'_autoTaskEnabled') ) { momoConf.guDAQConf.autoTaskEnabled = localStorage.getItem(User+'_autoTaskEnabled') ; };
+    if(localStorage.getItem(User+'_equipment_Expand')) { momoConf.guDAQConf.equipment_Expand =localStorage.getItem(User+'_equipment_Expand'); };
+    if(localStorage.getItem(User+'_beach_forceExpand')){ momoConf.guDAQConf.beach_forceExpand=localStorage.getItem(User+'_beach_forceExpand');};
+    if(localStorage.getItem(User+'_equipment_StoreExpand')) { momoConf.guDAQConf.equipment_StoreExpand= localStorage.getItem(User+'_equipment_StoreExpand'); };
+    if(localStorage.getItem(User+'_stone_ProgressEquipTip')){ momoConf.guDAQConf.stone_ProgressEquipTip=localStorage.getItem(User+'_stone_ProgressEquipTip');};
+    if(localStorage.getItem(User+'_stone_ProgressCardTip')) { momoConf.guDAQConf.stone_ProgressCardTip= localStorage.getItem(User+'_stone_ProgressCardTip'); };
+    if(localStorage.getItem(User+'_stone_ProgressHaloTip')) { momoConf.guDAQConf.stone_ProgressHaloTip= localStorage.getItem(User+'_stone_ProgressHaloTip'); };
+    if(localStorage.getItem(User+'_ignoreWishpoolExpiration') ) { momoConf.guDAQConf.ignoreWishpoolExpiration = localStorage.getItem(User+'_ignoreWishpoolExpiration') ; };
+    if(localStorage.getItem(User+'_beach_ignoreStoreMysEquip')) { momoConf.guDAQConf.beach_ignoreStoreMysEquip =localStorage.getItem(User+'_beach_ignoreStoreMysEquip'); };
+    if(localStorage.getItem(User+'_autoTaskCheckStoneProgress')){ momoConf.guDAQConf.autoTaskCheckStoneProgress=localStorage.getItem(User+'_autoTaskCheckStoneProgress');};
+    if(localStorage.getItem(User)){
+        let daqt=JSON.parse(localStorage.getItem(User));
+        if(daqt.dataIndex) { momoConf.guDAQConf.dataIndex =daqt.dataIndex; };
+        if(daqt.config) { momoConf.guDAQConf.config =daqt.config; };
+        if(daqt.calculatorTemplatePVE) { momoConf.guDAQConf.calculatorTemplatePVE =daqt.calculatorTemplatePVE; };
+    };
+    localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf));
+};
+function helpGufunc(){
+    momoConf=JSON.parse(localStorage.getItem('momoConf_'+User));
+
+    if(momoConf.ThemePackConf&&momoConf.ThemePackConf!={}){
+        localStorage.setItem('ThemePackConf',JSON.stringify(momoConf.ThemePackConf));
+    };
+
+    if(momoConf.BeachConf&&momoConf.BeachConf!={}){
+        localStorage.setItem('autoBeach_'+User,JSON.stringify(momoConf.BeachConf));
+    };
+
+    if(momoConf.PKConf&&momoConf.PKConf!={}){
+        let PKConf=momoConf.PKConf;
+        if(PKConf.maxap) { localStorage.setItem('maxap', PKConf.maxap); };
+        if(PKConf.showSM){ localStorage.setItem('showSM',PKConf.showSM);};
+        if(PKConf.maxrank) { localStorage.setItem('maxrank' , PKConf.maxrank); };
+        if(PKConf.g_gemid) { localStorage.setItem('g_gemid' , PKConf.g_gemid); };
+        if(PKConf.mainHost){ localStorage.setItem('mainHost' ,PKConf.mainHost);};
+        if(PKConf.g_ismake){ localStorage.setItem('g_ismake' ,PKConf.g_ismake);};
+        if(PKConf.flashtime){ localStorage.setItem('flashtime' ,PKConf.flashtime); };
+        if(PKConf.showcharlv){localStorage.setItem('showcharlv',PKConf.showcharlv);};
+        if(PKConf.g_ismanualmake) { localStorage.setItem('g_ismanualmake',PKConf.g_ismanualmake); };
+    };
+
+    if(momoConf.guDAQConf&&momoConf.guDAQConf!={}){
+        let DAQConf=momoConf.guDAQConf,daqt={};
+        //let daqt=JSON.parse(localStorage.getItem(User));
+        if(DAQConf.dataIndex) { daqt.dataIndex =DAQConf.dataIndex; };
+        if(DAQConf.config) { daqt.config =DAQConf.config; };
+        if(DAQConf.calculatorTemplatePVE) { daqt.calculatorTemplatePVE =DAQConf.calculatorTemplatePVE; };
+        localStorage.setItem(User, JSON.stringify(daqt));
+        if(DAQConf.over) { localStorage.setItem('over', DAQConf.over); };
+        if(DAQConf.title){ localStorage.setItem('title',DAQConf.title);};
+        if(DAQConf.halo_max) { localStorage.setItem('halo_max',DAQConf.halo_max); };
+        if(DAQConf.cardName) { localStorage.setItem('cardName',DAQConf.cardName); };
+        if(DAQConf.attribute) { localStorage.setItem('attribute', DAQConf.attribute); };
+        if(DAQConf.keepcheck) { localStorage.setItem('keepcheck', DAQConf.keepcheck); };
+        if(DAQConf.beachcheck){ localStorage.setItem('beachcheck',DAQConf.beachcheck);};
+        if(DAQConf.dataReward){ localStorage.setItem('dataReward',DAQConf.dataReward);};
+        if(DAQConf.beach_BG) { localStorage.setItem(User+'_beach_BG', DAQConf.beach_BG); };
+        if(DAQConf.forgeAuto){ localStorage.setItem(User+'_forgeAuto',DAQConf.forgeAuto);};
+        if(DAQConf.stoneAuto1) { localStorage.setItem(User+'_stoneAuto1',DAQConf.stoneAuto1); };
+        if(DAQConf.stoneAuto2) { localStorage.setItem(User+'_stoneAuto2',DAQConf.stoneAuto2); };
+        if(DAQConf.stoneAuto3) { localStorage.setItem(User+'_stoneAuto3',DAQConf.stoneAuto3); };
+        if(DAQConf.stoneAuto4) { localStorage.setItem(User+'_stoneAuto4',DAQConf.stoneAuto4); };
+        if(DAQConf.stoneAuto5) { localStorage.setItem(User+'_stoneAuto5',DAQConf.stoneAuto5); };
+        if(DAQConf.stoneAuto6) { localStorage.setItem(User+'_stoneAuto6',DAQConf.stoneAuto6); };
+        if(DAQConf.indexRally) { localStorage.setItem(User+'_indexRally',DAQConf.indexRally); };
+        if(DAQConf.equipment_BG) { localStorage.setItem(User+'_equipment_BG', DAQConf.equipment_BG); };
+        if(DAQConf.keepPkRecord) { localStorage.setItem(User+'_keepPkRecord', DAQConf.keepPkRecord); };
+      //if(DAQConf.amulet_groups){ localStorage.setItem(User+'_amulet_groups',DAQConf.amulet_groups);};
+        if(DAQConf.autoTaskEnabled) { localStorage.setItem(User+'_autoTaskEnabled',DAQConf.autoTaskEnabled); };
+        if(DAQConf.beach_forceExpand) { localStorage.setItem(User+'_beach_forceExpand',DAQConf.beach_forceExpand); };
+        if(DAQConf.equipment_StoreExpand) { localStorage.setItem(User+'_equipment_StoreExpand', DAQConf.equipment_StoreExpand); };
+        if(DAQConf.stone_ProgressEquipTip){ localStorage.setItem(User+'_stone_ProgressEquipTip',DAQConf.stone_ProgressEquipTip);};
+        if(DAQConf.stone_ProgressCardTip) { localStorage.setItem(User+'_stone_ProgressCardTip', DAQConf.stone_ProgressCardTip); };
+        if(DAQConf.stone_ProgressHaloTip) { localStorage.setItem(User+'_stone_ProgressHaloTip', DAQConf.stone_ProgressHaloTip); };
+        if(DAQConf.ignoreWishpoolExpiration ) { localStorage.setItem(User+'_ignoreWishpoolExpiration' , DAQConf.ignoreWishpoolExpiration) ; };
+        if(DAQConf.beach_ignoreStoreMysEquip) { localStorage.setItem(User+'_beach_ignoreStoreMysEquip', DAQConf.beach_ignoreStoreMysEquip); };
+        if(DAQConf.autoTaskCheckStoneProgress){ localStorage.setItem(User+'_autoTaskCheckStoneProgress',DAQConf.autoTaskCheckStoneProgress);};
+    };
+};
+function imptifunc(){
+    imptConf.amulet_groups={};
+    if(localStorage.getItem(User)){
+        let daqt=JSON.parse(localStorage.getItem(User));
+        if(daqt.dataBind) { momoConf.dataIndex =daqt.dataBind; };
+        if(daqt.config) { momoConf.guDAQConf.config =daqt.config; };
+        if(daqt.calculatorTemplatePVE) { momoConf.guDAQConf.calculatorTemplatePVE =daqt.calculatorTemplatePVE; };
+    };
+    if(localStorage.getItem(User+'_amulet_groups')){imptConf.amulet_groups=localStorage.getItem(User+'_amulet_groups');};
+    localStorage.setItem('imptConf_'+User, JSON.stringify(imptConf));
+};
+function imptpfunc(){
+    imptConf=JSON.parse(localStorage.getItem('imptConf_'+User));
+    if(imptConf.main&&imptConf.main!={}){ localStorage.setItem(User,JSON.stringify(imptConf.main)); };
+    if(imptConf.amulet_groups&&imptConf.amulet_groups!={}){ localStorage.setItem(User+'_amulet_groups',imptConf.amulet_groups); };
+};
+/* Kanban Drag & Resize */
+function dragfunc(obj){
     ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;console.log("width:"+ww+"higth"+wh);
     let l,t,i,s;
     obj.onmousedown = function (event) {
@@ -562,8 +758,7 @@ function drag(obj){
             localStorage.setItem('imgmove', JSON.stringify([l, t]));
         }
     }); return false;
-};drag(kanban);
-/* Kanban Resize */
+};
 window.onresize = function(){
     let temp = $('#divkanban'); ww = window.innerWidth || document.body.clientWidth; wh = window.innerHeight || document.body.clientHeight;
     if(localStorage.imgmove != null){ imgmove = JSON.parse(localStorage.imgmove); };
@@ -571,18 +766,91 @@ window.onresize = function(){
     if(imgmove[1]*wh>wh-3*Math.floor(custom.kanbansize )){kbh=wh-3*Math.floor(custom.kanbansize )}else{kbh=imgmove[1]*wh};
     temp[0].style.left = kbw + 'px'; temp[0].style.top = kbh + 'px';
 };
-/* Kanban Spine functions */
-let lastFrameTime = Date.now() / 1000,canvas,shader, batcher, gl, skeletonRenderer, shapes, activeSkeleton = "", pendingAnimation = '', animationQueue = [], speedFactor = 1, animationState, forceNoLoop,
-    mvp = new spine.webgl.Matrix4(), bgColor = [0, 0, 0, 0], additionAnimations = ['DEAR', 'NO_WEAPON', 'POSING', 'RACE', 'RUN_JUMP', 'SMILE'], loading = false, loadingSkeleton, generalBattleSkeletonData = {},
-    generalAdditionAnimations = {}, currentTexture, currentClassAnimData = { type: 0, data: {} }, currentCharaAnimData = { id: 0,data: {} }, currentClass = '1', currentSkeletonBuffer;window.skeleton = {};
-$("#setAnimation").click(function () {
-    animationState = skeleton.state;forceNoLoop = false;animationQueue = $("#animationList")[0].value.split(',');
-    if (animationQueue[0] == 'multi_standBy') { animationQueue.push('multi_idle_standBy');}
-    else if (['multi_idle_standBy', 'multi_idle_noWeapon', 'idle', 'walk', 'run', 'run_gamestart'].indexOf(animationQueue[0]) == -1) { animationQueue.push('idle'); };
-    console.log(animationQueue); let nextAnim = animationQueue.shift();
-    if (!/^\d{6}/.test(nextAnim)) nextAnim = getClass(currentClassAnimData.type) + '_' + nextAnim;
-    console.log(nextAnim); animationState.setAnimation(0, nextAnim, !animationQueue.length && !forceNoLoop);
-});
+/* Cloud */
+function clgnfunc(username,types,isreg) {
+    $.ajax({ url: 'https://api.inari.site/?s=App.User_User.Login&username=' + username + '&password=momoTown', type: 'POST', dataType: 'json' })
+        .done(data => {
+        if (data.ret == 200) {
+            let temp = data.data;
+            if (temp.is_login == true) {
+                console.log('login');
+                localStorage.setItem(types, JSON.stringify([temp.user_id, temp.token]));
+                if(types=='impt_Cloud'&&isreg){
+                    imptifunc();
+                    let texts=JSON.stringify(imptConf);
+                    texts=texts.replace(/{/g, '【【').replace(/}/g, '】】').replace(/"/g, '“”').replace(/\//g,'？？');
+                    console.log(texts)
+                    //ltcfunc(temp.user_id,temp.token,texts);
+                }
+                else if (types=='impt_Cloud') { //ctlfunc (temp.user_id,temp.token);
+                };
+                if(types=='momo_Cloud'&&isreg){ //cupdfunc(temp.user_id,temp.token);
+                }
+                else if (types=='momo_Cloud') { //ctlfunc (temp.user_id,temp.token);
+                };
+            }
+            else if (temp.is_login == false) { alert('Oops!') }
+        }
+        else if(data.ret == 400) {
+            //cregfunc(username,types);
+        }
+        else{ alert('Oops!' + data.ret + data.msg) }
+    })
+        .fail(data => { console.log(data) });
+};/* login */
+function cregfunc(username,types) {
+    $.ajax({ url: 'https://api.inari.site/?s=App.User_User.Register&username=' + username + '&password=momoTown', type: 'POST', dataType: 'json' })
+        .done(data => { if (data.ret == 200) { //clgnfunc(username,types,true);
+                                             } else { alert('Oops！' + data.ret + data.msg) }; })
+        .fail(data => { console.log(data) });
+};/* auto reg */
+function cupdfunc(user_id,token){
+    if(!localStorage.getItem('momoConf_'+User)){ momoConf.ThemePackConf=custom; };
+    localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf));
+    localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+    if(!custom.upconf){
+        let texts=JSON.stringify(momoConf);
+        texts=texts.replace(/{/g, '【【').replace(/}/g, '】】').replace(/"/g, '“”').replace(/\//g,'？？');
+        console.log(texts)
+        //ltcfunc(user_id,token,texts);
+    };
+};/* update cfg */
+function ltcfunc(user_id,token,text) {
+    let formData={
+        "user_id":user_id,
+        "token":token,
+        "guguhelper":text
+    }
+    $.ajax({ url:'https://api.inari.site/?s=App.User_User.Gupdate',data: formData, type: 'POST', dataType: 'json' })
+        .done(data => {
+        if (data.ret == 200) {
+            console.log('cloud sync');
+        }
+        else { alert(data.msg + data.ret); }
+    })
+        .fail(data => { console.log(data) });
+};/* upload cfg */
+function ctlfunc(user_id,token) {
+    let formData={
+        "user_id":user_id,
+        "token":token,
+    }
+    $.ajax({ url:'https://api.inari.site/?s=App.User_User.Guhelper',data: formData, type: 'POST', dataType: 'json' })
+        .done(data => {
+        if (data.ret == 200) {
+            console.log(data.data);
+        }
+        else { alert(data.msg + data.ret); }
+    })
+        .fail(data => { console.log(data) });
+};/* cloud cfg */
+function uuidfunc(){
+    let uuid=new Date().getTime().toString(36)+Math.ceil(Math.random()*36-1).toString(36);
+    localStorage.setItem("uuid",uuid); $(".themepack-uuid")[0].value=uuid;
+    //cregfunc(uuid,'impt_Cloud');
+};/* uuid */
+/* Spine */
+window.skeleton = {};
 function _(e, t, n) {
     let r = null;
     if ("text" === e){return document.createTextNode(t);};
@@ -772,66 +1040,7 @@ function resize() {
     if (scale < 1) scale = 1;let width = 256 * scale,height = 256 * scale;
     mvp.ortho2d(spineJson.wi,spineJson.hi, width, height); gl.viewport(0, 0, 512*spineJson.re, 512*spineJson.re);
 };
-/* Settings-Menu functions */
-$(".themelang").click(function(){
-    let ThemeLang = prompt('输入 zh 使用【简体中文】；\n輸入 zht 使用【繁體中文】；\nja を入力 表示言語【日本語】；\nInput en To show in 【English】.', "zh");
-    if (ThemeLang) {
-        if(ThemeLang=="zh"){ custom.language="zh"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
-        else if(ThemeLang=="zht"){ custom.language="zht"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
-        else if(ThemeLang=="ja"){ custom.language="ja"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
-        else if(ThemeLang=="en"){ custom.language="en"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
-        else{ custom.language="zh"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
-    };
-});
-$(".themepack-ls").click(function(){
-    if (confirm(lang.themeSW)) {
-        let ThemePack = prompt(lang.themeSA, "1");
-        if (ThemePack) {
-            if(ThemePack=="0"){ console.log('off');custom.ThemePack="off"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();}
-            else if(ThemePack=="1"){ console.log('test');custom.ThemePack="test"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload(); }
-            else if(ThemePack=="2"){
-                if (localStorage.userTheme){
-                    userTheme = JSON.parse(localStorage.userTheme);
-                    if(userTheme.h3!=null){
-                        console.log('user');custom.ThemePack="user";localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();nowTheme=userTheme;
-                        sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
-                        if(userTheme.舞==null){ alert(lang.initUFG) };
-                        if(userTheme.voice==null){ alert(lang.initUVO) };
-                    }
-                    else{ alert(lang.initUOT) };
-                }
-                else{ alert(lang.initUNU) };
-            }
-            else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
-        };
-    }
-    else{
-        if(confirm(lang.themeDF)){
-            console.log('classic');custom.ThemePack="classic"; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();
-        };
-    };
-});
-$(".icons-size").click(function(){
-    let IconSize = prompt(lang.iconUA, "50px");
-    if (IconSize) { custom.iconSize = IconSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
-});
-$(".kanban-size").click(function(){
-    let KanbanSize = prompt(lang.kanbanUA, "100");
-    if (KanbanSize) { custom.kanbansize = KanbanSize; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();};
-});
-$(".themepack-usr").click(function(){
-    let userTheme = prompt(lang.menuUA+'\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21',`${localStorage.userTheme}`);
-    if (userTheme) { console.log(userTheme); localStorage.setItem('userTheme', userTheme);};
-});
-$(".iconpack-switch").click(function(e){ custom.useOldNames = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
-$(".themepack-equip").click(function(e){ custom.useThemeName = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
-$(".themepack-showCG").click(function(e){ custom.showCG = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
-$(".themepack-showKB").click(function(e){ custom.showKanban = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));location.reload();});
-$(".themepack-voiceO").click(function(e){
-    custom.voiceO = e.target.checked; localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-    if(custom.voiceO==true){$("#themeSoundPlay").attr('src',nowTheme.voice[0]);}else{$("#themeSoundPlay").attr('src',nowTheme.voice[1]);};$("#themeSoundPlay")[0].play();
-});
-/* Replace to Theme-Icons */
+/* Replace */
 function repfunc(){
     if(ext!=".gif"){ $("button[style*='ys/icon/z']").attr("style",function(n,v){ n= v.replace(/.gif/g, ext);return n;});};
     $("button[style*='z2101']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]);n=n.replace(/ys\/icon\/z2101/g, purl+a1[4]+old);return n;});
@@ -858,10 +1067,10 @@ function repfunc(){
     $("button[style*='z2401']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]);n=n.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
     $("button[style*='z2402']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]);n=n.replace(/ys\/icon\/z2402/g, purl+h2[4]+old);return n;});
     $("button[style*='z2403']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]);n=n.replace(/ys\/icon\/z2403/g, purl+h3[4]+old);return n;});
-    $(".with-padding").html(function(n,v){n= v.replace(/苹果护身符/g, dessertname[0]); n= n.replace(/葡萄护身符/g, dessertname[1]); n= n.replace(/樱桃护身符/g, dessertname[2]); return n;});
-    $("button[data-original-title*='樱桃']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z901/g, purl+dessert[2]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/樱桃护身符/g, dessertname[2]);return n;});
-    $("button[data-original-title*='葡萄']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z902/g, purl+dessert[1]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/葡萄护身符/g, dessertname[1]);return n;});
-    $("button[data-original-title*='苹果']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z903/g, purl+dessert[0]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/苹果护身符/g, dessertname[0]);return n;});
+    $(".with-padding").html(function(n,v){n= v.replace(/星铜苹果护身符/g, dessertname[0]); n= n.replace(/蓝银葡萄护身符/g, dessertname[1]); n= n.replace(/紫晶樱桃护身符/g, dessertname[2]); return n;});
+    $("button[data-original-title*='樱桃']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z901/g, purl+dessert[2]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/樱桃护身符/g, dessertname[2]);return n;});
+    $("button[data-original-title*='葡萄']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z902/g, purl+dessert[1]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/葡萄护身符/g, dessertname[1]);return n;});
+    $("button[data-original-title*='苹果']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z903/g, purl+dessert[0]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/苹果护身符/g, dessertname[0]);return n;});
     $("button[data-original-title*='稀有']").attr("data-original-title",function(n,v){ n= v.replace(/稀有/g, dessertlevel[0]);return n;});
     $("button[data-original-title*='史诗']").attr("data-original-title",function(n,v){ n= v.replace(/史诗/g, dessertlevel[1]);return n;});
     $("button[data-original-title*='传奇']").attr("data-original-title",function(n,v){ n= v.replace(/传奇/g, dessertlevel[2]);return n;});
@@ -907,10 +1116,7 @@ function repfunc(){
         $(".fyg_tc>img[src*='z2203_']").attr("src",function(n,v){ n= v.replace(/ys\/icon\/z\/z2203_/g, purl+w3[4]);return n;});
     };
     if(custom.useThemeName==true){ themenamefunc(); } else if(nowTheme["equip-"+custom.language]){ themenamefunc(); };localStorage.setItem('nowEquip', nowEquip);
-};
-/* Replace to Old-Equip-Name
- * 此处旧版装备图标替换已进入计划报废倒计时
- */
+};/* Theme-Icons */
 function flogrepfunc(){
     if(custom.useOldNames!=true){
         $("button[data-original-title*='荆棘剑盾']").attr("data-original-title",function(n,v){ n= v.replace(/荆棘剑盾/g, "荆棘盾剑");return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z1/g, purl+a8[4]+old);return n;});
@@ -963,8 +1169,7 @@ function flogrepfunc(){
     $("button[data-original-title*='"+h1[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h1[4]+old);return n;}).attr("style",function(n,v){ n= v.replace(/ys\/icon\/z2401/g, purl+h1[4]+old);return n;});
     $("button[data-original-title*='"+h2[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h2[4]+old);return n;});
     $("button[data-original-title*='"+h3[3]+"']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z7/g, purl+h3[4]+old);return n;});
-};
-/* Replace to Theme-Equip-Name */
+};/* Old-Equip-Name */
 function themenamefunc(){
     $("button[data-original-title]").attr("data-original-title",function(n,v){
         n= v.replace(/探险者之剑/g, a1[3]);n= n.replace(/探险者短弓/g, a2[3]);n= n.replace(/探险者短杖/g, a3[3]);n= n.replace(/狂信者的荣誉之刃/g, a4[3]);n= n.replace(/反叛者的刺杀弓/g, a5[3]);n= n.replace(/幽梦匕首/g, a6[3]);
@@ -982,15 +1187,17 @@ function themenamefunc(){
         n= n.replace(/复苏战衣/g, c6[3]);n= n.replace(/复苏木甲/g, c6[3]);n= n.replace(/挑战斗篷/g, c7[3]);
         n= n.replace(/探险者耳环/g, h1[3]);n= n.replace(/探险者头巾/g, h1[3]);n= n.replace(/占星师的耳饰/g, h2[3]);n= n.replace(/占星师的发饰/g, h2[3]);n= n.replace(/萌爪耳钉/g, h3[3]);n= n.replace(/天使缎带/g, h3[3]);return n;
     });
-};
-/* Theme Fgimg Realization */
+};/* Theme-Equip-Name */
+/* Realization */
 function cardimgfunc(){
     let imgpanel,cardname;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
         if(cardname.length==1){
-            yourcard=cardname;custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            yourcard=cardname;
+            if(custom.yourcard!=yourcard){ custom.yourcard=yourcard;cupdfunc(); };
+            cardvo=nowTheme[yourcard+"voice"];
             kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',nowTheme[yourcard][3]);spineJson=nowTheme[yourcard+"spine"];
             if(custom.showKanban==true&&nowTheme.spine!=true){$(".tpkanban").attr('src', kanbanimg);};
             if(nowTheme[yourcard][2]!="https://sticker.inari.site/null.gif"&&imgpanel.children.length==2){
@@ -998,7 +1205,7 @@ function cardimgfunc(){
             };pagetype=nowEquip;
         }
         else if(cardname.length==0){
-            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];
             kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
             if(custom.showKanban==true&&nowTheme.spine!=true){$(".tpkanban").attr('src', kanbanimg);};pagetype=nowEquip;
         };
@@ -1029,18 +1236,19 @@ function cardimgfunc(){
     };
     if(nowTheme.spine!=true){spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
     if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype); if($("#eqli2.active").length!=1){$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};};
-};
-/* Detal Voice&Kanban Realization */
+};/* Theme Fgimg */
 function equipKBVOfunc(){
     let cardname;
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         let imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
         if(cardname.length==1){
-            yourcard=cardname;custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+            yourcard=cardname;
+            if(custom.yourcard!=yourcard){custom.yourcard=yourcard;cupdfunc();};
+            cardvo=nowTheme[yourcard+"voice"];
             spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
         }
         else if(cardname.length==0){
-            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];localStorage.setItem('ThemePackConf', JSON.stringify(custom));pagetype=nowEquip;
+            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
         };
     };
     if($(".text-info.fyg_f24").length==2){
@@ -1050,8 +1258,7 @@ function equipKBVOfunc(){
     };
     if(nowTheme.spine!=true){spineJson={"name":"hi","type":"0","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
     if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype);};
-};
-/* Battle Voice Realization */
+};/* Detal Voice&Kanban */
 function battlefunc(){
     if(soundonce%2==0&&battlecheck<1&&$(".alert.with-icon.fyg_tc").length>0){
         let battleCG;
@@ -1079,97 +1286,256 @@ function battlefunc(){
         let expcard=$("button[class*='fyg_colpz05bg'][style*='b4.gif']+.fyg_f18")[0].innerText,expvo=nowTheme[expcard[5]+"voice"];++collecheck;
         $("#themeSoundPlay").attr('src',expvo[0]+'levelup'+expvo[1]);if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};
     };
-};
-/* Battle CG Realization */
-function battlecgfunc(battleCG){ if(nowTheme.spine!=true){$(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg);},3000);}; };
-/* Theme Voice Realization */
-$(document).on('blur', "#btnAutoTask", function () { playAnimation(['joy_long', 'hold','joy_long_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button", function() { ccard=false;}).on('click', "[onclick*='xxcard(']", function() { ccard=false;})
-.on('click', "#bigcardimg",function(){if(!tempvo)tempvo=cardvo;if(custom.voiceO==true){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "#equip_one_key_link" , function() {ccard=false;playAnimation(['standBy']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "#binding_popup_link" , function() {ccard=false;playAnimation(['standBy']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='gx_sxds']",function() { playAnimation(['000000_eat_normal']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='gx_gt(']" ,function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='giftop']",function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='xyck(']", function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='gox(']" , function() { playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};collecheck=0;battlecheck=1;})
-.on('click', "button[onclick*='xyre(']", function() { playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='puton(']",function() { playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();}})
-.on('click', "button[onclick*='halosave(']",function() { playAnimation(['standBy']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='b_forge(']", function() { playAnimation(['joy_short','joy_short_return']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='b_forca(']", function() { playAnimation(['joy_short','joy_short_return']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='b_forcbs(']",function() { playAnimation(['joy_short','joy_short_return']); if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='gx_cxjd(']", function() { playAnimation(['standBy']); ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'reset'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[class*='btn fyg_colpz0'][onclick*='puto(']", function() { playAnimation(['000000_eat_normal']);})
-.on('click', "button[style*='float: right;']", function(e) { if(e.target.innerText=="装备"){playAnimation(['000000_eat_normal']);};})
-.on('click', "button[onclick*='updstat(']", function() { ccard=true;playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='eqlip(1),eqbp(1)']", function() { loading = false;ccard=true;playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='eqlip(2),eqbp(2)']", function() { loading = false;ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='eqlip(3),eqbp(3)']", function() { loading = false;ccard=true;playAnimation(['standBy']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "a[onclick*='eqlip(4),eqbp(4)']", function() { loading = false;ccard=true;playAnimation(['joy_short','joy_short_return']);if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='expcard(']", function() {
-    let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];playAnimation([spjoy]);ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'exp'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='cmaxup(']" , function() {
-    let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];playAnimation([spjoy]);ccard=true;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play();};})
-.on('click', "button[onclick*='jgjg(']",function() {
-    battlecheck=0;if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play();};
-    sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;facheck=$(".alert.alert-info.with-icon.fyg_tc").length;playAnimation(['attack','idle']);})
-.on('click', "#middlecardimg",function(){
-    if($('#eqli2.active').length==1&&tempvo!=cardvo){ xxcard(nowTheme[yourcard][0]);}
-    else{ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};};})
-.on('click', "button[onclick*='upcard(']",function(){
-    ccard=true;yourcard=tempca;custom.yourcard=yourcard;localStorage.setItem('ThemePackConf', JSON.stringify(custom));
+};/* Battle Voice */
+function battlecgfunc(battleCG){
+    if(nowTheme.spine!=true){$(".tpkanban").attr('src',battleCG); setTimeout(()=>{$(".tpkanban").attr('src', kanbanimg);},3000);};
+};/* Battle CG */
+
+
+/**
+ * Events.
+ */
+$(document).on('blur', "#btnAutoTask", function(){
+    playAnimation(['joy_long', 'hold','joy_long_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('change', ".themepack-uuid", function(e){
+    let temp=e.target.value,tst=/^[a-z0-9]*$/g;
+    if(tst.test(temp)&&temp.length==9){ localStorage.setItem("uuid",temp); //clgnfunc(temp,'impt_Cloud',false);
+                                      }
+    else{e.target.value=localStorage.uuid||""; };
+})
+.on('click',"button", function(){
+    ccard=false;
+})
+.on('click',"[onclick*='xxcard(']", function(){
+    ccard=false;
+})
+.on('click',"#bigcardimg", function(){
+    if(!tempvo)tempvo=cardvo;
+    if(custom.voiceO==true){$("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"#equip_one_key_link" , function(){
+    ccard=false; playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"#binding_popup_link" , function(){
+    ccard=false; playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"a[onclick*='gx_sxds']", function(){
+    playAnimation(['000000_eat_normal']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'power'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"a[onclick*='gx_gt(']" , function(){
+    playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='giftop']", function(){
+    playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='xyck(']", function(){
+    playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='gox(']" , function(){
+    playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+    collecheck=0;battlecheck=1;
+})
+.on('click',"button[onclick*='xyre(']", function(){
+    playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='puton(']",function(){
+    playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='halosave(']", function(){
+    playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='b_forge(']", function(){
+    playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='b_forca(']", function(){
+    playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='b_forcbs(']", function(){
+    playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='gx_cxjd(']", function(){
+    playAnimation(['standBy']); ccard=true;
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'reset'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[class*='g_colpz0'][onclick*='puto(']", function(){
+    playAnimation(['000000_eat_normal']);
+})
+.on('click',"button[style*='float: right;']", function(e){
+    if(e.target.innerText=="装备")playAnimation(['000000_eat_normal']);
+})
+.on('click',"button[onclick*='updstat(']", function(){
+    ccard=true;playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'change'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"a[onclick*='eqlip(1),eqbp(1)']", function(){
+    loading = false;ccard=true;playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"a[onclick*='eqlip(2),eqbp(2)']", function(){
+    loading = false;ccard=true;
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"a[onclick*='eqlip(3),eqbp(3)']", function(){
+    loading = false;ccard=true;playAnimation(['standBy']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'change'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"a[onclick*='eqlip(4),eqbp(4)']", function(){
+    loading = false;ccard=true;playAnimation(['joy_short','joy_short_return']);
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'colle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='expcard(']", function(){
+    let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];playAnimation([spjoy]);ccard=true;
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'exp'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='cmaxup(']" , function(){
+    let spjoy=$("option[value*=joyResult]")[0].value.split(',');spjoy=spjoy[0];playAnimation([spjoy]);ccard=true;
+    if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',tempvo[0]+'levelup'+tempvo[1]);$("#themeSoundPlay")[0].play(); };
+})
+.on('click',"button[onclick*='jgjg(']", function(){
+    battlecheck=0; if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+'battle'+cardvo[1]);$("#themeSoundPlay")[0].play(); };
+    sucheck=$(".alert.alert-danger.with-icon.fyg_tc").length;facheck=$(".alert.alert-info.with-icon.fyg_tc").length;playAnimation(['attack','idle']);
+})
+.on('click',"button[onclick*='upcard(']", function(){
+    ccard=true; yourcard=tempca; custom.yourcard=yourcard;cupdfunc();
     cardvo=nowTheme[yourcard+"voice"]; kanbanimg=nowTheme[yourcard][2];
-    if(nowTheme.spine==true){spineJson=nowTheme[yourcard+"spine"];}else{spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8};};
-   $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);
-    loading = false;spineload(spineJson.name, pagetype);playAnimation(['standBy']);
-    if(custom.showKanban==true&&nowTheme.spine!=true){$(".tpkanban").attr('src', kanbanimg)};
-    if(custom.voiceO==true){$("#themeSoundPlay")[0].play();};});
+    if(nowTheme.spine==true){ spineJson=nowTheme[yourcard+"spine"]; }else{ spineJson={"name":"hi","type":"1","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8}; };
+    $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);
+    loading = false; spineload(spineJson.name, pagetype); playAnimation(['standBy']);
+    if(custom.showKanban==true&&nowTheme.spine!=true){ $(".tpkanban").attr('src', kanbanimg); };
+    if(custom.voiceO==true){ $("#themeSoundPlay")[0].play(); };
+})
+.on('click',"#middlecardimg", function(){
+    if($('#eqli2.active').length==1&&tempvo!=cardvo){ xxcard(nowTheme[yourcard][0]);}
+    else{ if(custom.voiceO==true){ $("#themeSoundPlay").attr('src',cardvo[0]+Math.ceil(Math.random()*4-1)+cardvo[1]);$("#themeSoundPlay")[0].play();};};
+})
+.on('click',"#setAnimation", function(){
+    animationState = skeleton.state;forceNoLoop = false;animationQueue = $("#animationList")[0].value.split(',');
+    if (animationQueue[0] == 'multi_standBy') { animationQueue.push('multi_idle_standBy');}
+    else if (['multi_idle_standBy', 'multi_idle_noWeapon', 'idle', 'walk', 'run', 'run_gamestart'].indexOf(animationQueue[0]) == -1) { animationQueue.push('idle'); };
+    console.log(animationQueue); let nextAnim = animationQueue.shift();
+    if (!/^\d{6}/.test(nextAnim)) nextAnim = getClass(currentClassAnimData.type) + '_' + nextAnim;
+    console.log(nextAnim); animationState.setAnimation(0, nextAnim, !animationQueue.length && !forceNoLoop);
+})
+.on('click',".themelang", function(){
+    let ThemeLang = prompt('输入 zh 使用【简体中文】；\n輸入 zht 使用【繁體中文】；\nja を入力 表示言語【日本語】；\nInput en To show in 【English】.', "zh");
+    if (ThemeLang) {
+        if(ThemeLang=="zh"){ custom.language="zh"; custom.upconf=true;cupdfunc();location.reload();}
+        else if(ThemeLang=="zht"){ custom.language="zht"; custom.upconf=true;cupdfunc();location.reload();}
+        else if(ThemeLang=="ja"){ custom.language="ja"; custom.upconf=true;cupdfunc();location.reload();}
+        else if(ThemeLang=="en"){ custom.language="en"; custom.upconf=true;cupdfunc();location.reload();}
+        else{ custom.language="zh"; custom.upconf=true;cupdfunc();location.reload();};
+    };
+})
+.on('click',".themepack-ls", function(){
+    if (confirm(lang.themeSW)) {
+        let ThemePack = prompt(lang.themeSA, "1");
+        if (ThemePack) {
+            if(ThemePack=="0"){ console.log('off');custom.ThemePack="off"; custom.upconf=true;cupdfunc();location.reload();}
+            else if(ThemePack=="1"){ console.log('test');custom.ThemePack="test"; custom.upconf=true;cupdfunc();location.reload(); }
+            else if(ThemePack=="2"){
+                if (localStorage.userTheme||momoConf.userTheme){
+                    if(localStorage.userTheme&&!momoConf.userTheme){momoConf.userTheme=JSON.parse(localStorage.userTheme);userTheme=momoConf.userTheme;}
+                    else{userTheme=momoConf.userTheme;};
+                    if(userTheme.w4!=null){
+                        console.log('user');custom.ThemePack="user";custom.upconf=true;cupdfunc();location.reload();nowTheme=userTheme;
+                        sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
+                        if(userTheme.舞==null){ alert(lang.initUFG) };
+                        if(userTheme.voice==null){ alert(lang.initUVO) };
+                    }
+                    else{ alert(lang.initUOT) };
+                }
+                else{ alert(lang.initUNU) };
+            }
+            else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('upconf',false);;location.reload();};
+        };
+    }
+    else{
+        if(confirm(lang.themeDF)){
+            console.log('classic');custom.ThemePack="classic"; custom.upconf=true;cupdfunc();location.reload();
+        };
+    };
+})
+.on('click',".icons-size", function(){
+    let IconSize = prompt(lang.iconUA, "50px");
+    if (IconSize) { custom.iconSize = IconSize; custom.upconf=true;cupdfunc();location.reload();};
+})
+.on('click',".kanban-size", function(){
+    let KanbanSize = prompt(lang.kanbanUA, "100");
+    if (KanbanSize) { custom.kanbansize = KanbanSize; custom.upconf=true;cupdfunc();location.reload();};
+})
+.on('click',".themepack-usr", function(){
+    let userTheme = prompt(lang.menuUA+'\nhttps://kf.miaola.work/read.php?tid=809121&sf=141&page=21',`${localStorage.userTheme}`);
+    if (userTheme){ momoConf.userTheme=JSON.parse(userTheme); localStorage.setItem('userTheme',userTheme); cupdfunc(); };
+})
+.on('click',".iconpack-switch", function(e){
+    custom.useOldNames = e.target.checked;
+    custom.upconf=true;cupdfunc(); location.reload();
+})
+.on('click',".themepack-equip", function(e){
+    custom.useThemeName = e.target.checked;
+    custom.upconf=true;cupdfunc(); location.reload();
+})
+.on('click',".themepack-showCG", function(e){
+    custom.showCG = e.target.checked;
+    custom.upconf=true;cupdfunc(); location.reload();
+})
+.on('click',".themepack-showKB", function(e){
+    custom.showKanban = e.target.checked;
+    custom.upconf=true;cupdfunc(); location.reload();
+})
+.on('click',".themepack-voiceO", function(e){
+    custom.voiceO = e.target.checked;
+    cupdfunc();
+    custom.voiceO?$("#themeSoundPlay").attr('src',nowTheme.voice[0]):$("#themeSoundPlay").attr('src',nowTheme.voice[1]);
+    $("#themeSoundPlay")[0].play();
+})
+.on('click',".themepack-cuuid", function(){
+    uuidfunc();
+})
+.on('click',".detaillogitem", function() {
+    repfunc(); flogrepfunc();
+    if (custom.showCG == true) { cardimgfunc(); };
+})
+.ajaxSuccess(function(){
+    repfunc(); ++soundonce;
+    if(custom.showCG == true){ cardimgfunc();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVOfunc() };
+});
 
 
 /**
- * Add Script CSS.
+ * init.
  */
-$('head').append(`<style>
-    div[style='width:1200px;margin: 0 auto;'] { width: 80% !important;max-width:1200px;}
-    .btn.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important;line-height: ${Math.floor(parseInt(iconsize)*3.1/5)-1}px;${nowTheme.backsize}}
-    .btn.fyg_tr.fyg_mp3{ width: 263px !important; height: 40px !important;}
-    .btn.fyg_tl.fyg_mp3{ width: 263px !important; height: 40px !important;}
-    .btn.fyg_tc.fyg_mp3{ width: 536px !important; height: 40px !important;}
-    .btn.fyg_colpzbg.fyg_mp3 { width: ${Math.floor(parseInt(iconsize))}px !important; height: ${Math.floor(parseInt(iconsize))}px !important; ${nowTheme.wqbacksize}}
-    .img-rounded { width: 50px; height:50px;}
-    .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
-    #smallcardimg {height:50px;width:50px;}
-    [data-trigger=hover] {background-blend-mode: ${nowTheme.background} !important; }
-    [data-toggle=tooltip]{background-blend-mode: ${nowTheme.background} !important; }
-    .tool {position: fixed;top: 0;width: 100%;z-index: 1;cursor: default}
-	.tool>span {white-space: nowrap}
-</style>`);
-if(nowTheme.spinert){$('head').append(`<style>#divkanban:hover{background:url(${nowTheme.kanbanbg});background-size:cover;}</style>`);};
-if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Phone') > -1){
-    $('head').append(`<style>
-    select,body,h4,h5,i,.fyg_f14,h3,button,input,span,.panel-body,.col-sm-8 {font-size:28px !important;}
-    h2,.panel-heading,.fyg_f18,.col-sm-2.fyg_lh60{font-size:32px !important;}
-    .col-sm-2.fyg_lh60[style='text-align: left;']{width:180px;white-space: pre-wrap;}
-    .text-info.fyg_f24.fyg_lh60>span,.text-info.fyg_f24,.col-sm-2.fyg_lh60[style='text-align: left;']>span{font-size:48px !important;}
-    .progress{height:24px !important;}
-    div[class*='progress-bar']{font-size:26px !important;line-height:24px;}
-    p{font-size:26px !important;}
-    div[class='btn'],div[class='btn btn-primary'],.with-padding.bg-special.fyg_f14,.icon.icon-diamond{font-size:24px !important;}
-    .btn.btn-block.dropdown-toggle.fyg_lh30{font-size:18px !important;}
-    button[onclick*='b_forcbs(']{white-space: pre-wrap;}
-    .img-rounded,#smallcardimg {height:100px;width:100px;}
-    .btn.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;line-height: ${Math.floor(parseInt(iconsize)*1.2)-1}px;}
-    .btn.fyg_colpzbg.fyg_mp3{width:${Math.floor(parseInt(iconsize)*2)}px !important;height: ${Math.floor(parseInt(iconsize)*2)}px !important;}
-    .fyg_tc>.btn.fyg_colpzbg.fyg_mp3.fyg_tc{width:120px !important;height: 160px !important;line-height:42px;}
-    .btn.btn-primary.btn-group.dropup {height:160px !important;}
-</style>`);};
-
-
-/**
- * Final init.
- */
-$(document).on('click', ".detaillogitem", function () { repfunc();flogrepfunc();if (custom.showCG == true) { cardimgfunc(); };})
-.ajaxSuccess(function(){ repfunc();++soundonce;if(custom.showCG == true){ cardimgfunc();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVOfunc() };});
-$("#themeSoundPlay")[0].addEventListener('ended', function(){ battlefunc();});
-if(custom.showKanban==true&&nowTheme.spine==true){spineinit();};
+if(!localStorage.momo_Cloud){
+    //clgnfunc(momoUser,'momo_Cloud',false);
+};
+if(!localStorage.cloudGetCheck){
+    localStorage.setItem('cloudGetCheck',true);
+    //clgnfunc(momoUser,'momo_Cloud',false);
+    location.reload();
+}
+else{
+    //helpGufunc();
+    //guHelpfunc();
+    initConf(); insertHTML(); dragfunc(kanban); addCSS();
+    if(custom.upconf){ custom.upconf=false; cupdfunc(); };
+    if(localStorage.uuid&&!localStorage.impt_Cloud){
+        //clgnfunc(localStorage.uuid,'impt_Cloud',false);
+    };
+    $("#themeSoundPlay")[0].addEventListener('ended', function(){ battlefunc();});
+    if(custom.showKanban==true&&nowTheme.spine==true){spineinit();};
+};
