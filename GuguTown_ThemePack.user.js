@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.2.5
+// @version     3.4.0
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -17,6 +17,9 @@
 // @match       https://*.momozhen.com/*
 // @run-at      document-end
 // @require     https://greasyfork.org/scripts/450822-spine-webgl/code/spine-webgl.js?version=1090283
+// @require     https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js
+// @require     https://cdn.jsdelivr.net/npm/pako@2.0.4/dist/pako.js
+// @require     https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.js
 // @license     MIT License
 // @downloadURL https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
@@ -93,16 +96,16 @@ const defaultConf = {
         "initUVO":"このユーザー テーマパックのボイス機能は使用できません！このテーマパックを更新するか、ボイス機能無効化してください。",
         "initUOT":"このユーザー テーマパックのJSONは古くなっています！このテーマパックをできるだけ早く更新してください！テーマパックが有効になっていません！",
         "initUNU":"このユーザー テーマパックのJSONは存在しません！テーマパックが有効になっていません！",
-        "cuuid":"生成UUID",
+        "cuuid":"UUID作成",
         "menuTheme":"テーマパック",
-        "menuUser":"ユーザーJSON入力",
-        "menuIcon":"アイコンサイズ",
-        "menuKanban":"看板サイズ",
+        "menuUser":"テーマJSON入力",
+        "menuIcon":"アイコン大小",
+        "menuKanban":"看板大小",
         "menuOldEQ":"旧装備名",
         "menuThemeEQ":"テーマ装備名",
-        "menuSCG":"立ち絵機能",
-        "menuSVO":"ボイス機能",
-        "menuSKB":"看板娘機能",
+        "menuSCG":"立ち絵",
+        "menuSVO":"ボイス",
+        "menuSKB":"看板娘",
         "themeSW":"【OK】をクリックしてテーマパックを切り替えます； \n【キャンセル】をクリックするとデフォルトのテーマパックが使用されます。",
         "themeSA":"1 を入力して【テスト テーマパック】を使用；2 を入力して【ユーザー テーマパック】を使用；\n0 を入力して【オリジナル テーマパック】を使用；その他のテキストを入力して【クラシック テーマパック】を使用；\n【テスト テーマパック】テーマ装備名の著作権は cygames に帰属します。",
         "themeDF":"【OK】をクリックして【クラシック テーマパック】を使用します；\nキャンセルする場合は【キャンセル】をクリックしてください。",
@@ -121,14 +124,14 @@ const defaultConf = {
         "initUNU":"The JSON of this User ThemePack is non-existent! ThemePack not activated!",
         "cuuid":"Create UUID",
         "menuTheme":"ThemePack",
-        "menuUser":"Input UserTheme",
+        "menuUser":"UserTheme",
         "menuIcon":"IconSize",
         "menuKanban":"KanbanSize",
-        "menuOldEQ":"Old Equip Name",
-        "menuThemeEQ":"Theme Equip Name",
-        "menuSCG":"CG ON",
-        "menuSVO":"Voice ON",
-        "menuSKB":"Kanban ON",
+        "menuOldEQ":"Old Equip-Name",
+        "menuThemeEQ":"Theme Equip-Name",
+        "menuSCG":"CGimg",
+        "menuSVO":"Voice",
+        "menuSKB":"Kanban",
         "themeSW":"click【ok】 to switch ThemePack; click【cancel】 to use default ThemePack.",
         "themeSA":"input 1 to use 【Test ThemePack】;\ninput 2 to use【User ThemePack】;\ninput 0 to use 【origin ThemePack】;\ninput any other text to use 【classic ThemePack】;\nThe copyright of ThemeEquipName in 【Test ThemePack】 belongs to cygames.",
         "themeDF":"click【ok】to use 【origin ThemePack】; click【cancel】to cancel.",
@@ -428,8 +431,9 @@ const defaultConf = {
     "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6/"]
 }
 ,ygcheck = ["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"]
-,nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
-let mvp=new spine.webgl.Matrix4(),ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,User=$('span.fyg_colpz06.fyg_f24')[0].innerText,momoUser = "momo_"+User,uuidt=localStorage.uuid||""
+,nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+,api='https://api.inari.site/?s=App.User_User.';
+let mvp=new spine.webgl.Matrix4(),ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,User=$('span.fyg_colpz06.fyg_f24')[0].innerText,momoUser = "momo_"+User,uuid=localStorage.getItem('UUID_'+User)||""
 ,custom,nowTheme,tempca,tpkanban,kanban,kanbanimg,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,nowEquip,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
 ,canvas,gl,shader,batcher,skeletonRenderer,loadingSkeleton,currentSkeletonBuffer,animationState,forceNoLoop,currentTexture,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,pagetype=24,speedFactor=1,tempvo=false,ccard=false,loading = false
 ,timeout = null,useOldNamesCheck='',useThemeNameCheck='',Multilingual='',tpkanbanHTML='',showCGCheck='',voiceOCheck='',kanbanCheck='',activeSkeleton="",pendingAnimation='',generalAdditionAnimations={},userTheme={},generalBattleSkeletonData={},lang="zh"
@@ -530,7 +534,7 @@ function insertHTML(){
 }
   else{tpkanbanHTML = $(`<div id ="divkanban" style ="display:none;"><img class="tpkanban" src = ${kanbanimg}></div>`).insertBefore('body');};kanban = document.getElementById("divkanban");
   if($('.themepack-ls').length==0){
-    $(`<p></p><span><b>UUID</b> <input type="text" class="themepack-uuid" style="width:80px" value="${uuidt}">
+    $(`<p></p><span><b>UUID</b> <input type="text" class="themepack-uuid" style="width:80px" value="${uuid}">
     <input type="button" class="themepack-cuuid" value="${lang.cuuid}">
     <input type="button" class="themepack-ls" value="${lang.menuTheme}">
     <input type="button" class="themepack-usr" value="${lang.menuUser}">
@@ -581,8 +585,130 @@ if(navigator.userAgent.indexOf('Android') > -1||navigator.userAgent.indexOf('Pho
     .btn.btn-primary.btn-group.dropup {height:160px !important;}
 </style>`);};
 };/* add CSS */
+
+/* 压缩&解压&加密&解密&Others */
+function zip(str) {
+    str=LZMA.compress(str,2);
+    str=byte2str(str);
+    return str;
+};
+function unzip(str) {
+    str=str2byte(str);
+    str=LZMA.decompress(str);
+    return str;
+};
+function enc(message){
+    let encrypt = CryptoJS.AES.encrypt(message, CryptoJS.enc.Utf8.parse(uuid), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+    }).toString();
+    return encrypt;
+};
+function dec(encrypt){
+    let decrypt = CryptoJS.AES.decrypt(encrypt, CryptoJS.enc.Utf8.parse(uuid), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+    }).toString(CryptoJS.enc.Utf8);
+    //转成数字类型
+    return decrypt;
+};
+function byte2str(byte) {
+    let hex_str = "",
+        i,
+        len,
+        tmp_hex;
+
+    len = byte.length;
+
+    for (i = 0; i < len; ++i) {
+        if (byte[i] < 0) {
+            byte[i] = byte[i] + 256;
+        }
+        tmp_hex = byte[i].toString(16);
+
+        /// Add leading zero.
+        if (tmp_hex.length === 1) {
+            tmp_hex = "0" + tmp_hex;
+        }
+
+        hex_str += tmp_hex;
+    }
+
+    return hex_str.trim();
+};
+function str2byte(str) {
+    let count = 0,
+        hex_arr,
+        hex_data = [],
+        hex_len,
+        i;
+
+    if (str.trim() === "") {
+        return [];
+    }
+
+    /// Check for invalid hex characters.
+    if (/[^0-9a-fA-F\s]/.test(str)) {
+        return false;
+    }
+    hex_arr = mySplit(str,2);
+    //hex_arr = hex_str.split(/([0-9a-fA-F]+)/g);
+    hex_len = hex_arr.length;
+
+    for (i = 0; i < hex_len; ++i) {
+        if (hex_arr[i].trim() === "") {
+            continue;
+        }
+        hex_data[count++] = parseInt(hex_arr[i], 16);
+    }
+
+    return hex_data;
+};
+function mySplit(str,leng){
+    let arr = [];
+    let index = 0;
+    while(index<str.length){
+        arr.push(str.slice(index,index +=leng));
+    }
+    return arr;
+};
+function uuidfunc(){
+    uuid=new Date().getTime().toString(36);
+    localStorage.setItem('UUID_'+User,uuid);
+    $(".themepack-uuid")[0].value=uuid;
+};
+function testfunc(){
+    console.log("开始测试！");
+    let encs;
+    console.log("第一步：原始数据");
+    encs=localStorage.getItem("log_"+User);
+    console.log(encs);
+    console.log("第二步：压缩数据");
+    encs=zip(encs);
+    console.log(encs);
+    console.log("第三步：加密数据");
+    console.log(uuid);
+    console.log(CryptoJS.enc.Utf8.parse(uuid));
+    encs=enc(encs);
+    console.log(encs);
+    console.log("第四步：解密数据");
+    console.log(uuid);
+    console.log(CryptoJS.enc.Utf8.parse(uuid));
+    encs=dec(encs);
+    console.log(encs);
+    console.log("第五步：解压数据");
+    encs=unzip(encs);
+    console.log(encs);
+    if(encs==localStorage.getItem("log_"+User)){
+        console.log("测试通过！");
+    }
+    else{
+        console.log("测试完成，但数据不完全相同！");
+    };
+};
+
 /* GuHelper DAQ & Beach & PK */
-function guHelpfunc(){
+function guHelpfunc(way){
     momoConf.ThemePackConf={};
     momoConf.BeachConf={};
     momoConf.guDAQConf={};
@@ -611,17 +737,11 @@ function guHelpfunc(){
     if(localStorage.dataReward) { momoConf.guDAQConf.dataReward=localStorage.dataReward; };
     if(localStorage.getItem(User+'_beach_BG') ) { momoConf.guDAQConf.beach_BG = localStorage.getItem(User+'_beach_BG') ; };
     if(localStorage.getItem(User+'_forgeAuto')) { momoConf.guDAQConf.forgeAuto =localStorage.getItem(User+'_forgeAuto'); };
-    if(localStorage.getItem(User+'_stoneAuto1')){ momoConf.guDAQConf.stoneAuto1=localStorage.getItem(User+'_stoneAuto1');};
-    if(localStorage.getItem(User+'_stoneAuto2')){ momoConf.guDAQConf.stoneAuto2=localStorage.getItem(User+'_stoneAuto2');};
-    if(localStorage.getItem(User+'_stoneAuto3')){ momoConf.guDAQConf.stoneAuto3=localStorage.getItem(User+'_stoneAuto3');};
-    if(localStorage.getItem(User+'_stoneAuto4')){ momoConf.guDAQConf.stoneAuto4=localStorage.getItem(User+'_stoneAuto4');};
-    if(localStorage.getItem(User+'_stoneAuto5')){ momoConf.guDAQConf.stoneAuto5=localStorage.getItem(User+'_stoneAuto5');};
-    if(localStorage.getItem(User+'_stoneAuto6')){ momoConf.guDAQConf.stoneAuto6=localStorage.getItem(User+'_stoneAuto6');};
     if(localStorage.getItem(User+'_indexRally')){ momoConf.guDAQConf.indexRally=localStorage.getItem(User+'_indexRally');};
     if(localStorage.getItem(User+'_equipment_BG')) { momoConf.guDAQConf.equipment_BG =localStorage.getItem(User+'_equipment_BG'); };
     if(localStorage.getItem(User+'_keepPkRecord')) { momoConf.guDAQConf.keepPkRecord =localStorage.getItem(User+'_keepPkRecord'); };
-  //if(localStorage.getItem(User+'_amulet_groups')){ momoConf.guDAQConf.amulet_groups=localStorage.getItem(User+'_amulet_groups');};
-    if(localStorage.getItem(User+'_autoTaskEnabled') ) { momoConf.guDAQConf.autoTaskEnabled = localStorage.getItem(User+'_autoTaskEnabled') ; };
+    if(localStorage.getItem(User+'_stoneOperation')) { momoConf.guDAQConf.stoneOperation =localStorage.getItem(User+'_stoneOperation'); };
+    if(localStorage.getItem(User+'_autoTaskEnabled')){ momoConf.guDAQConf.autoTaskEnabled=localStorage.getItem(User+'_autoTaskEnabled');};
     if(localStorage.getItem(User+'_equipment_Expand')) { momoConf.guDAQConf.equipment_Expand =localStorage.getItem(User+'_equipment_Expand'); };
     if(localStorage.getItem(User+'_beach_forceExpand')){ momoConf.guDAQConf.beach_forceExpand=localStorage.getItem(User+'_beach_forceExpand');};
     if(localStorage.getItem(User+'_equipment_StoreExpand')) { momoConf.guDAQConf.equipment_StoreExpand= localStorage.getItem(User+'_equipment_StoreExpand'); };
@@ -633,14 +753,16 @@ function guHelpfunc(){
     if(localStorage.getItem(User+'_autoTaskCheckStoneProgress')){ momoConf.guDAQConf.autoTaskCheckStoneProgress=localStorage.getItem(User+'_autoTaskCheckStoneProgress');};
     if(localStorage.getItem(User)){
         let daqt=JSON.parse(localStorage.getItem(User));
-        if(daqt.dataIndex) { momoConf.guDAQConf.dataIndex =daqt.dataIndex; };
         if(daqt.config) { momoConf.guDAQConf.config =daqt.config; };
         if(daqt.calculatorTemplatePVE) { momoConf.guDAQConf.calculatorTemplatePVE =daqt.calculatorTemplatePVE; };
     };
+    if(localStorage.userTheme){ momoConf.userTheme=localStorage.userTheme;};
     localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf));
+    return JSON.stringify(momoConf);
 };
-function helpGufunc(){
-    momoConf=JSON.parse(localStorage.getItem('momoConf_'+User));
+function helpGufunc(way){
+    momoConf={};
+    if(localStorage.getItem('momoConf_'+User)){momoConf=JSON.parse(localStorage.getItem('momoConf_'+User));};
 
     if(momoConf.ThemePackConf&&momoConf.ThemePackConf!={}){
         localStorage.setItem('ThemePackConf',JSON.stringify(momoConf.ThemePackConf));
@@ -664,9 +786,7 @@ function helpGufunc(){
     };
 
     if(momoConf.guDAQConf&&momoConf.guDAQConf!={}){
-        let DAQConf=momoConf.guDAQConf,daqt={};
-        //let daqt=JSON.parse(localStorage.getItem(User));
-        if(DAQConf.dataIndex) { daqt.dataIndex =DAQConf.dataIndex; };
+        let DAQConf=momoConf.guDAQConf,daqt=JSON.parse(localStorage.getItem(User));
         if(DAQConf.config) { daqt.config =DAQConf.config; };
         if(DAQConf.calculatorTemplatePVE) { daqt.calculatorTemplatePVE =DAQConf.calculatorTemplatePVE; };
         localStorage.setItem(User, JSON.stringify(daqt));
@@ -680,17 +800,11 @@ function helpGufunc(){
         if(DAQConf.dataReward){ localStorage.setItem('dataReward',DAQConf.dataReward);};
         if(DAQConf.beach_BG) { localStorage.setItem(User+'_beach_BG', DAQConf.beach_BG); };
         if(DAQConf.forgeAuto){ localStorage.setItem(User+'_forgeAuto',DAQConf.forgeAuto);};
-        if(DAQConf.stoneAuto1) { localStorage.setItem(User+'_stoneAuto1',DAQConf.stoneAuto1); };
-        if(DAQConf.stoneAuto2) { localStorage.setItem(User+'_stoneAuto2',DAQConf.stoneAuto2); };
-        if(DAQConf.stoneAuto3) { localStorage.setItem(User+'_stoneAuto3',DAQConf.stoneAuto3); };
-        if(DAQConf.stoneAuto4) { localStorage.setItem(User+'_stoneAuto4',DAQConf.stoneAuto4); };
-        if(DAQConf.stoneAuto5) { localStorage.setItem(User+'_stoneAuto5',DAQConf.stoneAuto5); };
-        if(DAQConf.stoneAuto6) { localStorage.setItem(User+'_stoneAuto6',DAQConf.stoneAuto6); };
-        if(DAQConf.indexRally) { localStorage.setItem(User+'_indexRally',DAQConf.indexRally); };
-        if(DAQConf.equipment_BG) { localStorage.setItem(User+'_equipment_BG', DAQConf.equipment_BG); };
-        if(DAQConf.keepPkRecord) { localStorage.setItem(User+'_keepPkRecord', DAQConf.keepPkRecord); };
-      //if(DAQConf.amulet_groups){ localStorage.setItem(User+'_amulet_groups',DAQConf.amulet_groups);};
-        if(DAQConf.autoTaskEnabled) { localStorage.setItem(User+'_autoTaskEnabled',DAQConf.autoTaskEnabled); };
+        if(DAQConf.indexRally ) { localStorage.setItem(User+'_indexRally' , DAQConf.indexRally ); };
+        if(DAQConf.equipment_BG){ localStorage.setItem(User+'_equipment_BG',DAQConf.equipment_BG);};
+        if(DAQConf.keepPkRecord){ localStorage.setItem(User+'_keepPkRecord',DAQConf.keepPkRecord);};
+        if(DAQConf.stoneOperation) { localStorage.setItem(User+'_stoneOperation' ,DAQConf.stoneOperation); };
+        if(DAQConf.autoTaskEnabled){ localStorage.setItem(User+'_autoTaskEnabled',DAQConf.autoTaskEnabled);};
         if(DAQConf.beach_forceExpand) { localStorage.setItem(User+'_beach_forceExpand',DAQConf.beach_forceExpand); };
         if(DAQConf.equipment_StoreExpand) { localStorage.setItem(User+'_equipment_StoreExpand', DAQConf.equipment_StoreExpand); };
         if(DAQConf.stone_ProgressEquipTip){ localStorage.setItem(User+'_stone_ProgressEquipTip',DAQConf.stone_ProgressEquipTip);};
@@ -701,20 +815,22 @@ function helpGufunc(){
         if(DAQConf.autoTaskCheckStoneProgress){ localStorage.setItem(User+'_autoTaskCheckStoneProgress',DAQConf.autoTaskCheckStoneProgress);};
     };
 };
-function imptifunc(){
+function imptifunc(user_id,token){
     imptConf.amulet_groups={};
     if(localStorage.getItem(User)){
         let daqt=JSON.parse(localStorage.getItem(User));
-        if(daqt.dataBind) { momoConf.dataIndex =daqt.dataBind; };
-        if(daqt.config) { momoConf.guDAQConf.config =daqt.config; };
-        if(daqt.calculatorTemplatePVE) { momoConf.guDAQConf.calculatorTemplatePVE =daqt.calculatorTemplatePVE; };
+        if(daqt.dataIndex) { imptConf.guDAQConf.dataIndex =daqt.dataIndex; };
+        if(daqt.dataBind) { imptConf.dataIndex =daqt.dataBind; };
     };
     if(localStorage.getItem(User+'_amulet_groups')){imptConf.amulet_groups=localStorage.getItem(User+'_amulet_groups');};
     localStorage.setItem('imptConf_'+User, JSON.stringify(imptConf));
 };
 function imptpfunc(){
-    imptConf=JSON.parse(localStorage.getItem('imptConf_'+User));
-    if(imptConf.main&&imptConf.main!={}){ localStorage.setItem(User,JSON.stringify(imptConf.main)); };
+    imptConf=JSON.parse(localStorage.getItem('imptConf_'+User));let daqt={};
+    if(localStorage.getItem(User)){ daqt=JSON.parse(localStorage.getItem(User)); };
+    if(imptConf.dataIndex&&imptConf.dataIndex!={}){ daqt.dataIndex=imptConf.dataIndex; };
+    if(imptConf.dataBind&&imptConf.dataBind!={}){ daqt.dataBind=imptConf.dataBind; };
+    localStorage.setItem(User,JSON.stringify(daqt));
     if(imptConf.amulet_groups&&imptConf.amulet_groups!={}){ localStorage.setItem(User+'_amulet_groups',imptConf.amulet_groups); };
 };
 /* Kanban Drag & Resize */
@@ -767,61 +883,75 @@ window.onresize = function(){
     temp[0].style.left = kbw + 'px'; temp[0].style.top = kbh + 'px';
 };
 /* Cloud */
-function clgnfunc(username,types,isreg) {
-    $.ajax({ url: 'https://api.inari.site/?s=App.User_User.Login&username=' + username + '&password=momoTown', type: 'POST', dataType: 'json' })
+function clgnfunc(username,act,way) {
+    $.ajax({ url: api+'Login&username=' + username + '&password=momoTown', type: 'POST', dataType: 'json' })
         .done(data => {
         if (data.ret == 200) {
             let temp = data.data;
             if (temp.is_login == true) {
                 console.log('login');
-                localStorage.setItem(types, JSON.stringify([temp.user_id, temp.token]));
-                if(types=='impt_Cloud'&&isreg){
-                    imptifunc();
-                    let texts=JSON.stringify(imptConf);
-                    texts=texts.replace(/{/g, '【【').replace(/}/g, '】】').replace(/"/g, '“”').replace(/\//g,'？？');
-                    console.log(texts)
-                    //ltcfunc(temp.user_id,temp.token,texts);
+                localStorage.setItem('Cloud_'+User, JSON.stringify([temp.user_id, temp.token]));
+                localStorage.setItem('momo_Cloud', JSON.stringify([temp.user_id, temp.token]));
+                if(act=="lgn"){
+                    ctlfunc(temp.user_id,temp.token,'Guhelper');
+                    if(uuid!=""){
+                        ctlfunc(temp.user_id,temp.token,'Cardbind');
+                        ctlfunc(temp.user_id,temp.token,'Hufugroup');
+                    };
                 }
-                else if (types=='impt_Cloud') { //ctlfunc (temp.user_id,temp.token);
-                };
-                if(types=='momo_Cloud'&&isreg){ //cupdfunc(temp.user_id,temp.token);
-                }
-                else if (types=='momo_Cloud') { //ctlfunc (temp.user_id,temp.token);
-                };
+                else if(act=="ctl"){ ctlfunc(temp.user_id,temp.token,way); }
+                else if(act=="ltc"){ ltcfunc(temp.user_id,temp.token,way); };
             }
             else if (temp.is_login == false) { alert('Oops!') }
         }
         else if(data.ret == 400) {
-            //cregfunc(username,types);
+            cregfunc(username);
         }
         else{ alert('Oops!' + data.ret + data.msg) }
     })
         .fail(data => { console.log(data) });
 };/* login */
-function cregfunc(username,types) {
-    $.ajax({ url: 'https://api.inari.site/?s=App.User_User.Register&username=' + username + '&password=momoTown', type: 'POST', dataType: 'json' })
-        .done(data => { if (data.ret == 200) { //clgnfunc(username,types,true);
+function cregfunc(username) {
+    $.ajax({ url: api+'Register&username=' + username + '&password=momoTown', type: 'POST', dataType: 'json' })
+        .done(data => { if (data.ret == 200) { clgnfunc(username,"ltc",'Gupdate');
                                              } else { alert('Oops！' + data.ret + data.msg) }; })
         .fail(data => { console.log(data) });
 };/* auto reg */
-function cupdfunc(user_id,token){
-    if(!localStorage.getItem('momoConf_'+User)){ momoConf.ThemePackConf=custom; };
-    localStorage.setItem('momoConf_'+User, JSON.stringify(momoConf));
+function cupdfunc(){
     localStorage.setItem('ThemePackConf', JSON.stringify(custom));
-    if(!custom.upconf){
-        let texts=JSON.stringify(momoConf);
-        texts=texts.replace(/{/g, '【【').replace(/}/g, '】】').replace(/"/g, '“”').replace(/\//g,'？？');
-        console.log(texts)
-        //ltcfunc(user_id,token,texts);
-    };
+    if(localStorage.momo_Cloud){
+        let cupd=JSON.parse(localStorage.momo_Cloud);
+        if(!custom.upconf){
+            ltcfunc(cupd[0],cupd[1],'Gupdate');
+        };
+    }
+    else{clgnfunc(momoUser,"lgn")};
 };/* update cfg */
-function ltcfunc(user_id,token,text) {
+function ltcfunc(user_id,token,way) {
+    let text;
+    if(way=="Gupdate"){
+        guHelpfunc(way);
+        text=localStorage.getItem('momoConf_'+User);
+        text=zip(text);
+        console.log('Gupdate');
+    }
+    else if(way=="Cardupdate"){
+        guHelpfunc(way);
+        text=JSON.parse(localStorage.getItem(User));
+        text=JSON.stringify(text.dataBind);
+        text=zip(text);
+        text=enc(text);
+        console.log('Gupdate');
+    }
+    else if(way=="Hufupdate"){
+
+    };
     let formData={
         "user_id":user_id,
         "token":token,
-        "guguhelper":text
+        "texts":text
     }
-    $.ajax({ url:'https://api.inari.site/?s=App.User_User.Gupdate',data: formData, type: 'POST', dataType: 'json' })
+    $.ajax({ url:api+way,data: formData, type: 'POST', dataType: 'json' })
         .done(data => {
         if (data.ret == 200) {
             console.log('cloud sync');
@@ -830,25 +960,25 @@ function ltcfunc(user_id,token,text) {
     })
         .fail(data => { console.log(data) });
 };/* upload cfg */
-function ctlfunc(user_id,token) {
+function ctlfunc(user_id,token,way) {
     let formData={
         "user_id":user_id,
         "token":token,
     }
-    $.ajax({ url:'https://api.inari.site/?s=App.User_User.Guhelper',data: formData, type: 'POST', dataType: 'json' })
+    $.ajax({ url:api+way,data: formData, type: 'POST', dataType: 'json' })
         .done(data => {
-        if (data.ret == 200) {
-            console.log(data.data);
+        if(data!=null){
+            if (data.ret == 200) {
+                let tdt=data.data,tdts;
+                if(way=="Guhelper"){ tdt=tdt.guguhelper; tdts=unzip(tdt); localStorage.setItem('momoConf_'+User,tdts) }
+                else { tdt=tdt[way]; tdt=dec(tdt); tdts=unzip(tdt); };
+            }
+            else { alert(data.msg + data.ret); };
         }
-        else { alert(data.msg + data.ret); }
+        else{alert('数据处理异常')}
     })
         .fail(data => { console.log(data) });
 };/* cloud cfg */
-function uuidfunc(){
-    let uuid=new Date().getTime().toString(36)+Math.ceil(Math.random()*36-1).toString(36);
-    localStorage.setItem("uuid",uuid); $(".themepack-uuid")[0].value=uuid;
-    //cregfunc(uuid,'impt_Cloud');
-};/* uuid */
 /* Spine */
 window.skeleton = {};
 function _(e, t, n) {
@@ -864,14 +994,18 @@ function _(e, t, n) {
     if (n) for (let s = 0; s < n.length; s++)null != n[s] && r.appendChild(n[s]);
     return r;
 };
-function getClass(i){ return (i < 10 ? '0' : '') + i;};
+function getClass(i){
+    return (i < 10 ? '0' : '') + i;
+};
 function loadData(url, cb, loadType, progress) {
     let xhr = new XMLHttpRequest; xhr.open('GET', url, true);
     if (loadType) xhr.responseType = loadType; if (progress) xhr.onprogress = progress;
     xhr.onload = function () { if (xhr.status == 200){cb(true, xhr.response);}else{ cb(false);};};
     xhr.onerror = function () {cb(false); }; xhr.send();
 };
-function sliceCyspAnimation(buf) { let view = new DataView(buf), count = view.getInt32(12, true); return { count: count, data: buf.slice((count + 1) * 32)};};
+function sliceCyspAnimation(buf) {
+    let view = new DataView(buf), count = view.getInt32(12, true); return { count: count, data: buf.slice((count + 1) * 32)};
+};
 function spineinit() {
     canvas = document.getElementById("tpkanban"); let config = { alpha: true ,backgroundColor: "#000000"};
     gl = canvas.getContext("webgl", config) || canvas.getContext("experimental-webgl", config);
@@ -1301,9 +1435,10 @@ $(document).on('blur', "#btnAutoTask", function(){
 })
 .on('change', ".themepack-uuid", function(e){
     let temp=e.target.value,tst=/^[a-z0-9]*$/g;
-    if(tst.test(temp)&&temp.length==9){ localStorage.setItem("uuid",temp); //clgnfunc(temp,'impt_Cloud',false);
-                                      }
-    else{e.target.value=localStorage.uuid||""; };
+    if(tst.test(temp)&&temp.length==8){
+        uuid=temp; localStorage.setItem('UUID_'+User,uuid);
+    }
+    else{e.target.value=localStorage.getItem('UUID_'+User)||""; };
 })
 .on('click',"button", function(){
     ccard=false;
@@ -1506,6 +1641,9 @@ $(document).on('blur', "#btnAutoTask", function(){
 })
 .on('click',".themepack-cuuid", function(){
     uuidfunc();
+    //ctlfunc(temp.user_id,temp.token,'Cardbind');
+    //ctlfunc(temp.user_id,temp.token,'Hufugroup');
+    testfunc();
 })
 .on('click',".detaillogitem", function() {
     repfunc(); flogrepfunc();
@@ -1520,21 +1658,21 @@ $(document).on('blur', "#btnAutoTask", function(){
 /**
  * init.
  */
-if(!localStorage.momo_Cloud){
-    //clgnfunc(momoUser,'momo_Cloud',false);
+if(!localStorage.getItem('Cloud_'+User)){
+    clgnfunc(momoUser,"lgn");
+}else{
+    localStorage.setItem('momo_Cloud', localStorage.getItem('Cloud_'+User));
 };
 if(!localStorage.cloudGetCheck){
-    localStorage.setItem('cloudGetCheck',true);
-    //clgnfunc(momoUser,'momo_Cloud',false);
+    localStorage.setItem('clodGetCheck',true);
+    clgnfunc(momoUser,"lgn");
     location.reload();
 }
 else{
-    //helpGufunc();
-    //guHelpfunc();
+    guHelpfunc();
     initConf(); insertHTML(); dragfunc(kanban); addCSS();
-    if(custom.upconf){ custom.upconf=false; cupdfunc(); };
-    if(localStorage.uuid&&!localStorage.impt_Cloud){
-        //clgnfunc(localStorage.uuid,'impt_Cloud',false);
+    if(custom.upconf){
+        custom.upconf=false;cupdfunc();
     };
     $("#themeSoundPlay")[0].addEventListener('ended', function(){ battlefunc();});
     if(custom.showKanban==true&&nowTheme.spine==true){spineinit();};
