@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.4.0
+// @version     3.4.1
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -24,7 +24,6 @@
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // @grant       none
 // ==/UserScript==
-/* eslint-env jquery */
 'use strict';
 
 /**
@@ -1435,10 +1434,16 @@ function mySplit(str,leng){
 };
 function uuidfunc(){
     uuid=new Date().getTime().toString(36);
-    let tst=/^[a-z0-9]*$/g,temp=prompt(lang.puuid, uuid);
-    if(temp){ if(tst.test(temp)&&temp.length==8){ uuid=temp; }; };
     upload('Cardupdate');
     upload('Hufupdate');
+    let tst=/^[a-z0-9]*$/g,temp=prompt(lang.puuid, uuid);
+    if(temp){
+        if(tst.test(temp)&&temp.length==8){
+            uuid=temp;
+            upload('Cardupdate');
+            upload('Hufupdate');
+        };
+    };
 };
 function testfunc(){
     upload("test")
@@ -1669,13 +1674,14 @@ $(document).on('blur', "#btnAutoTask", function(){
     themeIcon(); oldEqName();
     if (custom.showCG == true) { themeFgimg(); };
 })
-.ajaxSuccess(function(){
+.ajaxSuccess(function(e,x){
     if(window.location.href.indexOf('fyg_index.php') != -1||window.location.href.indexOf('fyg_index.php#') == -1){
-        themeIcon();++soundonce;
-        if(custom.showCG == true){ themeFgimg();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVO() };
+        if(!x.responseJSON){
+            themeIcon();++soundonce;
+            if(custom.showCG == true){ themeFgimg();}else if(custom.showKanban==true||custom.voiceO==true){ equipKBVO() };
+        }
     };
 });
-
 
 
 /**
