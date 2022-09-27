@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.4.4
+// @version     3.4.5
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -1170,6 +1170,7 @@ function download(way) {
         if(data!=null){
             if (data.ret == 200) {
                 let tdt=data.data; tdt=tdt[way];
+                if(tdt==null){return;};
                 if(way!="Guhelper"||test){ if(test)way="test"; console.log(way+" Downloading..."); tdt=tdt.replace(/ /g, "+");console.log("Decrypting "+way+" Data..."); tdt=dec(tdt); console.log(way+" Data Decrypted!"); }
                 else{ console.log(way+" Downloading..."); };
                 console.log("Unzipping "+way+" Data...");tdt=unzip(tdt); console.log(way+" Data Unzipped!");
