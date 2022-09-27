@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.4.2
+// @version     3.4.4
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -24,6 +24,7 @@
 // @updateURL   https://github.com/HazukiKaguya/GuguTown_ThemePack/raw/main/GuguTown_ThemePack.user.js
 // @grant       none
 // ==/UserScript==
+/* eslint-env jquery */
 'use strict';
 
 /**
@@ -1251,14 +1252,15 @@ function beforeCloud(way){
         encs = JSON.stringify(cardTemp);
     }
     else if(way=="Hufupdate"){
-        encs = localStorage.getItem(User+'_amulet_groups');
+        encs = localStorage.getItem(User+'_amulet_groups')||"";
     }
     else if(way=="Pkupdate"){
-        encs = localStorage.getItem("log_"+User);
+        encs = localStorage.getItem("log_"+User)||"";
     }
     else if(way=="test"){
         encs = localStorage.userTheme;
     };
+    if (encs==""){ console.log('Null Data');return;};
     let before=encs.length;
     console.log(way+" Raw Data Acquired!");
     console.log("Zipping "+way+" Data....")
@@ -1446,8 +1448,10 @@ function uuidfunc(){
             uuid=temp;
             upload('Cardupdate');
             upload('Hufupdate');
+            $('.themepack-uuid')[0].value="Finish!";
         };
     };
+    $('.themepack-uuid')[0].value="Finish!";
 };
 function testfunc(){
     console.log("\n\n\n\n=== Test Start ===\n\n\n\n");
