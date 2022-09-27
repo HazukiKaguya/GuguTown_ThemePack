@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.4.1
+// @version     3.4.2
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -1125,13 +1125,14 @@ function register(username) {
         .fail(data => { console.log(data) });
 };
 function upload(way) {
+    console.log(way+" Uploading...");
     let text=beforeCloud(way),user_id,token,test=false;
     if(localStorage.momo_Cloud){
         let cupd=JSON.parse(localStorage.momo_Cloud);
         user_id=cupd[0];token=cupd[1];
     }
     else{ login(momoUser,"ltc",way);return;};
-    if(way=="test"){way="Cardupdate";test=true; };
+    if(way=="test"){way="Cardupdate";test=true;};
     let formData={
         "user_id":user_id,
         "token":token,
@@ -1158,7 +1159,7 @@ function download(way) {
         user_id=cupd[0];token=cupd[1];
     }
     else{ login(momoUser,"ctl",way);return;};
-    if(way=="test"){way="Cardbind";test=true;};
+    if(way=="test"){way="Cardbind";test=true;uuid="testfunc";};
     let formData={
         "user_id":user_id,
         "token":token,
@@ -1255,7 +1256,7 @@ function beforeCloud(way){
     else if(way=="Pkupdate"){
         encs = localStorage.getItem("log_"+User);
     }
-    else{
+    else if(way=="test"){
         encs = localStorage.userTheme;
     };
     let before=encs.length;
@@ -1349,7 +1350,7 @@ function afterCloud(way,texts){
     else if(way=="Pkdate"){
         if(texts&&texts!={}){ localStorage.setItem('log_'+User,texts); console.log("Battle History Data Restored!"); };
     }
-    else{
+    else if(way=="test"){
         let encs=texts;
         if(encs==localStorage.userTheme){
             console.log("Test Passed!");
@@ -1359,6 +1360,9 @@ function afterCloud(way,texts){
             console.log(encs);
             console.log(localStorage.userTheme);
         };
+        console.log('Please Undo Changes In Cardbind!');
+        console.log("\n\n\n\n=== Test Finish! ===\n\n\n");
+        $('.themepack-uuid')[0].value="Finish!";
     };
 };
 
@@ -1446,7 +1450,9 @@ function uuidfunc(){
     };
 };
 function testfunc(){
-    upload("test")
+    console.log("\n\n\n\n=== Test Start ===\n\n\n\n");
+    uuid="testfunc";
+    upload("test");
 };
 
 
@@ -1466,7 +1472,8 @@ $(document).on('blur', "#btnAutoTask", function(){
         download('Hufugroup');
         e.target.value="Done!"
     }
-    else{e.target.value="Error!"; };
+    else if(temp=="test"){ e.target.value="Testing...";testfunc(); }
+    else { e.target.value="Error!"; };
 })
 .on('click',"button", function(){
     ccard=false;
