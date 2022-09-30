@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.4.5
+// @version     3.5.0
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -156,7 +156,7 @@ const defaultConf = {
     "url":"ys/icon/",
     "old":"1",
     "ext":".gif",
-    "background":"",
+    "background":"normal",
     "kanbanbg":"https://sticker.inari.site/api/null.gif",
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:100% 100%;",
@@ -171,7 +171,7 @@ const defaultConf = {
     "equip-en":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword",
                  "Bloodthirsty demon Sword","Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe",
                  "Thorny Armor of the front supporter","Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring"],
-    "dessert":["z903","z902","z901"],
+    "dessert":["z/z903","z/z902","z/z901"],
     "dessertlevel":["稀有","史诗","传奇"],
     "dessertlevel-zht":["稀有","史詩","傳奇"],
     "dessertlevel-ja":["レア","大作","伝説"],
@@ -244,7 +244,7 @@ const defaultConf = {
     "url":"https://sticker.inari.site/guguicons/old/",
     "old":"",
     "ext":".gif",
-    "background":"",
+    "background":"overlay",
     "kanbanbg":"https://sticker.inari.site/api/null.gif",
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:80% 80%;",
@@ -440,7 +440,8 @@ const defaultConf = {
 }
 ,ygcheck = ["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"]
 ,nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
-,api='https://api.inari.site/?s=App.User_User.';
+,api='https://api.inari.site/?s=App.User_User.'
+,cards=['舞','默','琳','艾','梦','薇','伊','冥','命','希'];
 let ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,momoConf={},User=$('span.fyg_colpz06.fyg_f24')[0].innerText,momoUser = "momo_"+User,uuid,nowTheme
 ,custom,tempca,tpkanban,kanban,kanbanimg,ext,old,purl,dessert,dessertlevel,dessertname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,nowEquip,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
 ,canvas,gl,shader,batcher,skeletonRenderer,loadingSkeleton,currentSkeletonBuffer,animationState,forceNoLoop,currentTexture,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,pagetype=24,speedFactor=1,tempvo=false,ccard=false,loading = false
@@ -567,8 +568,6 @@ $('head').append(`<style>
     .img-rounded { width: 50px; height:50px;}
     .btn.fyg_colpzbg.fyg_tc { width: 60px !important; height: 100px !important;line-height:25px;}
     #smallcardimg {height:50px;width:50px;}
-    [data-trigger=hover] {background-blend-mode: ${nowTheme.background} !important; }
-    [data-toggle=tooltip]{background-blend-mode: ${nowTheme.background} !important; }
     .tool {position: fixed;top: 0;width: 100%;z-index: 1;cursor: default}
 	.tool>span {white-space: nowrap}
 </style>`);
@@ -706,9 +705,12 @@ function themeIcon(){
     $("button[data-original-title*='樱桃']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z901/g, purl+dessert[2]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/紫晶樱桃护身符/g, dessertname[2]);return n;});
     $("button[data-original-title*='葡萄']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z902/g, purl+dessert[1]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/蓝银葡萄护身符/g, dessertname[1]);return n;});
     $("button[data-original-title*='苹果']").attr("style",function(n,v){ n= v.replace(/ys\/icon\/z\/z903/g, purl+dessert[0]);return n;}).attr("data-original-title",function(n,v){ n= v.replace(/星铜苹果护身符/g, dessertname[0]);return n;});
-    $("button[data-original-title*='稀有']").attr("data-original-title",function(n,v){ n= v.replace(/稀有/g, dessertlevel[0]);return n;});
-    $("button[data-original-title*='史诗']").attr("data-original-title",function(n,v){ n= v.replace(/史诗/g, dessertlevel[1]);return n;});
-    $("button[data-original-title*='传奇']").attr("data-original-title",function(n,v){ n= v.replace(/传奇/g, dessertlevel[2]);return n;});
+    $("button[data-original-title*='稀有']").attr("data-original-title",function(n,v){ n= v.replace(/稀有/g, dessertlevel[0]);return n;})
+        .attr("style",function(n,v){n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#38B03F;background-image`);return n;});
+    $("button[data-original-title*='史诗']").attr("data-original-title",function(n,v){ n= v.replace(/史诗/g, dessertlevel[1]);return n;})
+        .attr("style",function(n,v){n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#F1A325;background-image`);return n;});
+    $("button[data-original-title*='传奇']").attr("data-original-title",function(n,v){ n= v.replace(/传奇/g, dessertlevel[2]);return n;})
+        .attr("style",function(n,v){n=v.replace(/background-image/g,`background-blend-mode: ${nowTheme.background};background-color:#EA644A;background-image`);return n;});;
     $(".fyg_tc>img[src*='z2101_']").attr("src",function(n,v){ loading = false;nowEquip=4;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]);return n;});
     $(".fyg_tc>img[src*='z2102_']").attr("src",function(n,v){ loading = false;nowEquip=8;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2102_/g, purl+a2[4]);return n;});
     $(".fyg_tc>img[src*='z2103_']").attr("src",function(n,v){ loading = false;nowEquip=7;pagetype=nowEquip;n= v.replace(/ys\/icon\/z\/z2103_/g, purl+a3[4]);return n;});
@@ -753,12 +755,14 @@ function themeIcon(){
     if(custom.useThemeName==true){ themeEqName(); } else if(nowTheme["equip-"+custom.language]){ themeEqName(); };localStorage.setItem('nowEquip', nowEquip);
 };
 function themeFgimg(){
-    let imgpanel,cardname;
+    let imgpanel,cardname;yourcard="舞";tempca="舞";
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         if($("#bigcardimg").length==0){ $(`<p></p><img id="bigcardimg" src="https://sticker.inari.site/null.gif">`).insertBefore("#backpacks"); };
         imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
         if(cardname.length==1){
-            yourcard=cardname;
+            for(let i=0;i<cards.length;i++){
+                if (cardname.indexOf(cards[i]) > -1) { yourcard=cardname;i=999; };
+            };
             if(custom.yourcard!=yourcard){ custom.yourcard=yourcard;update(); };
             cardvo=nowTheme[yourcard+"voice"];
             kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',nowTheme[yourcard][3]);spineJson=nowTheme[yourcard+"spine"];
@@ -768,13 +772,15 @@ function themeFgimg(){
             };pagetype=nowEquip;
         }
         else if(cardname.length==0){
-            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];
+            custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];
             kanbanimg=nowTheme[yourcard][2];$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");
             if(custom.showKanban==true&&nowTheme.spine!=true){$(".tpkanban").attr('src', kanbanimg);};pagetype=nowEquip;
         };
     };
     if($(".text-info.fyg_f24").length==2){
-        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
+        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;
+        for(let i=0;i<cards.length;i++){ if (cardname.indexOf(cards[i]) > -1) { tempca=cardname;i=999; }; };
+        cardname=tempca;$("#bigcardimg").attr('src',nowTheme[cardname][3]);tempvo=nowTheme[cardname+"voice"];
         if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
         loading=false;spineload(nowTheme[cardname+"spine"].name, nowTheme[cardname+"spine"].type);
     };
@@ -801,21 +807,25 @@ function themeFgimg(){
     if(window.location.href.indexOf('equip.php') > -1){ spineload(spineJson.name, pagetype); if($("#eqli2.active").length!=1){$("#bigcardimg").attr('src',"https://sticker.inari.site/null.gif");};};
 };
 function equipKBVO(){
-    let cardname;
+    let cardname;yourcard="舞";tempca="舞";
     if($(".text-info.fyg_f24.fyg_lh60").length==1){
         let imgpanel = document.getElementsByClassName('text-info fyg_f24 fyg_lh60')[0];cardname=imgpanel.children[0].innerText;tempvo=false;
         if(cardname.length==1){
-            yourcard=cardname;
+            for(let i=0;i<cards.length;i++){ if (cardname.indexOf(cards[i]) > -1) { yourcard=cardname;i=999; }; };
             if(custom.yourcard!=yourcard){custom.yourcard=yourcard;update();};
             cardvo=nowTheme[yourcard+"voice"];
             spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
         }
         else if(cardname.length==0){
-            yourcard="舞";custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
+            custom.yourcard=yourcard;cardvo=nowTheme[yourcard+"voice"];spineJson=nowTheme[yourcard+"spine"];pagetype=nowEquip;
         };
     };
     if($(".text-info.fyg_f24").length==2){
-        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;tempca=cardname;tempvo=nowTheme[cardname+"voice"];
+        cardname = document.getElementsByClassName('text-info fyg_f24')[1].innerText;
+        for(let i=0;i<cards.length;i++){
+            if (cardname.indexOf(cards[i]) > -1) { tempca=cardname;i=999; };
+        };
+        cardname=tempca;tempvo=nowTheme[cardname+"voice"];
         if(custom.voiceO==true&&ccard!=true){ $("#themeSoundPlay").attr('src',tempvo[0]+Math.ceil(Math.random()*4-1)+tempvo[1]);$("#themeSoundPlay")[0].play();};
         if(nowTheme.spine==true){loading=false;spineload(nowTheme[cardname+"spine"].name, nowTheme[cardname+"spine"].type);};
     };
@@ -1636,7 +1646,7 @@ $(document).on('blur', "#btnAutoTask", function(){
                 }
                 else{ alert(lang.initUNU) };
             }
-            else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('upconf',false);;location.reload();};
+            else{ console.log('classic');custom.ThemePack="classic"; localStorage.setItem('upconf',false);update();location.reload();};
         };
     }
     else{
