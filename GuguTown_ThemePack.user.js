@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.7.0
+// @version     3.7.2
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -507,7 +507,7 @@ else{
 };
 yourcard=custom.yourcard; cardvo=nowTheme[yourcard+"voice"]; iconsize=custom.iconSize; kanbanimg=nullimg;
 
-if(custom.showKanban==true){ kanbanCheck='checked'; }; showKanban();
+if(custom.showKanban==true){ kanbanCheck='checked'; };
 Multilingual='checked'; equipName=Language[custom.language].equip;
 if(custom.useOldNames&&!custom.useThemeName){
     nowTheme.dessertlevel=classicTheme["dessertlevel-"+custom.language];
@@ -596,7 +596,7 @@ function finalInit(){
     initConf(); insertHTML(); addCSS();
     let loadTime=new Date().getTime()-timeCheck;
     console.log("Load Finish! Takes "+loadTime+"ms");
-    if(custom.showKanban==true&&!nowTheme.nospine){ spineinit(); };
+    showKanban();
     if(localStorage.reload=="true"){localStorage.removeItem('reload');update();};
 };
 function update(){
@@ -871,6 +871,7 @@ function showKanban(){
             </style>`);
         };
         kanban = document.getElementById("divkanban"); dragfunc(kanban);
+        spineinit(true);
     }
     else if(!nowTheme.nofgimg){
         kanbanimg=nowTheme[yourcard][2];
@@ -1012,18 +1013,18 @@ function loadData(url, cb, loadType, progress) {
 function sliceCyspAnimation(buf) {
     let view = new DataView(buf), count = view.getInt32(12, true); return { count: count, data: buf.slice((count + 1) * 32)};
 };
-function spineinit() {
+function spineinit(act) {
     canvas = document.getElementById("tpkanban"); let config = { alpha: true ,backgroundColor: "#000000"};
     gl = canvas.getContext("webgl", config) || canvas.getContext("experimental-webgl", config);
     if (!gl) { alert('WebGL is unavailable.');return; };
     shader = spine.webgl.Shader.newTwoColoredTextured(gl); batcher = new spine.webgl.PolygonBatcher(gl);
     mvp.ortho2d(0, 0, 512 - 1, 512 - 1); skeletonRenderer = new spine.webgl.SkeletonRenderer(gl); shapes = new spine.webgl.ShapeRenderer(gl);
     if(!nowTheme.nospine)spineJson=nowTheme[yourcard+"spine"];
-    spineload(spineJson.name, pagetype);
+    spineload(spineJson.name, pagetype,act);
 };
-function spineload(name, type) {
-    if (custom.showKanban != true||nowTheme.nospine||loading) return; loading = true;
-    if (activeSkeleton == name && currentClass == type) return; currentClass = type;
+function spineload(name, type,act) {
+    if (!custom.showKanban||nowTheme.nospine||loading) return; loading = true;
+    if (activeSkeleton == name && currentClass == type&&!act) return; currentClass = type;
     let baseUnitId = name | "wuu"; loadingSkeleton = { id: name , info: spineJson, baseId: '000000' };
     if (loadingSkeleton.info.hasSpecialBase){loadingSkeleton.baseId = baseUnitId; currentClass = baseUnitId;}; let baseId = loadingSkeleton.baseId;
     if (!generalBattleSkeletonData[baseId]){
