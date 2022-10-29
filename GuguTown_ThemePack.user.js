@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.9.9
+// @version     3.9.10
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -828,7 +828,7 @@ function theEqName(action){
     $("button[data-original-title]").attr("data-original-title",function(n,v){
             n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
                 .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
-                .replace(new RegExp(eqn[11],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
+                .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
                 .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
                 .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
                 .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
@@ -839,7 +839,7 @@ function theEqName(action){
         $(".with-padding").html(function(n,v){
             n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
                 .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
-                .replace(new RegExp(eqn[11],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
+                .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
                 .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
                 .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
                 .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
