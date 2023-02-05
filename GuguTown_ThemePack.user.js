@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.9.10
+// @version     3.9.42
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -26,6 +26,17 @@
 // ==/UserScript==
 /* eslint-env jquery */
 'use strict';
+
+/*日间&夜间模式切换*/
+console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
+window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', event => {
+  if (event.matches) {
+    /*夜间模式*/
+  } else {
+    /*日间模式*/
+  }
+});
 
 /**
  * Settings.
@@ -495,11 +506,15 @@ const defaultConf = {
     "h3":["z2403","z7","萌爪耳钉","精灵王护石","%E8%90%8C%E7%88%AA%E8%80%B3%E9%92%89/"],
     "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6/"]
 }
-,ygcheck = ["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪"]
+,ygcheck = ["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪","六边形战士（野怪"]
 ,nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 ,api='https://api.inari.site/?s=App.User_User.'
 ,cards=['舞','默','琳','艾','梦','薇','伊','冥','命','希'];
-let ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,momoConf={},User=$('span.fyg_colpz06.fyg_f24')[0].innerText,momoUser = "momo_"+User,uuid,nowTheme
+let ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,momoConf={},
+    User=$("button[class*='btn btn-lg'][onclick*='fyg_index.php']")[0].innerText,
+
+
+    momoUser = "momo_"+User,uuid,nowTheme
 ,custom,tempca,tpkanban,kanban,kanbanimg,ext='.gif',old,purl,iurl,dessert,items,dessertlevel,dessertname,itemsname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,w5,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
 ,canvas,gl,shader,batcher,skeletonRenderer,loadingSkeleton,currentSkeletonBuffer,animationState,forceNoLoop,currentTexture,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,pagetype=24,speedFactor=1,tempvo=false,ccard=false,loading = false
 ,timeout = null,useOldNamesCheck='',useThemeNameCheck='',Multilingual='',tpkanbanHTML='',showCGCheck='',voiceOCheck='',kanbanCheck='',activeSkeleton="",pendingAnimation='',generalAdditionAnimations={},userTheme={},generalBattleSkeletonData={},lang="zh"
@@ -576,7 +591,7 @@ if (window.location.href.indexOf('pk.php') > -1||window.location.href.indexOf('e
 };
 function insertHTML(){
     if($('.themepack-ls').length==0){
-    $(`<p></p><span><b>${lang.vuuid}:</b> <input type="text" class="themepack-uuid" style="width:65px" value="">
+    let TheMenuHtml=`<p></p><span><b>${lang.vuuid}:</b> <input type="text" class="themepack-uuid" style="width:65px" value="">
     <input type="button" class="themepack-cuuid" value="${lang.cuuid}">
     <input type="button" class="themepack-ls" value="${lang.menuTheme}">
     <input type="button" class="themepack-usr" value="${lang.menuUser}">
@@ -590,7 +605,10 @@ function insertHTML(){
     <input type="button" class="themelang" value="文A">
     <input type="checkbox" class="themepack-switch" ${Multilingual} style="display:none">
     <audio id="themeSoundPlay" controls src="${nullimg}" type="audio/mp3" style="display:none"></audio>
-    </span>`).insertBefore($('hr')[0])};
+    </span>`;
+    if($("button[class*='btn btn-lg'][onclick*='fyg_']").length==7){ $(TheMenuHtml).insertAfter($("button[class*='btn btn-lg'][onclick*='fyg_shop']"));}
+    else if($("button[class*='btn btn-lg'][onclick*='fyg_']").length==6) { $(TheMenuHtml).insertAfter($("button[class*='btn btn-lg'][onclick*='fyg_gem']"));}
+    else {$(TheMenuHtml).insertBefore($("button[class*='btn btn-lg'][onclick*='fyg_']")[0]);};}
 };
 function addCSS(){
 $('head').append(`<style>
@@ -933,18 +951,19 @@ function themeIcon(){
 function themePKimg(){
     if(custom.showCG == true&&!nowTheme.nofgimg){
         let imgpanel,cardname;
-        if($(".col-md-7.fyg_tr").length>0){
+        if($(".col-md-6>.alert.alert-danger").length>0){
             for(let i=0;i<$(".col-md-7.fyg_tr").length;i++){
-                imgpanel = document.getElementsByClassName('col-md-7 fyg_tr')[i];
+                imgpanel = $('.col-md-7.fyg_tr')[i];
                 cardname=imgpanel.children[0].innerText;
-                if(cardname[cardname.length-3]!="."){
-                    cardname=cardname[cardname.length-2];
+                if(cardname[7]==" "){
+                    cardname=cardname[8];
+                    console.log(imgpanel);
                     imgpanel.style.backgroundImage=`url("${nowTheme[cardname][4]}")`;
                     imgpanel.style.backgroundSize="cover";
                 };
             };
         };
-        if($(".col-md-7.fyg_tl").length>0){
+        if($(".col-md-6>.alert.alert-info").length>0){
             for(let i=0;i<$(".col-md-7.fyg_tl").length;i++){
                 imgpanel = document.getElementsByClassName('col-md-7 fyg_tl')[i];
                 cardname=imgpanel.children[0].innerText;
@@ -957,7 +976,7 @@ function themePKimg(){
                         isyg = true;
                     };
                 };
-                if(cardname[cardname.length-2]!="."&&isyg==false){
+                if(cardname[7]!=" "&&isyg==false){
                     cardname=cardname[cardname.length-9];
                     imgpanel.style.backgroundImage=`url("${nowTheme[cardname][5]}")`;
                     imgpanel.style.backgroundSize="cover";
@@ -1768,7 +1787,7 @@ function changeact(cardname){ ccard=false; themeVoice("change",cardname); playAn
 function clickact(cardname) { ccard=false; themeVoice("click", cardname); playAnimation(['standBy']); };
 function poweract(cardname) { ccard=false; themeVoice("power", cardname); playAnimation(['000000_eat_normal']); };
 function colleact(cardname) { ccard=false; themeVoice("colle", cardname); playAnimation(['joy_short','joy_short_return']); };
-$("a[href='fyg_index.php']").attr("href","fyg_index.php#");
+$("button[onclick*='fyg_index.php']").attr("onclick","window.location.href='fyg_index.php#'");
 $(document).on('blur', "#btnAutoTask", function(){ playAnimation(['joy_long', 'hold','joy_long_return']); themeVoice("colle"); })
 .on('change', ".themepack-uuid", function(e){
     let temp=e.target.value,tst=/^[a-z0-9]*$/g;
@@ -1793,11 +1812,23 @@ $(document).on('blur', "#btnAutoTask", function(){ playAnimation(['joy_long', 'h
 .on('click',"[onclick*='gox(']",function(){ colleact(); collecheck=0;battlecheck=1; })
 .on('click',"[onclick*='updstat(']",function(){ ccard=true; changeact(); })
 .on('click',"[onclick*='xxcard(']", function(){ ccard=false; })
+.on('click',"[onclick*='vippay()']",function(){ themeVoice("power"); })
+.on('click',"[onclick*='payok()']",function(){ themeVoice("levelup"); })
 .on('click',"#binding_popup_link",function(){ changeact(tempca); })
-.on('click',"[onclick*='xyre(']" ,function(){ changeact(); })
 .on('click',"[onclick*='puton(']",function(){ changeact(); })
 .on('click',"[onclick*='osave(']",function(){ changeact(); })
 .on('click',"[onclick*='x_sxds']",function(){ poweract(); })
+.on('click',"[onclick*='stdel(']",function(){ themeVoice("reset"); })
+.on('click',"[onclick*='g_nz(']",function(){ colleact(); })
+.on('click',"[onclick*='stpick(']",function(){ colleact(); })
+.on('click',"[onclick*='cgamd(']",function(){ colleact(); })
+.on('click',"[onclick*='zshop(']",function(){ colleact(); })
+.on('click',"[onclick*='xyre(']" ,function(){ colleact(); })
+.on('click',"[onclick*='\'29\'\,\'29\'\,\'5\'']",function(){ colleact(); })
+.on('click',"[onclick*='xy_n(\'18']",function(){ colleact(); })
+.on('click',"[onclick*='\'4\'\,\'3']",function(){ colleact(); })
+.on('click',"[onclick*='sttz(']",function(){ colleact(); })
+.on('click',"[onclick*='gx_sxst(']",function(){ colleact(); })
 .on('click',"[onclick*='gx_gt(']",function(){ colleact(); })
 .on('click',"[onclick*='giftop']",function(){ colleact(); })
 .on('click',"[onclick*='xyck(']" ,function(){ colleact(); })
