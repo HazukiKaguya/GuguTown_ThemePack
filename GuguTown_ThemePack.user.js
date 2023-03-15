@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.10.0
+// @version     3.10.1
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -2133,7 +2133,11 @@ $(document).on('blur', "#btnAutoTask", function(){ playAnimation(['joy_long', 'h
                     $("a[href*='fyg_index.php']")[0].href="fyg_index.php#";
                 };
             }
-            else if(window.location.href.indexOf('fyg_equip.php')>-1){ themeIcon(); getCardName(); }
+            else if(window.location.href.indexOf('fyg_equip.php')>-1){themeIcon(); getCardName();
+                if($("a[href*='fyg_index.php']").length>0){
+                    $("a[href*='fyg_index.php']")[0].href="fyg_index.php#";
+                };
+            }
             else if(window.location.href.indexOf('fyg_beach.php')>-1){ themeIcon(); }
             else if(window.location.href.indexOf('fyg_index.php')>-1&&$(".modal-open").length>0){ theEqName(); };
         };
