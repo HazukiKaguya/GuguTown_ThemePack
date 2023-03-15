@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.9.42
+// @version     3.10.0
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -26,7 +26,9 @@
 // ==/UserScript==
 /* eslint-env jquery */
 'use strict';
-
+let unlogfix=document.getElementsByClassName("row").length;
+if(window.location.href.indexOf('php') == -1){console.log("This is a static resource."); return;}
+else if(unlogfix==0){console.log("Invalid login status or Game Server is currently under maintenance,Themepack Manager Loading stopped.");return;};
 /*日间&夜间模式切换*/
 console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
 window.matchMedia('(prefers-color-scheme: dark)')
@@ -80,9 +82,9 @@ const defaultConf = {
         "cloudPass":"请 输入/设置 云同步密码",
         "dessertlevel":["稀有","史诗","传奇"],
         "dessertname":["星铜苹果护身符","蓝银葡萄护身符","紫晶樱桃护身符"],
-        "itemsname":["体能刺激药水","锻造材料箱"],
+        "itemsname":["体能刺激药水","锻造材料箱","灵魂药水","随机装备箱","宝石原石","光环天赋石","苹果核","蓝锻造石","绿锻造石","金锻造石"],
         "equip":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指"]
+                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指","彩金长剑"]
     },
     "zht":{
         "initUFG":"此自定義主題包立繪功能不可用！",
@@ -111,9 +113,9 @@ const defaultConf = {
         "cloudPass":"請 輸入/设置 云同步密码",
         "dessertlevel":["稀有","史詩","傳奇"],
         "dessertname":["星銅蘋果護身符","藍銀葡萄護身符","紫晶櫻桃護身符"],
-        "itemsname":["体能刺激药水","鍛造材料箱"],
+        "itemsname":["體能刺激藥水","鍛造材料箱","靈魂藥水","隨機裝備箱","寶石原石","光環天賦石","蘋果核","藍鍛造石","綠鍛造石","金鍛造石"],
         "equip":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指"]
+                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指","彩金長劍"]
     },
     "ja": {
         "initUFG":"このユーザー テーマパックの立ち絵機能は使用できません！",
@@ -142,10 +144,10 @@ const defaultConf = {
         "cloudPass":"クラウド同期用のパスワードを入力/設定してください",
         "dessertlevel":["レア","大作","伝説"],
         "dessertname":["星銅林檎お守り","藍銀葡萄お守り","紫水晶桜ん坊お守り"],
-        "itemsname":["身体刺激剤","鍛造材料箱"],
+        "itemsname":["身体刺激剤","鍛造用材料箱","魂の薬","ランダム装備箱","宝石原石","光輪天賦石","リンゴ核","青鍛造石","緑鍛造石","金鍛造石"],
         "equip":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
                  "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪"]
+                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪","彩金長剣"]
     },
     "en": {
         "initUFG":"The CG Function in this User ThemePack is unavailable!",
@@ -173,10 +175,10 @@ const defaultConf = {
         "cloudPass":"Please input/set cloud sync password",
         "dessertlevel":["Rare   ","Epic   ","Legend "],
         "dessertname":["star copper apple amulet","blue silver grape amulet","amethyst cherry amulet"],
-        "itemsname":["Stamina Stimulant Potion","Forging material box"],
+        "itemsname":["Stamina Stimulant Potion","Forge Material Box","Soul potion","Random Equipment Chest","Original Gem Stone","Halo Talent Stone","Fruit Core","Blue Forge Stone","Green Forge Stone","Gold Forge Stone"],
         "equip":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword","Bloodthirsty demon Sword",
                 "Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe","Thorny Armor of the front supporter",
-                "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring"]
+                "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring","Lottery Gold Sword"]
     }
 }
 ,sampleTheme ={
@@ -188,7 +190,7 @@ const defaultConf = {
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:100% 100%;",
     "nofgimg":false,"nospine":false,"novoice":false,
-    "nothemeEqName":false,"nothemeAmName":false,
+    "nothemeEqName":false,"nothemeAmName":false,"nothemeItName":false,
 	"equip-zh":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
      "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指"],
 	"equip-zht":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
@@ -207,18 +209,19 @@ const defaultConf = {
     "dessertname-zht":["蘋果護身符","葡萄護身符","櫻桃護身符"],
     "dessertname-ja":["林檎お守り","葡萄お守り","桜ん坊お守り"],
     "dessertname-en":["apple amulet","grape amulet","cherry amulet"],
-    "itemsname-zh":["体能刺激药水","锻造材料箱"],
-    "itemsname-zht":["體能刺激藥水","鍛造材料箱"],
-    "itemsname-ja":["身体刺激剤","鍛造材料箱"],
-    "itemsname-en":["Stamina Stimulant Potion","Forging material box"],
+    "itemsname-zh":["体能刺激药水","锻造材料箱","灵魂药水","随机装备箱","宝石原石","光环天赋石","苹果核","蓝锻造石","绿锻造石","金锻造石"],
+    "itemsname-zht":["體能刺激藥水","鍛造材料箱","靈魂藥水","隨機裝備箱","寶石原石","光環天賦石","蘋果核","藍鍛造石","綠鍛造石","金鍛造石"],
+    "itemsname-ja":["身体刺激剤","鍛造用材料箱","魂の薬","ランダム装備箱","宝石原石","光輪天賦石","リンゴ核","青鍛造石","緑鍛造石","金鍛造石"],
+    "itemsname-en":["Stamina Stimulant Potion","Forge Material Box","Soul potion","Random Equipment Chest","Original Gem Stone","Halo Talent Stone","Fruit Core","Blue Forge Stone","Green Forge Stone","Gold Forge Stone"],
     "dessert":["z/z903","z/z902","z/z901"],
-    "items":["i/it001","i/it002"],
+    "items":["i/it001","i/it002","i/it003","i/it004","/i/it005","i/it310","i/it309","i/it301","i/it302","i/it303"],
     "魔灯之灵（野怪":"https://sticker.inari.site/null.gif",
     "六眼飞鱼（野怪":"https://sticker.inari.site/null.gif",
     "铁皮木人（野怪":"https://sticker.inari.site/null.gif",
     "迅捷魔蛛（野怪":"https://sticker.inari.site/null.gif",
     "食铁兽（野怪"  :"https://sticker.inari.site/null.gif",
     "晶刺豪猪（野怪":"https://sticker.inari.site/null.gif",
+    "六边形战士（野怪":"https://sticker.inari.site/null.gif",
     "舞":["3000","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "默":["3001","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "琳":["3002","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
@@ -229,6 +232,7 @@ const defaultConf = {
     "冥":["3007","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "命":["3008","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "希":["3009","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
+    "霞":["3010","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif","https://sticker.inari.site/null.gif"],
     "voice":["on.mp3","off.mp3"],
     "舞voice":["/vo/",".mp3"],
     "默voice":["/vo/",".mp3"],
@@ -251,6 +255,7 @@ const defaultConf = {
     "冥spine":{"name":"/unit/min/","type":"3","hasRarity6":true,"wi":-350,"hi":-48,"re":0.8},
     "命spine":{"name":"/unit/life/","type":"1","hasRarity6":false,"wi":-360,"hi":-36,"re":1.0},
     "希spine":{"name":"/unit/xii/","type":"10","hasRarity6":false,"wi":-370,"hi":-64,"re":0.8},
+    "霞spine":{"name":"/unit/xia/","type":"7","hasRarity6":false,"wi":-370,"hi":-64,"re":0.8},
     "a1":["z2101","z1","探险者之剑","探险者之剑","z/z2101_"],
     "a2":["z2102","z2","探险者短弓","探险者短弓","z/z2102_"],
     "a3":["z2103","z3","探险者短杖","探险者短杖","z/z2103_"],
@@ -263,6 +268,7 @@ const defaultConf = {
     "a9":["z2109","z1","陨铁重剑","陨铁重剑","z/z2109_"],
     "a10":["z2110","z2110","饮血魔剑","饮血魔剑","z/z2110_"],
     "ao10":["z2110","z2110","饮血长枪","饮血长枪","z/z2110_"],
+    "a11":["z2111","z2111","彩金长剑","彩金长剑","z/z2111_"],
     "w1":["z2201","z5","探险者手环","探险者手环","z/z2201_"],
     "wo1":["z2201","z5","探险者手套","探险者手套","z/z2201_"],
     "w2":["z2202","z8","命师的传承手环","命师的传承手环","z/z2202_"],
@@ -294,8 +300,8 @@ const defaultConf = {
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:100% 100%;",
     "dessert":["z/z903","z/z902","z/z901"],
-    "items":["i/it001","i/it002"],
-    "nothemeAmName":true,"nothemeEqName":true,
+    "items":["i/it001","i/it002","i/it003","i/it004","/i/it005","i/it310","i/it309","i/it301","i/it302","i/it303"],
+    "nothemeAmName":true,"nothemeEqName":true,"nothemeItName":true,
     "nofgimg":true,"novoice":true,"nospine":true,
     "a1":["z2101","z1","探险者之剑","探险者之剑","z/z2101_"],
     "a2":["z2102","z2","探险者短弓","探险者短弓","z/z2102_"],
@@ -309,6 +315,7 @@ const defaultConf = {
     "a9":["z2109","z1","陨铁重剑","陨铁重剑","z/z2109_"],
     "a10":["z2110","z2110","饮血魔剑","饮血魔剑","z/z2110_"],
     "ao10":["z2110","z2110","饮血长枪","饮血长枪","z/z2110_"],
+    "a11":["z2111","z2111","彩金长剑","彩金长剑","z/z2111_"],
     "w1":["z2201","z5","探险者手环","探险者手环","z/z2201_"],
     "wo1":["z2201","z5","探险者手套","探险者手套","z/z2201_"],
     "w2":["z2202","z8","命师的传承手环","命师的传承手环","z/z2202_"],
@@ -332,14 +339,14 @@ const defaultConf = {
     "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"]
 }
 ,classicTheme = {
-    "url":"https://sticker.inari.site/guguicons/old/",
-    "iurl":"https://sticker.inari.site/guguicons/old/",
+    "url":"https://p.inari.site/guguicons/old/",
+    "iurl":"https://p.inari.site/guguicons/old/",
     "old":"", "ext":".gif",
     "background":"overlay",
     "backsize":"background-size:80% 80%;",
     "wqbacksize":"background-size:80% 80%;",
     "nofgimg":true,"novoice":true,"nospine":true,
-    "nothemeEqName":true,"nothemeAmName":false,
+    "nothemeEqName":true,"nothemeAmName":false,"nothemeItName":true,
     "dessertlevel-zh":["稀有","史诗","传奇"],
     "dessertlevel-zht":["稀有","史詩","傳奇"],
     "dessertlevel-ja":["レア","大作","伝説"],
@@ -348,12 +355,8 @@ const defaultConf = {
     "dessertname-zht":["蘋果護身符","葡萄護身符","櫻桃護身符"],
     "dessertname-ja":["林檎お守り","葡萄お守り","桜ん坊お守り"],
     "dessertname-en":["apple amulet","grape amulet","cherry amulet"],
-    "itemsname-zh":["体能刺激药水","锻造材料箱"],
-    "itemsname-zht":["體能刺激藥水","鍛造材料箱"],
-    "itemsname-ja":["身体刺激剤","鍛造材料箱"],
-    "itemsname-en":["Stamina Stimulant Potion","Forging material box"],
     "dessert":["apple","grape","cherry"],
-    "items":["powerdrug","forgebox"],
+    "items":["powerdrug","forgebox","soul","eqchest","gem","halo","fruitcore","loforge","miforge","hiforge"],
     "a1":["z2101","z1","探险者之剑","探险者之剑","sword_"],
     "a2":["z2102","z2","探险者短弓","探险者短弓","bow_"],
     "a3":["z2103","z3","探险者短杖","探险者短杖","staff_"],
@@ -366,6 +369,7 @@ const defaultConf = {
     "a9":["z2109","z1","陨铁重剑","陨铁重剑","sword_"],
     "a10":["z2110","z2110","饮血魔剑","饮血魔剑","sword_"],
     "ao10":["z2110","z2110","饮血长枪","饮血长枪","spear_"],
+    "a11":["z2111","z2111","彩金长剑","彩金长剑","sword_"],
     "w1":["z2201","z5","探险者手环","探险者手环","bracelet_"],
     "wo1":["z2201","z5","探险者手套","探险者手套","gloves_"],
     "w2":["z2202","z8","命师的传承手环","命师的传承手环","bracelet_"],
@@ -399,37 +403,38 @@ const defaultConf = {
     "wqbacksize":"background-size:100% 100%;",
     "level":["普通","幸运","稀有","史诗","传奇"],
     "nofgimg":false,"nospine":false,"novoice":false,
-    "nothemeEqName":false,"nothemeAmName":false,
+    "nothemeEqName":false,"nothemeAmName":false,"nothemeItName":false,
     "equip-zh":["旅人剑","猎人弓","香木法杖","妖刀血鸦","深渊之弓","黑曜石天黑剑","棒棒糖手杖","盖亚之斧","盖亚之斧","勇气星核剑","混沌之刃","毁灭之伤冥神枪","旅者手镯","旅者拳套","睿智手镯","朋克手镯","深红爪","重金属护甲","皮革工作服","旅者长袍",
-                "魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结","永恒绿戒","深结晶变异水晶"],
+                "魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结","永恒绿戒","深结晶变异水晶","辉光剑征服者"],
     "equip-zht":["旅人劍","獵人弓","檀香之杖","妖刀血鴉","深淵之弓","天黑劍奧比修斯","棒棒糖手杖","蓋亞之斧","蓋亞之斧","星核劍艾爾茲修奈德","渾沌之劍","冥神槍毀滅苦痛","旅者手镯","旅者拳套","睿智手镯","龐克棘刺手環","深紅之爪","重金屬盔甲","皮革工作服",
-                 "旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結","常青之綠戒","深結晶變異水晶"],
+                 "旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結","常青之綠戒","深結晶變異水晶","輝光劍雅德瑪斯"],
     "equip-ja":["旅立ちの剣","狩人の弓","香木の杖","妖刀血鴉","アビスボウ","天黒剣オブシウス","ロリポップステッキ","ガイアアクス","ガイアアクス","星核剣エルツシュナイド","カオスブレード","冥神槍ドゥームペイン","旅立ちのミサンガ","旅立ちのパンチ",
                 "ソフォスブレスレット","パンクニードルバングル","クリムゾンクロー","ヘビーメタルアーマー","革のサロペット","旅立ちのローブ","魔導師のローブ","覇王樹の棘針鎧","翠緑の霊衣","翠緑の霊衣","黒瑪瑙の祈装衣","旅立ちの耳環","旅立ちの頭巾",
-                "海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐","常盤の緑環","深結晶ゼノクリスタル"],
+                "海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐","常盤の緑環","深結晶ゼノクリスタル","輝光剣アダマス"],
     "equip-en":["Iron Blade","Hunter's Bow","Fragrant Wood Wand","Blood Raven Demon Blade","Abyss Bow","Heavenly Black Obsidian Sword","Lolipop Stick","Gaia Axe","Gaia Axe","Star Core Sword - Erst Schneide","Chaos Blade","Nether God Spear, Doom Pain",
                 "Journey Bracelet","Journey Punches","Sophos Bracelet","Punk Bangle","Crimson Claw","Heavy Metal Armor","Leather Overalls","Journey Robe","Magician's Robe","Thorn of the Great Tree Armor","Viridian Spiritual Dress","Viridian Spiritual Dress",
-                "Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon","Evergreen Ring","Deep Crystalized Xenocrystal"],
-    "dessert":["apie","gdonuts","cakey"],
-    "items":["powerdrug","forgebox"],
-    "dessertlevel-zh":["家常的","美味的","诱人的"],
-    "dessertlevel-zht":["家常的","美味的","誘人的"],
-    "dessertlevel-ja":["自家製の","美味しい","超美味い"],
-    "dessertlevel-en":["homemade  ","tasty     ","delicious "],
-    "dessertname-zh":["苹果派","甜甜圈","樱桃蛋糕"],
-    "dessertname-zht":["蘋果派","甜甜圈","櫻桃蛋糕"],
-    "dessertname-ja":["アップルパイ","ドーナツ","チェリーケーキ"],
-    "dessertname-en":["apple pie","grape donuts","cherry cake"],
-    "itemsname-zh":["初级体力药剂","初级锻造台"],
-    "itemsname-zht":["初級體力藥劑","初級鍛造桌"],
-    "itemsname-ja":["下級体力薬剤","下級鍛造台"],
-    "itemsname-en":["Primary Stamina Potion","primary forging table"],
+                "Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon","Evergreen Ring","Deep Crystalized Xenocrystal","Brilliant Sword - Adamas"],
+    "dessert":["apple","grape","melon"],
+    "dessertlevel-zh":["普通的","成熟的","优质的"],
+    "dessertlevel-zht":["普通的","成熟的","優質的"],
+    "dessertlevel-ja":["普通の","熟した","上質な"],
+    "dessertlevel-en":["Common   ","Mature   ","Superior "],
+    "dessertname-zh":["苹果","葡萄","西瓜"],
+    "dessertname-zht":["蘋果","葡萄","西瓜"],
+    "dessertname-ja":["林檎","ぶどう","スイカ"],
+    "dessertname-en":["Apple","Grape","Watermelon"],
+    "items":["powerdrug","forgebox","souldrug","eqchest","gemchest","halostone","fruitcore","loforge","miforge","hiforge"],
+    "itemsname-zh":["体力药剂","自选锻造材料","经验药水","随机装备箱","自选概率宝石箱","光环天赋石","玛娜","低级锻造石","中级锻造石","高级锻造石"],
+    "itemsname-zht":["體力藥劑","自選鍛造材料","經驗藥水","隨機裝備箱","自選概率寶石箱","光環天賦石","瑪娜","低級鍛造石","中級鍛造石","高級鍛造石"],
+    "itemsname-ja":["体力薬剤","自選鍛造材料","経験薬","ランダム装備箱","自選確率宝石箱","光輪の天賦向上","マナ","下級鍛造石","中級鍛造石","上級鍛造石"],
+    "itemsname-en":["Stamina Potion","Optional Forging Material","Experience potion","Random Equipment Chest","Optional Probability Gem Chest","Halo Talent Stone","Mana","Primary Forge Stone","Intermediate Forge Stone","Superior Forge Stone"],
     "魔灯之灵（野怪":"https://p.inari.site/guguicons/test/mob/deng.png",
     "六眼飞鱼（野怪":"https://p.inari.site/guguicons/test/mob/fish.png",
     "铁皮木人（野怪":"https://p.inari.site/guguicons/test/mob/mu.png",
     "迅捷魔蛛（野怪":"https://p.inari.site/guguicons/test/mob/zhu.png",
     "食铁兽（野怪"  :"https://p.inari.site/guguicons/test/mob/shou.png",
     "晶刺豪猪（野怪":"https://p.inari.site/guguicons/test/mob/nzhu.png",
+    "六边形战士（野怪":"https://p.inari.site/guguicons/test/mob/liu.png",
     "舞":["3000","https://p.inari.site/guguicons/test/cg/wuu/1.png","https://p.inari.site/guguicons/test/cg/wuu/2.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/4.png",
          "https://p.inari.site/guguicons/test/cg/wuu/5.png","https://p.inari.site/guguicons/test/cg/wuu/3.png","https://p.inari.site/guguicons/test/cg/wuu/0.png","https://p.inari.site/guguicons/test/cg/wuu/0.png"],
     "默":["3001","https://p.inari.site/guguicons/test/cg/mo/1.png","https://p.inari.site/guguicons/test/cg/mo/2.png","https://p.inari.site/guguicons/test/cg/mo/3.png","https://p.inari.site/guguicons/test/cg/mo/4.png",
@@ -450,6 +455,8 @@ const defaultConf = {
          "https://p.inari.site/guguicons/test/cg/life/5.png","https://p.inari.site/guguicons/test/cg/life/3.png","https://p.inari.site/guguicons/test/cg/life/0.png","https://p.inari.site/guguicons/test/cg/life/0.png"],
     "希":["3009","https://p.inari.site/guguicons/test/cg/xii/1.png","https://p.inari.site/guguicons/test/cg/xii/2.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/4.png",
          "https://p.inari.site/guguicons/test/cg/xii/5.png","https://p.inari.site/guguicons/test/cg/xii/3.png","https://p.inari.site/guguicons/test/cg/xii/0.png","https://p.inari.site/guguicons/test/cg/xii/0.png"],
+    "霞":["3010","https://p.inari.site/guguicons/test/cg/xia/1.png","https://p.inari.site/guguicons/test/cg/xia/2.png","https://p.inari.site/guguicons/test/cg/xia/3.png","https://p.inari.site/guguicons/test/cg/xia/4.png",
+         "https://p.inari.site/guguicons/test/cg/xia/5.png","https://p.inari.site/guguicons/test/cg/xia/3.png","https://p.inari.site/guguicons/test/cg/xia/0.png","https://p.inari.site/guguicons/test/cg/xia/0.png"],
     "voice":["https://p.inari.site/guguicons/test/vo/on.mp3","https://p.inari.site/guguicons/test/vo/off.mp3"],
     "舞voice":["https://p.inari.site/guguicons/test/vo/wuu/",".mp3"],
     "默voice":["https://p.inari.site/guguicons/test/vo/mo/",".mp3"],
@@ -461,6 +468,7 @@ const defaultConf = {
     "冥voice":["https://p.inari.site/guguicons/test/vo/ming/",".mp3"],
     "命voice":["https://p.inari.site/guguicons/test/vo/life/",".mp3"],
     "希voice":["https://p.inari.site/guguicons/test/vo/xii/",".mp3"],
+    "霞voice":["https://p.inari.site/guguicons/test/vo/xia/",".mp3"],
     "spinert":["https://sticker.inari.site/api/common/","https://"],
     "舞spine":{"name":"sticker.inari.site/api/unit/wuu/","type":"6","hasRarity6":true,"wi":-330,"hi":-42,"re":0.8},
     "默spine":{"name":"sticker.inari.site/api/unit/mo/","type":"7","hasRarity6":true,"wi":-350,"hi":-42,"re":0.8},
@@ -472,50 +480,49 @@ const defaultConf = {
     "冥spine":{"name":"sticker.inari.site/api/unit/min/","type":"3","hasRarity6":true,"wi":-350,"hi":-48,"re":0.8},
     "命spine":{"name":"sticker.inari.site/api/unit/life/","type":"1","hasRarity6":false,"wi":-360,"hi":-36,"re":1.0},
     "希spine":{"name":"sticker.inari.site/api/unit/xii/","type":"10","hasRarity6":false,"wi":-370,"hi":-64,"re":0.8},
-    "a1":["z2101","z1","探险者之剑","旅人剑","%E6%8E%A2%E9%99%A9%E8%80%85%E4%B9%8B%E5%89%91/"],
-    "a2":["z2102","z2","探险者短弓","猎人弓","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E5%BC%93/"],
-    "a3":["z2103","z3","探险者短杖","香木法杖","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9F%AD%E6%9D%96/"],
-    "a4":["z2104","z4","狂信者的荣誉之刃","妖刀血鸦","%E7%8B%82%E4%BF%A1%E8%80%85%E7%9A%84%E8%8D%A3%E8%AA%89%E4%B9%8B%E5%88%83/"],
-    "a5":["z2105","z2","反叛者的刺杀弓","深渊之弓","%E5%8F%8D%E5%8F%9B%E8%80%85%E7%9A%84%E5%88%BA%E6%9D%80%E5%BC%93/"],
-    "a6":["z2106","z4","幽梦匕首","黑曜石天黑剑","%E5%B9%BD%E6%A2%A6%E5%8C%95%E9%A6%96/"],
-    "a7":["z2107","z3","光辉法杖","棒棒糖手杖","%E5%85%89%E8%BE%89%E6%B3%95%E6%9D%96/"],
-    "a8":["z2108","z1","荆棘盾剑","盖亚之斧","%E8%8D%86%E6%A3%98%E7%9B%BE%E5%89%91/"],
-    "ao8":["z2108","z1","荆棘剑盾","盖亚之斧","%E8%8D%86%E6%A3%98%E7%9B%BE%E5%89%91/"],
-    "a9":["z2109","z1","陨铁重剑","勇气星核剑","%E9%99%A8%E9%93%81%E9%87%8D%E5%89%91/"],
-    "a10":["z2110","z2110","饮血魔剑","混沌之刃","%E9%A5%AE%E8%A1%80%E9%AD%94%E5%89%91/"],
-    "ao10":["z2110","z2110","饮血长枪","毁灭之伤冥神枪","%E9%A5%AE%E8%A1%80%E9%95%BF%E6%9E%AA/"],
-    "w1":["z2201","z5","探险者手环","旅者手镯","%E6%8E%A2%E9%99%A9%E8%80%85%E6%89%8B%E7%8E%AF/"],
-    "wo1":["z2201","z5","探险者手套","旅者拳套","%E6%8E%A2%E9%99%A9%E8%80%85%E6%89%8B%E5%A5%97/"],
-    "w2":["z2202","z8","命师的传承手环","睿智手镯","%E5%91%BD%E5%B8%88%E7%9A%84%E4%BC%A0%E6%89%BF%E6%89%8B%E7%8E%AF/"],
-    "w3":["z2203","z5","秃鹫手环","朋克手镯","%E7%A7%83%E9%B9%AB%E6%89%8B%E7%8E%AF/"],
-    "wo3":["z2203","z5","秃鹫手套","深红爪","%E7%A7%83%E9%B9%AB%E6%89%8B%E5%A5%97/"],
-    "w4":["z2204","z2204","海星戒指","永恒绿戒","%E6%B5%B7%E6%98%9F%E6%88%92%E6%8C%87/"],
-    "w5":["z2205","z2205","噬魔戒指","深结晶变异水晶","%E5%99%AC%E9%AD%94%E6%88%92%E6%8C%87/"],
-    "c1":["z2301","z9","探险者铁甲","重金属护甲","%E6%8E%A2%E9%99%A9%E8%80%85%E9%93%81%E7%94%B2/"],
-    "c2":["z2302","z10","探险者皮甲","皮革工作服","%E6%8E%A2%E9%99%A9%E8%80%85%E7%9A%AE%E7%94%B2/"],
-    "c3":["z2303","z10","探险者布甲","旅者长袍","%E6%8E%A2%E9%99%A9%E8%80%85%E5%B8%83%E7%94%B2/"],
-    "c4":["z2304","z11","旅法师的灵光袍","魔导师的长袍","%E6%97%85%E6%B3%95%E5%B8%88%E7%9A%84%E7%81%B5%E5%85%89%E8%A2%8D/"],
-    "c5":["z2305","z9","战线支撑者的荆棘重甲","霸王树之棘针铠","%E6%88%98%E7%BA%BF%E6%94%AF%E6%92%91%E8%80%85%E7%9A%84%E8%8D%86%E6%A3%98%E9%87%8D%E7%94%B2/"],
-    "c6":["z2306","z2306","复苏战衣","翠绿灵衣","%E5%A4%8D%E8%8B%8F%E6%88%98%E8%A1%A3/"],
-    "co6":["z2306","z2306","复苏木甲","翠绿灵衣","%E5%A4%8D%E8%8B%8F%E6%88%98%E8%A1%A3/"],
-    "c7":["z2307","z2307","挑战斗篷","黑玛瑙之祈装衣","%E6%8C%91%E6%88%98%E6%96%97%E7%AF%B7/"],
-    "h1":["z2401","z7","探险者耳环","旅者耳环","%E6%8E%A2%E9%99%A9%E8%80%85%E8%80%B3%E7%8E%AF/"],
-    "ho1":["z2401","z7","探险者头巾","旅者头巾","%E6%8E%A2%E9%99%A9%E8%80%85%E5%A4%B4%E5%B7%BE/"],
-    "h2":["z2402","z7","占星师的耳饰","海神耳饰","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E8%80%B3%E9%A5%B0/"],
-    "ho2":["z2402","z7","占星师的发饰","樱花的月夜簪","%E5%8D%A0%E6%98%9F%E5%B8%88%E7%9A%84%E5%8F%91%E9%A5%B0/"],
-    "h3":["z2403","z7","萌爪耳钉","精灵王护石","%E8%90%8C%E7%88%AA%E8%80%B3%E9%92%89/"],
-    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","%E5%A4%A9%E4%BD%BF%E7%BC%8E%E5%B8%A6/"]
+    "霞spine":{"name":"sticker.inari.site/api/unit/xia/","type":"7","hasRarity6":false,"wi":-370,"hi":-64,"re":0.8},
+    "a1":["z2101","z1","探险者之剑","旅人剑","探险者之剑/"],
+    "a2":["z2102","z2","探险者短弓","猎人弓","探险者短弓/"],
+    "a3":["z2103","z3","探险者短杖","香木法杖","探险者短杖/"],
+    "a4":["z2104","z4","狂信者的荣誉之刃","妖刀血鸦","狂信者的荣誉之刃/"],
+    "a5":["z2105","z2","反叛者的刺杀弓","深渊之弓","反叛者的刺杀弓/"],
+    "a6":["z2106","z4","幽梦匕首","黑曜石天黑剑","幽梦匕首/"],
+    "a7":["z2107","z3","光辉法杖","棒棒糖手杖","光辉法杖/"],
+    "a8":["z2108","z1","荆棘盾剑","盖亚之斧","荆棘盾剑/"],
+    "ao8":["z2108","z1","荆棘剑盾","盖亚之斧","荆棘盾剑/"],
+    "a9":["z2109","z1","陨铁重剑","勇气星核剑","陨铁重剑/"],
+    "a10":["z2110","z2110","饮血魔剑","混沌之刃","饮血魔剑/"],
+    "ao10":["z2110","z2110","饮血长枪","毁灭之伤冥神枪","饮血长枪/"],
+    "a11":["z2111","z2111","彩金长剑","辉光剑雅德玛斯","彩金长剑/"],
+    "w1":["z2201","z5","探险者手环","旅者手镯","探险者手环/"],
+    "wo1":["z2201","z5","探险者手套","旅者拳套","探险者手套/"],
+    "w2":["z2202","z8","命师的传承手环","睿智手镯","命师的传承手环/"],
+    "w3":["z2203","z5","秃鹫手环","朋克手镯","秃鹫手环/"],
+    "wo3":["z2203","z5","秃鹫手套","深红爪","秃鹫手套/"],
+    "w4":["z2204","z2204","海星戒指","永恒绿戒","海星戒指/"],
+    "w5":["z2205","z2205","噬魔戒指","深结晶变异水晶","噬魔戒指/"],
+    "c1":["z2301","z9","探险者铁甲","重金属护甲","探险者铁甲/"],
+    "c2":["z2302","z10","探险者皮甲","皮革工作服","探险者皮甲/"],
+    "c3":["z2303","z10","探险者布甲","旅者长袍","探险者布甲/"],
+    "c4":["z2304","z11","旅法师的灵光袍","魔导师的长袍","旅法师的灵光袍/"],
+    "c5":["z2305","z9","战线支撑者的荆棘重甲","霸王树之棘针铠","战线支撑者的荆棘重甲/"],
+    "c6":["z2306","z2306","复苏战衣","翠绿灵衣","复苏战衣/"],
+    "co6":["z2306","z2306","复苏木甲","翠绿灵衣","复苏战衣/"],
+    "c7":["z2307","z2307","挑战斗篷","黑玛瑙之祈装衣","挑战斗篷/"],
+    "h1":["z2401","z7","探险者耳环","旅者耳环","探险者耳环/"],
+    "ho1":["z2401","z7","探险者头巾","旅者头巾","探险者头巾/"],
+    "h2":["z2402","z7","占星师的耳饰","海神耳饰","占星师的耳饰/"],
+    "ho2":["z2402","z7","占星师的发饰","樱花的月夜簪","占星师的发饰/"],
+    "h3":["z2403","z7","萌爪耳钉","精灵王护石","萌爪耳钉/"],
+    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","天使缎带/"]
 }
 ,ygcheck = ["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪","六边形战士（野怪"]
 ,nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 ,api='https://api.inari.site/?s=App.User_User.'
-,cards=['舞','默','琳','艾','梦','薇','伊','冥','命','希'];
+,cards=['舞','默','琳','艾','梦','薇','伊','冥','命','希',"霞"];
 let ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,momoConf={},
-    User=$("button[class*='btn btn-lg'][onclick*='fyg_index.php']")[0].innerText,
-
-
-    momoUser = "momo_"+User,uuid,nowTheme
-,custom,tempca,tpkanban,kanban,kanbanimg,ext='.gif',old,purl,iurl,dessert,items,dessertlevel,dessertname,itemsname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,w1,w2,w3,w4,w5,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
+User=$("button[class*='btn btn-lg'][onclick*='fyg_index.php']")[0].innerText,momoUser = "momo_"+User,uuid,nowTheme
+,custom,tempca,tpkanban,kanban,kanbanimg,ext='.gif',old,purl,iurl,dessert,items,dessertlevel,dessertname,itemsname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,w1,w2,w3,w4,w5,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
 ,canvas,gl,shader,batcher,skeletonRenderer,loadingSkeleton,currentSkeletonBuffer,animationState,forceNoLoop,currentTexture,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,pagetype=24,speedFactor=1,tempvo=false,ccard=false,loading = false
 ,timeout = null,useOldNamesCheck='',useThemeNameCheck='',Multilingual='',tpkanbanHTML='',showCGCheck='',voiceOCheck='',kanbanCheck='',activeSkeleton="",pendingAnimation='',generalAdditionAnimations={},userTheme={},generalBattleSkeletonData={},lang="zh"
 ,animationQueue=[],currentClass='1',imgmove=[0,0.6],lastFrameTime=Date.now()/1000,bgColor=[0,0,0,0],additionAnimations=['DEAR','NO_WEAPON','POSING','RACE','RUN_JUMP','SMILE'],currentClassAnimData={type:0,data:{}},currentCharaAnimData={id:0,data:{}}
@@ -558,12 +565,17 @@ Multilingual='checked'; equipName=Language[custom.language].equip;
 if(custom.useOldNames&&!custom.useThemeName){
     nowTheme.dessertlevel=classicTheme["dessertlevel-"+custom.language];
     nowTheme.dessertname=classicTheme["dessertname-"+custom.language];
-    nowTheme.itemsname=classicTheme["itemsname-"+custom.language];
+    nowTheme.itemsname=Language[custom.language].itemsname;
 }
-else if(custom.useThemeName&&!nowTheme.nothemeAmName){
+else if(custom.useThemeName&&!nowTheme.nothemeAmName&&!nowTheme.nothemeItName){
     nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];
     nowTheme.dessertname=nowTheme["dessertname-"+custom.language];
     nowTheme.itemsname=nowTheme["itemsname-"+custom.language];
+}
+else if(custom.useThemeName&&!nowTheme.nothemeAmName&&nowTheme.nothemeItName){
+    nowTheme.dessertlevel=nowTheme["dessertlevel-"+custom.language];
+    nowTheme.dessertname=nowTheme["dessertname-"+custom.language];
+    nowTheme.itemsname =Language[custom.language].itemsname;
 }
 else{
     nowTheme.dessertlevel=Language[custom.language].dessertlevel;
@@ -574,13 +586,14 @@ if(!nowTheme.nothemeEqName&&custom.useThemeName){ equipName=nowTheme["equip-"+cu
 
 nowTheme.a1[3]=equipName[0];nowTheme.a2[3]=equipName[1];nowTheme.a3[3]=equipName[2];nowTheme.a4[3]=equipName[3];nowTheme.a5[3]=equipName[4];nowTheme.a6[3]=equipName[5];
 nowTheme.a7[3]=equipName[6];nowTheme.a8[3]=equipName[7];nowTheme.ao8[3]=equipName[8];nowTheme.a9[3]=equipName[9];nowTheme.a10[3]=equipName[10];nowTheme.ao10[3]=equipName[11];
+nowTheme.a11[3]=equipName[33];
 nowTheme.w1[3]=equipName[12];nowTheme.wo1[3]=equipName[13];nowTheme.w2[3]=equipName[14];nowTheme.w3[3]=equipName[15];nowTheme.wo3[3]=equipName[16];nowTheme.w4[3]=equipName[31];nowTheme.w5[3]=equipName[32];
 nowTheme.c1[3]=equipName[17];nowTheme.c2[3]=equipName[18];nowTheme.c3[3]=equipName[19];nowTheme.c4[3]=equipName[20];nowTheme.c5[3]=equipName[21];nowTheme.c6[3]=equipName[22];nowTheme.co6[3]=equipName[23];nowTheme.c7[3]=equipName[24];
 nowTheme.h1[3]=equipName[25];nowTheme.ho1[3]=equipName[26];nowTheme.h2[3]=equipName[27];nowTheme.ho2[3]=equipName[28];nowTheme.h3[3]=equipName[29];nowTheme.ho3[3]=equipName[30];
 sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
 
 ext=nowTheme.ext;purl=nowTheme.url;iurl=nowTheme.iurl;dessert=nowTheme.dessert;items=nowTheme.items;old=nowTheme.old;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;itemsname=nowTheme.itemsname;
-a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;
+a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;a11=nowTheme.a11;
 w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;w4=nowTheme.w4;w5=nowTheme.w5;
 c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;
 h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
@@ -652,6 +665,7 @@ function finalInit(){
     console.log("Load Finish! Takes "+loadTime+"ms");
     showKanban();
     if(localStorage.reload=="true"){localStorage.removeItem('reload');update();};
+    if(window.location.href.indexOf('fyg_index.php') > -1){console.log("hi"); };
 };
 function update(){
     localStorage.setItem('ThemePackConf', JSON.stringify(custom));
@@ -665,6 +679,7 @@ function usTheme(UserJSON,act){
         if(!custom.ver){ update00(); }
         /*
         else if(custom.ver=="ver1.0"){ update10();}
+        /*
         else if(custom.ver=="ver1.1"){ update11(); }
         else if(custom.ver=="ver1.2"){ update12(); }
         */
@@ -695,15 +710,11 @@ function usTheme(UserJSON,act){
                     if(tempTheme['dessertname-zht']){ userTheme['dessertname-zht']=tempTheme['dessertname-zht']; }else{ userTheme['dessertname-zht']=Language.zht.dessertname; };
                     if(tempTheme['dessertname-ja']){ userTheme['dessertname-ja']=tempTheme['dessertname-ja']; }else{ userTheme['dessertname-ja']=Language.ja.dessertname; };
                     if(tempTheme['dessertname-en']){ userTheme['dessertname-en']=tempTheme['dessertname-en']; }else{ userTheme['dessertname-en']=Language.en.dessertname; };
-                    if(tempTheme['itemsname-zh']){ userTheme['itemsname-zh']=tempTheme['itemsname-zh']; }else{ userTheme['itemsname-zh']=Language.zh.itemsname; };
-                    if(tempTheme['itemsname-zht']){ userTheme['itemsname-zht']=tempTheme['itemsname-zht']; }else{ userTheme['itemsname-zht']=Language.zht.itemsname; };
-                    if(tempTheme['itemsname-ja']){ userTheme['itemsname-ja']=tempTheme['itemsname-ja']; }else{ userTheme['itemsname-ja']=Language.ja.itemsname; };
-                    if(tempTheme['itemsname-en']){ userTheme['itemsname-en']=tempTheme['itemsname-en']; }else{ userTheme['itemsname-en']=Language.en.itemsname; };
                     userTheme.nothemeAmName=false;
                 }else{ userTheme.nothemeAmName=true; };
             };
             if(tempTheme.nofgimg){ userTheme.nofgimg=true; alert('code:userTheme-001\n'+lang.initUFG); custom.showCG=false; }else{
-                if(tempTheme.舞||tempTheme.默||tempTheme.琳||tempTheme.艾||tempTheme.梦||tempTheme.薇||tempTheme.伊||tempTheme.冥||tempTheme.命||tempTheme.希){
+                if(tempTheme.舞||tempTheme.默||tempTheme.琳||tempTheme.艾||tempTheme.梦||tempTheme.薇||tempTheme.伊||tempTheme.冥||tempTheme.命||tempTheme.希||tempTheme.霞){
                     if(tempTheme.舞){ userTheme.舞=tempTheme.舞; }else{ userTheme.舞=sampleTheme.舞; };
                     if(tempTheme.默){ userTheme.默=tempTheme.默; }else{ userTheme.默=sampleTheme.默; };
                     if(tempTheme.琳){ userTheme.琳=tempTheme.琳; }else{ userTheme.琳=sampleTheme.琳; };
@@ -714,12 +725,14 @@ function usTheme(UserJSON,act){
                     if(tempTheme.冥){ userTheme.冥=tempTheme.冥; }else{ userTheme.冥=sampleTheme.冥; };
                     if(tempTheme.命){ userTheme.命=tempTheme.命; }else{ userTheme.命=sampleTheme.命; };
                     if(tempTheme.希){ userTheme.希=tempTheme.希; }else{ userTheme.希=sampleTheme.希; };
+                    if(tempTheme.霞){ userTheme.霞=tempTheme.霞; }else{ userTheme.霞=sampleTheme.霞; };
                     if(tempTheme['魔灯之灵（野怪']){ userTheme['魔灯之灵（野怪']=tempTheme['魔灯之灵（野怪']; }else{ userTheme['魔灯之灵（野怪']=sampleTheme['魔灯之灵（野怪']; };
                     if(tempTheme['六眼飞鱼（野怪']){ userTheme['六眼飞鱼（野怪']=tempTheme['六眼飞鱼（野怪']; }else{ userTheme['六眼飞鱼（野怪']=sampleTheme['六眼飞鱼（野怪']; };
                     if(tempTheme['铁皮木人（野怪']){ userTheme['铁皮木人（野怪']=tempTheme['铁皮木人（野怪']; }else{ userTheme['铁皮木人（野怪']=sampleTheme['铁皮木人（野怪']; };
                     if(tempTheme['迅捷魔蛛（野怪']){ userTheme['迅捷魔蛛（野怪']=tempTheme['迅捷魔蛛（野怪']; }else{ userTheme['迅捷魔蛛（野怪']=sampleTheme['迅捷魔蛛（野怪']; };
                     if(tempTheme['晶刺豪猪（野怪']){ userTheme['晶刺豪猪（野怪']=tempTheme['晶刺豪猪（野怪']; }else{ userTheme['晶刺豪猪（野怪']=sampleTheme['晶刺豪猪（野怪']; };
                     if(tempTheme['食铁兽（野怪']){ userTheme['食铁兽（野怪']=tempTheme['食铁兽（野怪']; }else{ userTheme['食铁兽（野怪']=sampleTheme['食铁兽（野怪']; };
+                    if(tempTheme['六边形战士（野怪']){ userTheme['六边形战士（野怪']=tempTheme['六边形战士（野怪']; }else{ userTheme['六边形战士（野怪']=sampleTheme['六边形战士（野怪']; };
                     userTheme.nofgimg=false;
                 }else{ userTheme.nofgimg=true; alert('code:updt-001\n'+lang.initUFG);custom.showKanban=false; };
             };
@@ -736,6 +749,7 @@ function usTheme(UserJSON,act){
                     if(tempTheme.冥spine){ userTheme.冥spine=tempTheme.冥spine; }else{ userTheme.冥spine=thespine; };
                     if(tempTheme.命spine){ userTheme.命spine=tempTheme.命spine; }else{ userTheme.命spine=thespine; };
                     if(tempTheme.希spine){ userTheme.希spine=tempTheme.希spine; }else{ userTheme.希spine=thespine; };
+                    if(tempTheme.霞spine){ userTheme.霞spine=tempTheme.霞spine; }else{ userTheme.霞spine=thespine; };
                     userTheme.nospine=false;
                 }
                 else{ userTheme.nospine=true; alert('code:updt-002\n'+lang.initUSP); };
@@ -754,6 +768,7 @@ function usTheme(UserJSON,act){
                     if(tempTheme.冥voice){ userTheme.冥voice=tempTheme.冥voice; }else{ userTheme.冥voice=thevoice; };
                     if(tempTheme.命voice){ userTheme.命voice=tempTheme.命voice; }else{ userTheme.命voice=thevoice; };
                     if(tempTheme.希voice){ userTheme.希voice=tempTheme.希voice; }else{ userTheme.希voice=thevoice; };
+                    if(tempTheme.霞voice){ userTheme.霞voice=tempTheme.霞voice; }else{ userTheme.霞voice=thevoice; };
                     userTheme.novoice=false;
                 }
                 else{ userTheme.novoice=true; }
@@ -777,6 +792,7 @@ function usTheme(UserJSON,act){
             if(tempTheme.a8){ userTheme.a8=tempTheme.a8; }else{ userTheme.a8=sampleTheme.a8; };
             if(tempTheme.a9){ userTheme.a9=tempTheme.a9; }else{ userTheme.a9=sampleTheme.a9; };
             if(tempTheme.a10){ userTheme.a10=tempTheme.a10; }else{ userTheme.a10=sampleTheme.a10; };
+            if(tempTheme.a11){ userTheme.a11=tempTheme.a11; }else{ userTheme.a11=sampleTheme.a11; };
             if(tempTheme.ao8){ userTheme.ao8=tempTheme.ao8; }else{
                 if(tempTheme.a8){ userTheme.ao8=tempTheme.a8; }else{ userTheme.ao8=sampleTheme.ao8; };
             };
@@ -816,11 +832,139 @@ function usTheme(UserJSON,act){
             if(tempTheme.ho3){ userTheme.ho3=tempTheme.ho3; }else{
                 if(tempTheme.h3){ userTheme.ho3=tempTheme.h3; }else{ userTheme.ho3=sampleTheme.ho3; };
             };
-            sessionStorage.setItem('userTheme', JSON.stringify(userTheme)); custom.ver="ver1.0"; update();
+            userTheme.nothemeItName=true;
+            sessionStorage.setItem('userTheme', JSON.stringify(userTheme)); custom.ver="ver1.1"; update();
             if(act){ nowTheme=userTheme; sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
         };
+        function update10(){
+            if(tempTheme.nothemeAmName){ userTheme.nothemeAmName=true; }else{
+                if(tempTheme['itemsname-zh']||tempTheme['itemsname-zht']||tempTheme['itemsname-ja']||tempTheme['itemsname-en']){
+                    if(tempTheme['itemsname-zh']&&tempTheme['itemsname-zh'].length==9){ userTheme['itemsname-zh']=tempTheme['itemsname-zh']; }
+                     else if(tempTheme['itemsname-zh']&&tempTheme['itemsname-zh'].length!=9){
+                         //userTheme['itemsname-zh']=tempTheme['itemsname-zh'];
+                    }else{ userTheme['itemsname-zh']=Language.zh.itemsname; };
+                    if(tempTheme['itemsname-zht']&&tempTheme['itemsname-zht'].length==9){ userTheme['itemsname-zht']=tempTheme['itemsname-zht']; }
+                    else if(tempTheme['itemsname-zht']&&tempTheme['itemsname-zht'].length!=9){
+                        //userTheme['itemsname-zht']=tempTheme['itemsname-zht'];
+                    }else{ userTheme['itemsname-zht']=Language.zht.itemsname; };
+                    if(tempTheme['itemsname-ja']&&tempTheme['itemsname-ja'].length==9){ userTheme['itemsname-ja']=tempTheme['itemsname-ja']; }
+                    else if(tempTheme['itemsname-ja']&&tempTheme['itemsname-ja'].length!=9){
+                        //userTheme['itemsname-ja']=tempTheme['itemsname-ja'];
+                    }else{ userTheme['itemsname-ja']=Language.ja.itemsname; };
+                    if(tempTheme['itemsname-en']&&tempTheme['itemsname-en'].length==9){ userTheme['itemsname-en']=tempTheme['itemsname-en']; }
+                    else if(tempTheme['itemsname-en']&&tempTheme['itemsname-en'].length==9){
+                        //userTheme['itemsname-en']=tempTheme['itemsname-en'];
+                    }else{ userTheme['itemsname-en']=Language.en.itemsname; };
+                    userTheme.nothemeAmName=false;
+                }else{ userTheme.nothemeAmName=true; };
+            };
+            if(!tempTheme.nofgimg){
+                if(tempTheme.霞){
+                    if(tempTheme.霞){ userTheme.霞=tempTheme.霞; }else{ userTheme.霞=sampleTheme.霞; };
+                    if(tempTheme['六边形战士（野怪']){ userTheme['六边形战士（野怪']=tempTheme['六边形战士（野怪']; }else{ userTheme['六边形战士（野怪']=sampleTheme['六边形战士（野怪']; };
+                };
+            };
+            if(tempTheme.nospine){ userTheme.nospine=true; alert('code:userTheme-002\n'+lang.initUSP); }else{
+                let thespine;thespine=tempTheme.舞spine||tempTheme.默spine||tempTheme.琳spine||tempTheme.艾spine||tempTheme.梦spine||tempTheme.薇spine||tempTheme.伊spine||tempTheme.冥spine||tempTheme.命spine||tempTheme.希spine||false;
+                if(tempTheme.spinert&&thespine!=false){
+                    if(tempTheme.舞spine){ userTheme.舞spine=tempTheme.舞spine; }else{ userTheme.舞spine=thespine; };
+                    if(tempTheme.默spine){ userTheme.默spine=tempTheme.默spine; }else{ userTheme.默spine=thespine; };
+                    if(tempTheme.琳spine){ userTheme.琳spine=tempTheme.琳spine; }else{ userTheme.琳spine=thespine; };
+                    if(tempTheme.艾spine){ userTheme.艾spine=tempTheme.艾spine; }else{ userTheme.艾spine=thespine; };
+                    if(tempTheme.梦spine){ userTheme.梦spine=tempTheme.梦spine; }else{ userTheme.梦spine=thespine; };
+                    if(tempTheme.薇spine){ userTheme.薇spine=tempTheme.薇spine; }else{ userTheme.薇spine=thespine; };
+                    if(tempTheme.伊spine){ userTheme.伊spine=tempTheme.伊spine; }else{ userTheme.伊spine=thespine; };
+                    if(tempTheme.冥spine){ userTheme.冥spine=tempTheme.冥spine; }else{ userTheme.冥spine=thespine; };
+                    if(tempTheme.命spine){ userTheme.命spine=tempTheme.命spine; }else{ userTheme.命spine=thespine; };
+                    if(tempTheme.希spine){ userTheme.希spine=tempTheme.希spine; }else{ userTheme.希spine=thespine; };
+                    if(tempTheme.霞spine){ userTheme.霞spine=tempTheme.霞spine; }else{ userTheme.霞spine=thespine; };
+                    userTheme.nospine=false;
+                }
+                else{ userTheme.nospine=true; alert('code:updt-002\n'+lang.initUSP); };
+            };
+            if(userTheme.nofgimg&&userTheme.nospine){ custom.showKanban=false; };
+            if(tempTheme.novoice){ userTheme.novoice=true; alert('code:userTheme-003\n'+lang.initUVO);custom.voiceO=false; }else{
+                let thevoice;thevoice=tempTheme.舞voice||tempTheme.默voice||tempTheme.琳voice||tempTheme.艾voice||tempTheme.梦voice||tempTheme.薇voice||tempTheme.伊voice||tempTheme.冥voice||tempTheme.命voice||tempTheme.希voice||false;
+                if(tempTheme.voice&&thevoice!=false){
+                    if(tempTheme.舞voice){ userTheme.舞voice=tempTheme.舞voice; }else{ userTheme.舞voice=thevoice; };
+                    if(tempTheme.默voice){ userTheme.默voice=tempTheme.默voice; }else{ userTheme.默voice=thevoice; };
+                    if(tempTheme.琳voice){ userTheme.琳voice=tempTheme.琳voice; }else{ userTheme.琳voice=thevoice; };
+                    if(tempTheme.艾voice){ userTheme.艾voice=tempTheme.艾voice; }else{ userTheme.艾voice=thevoice; };
+                    if(tempTheme.梦voice){ userTheme.梦voice=tempTheme.梦voice; }else{ userTheme.梦voice=thevoice; };
+                    if(tempTheme.薇voice){ userTheme.薇voice=tempTheme.薇voice; }else{ userTheme.薇voice=thevoice; };
+                    if(tempTheme.伊voice){ userTheme.伊voice=tempTheme.伊voice; }else{ userTheme.伊voice=thevoice; };
+                    if(tempTheme.冥voice){ userTheme.冥voice=tempTheme.冥voice; }else{ userTheme.冥voice=thevoice; };
+                    if(tempTheme.命voice){ userTheme.命voice=tempTheme.命voice; }else{ userTheme.命voice=thevoice; };
+                    if(tempTheme.希voice){ userTheme.希voice=tempTheme.希voice; }else{ userTheme.希voice=thevoice; };
+                    if(tempTheme.霞voice){ userTheme.霞voice=tempTheme.霞voice; }else{ userTheme.霞voice=thevoice; };
+                    userTheme.novoice=false;
+                }
+                else{ userTheme.novoice=true; }
+            };
+            if(tempTheme.nothemeEqName){ userTheme.nothemeEqName=true; }else{
+                if(tempTheme['equip-zh']||tempTheme['equip-zht']||tempTheme['equip-ja']||tempTheme['equip-en']){
+                    if(tempTheme['equip-zh']){ userTheme['equip-zh']=tempTheme['equip-zh']; }else{ userTheme['equip-zh']=Language.zh.equip; };
+                    if(tempTheme['equip-zht']){ userTheme['equip-zht']=tempTheme['equip-zht']; }else{ userTheme['equip-zht']=Language.zht.equip; };
+                    if(tempTheme['equip-ja']){ userTheme['equip-ja']=tempTheme['equip-ja']; }else{ userTheme['equip-ja']=Language.ja.equip; };
+                    if(tempTheme['equip-en']){ userTheme['equip-en']=tempTheme['equip-en']; }else{ userTheme['equip-en']=Language.en.equip; };
+                    userTheme.nothemeEqName=false;
+                }else{ userTheme.nothemeEqName=true; };
+            };
+            if(tempTheme.a1){ userTheme.a1=tempTheme.a1; }else{ userTheme.a1=sampleTheme.a1; };
+            if(tempTheme.a2){ userTheme.a2=tempTheme.a2; }else{ userTheme.a2=sampleTheme.a2; };
+            if(tempTheme.a3){ userTheme.a3=tempTheme.a3; }else{ userTheme.a3=sampleTheme.a3; };
+            if(tempTheme.a4){ userTheme.a4=tempTheme.a4; }else{ userTheme.a4=sampleTheme.a4; };
+            if(tempTheme.a5){ userTheme.a5=tempTheme.a5; }else{ userTheme.a5=sampleTheme.a5; };
+            if(tempTheme.a6){ userTheme.a6=tempTheme.a6; }else{ userTheme.a6=sampleTheme.a6; };
+            if(tempTheme.a7){ userTheme.a7=tempTheme.a7; }else{ userTheme.a7=sampleTheme.a7; };
+            if(tempTheme.a8){ userTheme.a8=tempTheme.a8; }else{ userTheme.a8=sampleTheme.a8; };
+            if(tempTheme.a9){ userTheme.a9=tempTheme.a9; }else{ userTheme.a9=sampleTheme.a9; };
+            if(tempTheme.a10){ userTheme.a10=tempTheme.a10; }else{ userTheme.a10=sampleTheme.a10; };
+            if(tempTheme.a11){ userTheme.a11=tempTheme.a11; }else{ userTheme.a11=sampleTheme.a11; };
+            if(tempTheme.ao8){ userTheme.ao8=tempTheme.ao8; }else{
+                if(tempTheme.a8){ userTheme.ao8=tempTheme.a8; }else{ userTheme.ao8=sampleTheme.ao8; };
+            };
+            if(tempTheme.ao10){ userTheme.a=tempTheme.ao10; }else{
+                if(tempTheme.ao10){ userTheme.ao10=tempTheme.a10; }else{ userTheme.ao10=sampleTheme.ao10; };
+            };
+            if(tempTheme.w1){ userTheme.w1=tempTheme.w1; }else{ userTheme.w1=sampleTheme.w1; };
+            if(tempTheme.w2){ userTheme.w2=tempTheme.w2; }else{ userTheme.w2=sampleTheme.w2; };
+            if(tempTheme.w3){ userTheme.w3=tempTheme.w3; }else{ userTheme.w3=sampleTheme.w3; };
+            if(tempTheme.w4){ userTheme.w4=tempTheme.w4; }else{ userTheme.w4=sampleTheme.w4; };
+            if(tempTheme.w5){ userTheme.w5=tempTheme.w5; }else{ userTheme.w5=sampleTheme.w5; };
+            if(tempTheme.wo1){ userTheme.wo1=tempTheme.wo1; }else{
+                if(tempTheme.w1){ userTheme.wo1=tempTheme.w1; }else{ userTheme.wo1=sampleTheme.wo1; };
+            };
+            if(tempTheme.wo3){ userTheme.wo3=tempTheme.wo3; }else{
+                if(tempTheme.w3){ userTheme.wo3=tempTheme.w3; }else{ userTheme.wo3=sampleTheme.wo3; };
+            };
+            if(tempTheme.c1){ userTheme.c1=tempTheme.c1; }else{ userTheme.c1=sampleTheme.c1; };
+            if(tempTheme.c2){ userTheme.c2=tempTheme.c2; }else{ userTheme.c2=sampleTheme.c2; };
+            if(tempTheme.c3){ userTheme.c3=tempTheme.c3; }else{ userTheme.c3=sampleTheme.c3; };
+            if(tempTheme.c4){ userTheme.c4=tempTheme.c4; }else{ userTheme.c4=sampleTheme.c4; };
+            if(tempTheme.c5){ userTheme.c5=tempTheme.c5; }else{ userTheme.c5=sampleTheme.c5; };
+            if(tempTheme.c6){ userTheme.c6=tempTheme.c6; }else{ userTheme.c6=sampleTheme.c6; };
+            if(tempTheme.c7){ userTheme.c7=tempTheme.c7; }else{ userTheme.c7=sampleTheme.c7; };
+            if(tempTheme.co6){ userTheme.co6=tempTheme.co6; }else{
+                if(tempTheme.c6){ userTheme.co6=tempTheme.c6; }else{ userTheme.co6=sampleTheme.co6; };
+            };
+            if(tempTheme.h1){ userTheme.h1=tempTheme.h1; }else{ userTheme.h1=sampleTheme.h1; };
+            if(tempTheme.h2){ userTheme.h2=tempTheme.h2; }else{ userTheme.h2=sampleTheme.h2; };
+            if(tempTheme.h3){ userTheme.h3=tempTheme.h3; }else{ userTheme.h3=sampleTheme.h3; };
+            if(tempTheme.ho1){ userTheme.ho1=tempTheme.ho1; }else{
+                if(tempTheme.h1){ userTheme.ho1=tempTheme.h1; }else{ userTheme.ho1=sampleTheme.ho1; };
+            };
+            if(tempTheme.ho2){ userTheme.ho2=tempTheme.ho2; }else{
+                if(tempTheme.h2){ userTheme.ho2=tempTheme.h2; }else{ userTheme.ho2=sampleTheme.ho2; };
+            };
+            if(tempTheme.ho3){ userTheme.ho3=tempTheme.ho3; }else{
+                if(tempTheme.h3){ userTheme.ho3=tempTheme.h3; }else{ userTheme.ho3=sampleTheme.ho3; };
+            };
+            sessionStorage.setItem('userTheme', JSON.stringify(userTheme)); custom.ver="ver1.1"; update();
+            if(act){ nowTheme=userTheme; sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme)); };
+            tempTheme.ver11=""; update11();
+        };
         /*
-        function update10(){ tempTheme.ver11=""; update11(); };
         function update11(){ tempTheme.ver12=""; update12(); };
         function update12(){ tempTheme.ver13=""; sessionStorage.setItem('userTheme', JSON.stringify(tempTheme)); custom.ver="ver1.3"; update();};
         */
@@ -844,27 +988,41 @@ function theEqName(action){
     };
     */
     $("button[data-original-title]").attr("data-original-title",function(n,v){
-            n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
-                .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
-                .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
-                .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
-                .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
-                .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
-                .replace(new RegExp(dnn[2],'g'), dessertname[2]).replace(new RegExp(dnn[1],'g'), dessertname[1]).replace(new RegExp(dnn[0],'g'), dessertname[0])
-                .replace(new RegExp(itn[0],'g'), itemsname[0]).replace(new RegExp(itn[1],'g'), itemsname[1]);
-            return n;
-        });
-        $(".with-padding").html(function(n,v){
-            n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
-                .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
-                .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
-                .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
-                .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
-                .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
-                .replace(new RegExp(dnn[2],'g'), dessertname[2]).replace(new RegExp(dnn[1],'g'), dessertname[1]).replace(new RegExp(dnn[0],'g'), dessertname[0])
-                .replace(new RegExp(itn[0],'g'), itemsname[0]).replace(new RegExp(itn[1],'g'), itemsname[1]);;
-            return n;
-        });
+        n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
+            .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
+            .replace(new RegExp(eqn[33],'g'),a11[3])
+            .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
+            .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
+            .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
+            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
+            .replace(new RegExp(dnn[2],'g'),dessertname[2]).replace(new RegExp(dnn[1],'g'),dessertname[1]).replace(new RegExp(dnn[0],'g'),dessertname[0])
+            .replace(new RegExp(itn[0],'g'),itemsname[0]).replace(new RegExp(itn[1],'g'),itemsname[1]).replace(new RegExp(itn[2],'g'),itemsname[2]).replace(new RegExp(itn[3],'g'),itemsname[3]).replace(new RegExp(itn[4],'g'),itemsname[4])
+            .replace(new RegExp(itn[5],'g'),itemsname[5]).replace(new RegExp(itn[6],'g'),itemsname[6]).replace(new RegExp(itn[7],'g'),itemsname[7]).replace(new RegExp(itn[8],'g'),itemsname[8]).replace(new RegExp(itn[9],'g'),itemsname[9]);
+        return n;
+    });
+    $(".modal-body.fyg_f14").html(function(n,v){
+        n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
+            .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
+            .replace(new RegExp(eqn[33],'g'),a11[3])
+            .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
+            .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
+            .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
+            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3]);
+        return n;
+    });
+    $(".with-padding").html(function(n,v){
+        n= v.replace(new RegExp(eqn[0],'g'),a1[3]).replace(new RegExp(eqn[1],'g'),a2[3]).replace(new RegExp(eqn[2],'g'),a3[3]).replace(new RegExp(eqn[3],'g'),a4[3]).replace(new RegExp(eqn[4],'g'),a5[3])
+            .replace(new RegExp(eqn[5],'g'),a6[3]).replace(new RegExp(eqn[6],'g'),a7[3]).replace(new RegExp(eqn[7],'g'),a8[3]).replace(new RegExp(eqn[9],'g'),a9[3]).replace(new RegExp(eqn[10],'g'),a10[3])
+            .replace(new RegExp(eqn[33],'g'),a11[3])
+            .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
+            .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
+            .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
+            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
+            .replace(new RegExp(dnn[2],'g'),dessertname[2]).replace(new RegExp(dnn[1],'g'),dessertname[1]).replace(new RegExp(dnn[0],'g'),dessertname[0])
+            .replace(new RegExp(itn[0],'g'),itemsname[0]).replace(new RegExp(itn[1],'g'),itemsname[1]).replace(new RegExp(itn[2],'g'),itemsname[2]).replace(new RegExp(itn[3],'g'),itemsname[3]).replace(new RegExp(itn[4],'g'),itemsname[4])
+            .replace(new RegExp(itn[5],'g'),itemsname[5]).replace(new RegExp(itn[6],'g'),itemsname[6]).replace(new RegExp(itn[7],'g'),itemsname[7]).replace(new RegExp(itn[8],'g'),itemsname[8]).replace(new RegExp(itn[9],'g'),itemsname[9]);
+        return n;
+    });
 };
 function themeIcon(){
     $("button[style*='ys/icon/z']").attr("style",function(n,v){
@@ -889,7 +1047,7 @@ function themeIcon(){
     $("button[style*='ys/icon/z/z21']").attr("style",function(n,v){
         n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]).replace(/ys\/icon\/z\/z2102_/g, purl+a2[4]).replace(/ys\/icon\/z\/z2103_/g, purl+a3[4]).replace(/ys\/icon\/z\/z2104_/g, purl+a4[4])
             .replace(/ys\/icon\/z\/z2105_/g, purl+a5[4]).replace(/ys\/icon\/z\/z2106_/g, purl+a6[4]).replace(/ys\/icon\/z\/z2107_/g, purl+a7[4]).replace(/ys\/icon\/z\/z2108_/g, purl+a8[4])
-            .replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]).replace(/ys\/icon\/z\/z2110_/g,purl+a10[4]);
+            .replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]).replace(/ys\/icon\/z\/z2110_/g,purl+a10[4]).replace(/ys\/icon\/z\/z2111_/g,purl+a11[4]);
         return n;
     });
     $("button[style*='ys/icon/z/z22']").attr("style",function(n,v){
@@ -911,7 +1069,8 @@ function themeIcon(){
         return n;
     });
     $("button[style*='ys/icon/i/it']").attr("style",function(n,v){
-        n= v.replace(/ys\/icon\/i\/it001/g, iurl+items[0]).replace(/ys\/icon\/i\/it002/g, iurl+items[1]);
+        n= v.replace(/ys\/icon\/i\/it001/g, iurl+items[0]).replace(/ys\/icon\/i\/it002/g, iurl+items[1]).replace(/ys\/icon\/i\/it003/g, iurl+items[2]).replace(/ys\/icon\/i\/it004/g, iurl+items[3]).replace(/ys\/icon\/i\/it005/g, iurl+items[4])
+        .replace(/ys\/icon\/i\/it310/g, iurl+items[5]).replace(/ys\/icon\/i\/it309/g, iurl+items[6]).replace(/ys\/icon\/i\/it301/g, iurl+items[7]).replace(/ys\/icon\/i\/it302/g, iurl+items[8]).replace(/ys\/icon\/i\/it303/g, iurl+items[9]);
         return n;
     });
 
@@ -921,7 +1080,7 @@ function themeIcon(){
         if(v.indexOf('10')>-1)custom.useOldNames?nowEquip=6:nowEquip=10;
         n= v.replace(/ys\/icon\/z\/z2101_/g, purl+a1[4]).replace(/ys\/icon\/z\/z2102_/g, purl+a2[4]).replace(/ys\/icon\/z\/z2103_/g, purl+a3[4]).replace(/ys\/icon\/z\/z2104_/g, purl+a4[4])
             .replace(/ys\/icon\/z\/z2105_/g, purl+a5[4]).replace(/ys\/icon\/z\/z2106_/g, purl+a6[4]).replace(/ys\/icon\/z\/z2107_/g, purl+a7[4]).replace(/ys\/icon\/z\/z2108_/g, purl+a8[4])
-            .replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]).replace(/ys\/icon\/z\/z2110_/g, purl+a10[4]);
+            .replace(/ys\/icon\/z\/z2109_/g, purl+a9[4]).replace(/ys\/icon\/z\/z2110_/g, purl+a10[4]).replace(/ys\/icon\/z\/z2111_/g,purl+a11[4]);
         loading = false; pagetype=nowEquip;
         return n;
     });
@@ -957,9 +1116,10 @@ function themePKimg(){
                 cardname=imgpanel.children[0].innerText;
                 if(cardname[7]==" "){
                     cardname=cardname[8];
-                    console.log(imgpanel);
                     imgpanel.style.backgroundImage=`url("${nowTheme[cardname][4]}")`;
-                    imgpanel.style.backgroundSize="cover";
+                    imgpanel.style.backgroundSize="contain";
+                    imgpanel.style.backgroundPosition="left top";
+                    imgpanel.style.backgroundRepeat="no-repeat";
                 };
             };
         };
@@ -972,14 +1132,18 @@ function themePKimg(){
                     if(cardname.indexOf(ygcheck[j])>-1){
                         let ygtcheck=ygcheck[j];
                         imgpanel.style.backgroundImage=`url("${nowTheme[ygtcheck]}")`;
-                        imgpanel.style.backgroundSize="cover";
+                        imgpanel.style.backgroundSize="contain";
+                        imgpanel.style.backgroundPosition="right top";
+                        imgpanel.style.backgroundRepeat="no-repeat";
                         isyg = true;
                     };
                 };
                 if(cardname[7]!=" "&&isyg==false){
                     cardname=cardname[cardname.length-9];
                     imgpanel.style.backgroundImage=`url("${nowTheme[cardname][5]}")`;
-                    imgpanel.style.backgroundSize="cover";
+                    imgpanel.style.backgroundSize="contain";
+                    imgpanel.style.backgroundPosition="right top";
+                    imgpanel.style.backgroundRepeat="no-repeat";
                 };
             };
         };
@@ -1028,6 +1192,7 @@ function getCardName(){
                 cardname=imgpanel.children[0].innerText;
                 if(cardname.length==1&&custom.showCG&&!nowTheme.nofgimg){
                     imgpanel.style.textAlign="left";
+                    if(nowTheme[cardname]==null){return;}
                     $(`<img class="smallcardimg" id="smallcardimg${i}" src="${nowTheme[cardname][1]}" style="vertical-align:top !important;"><span id="smallcardimg1${i}">&nbsp;&nbsp;</span>`).insertBefore(imgpanel.children[0]);
                 };
             };
@@ -1963,11 +2128,16 @@ $(document).on('blur', "#btnAutoTask", function(){ playAnimation(['joy_long', 'h
     if(window.location.href.indexOf('fyg_index.php') != -1||window.location.href.indexOf('fyg_index.php#') == -1){
         if(!x.responseJSON){
             ++soundonce;
-            if(window.location.href.indexOf('fyg_pk.php')>-1){ themePKimg(); themeIcon(); }
+            if(window.location.href.indexOf('fyg_pk.php')>-1){ themePKimg(); themeIcon();
+                if($("a[href*='fyg_index.php']").length>0){
+                    $("a[href*='fyg_index.php']")[0].href="fyg_index.php#";
+                };
+            }
             else if(window.location.href.indexOf('fyg_equip.php')>-1){ themeIcon(); getCardName(); }
-            else if(window.location.href.indexOf('fyg_beach.php')>-1){ themeIcon(); };
-        }
-    };
+            else if(window.location.href.indexOf('fyg_beach.php')>-1){ themeIcon(); }
+            else if(window.location.href.indexOf('fyg_index.php')>-1&&$(".modal-open").length>0){ theEqName(); };
+        };
+    }
 });
 
 /* Other Update Event */
