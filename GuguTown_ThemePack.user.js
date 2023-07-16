@@ -5,7 +5,7 @@
 // @name:ja     咕咕镇テーマパックマネージャー
 // @namespace   https://github.com/HazukiKaguya/GuguTown_ThemePack
 // @homepage    https://github.com/HazukiKaguya/GuguTown_ThemePack
-// @version     3.10.1
+// @version     3.10.2
 // @description WebGame GuguTown ThemePack Manager.
 // @description:zh-CN 气人页游 咕咕镇 主题包管理器。
 // @description:zh-TW 氣人頁遊 咕咕鎮 主題包管理器。
@@ -84,7 +84,7 @@ const defaultConf = {
         "dessertname":["星铜苹果护身符","蓝银葡萄护身符","紫晶樱桃护身符"],
         "itemsname":["体能刺激药水","锻造材料箱","灵魂药水","随机装备箱","宝石原石","光环天赋石","苹果核","蓝锻造石","绿锻造石","金锻造石"],
         "equip":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指","彩金长剑"]
+                "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指","彩金长剑","猎魔耳环"]
     },
     "zht":{
         "initUFG":"此自定義主題包立繪功能不可用！",
@@ -115,7 +115,7 @@ const defaultConf = {
         "dessertname":["星銅蘋果護身符","藍銀葡萄護身符","紫晶櫻桃護身符"],
         "itemsname":["體能刺激藥水","鍛造材料箱","靈魂藥水","隨機裝備箱","寶石原石","光環天賦石","蘋果核","藍鍛造石","綠鍛造石","金鍛造石"],
         "equip":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指","彩金長劍"]
+                 "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指","彩金長劍","猎魔耳環"]
     },
     "ja": {
         "initUFG":"このユーザー テーマパックの立ち絵機能は使用できません！",
@@ -147,7 +147,7 @@ const defaultConf = {
         "itemsname":["身体刺激剤","鍛造用材料箱","魂の薬","ランダム装備箱","宝石原石","光輪天賦石","リンゴ核","青鍛造石","緑鍛造石","金鍛造石"],
         "equip":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
                  "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪","彩金長剣"]
+                 "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪","彩金長剣","猎魔耳環"]
     },
     "en": {
         "initUFG":"The CG Function in this User ThemePack is unavailable!",
@@ -178,7 +178,7 @@ const defaultConf = {
         "itemsname":["Stamina Stimulant Potion","Forge Material Box","Soul potion","Random Equipment Chest","Original Gem Stone","Halo Talent Stone","Fruit Core","Blue Forge Stone","Green Forge Stone","Gold Forge Stone"],
         "equip":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword","Bloodthirsty demon Sword",
                 "Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe","Thorny Armor of the front supporter",
-                "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring","Lottery Gold Sword"]
+                "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring","Lottery Gold Sword","Hunt Devil Earrings"]
     }
 }
 ,sampleTheme ={
@@ -192,15 +192,15 @@ const defaultConf = {
     "nofgimg":false,"nospine":false,"novoice":false,
     "nothemeEqName":false,"nothemeAmName":false,"nothemeItName":false,
 	"equip-zh":["探险者之剑","探险者短弓","探险者短杖","狂信者的荣誉之刃","反叛者的刺杀弓","幽梦匕首","光辉法杖","荆棘盾剑","荆棘剑盾","陨铁重剑","饮血魔剑","饮血长枪","探险者手环","探险者手套","命师的传承手环","秃鹫手环",
-     "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指"],
+     "秃鹫手套","探险者铁甲","探险者皮甲","探险者布甲","旅法师的灵光袍","战线支撑者的荆棘重甲","复苏战衣","复苏木甲","挑战斗篷","探险者耳环","探险者头巾","占星师的耳饰","占星师的发饰","萌爪耳钉","天使缎带","海星戒指","噬魔戒指","猎魔耳环"],
 	"equip-zht":["探險者之劍","探險者短弓","探險者短杖","狂信者的榮譽之刃","反叛者的刺殺弓","幽夢匕首","光輝法杖","荊棘盾劍","荊棘劍盾","隕鐵重劍","飲血魔劍","飲血長槍","探險者手環","探險者手套","命師的傳承手環","禿鹫手環",
-     "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指"],
+     "禿鹫手套","探險者鐵甲","探險者皮甲","探險者布甲","旅法師的靈光袍","戰線支撐者的荊棘重甲","複蘇戰衣","複蘇木甲","挑戰鬥篷","探險者耳環","探險者頭巾","占星師的耳飾","占星師的發飾","萌爪耳釘","天使緞帶","海星戒指","噬魔戒指","猎魔耳环"],
 	"equip-ja":["探検家の剣","探検家の弓","探検家の杖","狂信者の栄光刃","反逆者の暗殺弓","ダークドリーム匕首","輝く杖","いばら盾剣","いばら剣盾","流星鉄のエペの剣","血に飢えた魔剣","血に飢えた槍","探検家の腕輪","探検家の手袋",
     "命の師匠の継承腕輪","ハゲタカ腕輪","ハゲタカ手袋","探検家の鎧","探検家の革","探検家の衣","旅法師のローブ","フロントサポーターのトゲアーマー","蘇るスーツ","蘇るウッドアーマー","挑戦者のマント",
-    "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪"],
+    "探検家のイヤリング","探検家のマフラー","占星術師のイヤリング","占星術師の髪飾り","萌え猫爪のイヤリング","天使のリボン","海星指輪","デビル・デバウラー指輪","猎魔耳飾り"],
 	"equip-en":["Explorer's Sword","Explorer's Bow","Explorer's Staff","Honor Blade of crazy believer","Rebel's assassination Bow","Faint Dream Dagger","Shining Staff","Thorny shield Sword","Thorny sword Shield","Meteoric iron Epee Sword","Bloodthirsty demon Sword",
     "Bloodthirsty Lance","Explorer's Bracelet","Explorer's Glove","命's Bracelet from her Shifu","Vulture Bracelet","Vulture Glove","Explorer's Armor","Explorer's Leather","Explorer's Cloth","Magician's aura Robe","Thorny Armor of the front supporter",
-    "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring"],
+    "Recovery suit","Revived wood armour","Challenger's Cloak","Explorer's Earrings","Explorer's Scarf","Astrologer's Earrings","Astrologer's hair ornament","Neko Claw Earrings","Angel's Ribbon","Starfish Ring","Devil Devourer Ring","Heaven Hell Earrings"],
     "dessertlevel-zh":["稀有","史诗","传奇"],
     "dessertlevel-zht":["稀有","史詩","傳奇"],
     "dessertlevel-ja":["レア","大作","伝説"],
@@ -289,7 +289,8 @@ const defaultConf = {
     "h2":["z2402","z7","占星师的耳饰","占星师的耳饰","z/z2402_"],
     "ho2":["z2402","z7","占星师的发饰","占星师的发饰","z/z2402_"],
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","z/z2403_"],
-    "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"]
+    "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"],
+    "h4":["z2404","z7","猎魔耳环","猎魔耳环","z/z2404_"]
 }
 ,originTheme = {
     "url":"ys/icon/",
@@ -336,7 +337,8 @@ const defaultConf = {
     "h2":["z2402","z7","占星师的耳饰","占星师的耳饰","z/z2402_"],
     "ho2":["z2402","z7","占星师的发饰","占星师的发饰","z/z2402_"],
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","z/z2403_"],
-    "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"]
+    "ho3":["z2403","z7","天使缎带","天使缎带","z/z2403_"],
+    "h4":["z2404","z7","猎魔耳环","猎魔耳环","z/z2404_"]
 }
 ,classicTheme = {
     "url":"https://p.inari.site/guguicons/old/",
@@ -390,7 +392,8 @@ const defaultConf = {
     "h2":["z2402","z7","占星师的耳饰","占星师的耳饰","earring_"],
     "ho2":["z2402","z7","占星师的发饰","占星师的发饰","swirl_"],
     "h3":["z2403","z7","萌爪耳钉","萌爪耳钉","neko_"],
-    "ho3":["z2403","z7","天使缎带","天使缎带","swirl_"]
+    "ho3":["z2403","z7","天使缎带","天使缎带","swirl_"],
+    "h4":["z2404","z7","猎魔耳环","猎魔耳环","earring_"]
 }
 ,testTheme = {
     "url":"https://p.inari.site/guguicons/test/eq/",
@@ -405,15 +408,15 @@ const defaultConf = {
     "nofgimg":false,"nospine":false,"novoice":false,
     "nothemeEqName":false,"nothemeAmName":false,"nothemeItName":false,
     "equip-zh":["旅人剑","猎人弓","香木法杖","妖刀血鸦","深渊之弓","黑曜石天黑剑","棒棒糖手杖","盖亚之斧","盖亚之斧","勇气星核剑","混沌之刃","毁灭之伤冥神枪","旅者手镯","旅者拳套","睿智手镯","朋克手镯","深红爪","重金属护甲","皮革工作服","旅者长袍",
-                "魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结","永恒绿戒","深结晶变异水晶","辉光剑征服者"],
+                "魔导师的长袍","霸王树之棘针铠","翠绿灵衣","翠绿灵衣","黑玛瑙之祈装衣","旅者耳环","旅者头巾","海神耳饰","桜花の月夜簪","精灵王护石","细冰姬的蝴蝶结","永恒绿戒","深结晶变异水晶","辉光剑征服者","狱天耳环"],
     "equip-zht":["旅人劍","獵人弓","檀香之杖","妖刀血鴉","深淵之弓","天黑劍奧比修斯","棒棒糖手杖","蓋亞之斧","蓋亞之斧","星核劍艾爾茲修奈德","渾沌之劍","冥神槍毀滅苦痛","旅者手镯","旅者拳套","睿智手镯","龐克棘刺手環","深紅之爪","重金屬盔甲","皮革工作服",
-                 "旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結","常青之綠戒","深結晶變異水晶","輝光劍雅德瑪斯"],
+                 "旅行長袍","魔導師的長袍","霸王樹之棘針鎧","翠綠靈衣","翠綠靈衣","黑瑪瑙祈裝衣","旅者耳環","旅者頭巾","海神耳飾","櫻花月夜簪","精靈王護石","細冰姬的蝴蝶結","常青之綠戒","深結晶變異水晶","輝光劍雅德瑪斯","獄天耳飾"],
     "equip-ja":["旅立ちの剣","狩人の弓","香木の杖","妖刀血鴉","アビスボウ","天黒剣オブシウス","ロリポップステッキ","ガイアアクス","ガイアアクス","星核剣エルツシュナイド","カオスブレード","冥神槍ドゥームペイン","旅立ちのミサンガ","旅立ちのパンチ",
                 "ソフォスブレスレット","パンクニードルバングル","クリムゾンクロー","ヘビーメタルアーマー","革のサロペット","旅立ちのローブ","魔導師のローブ","覇王樹の棘針鎧","翠緑の霊衣","翠緑の霊衣","黒瑪瑙の祈装衣","旅立ちの耳環","旅立ちの頭巾",
-                "海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐","常盤の緑環","深結晶ゼノクリスタル","輝光剣アダマス"],
+                "海神の耳飾り","桜花の月夜簪","精霊王の護石","細氷姫の結び紐","常盤の緑環","深結晶ゼノクリスタル","輝光剣アダマス","獄天の耳飾り"],
     "equip-en":["Iron Blade","Hunter's Bow","Fragrant Wood Wand","Blood Raven Demon Blade","Abyss Bow","Heavenly Black Obsidian Sword","Lolipop Stick","Gaia Axe","Gaia Axe","Star Core Sword - Erst Schneide","Chaos Blade","Nether God Spear, Doom Pain",
                 "Journey Bracelet","Journey Punches","Sophos Bracelet","Punk Bangle","Crimson Claw","Heavy Metal Armor","Leather Overalls","Journey Robe","Magician's Robe","Thorn of the Great Tree Armor","Viridian Spiritual Dress","Viridian Spiritual Dress",
-                "Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon","Evergreen Ring","Deep Crystalized Xenocrystal","Brilliant Sword - Adamas"],
+                "Black Agate Prayer Dress","Journey Earrings","Journey Hood","Ocean God's Earrings","Moonlight Blossom Hairpin","Fairy King's Guardian Stone","Ice Princess Ribbon","Evergreen Ring","Deep Crystalized Xenocrystal","Brilliant Sword - Adamas","Heaven Hell Earrings"],
     "dessert":["apple","grape","melon"],
     "dessertlevel-zh":["普通的","成熟的","优质的"],
     "dessertlevel-zht":["普通的","成熟的","優質的"],
@@ -514,7 +517,8 @@ const defaultConf = {
     "h2":["z2402","z7","占星师的耳饰","海神耳饰","占星师的耳饰/"],
     "ho2":["z2402","z7","占星师的发饰","樱花的月夜簪","占星师的发饰/"],
     "h3":["z2403","z7","萌爪耳钉","精灵王护石","萌爪耳钉/"],
-    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","天使缎带/"]
+    "ho3":["z2403","z7","天使缎带","细冰姬的蝴蝶结","天使缎带/"],
+    "h4":["z2404","z7","猎魔耳环","狱天耳环","猎魔耳环/"]
 }
 ,ygcheck = ["魔灯之灵（野怪","六眼飞鱼（野怪","铁皮木人（野怪","迅捷魔蛛（野怪","食铁兽（野怪","晶刺豪猪（野怪","六边形战士（野怪"]
 ,nullimg = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
@@ -522,7 +526,7 @@ const defaultConf = {
 ,cards=['舞','默','琳','艾','梦','薇','伊','冥','命','希',"霞"];
 let ww=window.innerWidth||document.body.clientWidth,wh=window.innerHeight||document.body.clientHeight,momoConf={},
 User=$("button[class*='btn btn-lg'][onclick*='fyg_index.php']")[0].innerText,momoUser = "momo_"+User,uuid,nowTheme
-,custom,tempca,tpkanban,kanban,kanbanimg,ext='.gif',old,purl,iurl,dessert,items,dessertlevel,dessertname,itemsname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,w1,w2,w3,w4,w5,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,spinert,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
+,custom,tempca,tpkanban,kanban,kanbanimg,ext='.gif',old,purl,iurl,dessert,items,dessertlevel,dessertname,itemsname,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,w1,w2,w3,w4,w5,c1,c2,c3,c4,c5,c6,c7,h1,h2,h3,h4,spinert,spineJson,tch,yourcard,cardvo,iconsize,equipName,kbw,kbh,shapes
 ,canvas,gl,shader,batcher,skeletonRenderer,loadingSkeleton,currentSkeletonBuffer,animationState,forceNoLoop,currentTexture,soundonce=0,sucheck=0,facheck=0,battlecheck=0,collecheck=0,pagetype=24,speedFactor=1,tempvo=false,ccard=false,loading = false
 ,timeout = null,useOldNamesCheck='',useThemeNameCheck='',Multilingual='',tpkanbanHTML='',showCGCheck='',voiceOCheck='',kanbanCheck='',activeSkeleton="",pendingAnimation='',generalAdditionAnimations={},userTheme={},generalBattleSkeletonData={},lang="zh"
 ,animationQueue=[],currentClass='1',imgmove=[0,0.6],lastFrameTime=Date.now()/1000,bgColor=[0,0,0,0],additionAnimations=['DEAR','NO_WEAPON','POSING','RACE','RUN_JUMP','SMILE'],currentClassAnimData={type:0,data:{}},currentCharaAnimData={id:0,data:{}}
@@ -589,14 +593,14 @@ nowTheme.a7[3]=equipName[6];nowTheme.a8[3]=equipName[7];nowTheme.ao8[3]=equipNam
 nowTheme.a11[3]=equipName[33];
 nowTheme.w1[3]=equipName[12];nowTheme.wo1[3]=equipName[13];nowTheme.w2[3]=equipName[14];nowTheme.w3[3]=equipName[15];nowTheme.wo3[3]=equipName[16];nowTheme.w4[3]=equipName[31];nowTheme.w5[3]=equipName[32];
 nowTheme.c1[3]=equipName[17];nowTheme.c2[3]=equipName[18];nowTheme.c3[3]=equipName[19];nowTheme.c4[3]=equipName[20];nowTheme.c5[3]=equipName[21];nowTheme.c6[3]=equipName[22];nowTheme.co6[3]=equipName[23];nowTheme.c7[3]=equipName[24];
-nowTheme.h1[3]=equipName[25];nowTheme.ho1[3]=equipName[26];nowTheme.h2[3]=equipName[27];nowTheme.ho2[3]=equipName[28];nowTheme.h3[3]=equipName[29];nowTheme.ho3[3]=equipName[30];
+nowTheme.h1[3]=equipName[25];nowTheme.ho1[3]=equipName[26];nowTheme.h2[3]=equipName[27];nowTheme.ho2[3]=equipName[28];nowTheme.h3[3]=equipName[29];nowTheme.ho3[3]=equipName[30];nowTheme.h4[3]=equipName[34];
 sessionStorage.setItem('ThemePack', JSON.stringify(nowTheme));
 
 ext=nowTheme.ext;purl=nowTheme.url;iurl=nowTheme.iurl;dessert=nowTheme.dessert;items=nowTheme.items;old=nowTheme.old;dessertlevel=nowTheme.dessertlevel;dessertname=nowTheme.dessertname;itemsname=nowTheme.itemsname;
 a1=nowTheme.a1;a2=nowTheme.a2;a3=nowTheme.a3;a4=nowTheme.a4;a5=nowTheme.a5;a6=nowTheme.a6;a7=nowTheme.a7;a8=nowTheme.a8;a9=nowTheme.a9;a10=nowTheme.a10;a11=nowTheme.a11;
 w1=nowTheme.w1;w2=nowTheme.w2;w3=nowTheme.w3;w4=nowTheme.w4;w5=nowTheme.w5;
 c1=nowTheme.c1;c2=nowTheme.c2;c3=nowTheme.c3;c4=nowTheme.c4;c5=nowTheme.c5;c6=nowTheme.c6;c7=nowTheme.c7;
-h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;
+h1=nowTheme.h1;h2=nowTheme.h2;h3=nowTheme.h3;h4=nowTheme.h4;
 
 if(custom.useOldNames==true){ useOldNamesCheck='checked'; a8=nowTheme.ao8;a10=nowTheme.ao10;w1=nowTheme.wo1;w3=nowTheme.wo3;c6=nowTheme.co6;h1=nowTheme.ho1;h2=nowTheme.ho2;h3=nowTheme.ho3; };
 nowEquip = localStorage.nowEquip || "0";
@@ -823,6 +827,7 @@ function usTheme(UserJSON,act){
             if(tempTheme.h1){ userTheme.h1=tempTheme.h1; }else{ userTheme.h1=sampleTheme.h1; };
             if(tempTheme.h2){ userTheme.h2=tempTheme.h2; }else{ userTheme.h2=sampleTheme.h2; };
             if(tempTheme.h3){ userTheme.h3=tempTheme.h3; }else{ userTheme.h3=sampleTheme.h3; };
+            if(tempTheme.h4){ userTheme.h4=tempTheme.h4; }else{ userTheme.h4=sampleTheme.h4; };
             if(tempTheme.ho1){ userTheme.ho1=tempTheme.ho1; }else{
                 if(tempTheme.h1){ userTheme.ho1=tempTheme.h1; }else{ userTheme.ho1=sampleTheme.ho1; };
             };
@@ -951,6 +956,7 @@ function usTheme(UserJSON,act){
             if(tempTheme.h1){ userTheme.h1=tempTheme.h1; }else{ userTheme.h1=sampleTheme.h1; };
             if(tempTheme.h2){ userTheme.h2=tempTheme.h2; }else{ userTheme.h2=sampleTheme.h2; };
             if(tempTheme.h3){ userTheme.h3=tempTheme.h3; }else{ userTheme.h3=sampleTheme.h3; };
+            if(tempTheme.h4){ userTheme.h4=tempTheme.h4; }else{ userTheme.h4=sampleTheme.h4; };
             if(tempTheme.ho1){ userTheme.ho1=tempTheme.ho1; }else{
                 if(tempTheme.h1){ userTheme.ho1=tempTheme.h1; }else{ userTheme.ho1=sampleTheme.ho1; };
             };
@@ -994,7 +1000,7 @@ function theEqName(action){
             .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
             .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
             .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
-            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
+            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3]).replace(new RegExp(eqn[34],'g'),h4[3])
             .replace(new RegExp(dnn[2],'g'),dessertname[2]).replace(new RegExp(dnn[1],'g'),dessertname[1]).replace(new RegExp(dnn[0],'g'),dessertname[0])
             .replace(new RegExp(itn[0],'g'),itemsname[0]).replace(new RegExp(itn[1],'g'),itemsname[1]).replace(new RegExp(itn[2],'g'),itemsname[2]).replace(new RegExp(itn[3],'g'),itemsname[3]).replace(new RegExp(itn[4],'g'),itemsname[4])
             .replace(new RegExp(itn[5],'g'),itemsname[5]).replace(new RegExp(itn[6],'g'),itemsname[6]).replace(new RegExp(itn[7],'g'),itemsname[7]).replace(new RegExp(itn[8],'g'),itemsname[8]).replace(new RegExp(itn[9],'g'),itemsname[9]);
@@ -1007,7 +1013,7 @@ function theEqName(action){
             .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
             .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
             .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
-            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3]);
+            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3]).replace(new RegExp(eqn[34],'g'),h4[3]);
         return n;
     });
     $(".with-padding").html(function(n,v){
@@ -1017,7 +1023,7 @@ function theEqName(action){
             .replace(new RegExp(eqn[12],'g'),w1[3]).replace(new RegExp(eqn[14],'g'),w2[3]).replace(new RegExp(eqn[15],'g'),w3[3]).replace(new RegExp(eqn[31],'g'),w4[3]).replace(new RegExp(eqn[32],'g'),w5[3])
             .replace(new RegExp(eqn[17],'g'),c1[3]).replace(new RegExp(eqn[18],'g'),c2[3]).replace(new RegExp(eqn[19],'g'),c3[3]).replace(new RegExp(eqn[20],'g'),c4[3]).replace(new RegExp(eqn[21],'g'),c5[3])
             .replace(new RegExp(eqn[22],'g'),c6[3]).replace(new RegExp(eqn[24],'g'),c7[3])
-            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3])
+            .replace(new RegExp(eqn[25],'g'),h1[3]).replace(new RegExp(eqn[27],'g'),h2[3]).replace(new RegExp(eqn[29],'g'),h3[3]).replace(new RegExp(eqn[34],'g'),h4[3])
             .replace(new RegExp(dnn[2],'g'),dessertname[2]).replace(new RegExp(dnn[1],'g'),dessertname[1]).replace(new RegExp(dnn[0],'g'),dessertname[0])
             .replace(new RegExp(itn[0],'g'),itemsname[0]).replace(new RegExp(itn[1],'g'),itemsname[1]).replace(new RegExp(itn[2],'g'),itemsname[2]).replace(new RegExp(itn[3],'g'),itemsname[3]).replace(new RegExp(itn[4],'g'),itemsname[4])
             .replace(new RegExp(itn[5],'g'),itemsname[5]).replace(new RegExp(itn[6],'g'),itemsname[6]).replace(new RegExp(itn[7],'g'),itemsname[7]).replace(new RegExp(itn[8],'g'),itemsname[8]).replace(new RegExp(itn[9],'g'),itemsname[9]);
@@ -1061,7 +1067,7 @@ function themeIcon(){
         return n;
     });
     $("button[style*='ys/icon/z/z24']").attr("style",function(n,v){
-        n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]).replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]).replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]);
+        n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]).replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]).replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]).replace(/ys\/icon\/z\/z2404_/g, purl+h4[4]);
         return n;
     });
     $("button[style*='ys/icon/z/z9']").attr("style",function(n,v){
@@ -1100,7 +1106,7 @@ function themeIcon(){
         return n;
     });
     $(".fyg_tc>img[src*='ys/icon/z/z24']").attr("src",function(n,v){
-        n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]).replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]).replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]);
+        n= v.replace(/ys\/icon\/z\/z2401_/g, purl+h1[4]).replace(/ys\/icon\/z\/z2402_/g, purl+h2[4]).replace(/ys\/icon\/z\/z2403_/g, purl+h3[4]).replace(/ys\/icon\/z\/z2404_/g, purl+h4[4]);
         return n;
     });
 
